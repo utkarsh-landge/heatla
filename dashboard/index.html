@@ -4,8 +4,12 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>HEATLA — heat vulnerability and cooling centres in LA County</title>
-<meta name="description" content="Which LA County census tracts are most vulnerable to extreme heat, and where should new public cooling centers go." />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='13'>🌡️</text></svg>" />
+<meta name="description" content="Which Los Angeles County census tracts are most exposed to extreme heat, and where new public cooling centres would reach the most vulnerable people." />
+<meta name="color-scheme" content="dark light" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230C1319'/><rect x='7' y='6' width='5' height='20' rx='2.5' fill='%23FFC94A'/><rect x='15' y='12' width='5' height='14' rx='2.5' fill='%237C9771'/><rect x='23' y='18' width='4' height='8' rx='2' fill='%232B627B'/></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <link rel="stylesheet" href="./styles.css" />
@@ -13,150 +17,181 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="topbar">
-  <div class="brand">
-    <span class="mark" aria-hidden="true"></span>
-    <div>
-      <h1>HEATLA</h1>
-      <p class="sub">Heat vulnerability and cooling-centre siting · Los Angeles County</p>
-    </div>
+<div class="shell">
+
+  <!-- vertical rail: the instrument's mode selector -->
+  <nav class="rail" role="tablist" aria-label="Views">
+    <div class="rail-mark" aria-hidden="true"><i></i><i></i><i></i></div>
+    <button role="tab" class="rail-tab" data-view="map" aria-selected="true">
+      <span class="rail-n">1</span><span class="rail-l">Exposure</span></button>
+    <button role="tab" class="rail-tab" data-view="optimizer" aria-selected="false">
+      <span class="rail-n">2</span><span class="rail-l">Siting</span></button>
+    <button role="tab" class="rail-tab" data-view="budget" aria-selected="false">
+      <span class="rail-n">3</span><span class="rail-l">Budget</span></button>
+    <button role="tab" class="rail-tab" data-view="association" aria-selected="false">
+      <span class="rail-n">4</span><span class="rail-l">Drivers</span></button>
+    <button role="tab" class="rail-tab" data-view="methods" aria-selected="false">
+      <span class="rail-n">5</span><span class="rail-l">Method</span></button>
+    <div class="rail-foot" id="rail-mode" aria-live="polite"></div>
+  </nav>
+
+  <div class="body">
+
+    <!-- the finding, before the brand -->
+    <header class="lede">
+      <p class="statement" id="statement">
+        <span class="hero-num" id="hero-num">—</span>
+        <span class="hero-rest" id="hero-rest">Reading the county.</span>
+      </p>
+      <div class="lede-side">
+        <p class="scale-name" id="scale-mid">heat vulnerability index</p>
+        <div class="scale" aria-hidden="true"><span class="scale-fill"></span></div>
+        <p class="scale-cap"><span class="lo">less vulnerable</span><span class="hi">more vulnerable</span></p>
+        <p class="provenance" id="provenance"></p>
+      </div>
+    </header>
+
+    <main id="main">
+
+      <!-- ------------------------------------------------------- EXPOSURE -->
+      <section class="view" id="view-map">
+        <div class="stage">
+          <div id="map" role="application" aria-label="Map of Los Angeles County census tracts"></div>
+
+          <div class="floating" id="map-controls">
+            <div class="field">
+              <label for="layer-select">Colour tracts by</label>
+              <select id="layer-select">
+                <option value="hvi">Heat vulnerability index</option>
+                <option value="lst_f">Peak summer surface temperature</option>
+                <option value="pct_canopy">Tree canopy</option>
+                <option value="pct_impervious">Impervious surface</option>
+                <option value="pct_poverty">Below poverty line</option>
+                <option value="pct_age65p">Age 65 and over</option>
+                <option value="pct_under5">Under 5</option>
+                <option value="dist_center_m">Distance to nearest centre</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="radius-map">Service radius <output id="radius-map-out">2.0 km</output></label>
+              <input type="range" id="radius-map" min="800" max="3200" step="200" value="2000" />
+            </div>
+
+            <div class="switches">
+              <label class="sw"><input type="checkbox" id="chk-centers" checked /><span>Existing centres</span></label>
+              <label class="sw"><input type="checkbox" id="chk-buffers" checked /><span>Service radius</span></label>
+              <label class="sw"><input type="checkbox" id="chk-unserved" /><span>Unserved and vulnerable only</span></label>
+            </div>
+
+            <div class="legend" id="legend"></div>
+          </div>
+        </div>
+
+        <div class="readout" id="map-stats"></div>
+      </section>
+
+      <!-- --------------------------------------------------------- SITING -->
+      <section class="view hidden" id="view-optimizer">
+        <div class="stage">
+          <div id="map2" role="application" aria-label="Map of proposed cooling-centre sites"></div>
+
+          <div class="floating" id="opt-controls">
+            <div class="field">
+              <label for="opt-method">Method</label>
+              <select id="opt-method">
+                <option value="greedy">Greedy</option>
+                <option value="ilp">Exact optimum (ILP)</option>
+                <option value="sort_by_hvi">Rank tracts by vulnerability</option>
+                <option value="hottest_tracts">Pick the hottest tracts</option>
+                <option value="most_populous">Pick the most populous tracts</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="opt-objective">Maximise</label>
+              <select id="opt-objective">
+                <option value="pop_x_hvi">People weighted by vulnerability</option>
+                <option value="count">Tracts covered</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="opt-radius">Service radius</label>
+              <select id="opt-radius"></select>
+            </div>
+            <div class="field">
+              <label for="opt-k">New centres <output id="opt-k-out">20</output></label>
+              <input type="range" id="opt-k" min="5" max="50" step="5" value="20" />
+            </div>
+          </div>
+        </div>
+
+        <div class="readout" id="opt-metrics"></div>
+
+        <div class="fair">
+          <h2>Who ends up within reach</h2>
+          <p class="note">Share of each group living inside the service radius, counting the existing centres plus the new ones. The marker is the figure for all residents, so a bar short of it means that group is behind.</p>
+          <div id="opt-fairness"></div>
+        </div>
+      </section>
+
+      <!-- --------------------------------------------------------- BUDGET -->
+      <section class="view hidden" id="view-budget">
+        <div class="wide">
+          <h2>What one more cooling centre buys</h2>
+          <p class="note">Coverage can only rise as centres are added, and the exact optimum sits at or above the greedy solution everywhere. The useful quantity is the slope: how much reach the next centre adds. Realistic budgets stop around twenty, well before the curve flattens.</p>
+
+          <div class="field inline">
+            <label for="budget-metric">Measure</label>
+            <select id="budget-metric">
+              <option value="vuln_weighted_pop_covered_pct">People weighted by vulnerability (%)</option>
+              <option value="top25_hvi_pop_covered_pct">Residents of the most vulnerable quarter (%)</option>
+              <option value="pop_covered_pct">All residents (%)</option>
+            </select>
+          </div>
+
+          <div class="chart-box"><canvas id="budget-chart" aria-label="Coverage against number of new centres" role="img"></canvas></div>
+          <div class="readout" id="budget-readout"></div>
+
+          <h3>Every method at the reported budgets</h3>
+          <div class="table-wrap" id="headline-table"></div>
+        </div>
+      </section>
+
+      <!-- -------------------------------------------------------- DRIVERS -->
+      <section class="view hidden" id="view-association">
+        <div class="wide">
+          <h2>What goes with heat vulnerability, once the heat itself is held fixed</h2>
+          <p class="note">This describes relationships; it does not predict anything. Surface temperature, pavement, canopy and density enter as controls, and the social variables are the ones being read. The question is which populations end up most vulnerable among places that are physically alike. Folds are spatial, so neighbouring tracts cannot leak between training and test.</p>
+
+          <div class="field inline">
+            <label for="assoc-outcome">Outcome</label>
+            <select id="assoc-outcome">
+              <option value="hvi">Vulnerability index, with its own four inputs excluded</option>
+              <option value="heat_er_rate_per100k">Heat-related emergency visits</option>
+            </select>
+          </div>
+
+          <div class="chart-box tall"><canvas id="assoc-chart" aria-label="Strength of association per variable" role="img"></canvas></div>
+          <div id="assoc-cv"></div>
+
+          <h3>Does the index agree with anything measured independently?</h3>
+          <div class="table-wrap" id="validation-table"></div>
+        </div>
+      </section>
+
+      <!-- --------------------------------------------------------- METHOD -->
+      <section class="view hidden" id="view-methods">
+        <div class="wide prose" id="methods-body"></div>
+      </section>
+
+    </main>
+
+    <footer>
+      <p>Built for CSCI 461, AI for Sustainable Development, from public federal, state and county data.
+      It touches three Sustainable Development Goals: good health, sustainable cities, and climate action.</p>
+    </footer>
   </div>
-  <div id="mode-badge" class="badge" role="status"></div>
-</header>
-
-<nav class="tabs" role="tablist" aria-label="Views">
-  <button role="tab" class="tab" data-view="map" aria-selected="true">Map</button>
-  <button role="tab" class="tab" data-view="optimizer" aria-selected="false">Optimiser</button>
-  <button role="tab" class="tab" data-view="budget" aria-selected="false">Budget curve</button>
-  <button role="tab" class="tab" data-view="association" aria-selected="false">Association study</button>
-  <button role="tab" class="tab" data-view="methods" aria-selected="false">Methods &amp; data</button>
-</nav>
-
-<main id="main">
-
-  <!-- ------------------------------------------------------------ MAP -->
-  <section class="view" id="view-map">
-    <div class="split">
-      <div class="panel controls">
-        <h2>Layers</h2>
-        <label for="layer-select">Colour tracts by</label>
-        <select id="layer-select">
-          <option value="hvi">Heat Vulnerability Index</option>
-          <option value="lst_f">Peak summer surface temperature</option>
-          <option value="pct_canopy">Tree canopy</option>
-          <option value="pct_impervious">Impervious surface</option>
-          <option value="pct_poverty">Below poverty line</option>
-          <option value="pct_age65p">Age 65+</option>
-          <option value="pct_under5">Under 5</option>
-          <option value="dist_center_m">Distance to nearest centre</option>
-        </select>
-
-        <fieldset>
-          <legend>Overlays</legend>
-          <label class="chk"><input type="checkbox" id="chk-centers" checked /> Existing cooling centres</label>
-          <label class="chk"><input type="checkbox" id="chk-buffers" checked /> Service radius</label>
-          <label class="chk"><input type="checkbox" id="chk-unserved" /> Unserved &amp; vulnerable only</label>
-        </fieldset>
-
-        <label for="radius-map">Service radius: <output id="radius-map-out">2.0 km</output></label>
-        <input type="range" id="radius-map" min="800" max="3200" step="200" value="2000" />
-
-        <div id="map-stats" class="stats"></div>
-        <div id="legend" class="legend" aria-hidden="false"></div>
-      </div>
-      <div class="panel map-wrap">
-        <div id="map" role="application" aria-label="Map of Los Angeles County census tracts"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ------------------------------------------------------ OPTIMIZER -->
-  <section class="view hidden" id="view-optimizer">
-    <div class="split">
-      <div class="panel controls">
-        <h2>Choose new sites</h2>
-
-        <label for="opt-method">Method</label>
-        <select id="opt-method">
-          <option value="greedy">Greedy (submodular, ≥63% of optimum)</option>
-          <option value="ilp">ILP (exact optimum)</option>
-          <option value="sort_by_hvi">Baseline: sort by HVI</option>
-          <option value="hottest_tracts">Baseline: hottest tracts</option>
-          <option value="most_populous">Baseline: most populous</option>
-        </select>
-
-        <label for="opt-objective">Optimise for</label>
-        <select id="opt-objective">
-          <option value="pop_x_hvi">Population × HVI</option>
-          <option value="count">Tracts covered (count)</option>
-        </select>
-
-        <label for="opt-radius">Service radius</label>
-        <select id="opt-radius"></select>
-
-        <label for="opt-k">New centres (K): <output id="opt-k-out">20</output></label>
-        <input type="range" id="opt-k" min="5" max="50" step="5" value="20" />
-
-        <div id="opt-metrics" class="metrics"></div>
-        <h3>Fairness: coverage by group</h3>
-        <p class="hint">Share of each group's population inside the service radius, counting existing centres plus the new ones.</p>
-        <div id="opt-fairness"></div>
-      </div>
-      <div class="panel map-wrap">
-        <div id="map2" role="application" aria-label="Map of chosen cooling-centre sites"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- --------------------------------------------------------- BUDGET -->
-  <section class="view hidden" id="view-budget">
-    <div class="panel">
-      <h2>How much does one more cooling centre buy?</h2>
-      <p class="hint">Every curve is monotonic — more centres never means less coverage — and the ILP is always at or above greedy. The <strong>slope</strong> is the policy number: it is the marginal benefit of the next centre. Realistic budgets are around 10–20 sites, which is still on the steep part of the curve.</p>
-      <div class="chart-controls">
-        <label for="budget-metric">Y axis</label>
-        <select id="budget-metric">
-          <option value="vuln_weighted_pop_covered_pct">Vulnerability-weighted population covered (%)</option>
-          <option value="top25_hvi_pop_covered_pct">Top-quartile-HVI population covered (%)</option>
-          <option value="pop_covered_pct">Population covered (%)</option>
-        </select>
-      </div>
-      <div class="chart-box"><canvas id="budget-chart" aria-label="Budget versus coverage curve" role="img"></canvas></div>
-      <div id="budget-readout" class="stats"></div>
-      <h3>Headline table</h3>
-      <div class="table-wrap" id="headline-table"></div>
-    </div>
-  </section>
-
-  <!-- ---------------------------------------------------- ASSOCIATION -->
-  <section class="view hidden" id="view-association">
-    <div class="panel">
-      <h2>What is associated with heat vulnerability, net of physical heat?</h2>
-      <p class="hint">This is an association study, not a deployed predictor. Physical heat variables (surface temperature, pavement, canopy, density) enter as <em>controls</em>; the social variables are the ones of interest. The question is: among places that are physically similar, which populations end up most vulnerable? Cross-validation uses spatial k-means folds, and the R² is a check that the fitted surface is stable enough to read — not a result.</p>
-      <div class="chart-controls">
-        <label for="assoc-outcome">Outcome</label>
-        <select id="assoc-outcome">
-          <option value="hvi">HVI (its own four inputs excluded from predictors)</option>
-          <option value="heat_er_rate_per100k">Heat-related ER visits (leakage-free)</option>
-        </select>
-      </div>
-      <div class="chart-box tall"><canvas id="assoc-chart" aria-label="Feature importance" role="img"></canvas></div>
-      <div id="assoc-cv" class="stats"></div>
-      <h3>HVI validation</h3>
-      <div class="table-wrap" id="validation-table"></div>
-    </div>
-  </section>
-
-  <!-- -------------------------------------------------------- METHODS -->
-  <section class="view hidden" id="view-methods">
-    <div class="panel prose" id="methods-body"></div>
-  </section>
-
-</main>
-
-<footer>
-  <p>CSCI 461 · AI for Sustainable Development · SDG 3, 11, 13. Built from public data; see the Methods tab for sources and vintages.</p>
-</footer>
+</div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>

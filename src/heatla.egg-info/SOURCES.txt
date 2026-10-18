@@ -1,3 +1,4 @@
+README.md
 pyproject.toml
 requirements.txt
 src/heatla/__init__.py
@@ -20,3 +21,7 @@ src/heatla.egg-info/SOURCES.txt
 src/heatla.egg-info/dependency_links.txt
 src/heatla.egg-info/requires.txt
 src/heatla.egg-info/top_level.txt
+tests/test_coverage_and_optimizer.py
+tests/test_hvi.py
+tests/test_ingest_joins.py
+tests/test_partA_partB.py

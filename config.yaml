@@ -1,0 +1,7 @@
+# HEATLA run configuration. Edit this file, not the code.
+# Switch to real data once data/raw is populated (see data/README.md).
+data_mode: mock          # mock | real
+lst_source: landsat      # landsat | ecostress -> see §2 of the report
+radius_m: 2000
+k_default: 20
+centers_set: augmented   # permanent | augmented

@@ -1,0 +1,13 @@
+feature,role,mean_abs_shap,direction_corr,direction
+pct_impervious,physical (control),6.06842,0.97424,higher -> more vulnerable
+svi,social (of interest),4.30389,0.98376,higher -> more vulnerable
+median_income,social (of interest),2.4325,-0.9366,higher -> less vulnerable
+pop_density_km2,physical (control),2.31614,-0.92441,higher -> less vulnerable
+pct_under18,social (of interest),2.24721,-0.93089,higher -> less vulnerable
+land_area_sqkm,physical (control),1.98931,-0.66213,higher -> less vulnerable
+pct_under5,social (of interest),1.86444,-0.90348,higher -> less vulnerable
+ces_pollution_pctl,physical (control),0.822,-0.2738,higher -> less vulnerable
+pct_asian,social (of interest),0.40024,-0.60811,higher -> less vulnerable
+pct_white_nh,social (of interest),0.35578,0.22362,higher -> more vulnerable
+pct_hispanic,social (of interest),0.35562,0.4217,higher -> more vulnerable
+pct_black,social (of interest),0.32742,0.17893,higher -> more vulnerable

@@ -1,0 +1,11 @@
+{
+  "name": "heatla-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Static dashboard for the HEATLA project",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node build.mjs && npx --yes serve dist -l 5173",
+    "start": "npx --yes serve dist -l 5173"
+  }
+}

@@ -1,0 +1,1 @@
+[{"comparison":"Heat-related ER visits (ZIP-apportioned)","spearman_rho":0.642,"p_value":7.45e-291,"n":2498,"top10_overlap":null},{"comparison":"CDC\/ATSDR SVI","spearman_rho":0.437,"p_value":2.8e-117,"n":2498,"top10_overlap":"15%"},{"comparison":"CalEnviroScreen score","spearman_rho":0.536,"p_value":6.32e-186,"n":2498,"top10_overlap":"17%"}]

@@ -1,0 +1,319 @@
+{
+  "run_at": "2026-10-17T17:07:40",
+  "config": {
+    "data_mode": "mock",
+    "lst_source": "landsat",
+    "radius_m": 2000,
+    "radius_grid_m": [
+      1609,
+      2000,
+      3219
+    ],
+    "k_default": 20,
+    "k_grid": [
+      5,
+      10,
+      15,
+      20,
+      25,
+      30,
+      40,
+      50
+    ],
+    "k_report": [
+      10,
+      20
+    ],
+    "objectives": [
+      "count",
+      "pop_x_hvi"
+    ],
+    "methods": [
+      "greedy",
+      "ilp"
+    ],
+    "ilp_time_limit_s": 120,
+    "n_random_draws": 200,
+    "n_spatial_folds": 5,
+    "hvi_inputs": [
+      "lst_f",
+      "pct_age65p",
+      "pct_poverty",
+      "pct_no_canopy"
+    ],
+    "centers_set": "augmented",
+    "mock_n_tracts": 2498,
+    "mock_n_centers_permanent": 12,
+    "mock_n_centers_augmented": 153,
+    "seed": 461,
+    "paths": {
+      "root": "/Users/utkarsh/heatla",
+      "data": "/Users/utkarsh/heatla/data",
+      "raw": "/Users/utkarsh/heatla/data/raw",
+      "interim": "/Users/utkarsh/heatla/data/interim",
+      "processed": "/Users/utkarsh/heatla/data/processed",
+      "reports": "/Users/utkarsh/heatla/reports",
+      "figures": "/Users/utkarsh/heatla/reports/figures",
+      "tables": "/Users/utkarsh/heatla/reports/tables",
+      "dashboard_data": "/Users/utkarsh/heatla/dashboard/public/data"
+    }
+  },
+  "elapsed_seconds": 43.3,
+  "n_tracts": 2498,
+  "n_existing_centers": 153,
+  "hvi_validation": {
+    "er_visits": {
+      "spearman_rho": 0.6424679652906925,
+      "p_value": 7.453966588537211e-291,
+      "n_tracts": 2498,
+      "caveat": "ER visits are published by ZIP code, not by census tract. Rates were pushed down to tracts by population-weighted apportionment, so every tract inside one ZIP shares a value and the correlation is attenuated and partly mechanical. Treat it as a weak corroboration, not a test."
+    },
+    "svi": {
+      "spearman_rho": 0.4374345306649688,
+      "p_value": 2.802452554949927e-117,
+      "n_tracts": 2498,
+      "top10_overlap": {
+        "k": 250,
+        "overlap_n": 37,
+        "overlap_frac": 0.148,
+        "jaccard": 0.07991360691144708
+      },
+      "top25_overlap": {
+        "k": 624,
+        "overlap_n": 236,
+        "overlap_frac": 0.3782051282051282,
+        "jaccard": 0.233201581027668
+      },
+      "note": "SVI is a general social-vulnerability index with no heat exposure term, so agreement should be partial: identical rankings would mean HVI adds nothing, and no agreement would suggest the social inputs are not behaving."
+    },
+    "calenviroscreen": {
+      "spearman_rho": 0.536127338491711,
+      "p_value": 6.315675770974685e-186,
+      "n_tracts": 2498,
+      "top10_overlap": {
+        "k": 250,
+        "overlap_n": 43,
+        "overlap_frac": 0.172,
+        "jaccard": 0.09409190371991247
+      }
+    },
+    "component_correlations": {
+      "lst_f": 0.5810431178036958,
+      "pct_age65p": 0.305176040296459,
+      "pct_poverty": 0.5683692474974773,
+      "pct_no_canopy": 0.6143159626919461
+    },
+    "component_intercorrelation": {
+      "hvi_rank_lst_f": {
+        "hvi_rank_lst_f": 1.0,
+        "hvi_rank_pct_age65p": -0.015,
+        "hvi_rank_pct_poverty": 0.105,
+        "hvi_rank_pct_no_canopy": 0.161
+      },
+      "hvi_rank_pct_age65p": {
+        "hvi_rank_lst_f": -0.015,
+        "hvi_rank_pct_age65p": 1.0,
+        "hvi_rank_pct_poverty": -0.181,
+        "hvi_rank_pct_no_canopy": -0.121
+      },
+      "hvi_rank_pct_poverty": {
+        "hvi_rank_lst_f": 0.105,
+        "hvi_rank_pct_age65p": -0.181,
+        "hvi_rank_pct_poverty": 1.0,
+        "hvi_rank_pct_no_canopy": 0.29
+      },
+      "hvi_rank_pct_no_canopy": {
+        "hvi_rank_lst_f": 0.161,
+        "hvi_rank_pct_age65p": -0.121,
+        "hvi_rank_pct_poverty": 0.29,
+        "hvi_rank_pct_no_canopy": 1.0
+      }
+    }
+  },
+  "partA_summary": {
+    "n_existing_centers": 153,
+    "centers_set": "augmented",
+    "radius_default_m": 2000,
+    "unmet_need": {
+      "r1609": {
+        "radius_m": 1609,
+        "tracts_served": 328,
+        "tracts_served_pct": 13.130504403522819,
+        "pop_served": 1384152.0,
+        "pop_served_pct": 14.013249570840738,
+        "high_hvi_pop_unserved": 2090841.0,
+        "high_hvi_pop_unserved_pct": 84.5141763000348,
+        "top10_hvi_pop_unserved_pct": 79.16486059801088,
+        "age65p_served_pct": 13.503306078565,
+        "under5_served_pct": 14.590075727385631,
+        "under18_served_pct": 14.416229448941106,
+        "poverty_served_pct": 13.593899572554651
+      },
+      "r2000": {
+        "radius_m": 2000,
+        "tracts_served": 533,
+        "tracts_served_pct": 21.33706965572458,
+        "pop_served": 2223306.0,
+        "pop_served_pct": 22.508902093373877,
+        "high_hvi_pop_unserved": 1823637.0,
+        "high_hvi_pop_unserved_pct": 73.71348606865207,
+        "top10_hvi_pop_unserved_pct": 69.83669825464176,
+        "age65p_served_pct": 21.734686190323362,
+        "under5_served_pct": 23.277148547562636,
+        "under18_served_pct": 23.144757309744598,
+        "poverty_served_pct": 21.910210150529988
+      },
+      "r3219": {
+        "radius_m": 3219,
+        "tracts_served": 1082,
+        "tracts_served_pct": 43.3146517213771,
+        "pop_served": 4405509.0,
+        "pop_served_pct": 44.601674601911505,
+        "high_hvi_pop_unserved": 1332474.0,
+        "high_hvi_pop_unserved_pct": 53.86011779528552,
+        "top10_hvi_pop_unserved_pct": 49.65035173601308,
+        "age65p_served_pct": 43.631265231486026,
+        "under5_served_pct": 45.26199564034687,
+        "under18_served_pct": 45.301729843578585,
+        "poverty_served_pct": 42.88361808265735
+      }
+    },
+    "distribution_shift": {
+      "hvi": {
+        "all_mean": 50.0201,
+        "served_mean": 51.5728,
+        "std_mean_diff": 0.1015,
+        "ks_stat": 0.0539,
+        "ks_p": 0.149,
+        "shift": "higher in served"
+      },
+      "lst_f": {
+        "all_mean": 97.4832,
+        "served_mean": 100.7487,
+        "std_mean_diff": 0.2741,
+        "ks_stat": 0.1252,
+        "ks_p": 0.0,
+        "shift": "higher in served"
+      },
+      "pct_canopy": {
+        "all_mean": 14.3396,
+        "served_mean": 13.6539,
+        "std_mean_diff": -0.084,
+        "ks_stat": 0.0738,
+        "ks_p": 0.0157,
+        "shift": "none (|d|<0.1)"
+      },
+      "pct_impervious": {
+        "all_mean": 46.8155,
+        "served_mean": 50.605,
+        "std_mean_diff": 0.301,
+        "ks_stat": 0.1308,
+        "ks_p": 0.0,
+        "shift": "higher in served"
+      },
+      "pct_age65p": {
+        "all_mean": 14.5952,
+        "served_mean": 14.0998,
+        "std_mean_diff": -0.1106,
+        "ks_stat": 0.0527,
+        "ks_p": 0.1678,
+        "shift": "lower in served"
+      },
+      "pct_under5": {
+        "all_mean": 6.6347,
+        "served_mean": 6.8737,
+        "std_mean_diff": 0.1213,
+        "ks_stat": 0.0757,
+        "ks_p": 0.0123,
+        "shift": "higher in served"
+      },
+      "pct_under18": {
+        "all_mean": 23.2854,
+        "served_mean": 23.9875,
+        "std_mean_diff": 0.1463,
+        "ks_stat": 0.0668,
+        "ks_p": 0.0378,
+        "shift": "higher in served"
+      },
+      "pct_poverty": {
+        "all_mean": 17.2308,
+        "served_mean": 16.8173,
+        "std_mean_diff": -0.0597,
+        "ks_stat": 0.0341,
+        "ks_p": 0.6719,
+        "shift": "none (|d|<0.1)"
+      },
+      "median_income": {
+        "all_mean": 73980.8647,
+        "served_mean": 76354.7842,
+        "std_mean_diff": 0.0916,
+        "ks_stat": 0.0406,
+        "ks_p": 0.4507,
+        "shift": "none (|d|<0.1)"
+      },
+      "svi": {
+        "all_mean": 0.5002,
+        "served_mean": 0.479,
+        "std_mean_diff": -0.0733,
+        "ks_stat": 0.0457,
+        "ks_p": 0.3069,
+        "shift": "none (|d|<0.1)"
+      },
+      "ces_score": {
+        "all_mean": 32.519,
+        "served_mean": 31.922,
+        "std_mean_diff": -0.0413,
+        "ks_stat": 0.0341,
+        "ks_p": 0.673,
+        "shift": "none (|d|<0.1)"
+      },
+      "pct_hispanic": {
+        "all_mean": 45.5033,
+        "served_mean": 45.1506,
+        "std_mean_diff": -0.0248,
+        "ks_stat": 0.0219,
+        "ks_p": 0.9813,
+        "shift": "none (|d|<0.1)"
+      },
+      "pct_black": {
+        "all_mean": 8.9196,
+        "served_mean": 8.7089,
+        "std_mean_diff": -0.0341,
+        "ks_stat": 0.0268,
+        "ks_p": 0.9003,
+        "shift": "none (|d|<0.1)"
+      },
+      "pct_asian": {
+        "all_mean": 14.4074,
+        "served_mean": 15.4629,
+        "std_mean_diff": 0.1155,
+        "ks_stat": 0.0931,
+        "ks_p": 0.0009,
+        "shift": "higher in served"
+      },
+      "pct_white_nh": {
+        "all_mean": 27.1681,
+        "served_mean": 26.6188,
+        "std_mean_diff": -0.0345,
+        "ks_stat": 0.0305,
+        "ks_p": 0.7938,
+        "shift": "none (|d|<0.1)"
+      },
+      "pop_density_km2": {
+        "all_mean": 1302.9462,
+        "served_mean": 1375.445,
+        "std_mean_diff": 0.2236,
+        "ks_stat": 0.0985,
+        "ks_p": 0.0004,
+        "shift": "higher in served"
+      }
+    },
+    "median_distance_to_center_m": 3540.524911594537,
+    "p90_distance_to_center_m": 6395.3280502116795,
+    "verdict": "Existing centres skew towards higher-vulnerability tracts, so placement is at least partly corrective."
+  },
+  "partB_association_outcomes": [
+    "hvi",
+    "heat_er_rate_per100k"
+  ]
+}

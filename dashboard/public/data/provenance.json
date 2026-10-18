@@ -1,0 +1,43 @@
+{
+  "built": "2026-10-17",
+  "data_mode": "mock",
+  "lst_source": "landsat",
+  "centers_set": "augmented",
+  "n_tracts": 2498,
+  "n_centers": 153,
+  "total_population": 9877452.0,
+  "coverage": {
+    "pop": 1.0,
+    "pct_age65p": 1.0,
+    "pct_under5": 1.0,
+    "pct_under18": 1.0,
+    "pct_poverty": 1.0,
+    "median_income": 1.0,
+    "pct_hispanic": 1.0,
+    "pct_black": 1.0,
+    "pct_asian": 1.0,
+    "pct_white_nh": 1.0,
+    "lst_f": 1.0,
+    "pct_canopy": 1.0,
+    "pct_impervious": 1.0,
+    "svi": 1.0
+  },
+  "provenance": {
+    "GEOID": "SYNTHETIC MOCK",
+    "pop": "SYNTHETIC MOCK",
+    "pct_age65p": "SYNTHETIC MOCK",
+    "pct_under5": "SYNTHETIC MOCK",
+    "pct_under18": "SYNTHETIC MOCK",
+    "pct_poverty": "SYNTHETIC MOCK",
+    "median_income": "SYNTHETIC MOCK",
+    "pct_hispanic": "SYNTHETIC MOCK",
+    "pct_black": "SYNTHETIC MOCK",
+    "pct_asian": "SYNTHETIC MOCK",
+    "pct_white_nh": "SYNTHETIC MOCK",
+    "lst_f": "SYNTHETIC MOCK",
+    "pct_canopy": "SYNTHETIC MOCK",
+    "pct_impervious": "SYNTHETIC MOCK",
+    "svi": "SYNTHETIC MOCK",
+    "heat_er_rate_per100k": "SYNTHETIC MOCK (ZIP-level, apportioned to tracts)"
+  }
+}

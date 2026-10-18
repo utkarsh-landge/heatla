@@ -1,0 +1,4 @@
+comparison,spearman_rho,p_value,n,top10_overlap
+Heat-related ER visits (ZIP-apportioned),0.642,7.45e-291,2498,
+CDC/ATSDR SVI,0.437,2.80e-117,2498,15%
+CalEnviroScreen score,0.536,6.32e-186,2498,17%

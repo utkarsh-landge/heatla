@@ -1,0 +1,182 @@
+{
+  "n_existing_centers": 153,
+  "centers_set": "augmented",
+  "radius_default_m": 2000,
+  "unmet_need": {
+    "r1609": {
+      "radius_m": 1609,
+      "tracts_served": 328,
+      "tracts_served_pct": 13.130504403522819,
+      "pop_served": 1384152.0,
+      "pop_served_pct": 14.013249570840738,
+      "high_hvi_pop_unserved": 2090841.0,
+      "high_hvi_pop_unserved_pct": 84.5141763000348,
+      "top10_hvi_pop_unserved_pct": 79.16486059801088,
+      "age65p_served_pct": 13.503306078565,
+      "under5_served_pct": 14.590075727385631,
+      "under18_served_pct": 14.416229448941106,
+      "poverty_served_pct": 13.593899572554651
+    },
+    "r2000": {
+      "radius_m": 2000,
+      "tracts_served": 533,
+      "tracts_served_pct": 21.33706965572458,
+      "pop_served": 2223306.0,
+      "pop_served_pct": 22.508902093373877,
+      "high_hvi_pop_unserved": 1823637.0,
+      "high_hvi_pop_unserved_pct": 73.71348606865207,
+      "top10_hvi_pop_unserved_pct": 69.83669825464176,
+      "age65p_served_pct": 21.734686190323362,
+      "under5_served_pct": 23.277148547562636,
+      "under18_served_pct": 23.144757309744598,
+      "poverty_served_pct": 21.910210150529988
+    },
+    "r3219": {
+      "radius_m": 3219,
+      "tracts_served": 1082,
+      "tracts_served_pct": 43.3146517213771,
+      "pop_served": 4405509.0,
+      "pop_served_pct": 44.601674601911505,
+      "high_hvi_pop_unserved": 1332474.0,
+      "high_hvi_pop_unserved_pct": 53.86011779528552,
+      "top10_hvi_pop_unserved_pct": 49.65035173601308,
+      "age65p_served_pct": 43.631265231486026,
+      "under5_served_pct": 45.26199564034687,
+      "under18_served_pct": 45.301729843578585,
+      "poverty_served_pct": 42.88361808265735
+    }
+  },
+  "distribution_shift": {
+    "hvi": {
+      "all_mean": 50.0201,
+      "served_mean": 51.5728,
+      "std_mean_diff": 0.1015,
+      "ks_stat": 0.0539,
+      "ks_p": 0.149,
+      "shift": "higher in served"
+    },
+    "lst_f": {
+      "all_mean": 97.4832,
+      "served_mean": 100.7487,
+      "std_mean_diff": 0.2741,
+      "ks_stat": 0.1252,
+      "ks_p": 0.0,
+      "shift": "higher in served"
+    },
+    "pct_canopy": {
+      "all_mean": 14.3396,
+      "served_mean": 13.6539,
+      "std_mean_diff": -0.084,
+      "ks_stat": 0.0738,
+      "ks_p": 0.0157,
+      "shift": "none (|d|<0.1)"
+    },
+    "pct_impervious": {
+      "all_mean": 46.8155,
+      "served_mean": 50.605,
+      "std_mean_diff": 0.301,
+      "ks_stat": 0.1308,
+      "ks_p": 0.0,
+      "shift": "higher in served"
+    },
+    "pct_age65p": {
+      "all_mean": 14.5952,
+      "served_mean": 14.0998,
+      "std_mean_diff": -0.1106,
+      "ks_stat": 0.0527,
+      "ks_p": 0.1678,
+      "shift": "lower in served"
+    },
+    "pct_under5": {
+      "all_mean": 6.6347,
+      "served_mean": 6.8737,
+      "std_mean_diff": 0.1213,
+      "ks_stat": 0.0757,
+      "ks_p": 0.0123,
+      "shift": "higher in served"
+    },
+    "pct_under18": {
+      "all_mean": 23.2854,
+      "served_mean": 23.9875,
+      "std_mean_diff": 0.1463,
+      "ks_stat": 0.0668,
+      "ks_p": 0.0378,
+      "shift": "higher in served"
+    },
+    "pct_poverty": {
+      "all_mean": 17.2308,
+      "served_mean": 16.8173,
+      "std_mean_diff": -0.0597,
+      "ks_stat": 0.0341,
+      "ks_p": 0.6719,
+      "shift": "none (|d|<0.1)"
+    },
+    "median_income": {
+      "all_mean": 73980.8647,
+      "served_mean": 76354.7842,
+      "std_mean_diff": 0.0916,
+      "ks_stat": 0.0406,
+      "ks_p": 0.4507,
+      "shift": "none (|d|<0.1)"
+    },
+    "svi": {
+      "all_mean": 0.5002,
+      "served_mean": 0.479,
+      "std_mean_diff": -0.0733,
+      "ks_stat": 0.0457,
+      "ks_p": 0.3069,
+      "shift": "none (|d|<0.1)"
+    },
+    "ces_score": {
+      "all_mean": 32.519,
+      "served_mean": 31.922,
+      "std_mean_diff": -0.0413,
+      "ks_stat": 0.0341,
+      "ks_p": 0.673,
+      "shift": "none (|d|<0.1)"
+    },
+    "pct_hispanic": {
+      "all_mean": 45.5033,
+      "served_mean": 45.1506,
+      "std_mean_diff": -0.0248,
+      "ks_stat": 0.0219,
+      "ks_p": 0.9813,
+      "shift": "none (|d|<0.1)"
+    },
+    "pct_black": {
+      "all_mean": 8.9196,
+      "served_mean": 8.7089,
+      "std_mean_diff": -0.0341,
+      "ks_stat": 0.0268,
+      "ks_p": 0.9003,
+      "shift": "none (|d|<0.1)"
+    },
+    "pct_asian": {
+      "all_mean": 14.4074,
+      "served_mean": 15.4629,
+      "std_mean_diff": 0.1155,
+      "ks_stat": 0.0931,
+      "ks_p": 0.0009,
+      "shift": "higher in served"
+    },
+    "pct_white_nh": {
+      "all_mean": 27.1681,
+      "served_mean": 26.6188,
+      "std_mean_diff": -0.0345,
+      "ks_stat": 0.0305,
+      "ks_p": 0.7938,
+      "shift": "none (|d|<0.1)"
+    },
+    "pop_density_km2": {
+      "all_mean": 1302.9462,
+      "served_mean": 1375.445,
+      "std_mean_diff": 0.2236,
+      "ks_stat": 0.0985,
+      "ks_p": 0.0004,
+      "shift": "higher in served"
+    }
+  },
+  "median_distance_to_center_m": 3540.524911594537,
+  "p90_distance_to_center_m": 6395.3280502116795,
+  "verdict": "Existing centres skew towards higher-vulnerability tracts, so placement is at least partly corrective."
+}

@@ -1,0 +1,17 @@
+feature,role,perm_importance_mean,perm_importance_std
+lst_f,physical (control),0.68119,0.0206
+pct_canopy,physical (control),0.10206,0.00448
+land_area_sqkm,physical (control),0.09206,0.00318
+pct_age65p,social (of interest),0.08098,0.00279
+median_income,social (of interest),0.05868,0.00235
+ces_pollution_pctl,physical (control),0.04639,0.0011
+pct_poverty,social (of interest),0.04379,0.00141
+pct_under18,social (of interest),0.04013,0.0015
+pop_density_km2,physical (control),0.03848,0.00141
+pct_under5,social (of interest),0.02878,0.00123
+pct_impervious,physical (control),0.02107,0.00089
+pct_asian,social (of interest),0.02089,0.00059
+pct_hispanic,social (of interest),0.01963,0.00092
+pct_black,social (of interest),0.01785,0.00061
+svi,social (of interest),0.01783,0.00053
+pct_white_nh,social (of interest),0.01456,0.00045

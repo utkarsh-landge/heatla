@@ -1,0 +1,205 @@
+{
+  "hvi": {
+    "outcome": "hvi",
+    "n": 2498,
+    "features_social": [
+      "pct_under5",
+      "pct_under18",
+      "median_income",
+      "pct_hispanic",
+      "pct_black",
+      "pct_asian",
+      "pct_white_nh",
+      "svi"
+    ],
+    "features_physical_controls": [
+      "pct_impervious",
+      "pop_density_km2",
+      "land_area_sqkm",
+      "ces_pollution_pctl"
+    ],
+    "fitted_model": "xgboost",
+    "best_cv_model": "ridge_splines",
+    "cv": [
+      {
+        "model": "ridge_splines",
+        "cv": "spatial k-means (5 folds)",
+        "rmse": 11.2284,
+        "mae": 9.0687,
+        "r2": 0.4592,
+        "n": 2498,
+        "r2_random_split": 0.6669,
+        "r2_optimism_from_random_split": 0.2076
+      },
+      {
+        "model": "random_forest",
+        "cv": "spatial k-means (5 folds)",
+        "rmse": 13.271,
+        "mae": 10.7148,
+        "r2": 0.2446,
+        "n": 2498,
+        "r2_random_split": 0.6951,
+        "r2_optimism_from_random_split": 0.4505
+      },
+      {
+        "model": "xgboost",
+        "cv": "spatial k-means (5 folds)",
+        "rmse": 12.1315,
+        "mae": 9.8021,
+        "r2": 0.3687,
+        "n": 2498,
+        "r2_random_split": 0.7136,
+        "r2_optimism_from_random_split": 0.3449
+      }
+    ],
+    "top_social_associations": [
+      {
+        "feature": "svi",
+        "role": "social (of interest)",
+        "mean_abs_shap": 4.303899765014648,
+        "direction_corr": 0.9838,
+        "direction": "higher -> more vulnerable"
+      },
+      {
+        "feature": "median_income",
+        "role": "social (of interest)",
+        "mean_abs_shap": 2.432499885559082,
+        "direction_corr": -0.9366,
+        "direction": "higher -> less vulnerable"
+      },
+      {
+        "feature": "pct_under18",
+        "role": "social (of interest)",
+        "mean_abs_shap": 2.2472000122070312,
+        "direction_corr": -0.9309,
+        "direction": "higher -> less vulnerable"
+      },
+      {
+        "feature": "pct_under5",
+        "role": "social (of interest)",
+        "mean_abs_shap": 1.864400029182434,
+        "direction_corr": -0.9035,
+        "direction": "higher -> less vulnerable"
+      },
+      {
+        "feature": "pct_asian",
+        "role": "social (of interest)",
+        "mean_abs_shap": 0.4002000093460083,
+        "direction_corr": -0.6081,
+        "direction": "higher -> less vulnerable"
+      },
+      {
+        "feature": "pct_white_nh",
+        "role": "social (of interest)",
+        "mean_abs_shap": 0.35580000281333923,
+        "direction_corr": 0.2236,
+        "direction": "higher -> more vulnerable"
+      }
+    ],
+    "interpretation_note": "Importance and SHAP describe the fitted surface, not a causal effect. Physical heat variables are controls; the ranking of the social variables is the deliverable, and the CV numbers only say whether the surface is stable enough to read."
+  },
+  "heat_er_rate_per100k": {
+    "outcome": "heat_er_rate_per100k",
+    "n": 2498,
+    "features_social": [
+      "pct_age65p",
+      "pct_under5",
+      "pct_under18",
+      "pct_poverty",
+      "median_income",
+      "pct_hispanic",
+      "pct_black",
+      "pct_asian",
+      "pct_white_nh",
+      "svi"
+    ],
+    "features_physical_controls": [
+      "lst_f",
+      "pct_impervious",
+      "pct_canopy",
+      "pop_density_km2",
+      "land_area_sqkm",
+      "ces_pollution_pctl"
+    ],
+    "fitted_model": "xgboost",
+    "best_cv_model": "ridge_splines",
+    "cv": [
+      {
+        "model": "ridge_splines",
+        "cv": "spatial k-means (5 folds)",
+        "rmse": 4.0066,
+        "mae": 3.2517,
+        "r2": 0.3695,
+        "n": 2498,
+        "r2_random_split": 0.5761,
+        "r2_optimism_from_random_split": 0.2066
+      },
+      {
+        "model": "random_forest",
+        "cv": "spatial k-means (5 folds)",
+        "rmse": 4.2775,
+        "mae": 3.4562,
+        "r2": 0.2814,
+        "n": 2498,
+        "r2_random_split": 0.6443,
+        "r2_optimism_from_random_split": 0.3629
+      },
+      {
+        "model": "xgboost",
+        "cv": "spatial k-means (5 folds)",
+        "rmse": 4.3758,
+        "mae": 3.5189,
+        "r2": 0.248,
+        "n": 2498,
+        "r2_random_split": 0.6252,
+        "r2_optimism_from_random_split": 0.3772
+      }
+    ],
+    "top_social_associations": [
+      {
+        "feature": "pct_age65p",
+        "role": "social (of interest)",
+        "mean_abs_shap": 0.6334999799728394,
+        "direction_corr": 0.9213,
+        "direction": "higher -> more vulnerable"
+      },
+      {
+        "feature": "median_income",
+        "role": "social (of interest)",
+        "mean_abs_shap": 0.46239998936653137,
+        "direction_corr": -0.9104,
+        "direction": "higher -> less vulnerable"
+      },
+      {
+        "feature": "pct_poverty",
+        "role": "social (of interest)",
+        "mean_abs_shap": 0.3425000011920929,
+        "direction_corr": 0.9319,
+        "direction": "higher -> more vulnerable"
+      },
+      {
+        "feature": "pct_under18",
+        "role": "social (of interest)",
+        "mean_abs_shap": 0.257099986076355,
+        "direction_corr": -0.878,
+        "direction": "higher -> less vulnerable"
+      },
+      {
+        "feature": "pct_under5",
+        "role": "social (of interest)",
+        "mean_abs_shap": 0.2151000052690506,
+        "direction_corr": -0.8098,
+        "direction": "higher -> less vulnerable"
+      },
+      {
+        "feature": "svi",
+        "role": "social (of interest)",
+        "mean_abs_shap": 0.1467999964952469,
+        "direction_corr": 0.7979,
+        "direction": "higher -> more vulnerable"
+      }
+    ],
+    "interpretation_note": "Importance and SHAP describe the fitted surface, not a causal effect. Physical heat variables are controls; the ranking of the social variables is the deliverable, and the CV numbers only say whether the surface is stable enough to read.",
+    "caveat": "ER rates are ZIP-level values apportioned to tracts, so tracts inside one ZIP share an outcome value. Treat the ranking as corroboration of the HVI-based one, not an independent result."
+  }
+}

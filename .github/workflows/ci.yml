@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -e . --no-deps
+
+      - name: Unit tests
+        run: pytest tests -q
+
+      # The whole pipeline has to run on the synthetic county, so a broken
+      # Part A/B/C is caught here and not at submission time.
+      - name: Pipeline smoke run (synthetic data)
+        run: python -m heatla.run_all --data-mode mock --quick
+
+      - name: Check the expected outputs exist
+        run: |
+          test -f reports/run_manifest.json
+          test -f reports/tables/partA_distribution_comparison.csv
+          test -f reports/tables/partB_hvi_validation.csv
+          test -f reports/tables/partC_headline.csv
+          test -f dashboard/public/data/tracts.geojson
+          ls reports/figures/*.png | wc -l
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: heatla-outputs
+          path: |
+            reports/
+            dashboard/public/data/
+          retention-days: 14
+
+  dashboard-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Build the dashboard
+        working-directory: dashboard
+        run: |
+          npm install
+          npm run build

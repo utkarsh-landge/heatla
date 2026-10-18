@@ -1,0 +1,17 @@
+feature,role,mean_abs_shap,direction_corr,direction
+lst_f,physical (control),2.23689,0.97149,higher -> more vulnerable
+pct_age65p,social (of interest),0.63347,0.92134,higher -> more vulnerable
+pct_canopy,physical (control),0.62381,-0.88823,higher -> less vulnerable
+median_income,social (of interest),0.46238,-0.91043,higher -> less vulnerable
+land_area_sqkm,physical (control),0.39546,-0.00566,non-monotone/flat
+pct_poverty,social (of interest),0.3425,0.93194,higher -> more vulnerable
+pct_under18,social (of interest),0.25708,-0.87801,higher -> less vulnerable
+pop_density_km2,physical (control),0.24866,0.30139,higher -> more vulnerable
+ces_pollution_pctl,physical (control),0.23038,0.39708,higher -> more vulnerable
+pct_under5,social (of interest),0.21512,-0.80983,higher -> less vulnerable
+svi,social (of interest),0.14684,0.79786,higher -> more vulnerable
+pct_hispanic,social (of interest),0.1392,-0.27052,higher -> less vulnerable
+pct_impervious,physical (control),0.11694,0.26269,higher -> more vulnerable
+pct_asian,social (of interest),0.11276,0.51249,higher -> more vulnerable
+pct_black,social (of interest),0.10293,0.15365,higher -> more vulnerable
+pct_white_nh,social (of interest),0.09712,0.00647,non-monotone/flat

@@ -1,0 +1,69 @@
+{
+  "er_visits": {
+    "spearman_rho": 0.6424679652906925,
+    "p_value": 7.453966588537211e-291,
+    "n_tracts": 2498,
+    "caveat": "ER visits are published by ZIP code, not by census tract. Rates were pushed down to tracts by population-weighted apportionment, so every tract inside one ZIP shares a value and the correlation is attenuated and partly mechanical. Treat it as a weak corroboration, not a test."
+  },
+  "svi": {
+    "spearman_rho": 0.4374345306649688,
+    "p_value": 2.802452554949927e-117,
+    "n_tracts": 2498,
+    "top10_overlap": {
+      "k": 250,
+      "overlap_n": 37,
+      "overlap_frac": 0.148,
+      "jaccard": 0.07991360691144708
+    },
+    "top25_overlap": {
+      "k": 624,
+      "overlap_n": 236,
+      "overlap_frac": 0.3782051282051282,
+      "jaccard": 0.233201581027668
+    },
+    "note": "SVI is a general social-vulnerability index with no heat exposure term, so agreement should be partial: identical rankings would mean HVI adds nothing, and no agreement would suggest the social inputs are not behaving."
+  },
+  "calenviroscreen": {
+    "spearman_rho": 0.536127338491711,
+    "p_value": 6.315675770974685e-186,
+    "n_tracts": 2498,
+    "top10_overlap": {
+      "k": 250,
+      "overlap_n": 43,
+      "overlap_frac": 0.172,
+      "jaccard": 0.09409190371991247
+    }
+  },
+  "component_correlations": {
+    "lst_f": 0.5810431178036958,
+    "pct_age65p": 0.305176040296459,
+    "pct_poverty": 0.5683692474974773,
+    "pct_no_canopy": 0.6143159626919461
+  },
+  "component_intercorrelation": {
+    "hvi_rank_lst_f": {
+      "hvi_rank_lst_f": 1.0,
+      "hvi_rank_pct_age65p": -0.015,
+      "hvi_rank_pct_poverty": 0.105,
+      "hvi_rank_pct_no_canopy": 0.161
+    },
+    "hvi_rank_pct_age65p": {
+      "hvi_rank_lst_f": -0.015,
+      "hvi_rank_pct_age65p": 1.0,
+      "hvi_rank_pct_poverty": -0.181,
+      "hvi_rank_pct_no_canopy": -0.121
+    },
+    "hvi_rank_pct_poverty": {
+      "hvi_rank_lst_f": 0.105,
+      "hvi_rank_pct_age65p": -0.181,
+      "hvi_rank_pct_poverty": 1.0,
+      "hvi_rank_pct_no_canopy": 0.29
+    },
+    "hvi_rank_pct_no_canopy": {
+      "hvi_rank_lst_f": 0.161,
+      "hvi_rank_pct_age65p": -0.121,
+      "hvi_rank_pct_poverty": 0.29,
+      "hvi_rank_pct_no_canopy": 1.0
+    }
+  }
+}

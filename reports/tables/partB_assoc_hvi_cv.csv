@@ -1,0 +1,4 @@
+model,cv,rmse,mae,r2,n,r2_random_split,r2_optimism_from_random_split
+ridge_splines,spatial k-means (5 folds),11.2284,9.0687,0.4592,2498,0.6669,0.2076
+random_forest,spatial k-means (5 folds),13.271,10.7148,0.2446,2498,0.6951,0.4505
+xgboost,spatial k-means (5 folds),12.1315,9.8021,0.3687,2498,0.7136,0.3449

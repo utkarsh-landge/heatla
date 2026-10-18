@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+
+# Cached downloads and derived outputs: regenerate with `make fetch` / `make mock`.
+data/raw/*
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+dashboard/node_modules/
+dashboard/dist/
+.vercel/

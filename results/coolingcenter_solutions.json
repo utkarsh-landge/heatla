@@ -1,0 +1,1399 @@
+{
+  "primary_model": "poisson",
+  "n_zips": 287,
+  "n_candidate_sites": 153,
+  "cost_per_center": 1.0,
+  "cost_note": "uniform cost per center; budget = number of centers k; adjustable",
+  "budgets_k": [
+    5,
+    10,
+    20,
+    40
+  ],
+  "radii_miles": [
+    1,
+    2,
+    3,
+    5
+  ],
+  "runs": [
+    {
+      "radius_mi": 1,
+      "k": 5,
+      "budget_cost": 5.0,
+      "greedy": {
+        "sites": [
+          "Junipero Serra Branch Library",
+          "Pacoima Branch Library",
+          "West Valley Regional Branch Library",
+          "Valley Plaza Branch Library",
+          "Pico Union Branch Library"
+        ],
+        "n_selected": 5,
+        "zips_covered": 9,
+        "pred_coverage": 0.0658,
+        "obs_coverage": 0.0667,
+        "equity_income_quartile": {
+          "q1": 0.1123,
+          "q2": 0.0884,
+          "q3": 0.0,
+          "q4": 0.0,
+          "worst_quartile_coverage": 0.0
+        },
+        "equity_ces_quartile": {
+          "q1": 0.0,
+          "q2": 0.0,
+          "q3": 0.0373,
+          "q4": 0.1514,
+          "worst_quartile_coverage": 0.0
+        }
+      },
+      "exact": {
+        "sites": [
+          "Junipero Serra Branch Library",
+          "Pacoima Branch Library",
+          "Pico Union Branch Library",
+          "Valley Plaza Branch Library",
+          "West Valley Regional Branch Library"
+        ],
+        "n_selected": 5,
+        "zips_covered": 9,
+        "pred_coverage": 0.0658,
+        "obs_coverage": 0.0667,
+        "equity_income_quartile": {
+          "q1": 0.1123,
+          "q2": 0.0884,
+          "q3": 0.0,
+          "q4": 0.0,
+          "worst_quartile_coverage": 0.0
+        },
+        "equity_ces_quartile": {
+          "q1": 0.0,
+          "q2": 0.0,
+          "q3": 0.0373,
+          "q4": 0.1514,
+          "worst_quartile_coverage": 0.0
+        }
+      }
+    },
+    {
+      "radius_mi": 1,
+      "k": 10,
+      "budget_cost": 10.0,
+      "greedy": {
+        "sites": [
+          "Junipero Serra Branch Library",
+          "Pacoima Branch Library",
+          "West Valley Regional Branch Library",
+          "Valley Plaza Branch Library",
+          "Pico Union Branch Library",
+          "Mark Twain Branch Library",
+          "Malabar Branch Library",
+          "El Monte Library",
+          "Panorama City Branch Library",
+          "Angeles Mesa Branch Library"
+        ],
+        "n_selected": 10,
+        "zips_covered": 17,
+        "pred_coverage": 0.1174,
+        "obs_coverage": 0.1205,
+        "equity_income_quartile": {
+          "q1": 0.2453,
+          "q2": 0.1058,
+          "q3": 0.0,
+          "q4": 0.0,
+          "worst_quartile_coverage": 0.0
+        },
+        "equity_ces_quartile": {
+          "q1": 0.0,
+          "q2": 0.0,
+          "q3": 0.0607,
+          "q4": 0.2745,
+          "worst_quartile_coverage": 0.0
+        }
+      },
+      "exact": {
+        "sites": [
+          "Angeles Mesa Branch Library",
+          "El Monte Library",
+          "Junipero Serra Branch Library",
+          "Malabar Branch Library",
+          "Mark Twain Branch Library",
+          "Pacoima Branch Library",
+          "Panorama City Branch Library",
+          "Pico Union Branch Library",
+          "Valley Plaza Branch Library",
+          "West Valley Regional Branch Library"
+        ],
+        "n_selected": 10,
+        "zips_covered": 17,
+        "pred_coverage": 0.1174,
+        "obs_coverage": 0.1205,
+        "equity_income_quartile": {
+          "q1": 0.2453,
+          "q2": 0.1058,
+          "q3": 0.0,
+          "q4": 0.0,
+          "worst_quartile_coverage": 0.0
+        },
+        "equity_ces_quartile": {
+          "q1": 0.0,
+          "q2": 0.0,
+          "q3": 0.0607,
+          "q4": 0.2745,
+          "worst_quartile_coverage": 0.0
+        }
+      }
+    },
+    {
+      "radius_mi": 1,
+      "k": 20,
+      "budget_cost": 20.0,
+      "greedy": {
+        "sites": [
+          "Junipero Serra Branch Library",
+          "Pacoima Branch Library",
+          "West Valley Regional Branch Library",
+          "Valley Plaza Branch Library",
+          "Pico Union Branch Library",
+          "Mark Twain Branch Library",
+          "Malabar Branch Library",
+          "El Monte Library",
+          "Panorama City Branch Library",
+          "Angeles Mesa Branch Library",
+          "Ervin \"Magic\" Johnson Recreation Area",
+          "Ascot Branch Library",
+          "Canoga Park Branch Library",
+          "Pomona Public Library",
+          "Baldwin Park Library",
+          "Southeast LA Comprehensive AJCC",
+          "Mid-Valley Regional Library",
+          "Van Nuys Branch Library",
+          "Asian Community Center",
+          "Jesse Owens Park"
+        ],
+        "n_selected": 20,
+        "zips_covered": 31,
+        "pred_coverage": 0.2048,
+        "obs_coverage": 0.2049,
+        "equity_income_quartile": {
+          "q1": 0.3476,
+          "q2": 0.2777,
+          "q3": 0.0,
+          "q4": 0.0,
+          "worst_quartile_coverage": 0.0
+        },
+        "equity_ces_quartile": {
+          "q1": 0.0,
+          "q2": 0.0,
+          "q3": 0.1595,
+          "q4": 0.4406,
+          "worst_quartile_coverage": 0.0
+        }
+      },
+      "exact": {
+        "sites": [
+          "Angeles Mesa Branch Library",
+          "Ascot Branch Library",
+          "Asian Community Center",
+          "Baldwin Park Library",
+          "Canoga Park Branch Library",
+          "El Monte Library",
+          "Ervin \"Magic\" Johnson Recreation Area",
+          "Jesse Owens Park",
+          "Junipero Serra Branch Library",
+          "Malabar Branch Library",
+          "Mark Twain Branch Library",
+          "Mid-Valley Regional Library",
+          "Pacoima Branch Library",
+          "Panorama City Branch Library",
+          "Pico Union Branch Library",
+          "Pomona Public Library",
+          "Southeast LA Comprehensive AJCC",
+          "Valley Plaza Branch Library",
+          "Van Nuys Branch Library",
+          "West Valley Regional Branch Library"
+        ],
+        "n_selected": 20,
+        "zips_covered": 31,
+        "pred_coverage": 0.2048,
+        "obs_coverage": 0.2049,
+        "equity_income_quartile": {
+          "q1": 0.3476,
+          "q2": 0.2777,
+          "q3": 0.0,
+          "q4": 0.0,
+          "worst_quartile_coverage": 0.0
+        },
+        "equity_ces_quartile": {
+          "q1": 0.0,
+          "q2": 0.0,
+          "q3": 0.1595,
+          "q4": 0.4406,
+          "worst_quartile_coverage": 0.0
+        }
+      }
+    },
+    {
+      "radius_mi": 1,
+      "k": 40,
+      "budget_cost": 40.0,
+      "greedy": {
+        "sites": [
+          "Junipero Serra Branch Library",
+          "Pacoima Branch Library",
+          "West Valley Regional Branch Library",
+          "Valley Plaza Branch Library",
+          "Pico Union Branch Library",
+          "Mark Twain Branch Library",
+          "Malabar Branch Library",
+          "El Monte Library",
+          "Panorama City Branch Library",
+          "Angeles Mesa Branch Library",
+          "Ervin \"Magic\" Johnson Recreation Area",
+          "Ascot Branch Library",
+          "Canoga Park Branch Library",
+          "Pomona Public Library",
+          "Baldwin Park Library",
+          "Southeast LA Comprehensive AJCC",
+          "Mid-Valley Regional Library",
+          "Van Nuys Branch Library",
+          "Asian Community Center",
+          "Jesse Owens Park",
+          "East Los Angeles Library",
+          "Clifton M. Brakensiek Library",
+          "Lynwood Senior Center",
+          "Ted Watkins Memorial Park",
+          "Rogers Park",
+          "Franklin D. Roosevelt park",
+          "Palomares Park Community Center",
+          "San Pedro Regional Library",
+          "Pio Pico - Koreatown Branch Library",
+          "Westwood Branch Library",
+          "Memorial Branch Library",
+          "Hacienda Community and Recreation Center",
+          "Echo Park Branch Library",
+          "Central Library",
+          "Jefferson  - Vassie D. Wright Memorial Branch Library",
+          "Frances Howard Goldwyn - Hollywood Regional Library",
+          "Arroyo Seco Regional Library",
+          "South El Monte Senior Center ",
+          "Robert Louis Stevenson Branch Library",
+          "Paramount Community Center"
+        ],
+        "n_selected": 40,
+        "zips_covered": 59,
+        "pred_coverage": 0.3231,
+        "obs_coverage": 0.3264,
+        "equity_income_quartile": {
+          "q1": 0.5581,
+          "q2": 0.382,
+          "q3": 0.0628,
+          "q4": 0.0,
+          "worst_quartile_coverage": 0.0
+        },
+        "equity_ces_quartile": {
+          "q1": 0.0255,
+          "q2": 0.0843,
+          "q3": 0.2809,
+          "q4": 0.6096,
+          "worst_quartile_coverage": 0.0255
+        }
+      },
+      "exact": {
+        "sites": [
+          "Angeles Mesa Branch Library",
+          "Arroyo Seco Regional Library",
+          "Ascot Branch Library",
+          "Asian Community Center",
+          "Baldwin Park Library",
+          "Canoga Park Branch Library",
+          "Central Library",
+          "Clifton M. Brakensiek Library",
+          "East Los Angeles Library",
+          "Echo Park Branch Library",
+          "El Monte Library",
+          "Ervin \"Magic\" Johnson Recreation Area",
+          "Frances Howard Goldwyn - Hollywood Regional Library",
+          "Franklin D. Roosevelt park",
+          "Hacienda Community and Recreation Center",
+          "Jefferson  - Vassie D. Wright Memorial Branch Library",
+          "Jesse Owens Park",
+          "Junipero Serra Branch Library",
+          "Lynwood Senior Center",
+          "Malabar Branch Library",
+          "Mark Twain Branch Library",
+          "Memorial Branch Library",
+          "Mid-Valley Regional Library",
+          "Pacoima Branch Library",
+          "Palomares Park Community Center",
+          "Panorama City Branch Library",
+          "Paramount Community Center",
+          "Pico Union Branch Library",
+          "Pio Pico - Koreatown Branch Library",
+          "Pomona Public Library",
+          "Rogers Park",
+          "Salazar Park",
+          "San Pedro Regional Library",
+          "South El Monte Senior Center ",
+          "Southeast LA Comprehensive AJCC",
+          "Ted Watkins Memorial Park",
+          "Valley Plaza Branch Library",
+          "Van Nuys Branch Library",
+          "West Valley Regional Branch Library",
+          "Westwood Branch Library"
+        ],
+        "n_selected": 40,
+        "zips_covered": 59,
+        "pred_coverage": 0.3231,
+        "obs_coverage": 0.3264,
+        "equity_income_quartile": {
+          "q1": 0.5581,
+          "q2": 0.382,
+          "q3": 0.0628,
+          "q4": 0.0,
+          "worst_quartile_coverage": 0.0
+        },
+        "equity_ces_quartile": {
+          "q1": 0.0255,
+          "q2": 0.0843,
+          "q3": 0.2809,
+          "q4": 0.6096,
+          "worst_quartile_coverage": 0.0255
+        }
+      }
+    },
+    {
+      "radius_mi": 2,
+      "k": 5,
+      "budget_cost": 5.0,
+      "greedy": {
+        "sites": [
+          "Felipe de Neve Branch Library",
+          "Mark Twain Branch Library",
+          "Junipero Serra Branch Library",
+          "Pacoima Branch Library",
+          "Franklin D. Roosevelt park"
+        ],
+        "n_selected": 5,
+        "zips_covered": 25,
+        "pred_coverage": 0.132,
+        "obs_coverage": 0.1285,
+        "equity_income_quartile": {
+          "q1": 0.2999,
+          "q2": 0.0813,
+          "q3": 0.0117,
+          "q4": 0.0,
+          "worst_quartile_coverage": 0.0
+        },
+        "equity_ces_quartile": {
+          "q1": 0.0,
+          "q2": 0.0,
+          "q3": 0.1198,
+          "q4": 0.2711,
+          "worst_quartile_coverage": 0.0
+        }
+      },
+      "exact": {
+        "sites": [
+          "Felipe de Neve Branch Library",
+          "Franklin D. Roosevelt park",
+          "Junipero Serra Branch Library",
+          "Morningside Park Branch Library",
+          "Pacoima Branch Library"
+        ],
+        "n_selected": 5,
+        "zips_covered": 28,
+        "pred_coverage": 0.1344,
+        "obs_coverage": 0.1301,
+        "equity_income_quartile": {
+          "q1": 0.2937,
+          "q2": 0.0966,
+          "q3": 0.0117,
+          "q4": 0.0,
+          "worst_quartile_coverage": 0.0
+        },
+        "equity_ces_quartile": {
+          "q1": 0.0,
+          "q2": 0.0073,
+          "q3": 0.1432,
+          "q4": 0.2565,
+          "worst_quartile_coverage": 0.0
+        }
+      }
+    },
+    {
+      "radius_mi": 2,
+      "k": 10,
+      "budget_cost": 10.0,
+      "greedy": {
+        "sites": [
+          "Felipe de Neve Branch Library",
+          "Mark Twain Branch Library",
+          "Junipero Serra Branch Library",
+          "Pacoima Branch Library",
+          "Franklin D. Roosevelt park",
+          "Mona Park",
+          "Panorama City Branch Library",
+          "North Hollywood Amelia Earhart Regional Library",
+          "Morningside Park Branch Library",
+          "East Los Angeles Service Center"
+        ],
+        "n_selected": 10,
+        "zips_covered": 44,
+        "pred_coverage": 0.2193,
+        "obs_coverage": 0.2147,
+        "equity_income_quartile": {
+          "q1": 0.4713,
+          "q2": 0.1514,
+          "q3": 0.0312,
+          "q4": 0.0167,
+          "worst_quartile_coverage": 0.0167
+        },
+        "equity_ces_quartile": {
+          "q1": 0.0172,
+          "q2": 0.0374,
+          "q3": 0.1744,
+          "q4": 0.4389,
+          "worst_quartile_coverage": 0.0172
+        }
+      },
+      "exact": {
+        "sites": [
+          "Ascot Branch Library",
+          "East Los Angeles Service Center",
+          "Felipe de Neve Branch Library",
+          "George Washington Carver Park",
+          "Junipero Serra Branch Library",
+          "Morningside Park Branch Library",
+          "North Hollywood Amelia Earhart Regional Library",
+          "Pacoima Branch Library",
+          "Panorama City Branch Library",
+          "Washington Irving Branch Library"
+        ],
+        "n_selected": 10,
+        "zips_covered": 45,
+        "pred_coverage": 0.2209,
+        "obs_coverage": 0.2196,
+        "equity_income_quartile": {
+          "q1": 0.4757,
+          "q2": 0.1514,
+          "q3": 0.0312,
+          "q4": 0.0167,
+          "worst_quartile_coverage": 0.0167
+        },
+        "equity_ces_quartile": {
+          "q1": 0.0172,
+          "q2": 0.0374,
+          "q3": 0.1965,
+          "q4": 0.4272,
+          "worst_quartile_coverage": 0.0172
+        }
+      }
+    },
+    {
+      "radius_mi": 2,
+      "k": 20,
+      "budget_cost": 20.0,
+      "greedy": {
+        "sites": [
+          "Felipe de Neve Branch Library",
+          "Mark Twain Branch Library",
+          "Junipero Serra Branch Library",
+          "Pacoima Branch Library",
+          "Franklin D. Roosevelt park",
+          "Mona Park",
+          "Panorama City Branch Library",
+          "North Hollywood Amelia Earhart Regional Library",
+          "Morningside Park Branch Library",
+          "East Los Angeles Service Center",
+          "Washington Irving Branch Library",
+          "La Puente Library",
+          "Granada Hills Branch Library",
+          "Sun Valley Branch Library",
+          "Slawson AJCC",
+          "West Valley Regional Branch Library",
+          "Dexter Park",
+          "East Rancho Dominguez Community Center and Park",
+          "South Whittier Library",
+          "Del Aire Park"
+        ],
+        "n_selected": 20,
+        "zips_covered": 68,
+        "pred_coverage": 0.3507,
+        "obs_coverage": 0.3495,
+        "equity_income_quartile": {
+          "q1": 0.6339,
+          "q2": 0.279,
+          "q3": 0.1695,
+          "q4": 0.0659,
+          "worst_quartile_coverage": 0.0659
+        },
+        "equity_ces_quartile": {
+          "q1": 0.0247,
+          "q2": 0.1719,
+          "q3": 0.3105,
+          "q4": 0.6099,
+          "worst_quartile_coverage": 0.0247
+        }
+      },
+      "exact": {
+        "sites": [
+          "Ascot Branch Library",
+          "Del Aire Park",
+          "East Los Angeles Service Center",
+          "East Rancho Dominguez Community Center and Park",
+          "Felipe de Neve Branch Library",
+          "George Washington Carver Park",
+          "Granada Hills Branch Library",
+          "Junipero Serra Branch Library",
+          "La Puente Library",
+          "Morningside Park Branch Library",
+          "North Hollywood Amelia Earhart Regional Library",
+          "Pacoima Branch Library",
+          "Panorama City Branch Library",
+          "Slawson AJCC",
+          "South Whittier Library",
+          "Southeast LA Comprehensive AJCC",
+          "Sun Valley Branch Library",
+          "Veteran's Memorial Community Regional Park",
+          "Washington Irving Branch Library",
+          "West Valley Regional Branch Library"
+        ],
+        "n_selected": 20,
+        "zips_covered": 68,
+        "pred_coverage": 0.352,
+        "obs_coverage": 0.3507,
+        "equity_income_quartile": {
+          "q1": 0.6379,
+          "q2": 0.279,
+          "q3": 0.1695,
+          "q4": 0.0659,
+          "worst_quartile_coverage": 0.0659
+        },
+        "equity_ces_quartile": {
+          "q1": 0.0247,
+          "q2": 0.1719,
+          "q3": 0.3105,
+          "q4": 0.6136,
+          "worst_quartile_coverage": 0.0247
+        }
+      }
+    },
+    {
+      "radius_mi": 2,
+      "k": 40,
+      "budget_cost": 40.0,
+      "greedy": {
+        "sites": [
+          "Felipe de Neve Branch Library",
+          "Mark Twain Branch Library",
+          "Junipero Serra Branch Library",
+          "Pacoima Branch Library",
+          "Franklin D. Roosevelt park",
+          "Mona Park",
+          "Panorama City Branch Library",
+          "North Hollywood Amelia Earhart Regional Library",
+          "Morningside Park Branch Library",
+          "East Los Angeles Service Center",
+          "Washington Irving Branch Library",
+          "La Puente Library",
+          "Granada Hills Branch Library",
+          "Sun Valley Branch Library",
+          "Slawson AJCC",
+          "West Valley Regional Branch Library",
+          "Dexter Park",
+          "East Rancho Dominguez Community Center and Park",
+          "South Whittier Library",
+          "Del Aire Park",
+          "Will & Ariel Durant Branch Library",
+          "Little Tokyo Branch Library",
+          "Atwater Village Branch Library",
+          "Dee Hardison Sports Center",
+          "Rancho Dominguez AJCC (KRA)",
+          "El Monte Library",
+          "San Gabriel Library",
+          "Palms - Rancho Park Branch Library",
+          "Canoga Park Branch Library",
+          "Pomona Public Library",
+          "El Sereno Branch Library",
+          "Baldwin Park Library",
+          "Lynwood Senior Center",
+          "Alondra Community Regional Park",
+          "Potrero Heights Park Community and Senior Center",
+          "Don Knabe Community Regional Park",
+          "Van Nuys Branch Library",
+          "Lancaster Library",
+          "San Pedro Regional Library",
+          "Duarte Library"
+        ],
+        "n_selected": 40,
+        "zips_covered": 123,
+        "pred_coverage": 0.5375,
+        "obs_coverage": 0.5329,
+        "equity_income_quartile": {
+          "q1": 0.7971,
+          "q2": 0.5253,
+          "q3": 0.3657,
+          "q4": 0.1694,
+          "worst_quartile_coverage": 0.1694
+        },
+        "equity_ces_quartile": {
+          "q1": 0.1023,
+          "q2": 0.3289,
+          "q3": 0.5971,
+          "q4": 0.7818,
+          "worst_quartile_coverage": 0.1023
+        }
+      },
+      "exact": {
+        "sites": [
+          "Atwater Village Branch Library",
+          "Baldwin Park Library",
+          "Canoga Park Branch Library",
+          "Dee Hardison Sports Center",
+          "Del Aire Park",
+          "Don Knabe Community Regional Park",
+          "East Los Angeles Service Center",
+          "East Rancho Dominguez Community Center and Park",
+          "El Monte Library",
+          "El Sereno Branch Library",
+          "Felipe de Neve Branch Library",
+          "Franklin D. Roosevelt park",
+          "Granada Hills Branch Library",
+          "Helen Keller Park",
+          "Jesse Owens Park",
+          "Junipero Serra Branch Library",
+          "La Puente Library",
+          "Lancaster Library",
+          "Little Tokyo Branch Library",
+          "Mona Park",
+          "North Hollywood Amelia Earhart Regional Library",
+          "North Torrance Library ",
+          "Pacoima Branch Library",
+          "Palms - Rancho Park Branch Library",
+          "Panorama City Branch Library",
+          "Pomona Public Library",
+          "Potrero Heights Park Community and Senior Center",
+          "Rancho Dominguez AJCC (KRA)",
+          "Rogers Park",
+          "San Gabriel Library",
+          "San Pedro Regional Library",
+          "Slawson AJCC",
+          "South Whittier Library",
+          "Southeast LA Comprehensive AJCC",
+          "Sun Valley Branch Library",
+          "Van Nuys Branch Library",
+          "Veteran's Memorial Community Regional Park",
+          "Washington Irving Branch Library",
+          "West Valley Regional Branch Library",
+          "Will & Ariel Durant Branch Library"
+        ],
+        "n_selected": 40,
+        "zips_covered": 123,
+        "pred_coverage": 0.5383,
+        "obs_coverage": 0.5341,
+        "equity_income_quartile": {
+          "q1": 0.7971,
+          "q2": 0.5416,
+          "q3": 0.3321,
+          "q4": 0.1918,
+          "worst_quartile_coverage": 0.1918
+        },
+        "equity_ces_quartile": {
+          "q1": 0.1203,
+          "q2": 0.3144,
+          "q3": 0.5855,
+          "q4": 0.7951,
+          "worst_quartile_coverage": 0.1203
+        }
+      }
+    },
+    {
+      "radius_mi": 3,
+      "k": 5,
+      "budget_cost": 5.0,
+      "greedy": {
+        "sites": [
+          "John Muir Branch Library",
+          "Pio Pico - Koreatown Branch Library",
+          "Panorama City Branch Library",
+          "Mona Park",
+          "City Terrace Park"
+        ],
+        "n_selected": 5,
+        "zips_covered": 47,
+        "pred_coverage": 0.2615,
+        "obs_coverage": 0.2569,
+        "equity_income_quartile": {
+          "q1": 0.5554,
+          "q2": 0.216,
+          "q3": 0.0117,
+          "q4": 0.0,
+          "worst_quartile_coverage": 0.0
+        },
+        "equity_ces_quartile": {
+          "q1": 0.0,
+          "q2": 0.031,
+          "q3": 0.216,
+          "q4": 0.5336,
+          "worst_quartile_coverage": 0.0
+        }
+      },
+      "exact": {
+        "sites": [
+          "City Terrace Park",
+          "John Muir Branch Library",
+          "Mona Park",
+          "Panorama City Branch Library",
+          "Pio Pico - Koreatown Branch Library"
+        ],
+        "n_selected": 5,
+        "zips_covered": 47,
+        "pred_coverage": 0.2615,
+        "obs_coverage": 0.2569,
+        "equity_income_quartile": {
+          "q1": 0.5554,
+          "q2": 0.216,
+          "q3": 0.0117,
+          "q4": 0.0,
+          "worst_quartile_coverage": 0.0
+        },
+        "equity_ces_quartile": {
+          "q1": 0.0,
+          "q2": 0.031,
+          "q3": 0.216,
+          "q4": 0.5336,
+          "worst_quartile_coverage": 0.0
+        }
+      }
+    },
+    {
+      "radius_mi": 3,
+      "k": 10,
+      "budget_cost": 10.0,
+      "greedy": {
+        "sites": [
+          "John Muir Branch Library",
+          "Pio Pico - Koreatown Branch Library",
+          "Panorama City Branch Library",
+          "Mona Park",
+          "City Terrace Park",
+          "Clifton M. Brakensiek Library",
+          "North Torrance Library ",
+          "Canoga Park Branch Library",
+          "South El Monte Senior Center ",
+          "Mar Vista Branch Library"
+        ],
+        "n_selected": 10,
+        "zips_covered": 85,
+        "pred_coverage": 0.4017,
+        "obs_coverage": 0.3877,
+        "equity_income_quartile": {
+          "q1": 0.613,
+          "q2": 0.4186,
+          "q3": 0.198,
+          "q4": 0.1431,
+          "worst_quartile_coverage": 0.1431
+        },
+        "equity_ces_quartile": {
+          "q1": 0.0702,
+          "q2": 0.21,
+          "q3": 0.3982,
+          "q4": 0.6455,
+          "worst_quartile_coverage": 0.0702
+        }
+      },
+      "exact": {
+        "sites": [
+          "Canoga Park Branch Library",
+          "City Terrace Park",
+          "Clifton M. Brakensiek Library",
+          "John Muir Branch Library",
+          "Mar Vista Branch Library",
+          "Mona Park",
+          "North Torrance Library ",
+          "Panorama City Branch Library",
+          "Pio Pico - Koreatown Branch Library",
+          "South El Monte Senior Center "
+        ],
+        "n_selected": 10,
+        "zips_covered": 85,
+        "pred_coverage": 0.4017,
+        "obs_coverage": 0.3877,
+        "equity_income_quartile": {
+          "q1": 0.613,
+          "q2": 0.4186,
+          "q3": 0.198,
+          "q4": 0.1431,
+          "worst_quartile_coverage": 0.1431
+        },
+        "equity_ces_quartile": {
+          "q1": 0.0702,
+          "q2": 0.21,
+          "q3": 0.3982,
+          "q4": 0.6455,
+          "worst_quartile_coverage": 0.0702
+        }
+      }
+    },
+    {
+      "radius_mi": 3,
+      "k": 20,
+      "budget_cost": 20.0,
+      "greedy": {
+        "sites": [
+          "John Muir Branch Library",
+          "Pio Pico - Koreatown Branch Library",
+          "Panorama City Branch Library",
+          "Mona Park",
+          "City Terrace Park",
+          "Clifton M. Brakensiek Library",
+          "North Torrance Library ",
+          "Canoga Park Branch Library",
+          "South El Monte Senior Center ",
+          "Mar Vista Branch Library",
+          "Eagle Rock Branch Library",
+          "Slawson AJCC",
+          "Los Nietos Community and Senior Center",
+          "La Puente Library",
+          "Rancho Dominguez AJCC (KRA)",
+          "Pomona Public Library",
+          "Sherman Oaks Martin Pollard Branch Library",
+          "Duarte Library",
+          "Northwest Library",
+          "El Cariso Community Regional Park"
+        ],
+        "n_selected": 20,
+        "zips_covered": 138,
+        "pred_coverage": 0.598,
+        "obs_coverage": 0.5977,
+        "equity_income_quartile": {
+          "q1": 0.7353,
+          "q2": 0.6891,
+          "q3": 0.4781,
+          "q4": 0.2365,
+          "worst_quartile_coverage": 0.2365
+        },
+        "equity_ces_quartile": {
+          "q1": 0.1443,
+          "q2": 0.4267,
+          "q3": 0.6107,
+          "q4": 0.8623,
+          "worst_quartile_coverage": 0.1443
+        }
+      },
+      "exact": {
+        "sites": [
+          "Canoga Park Branch Library",
+          "City Terrace Park",
+          "Clifton M. Brakensiek Library",
+          "Duarte Library",
+          "Exposition Park - Dr. Mary McLeod Bethune Regional Library",
+          "Fairfax Branch Library",
+          "La Puente Library",
+          "Los Nietos Community and Senior Center",
+          "Mar Vista Branch Library",
+          "Mark Twain Branch Library",
+          "North Torrance Library ",
+          "Northwest Library",
+          "Panorama City Branch Library",
+          "Pomona Public Library",
+          "Rancho Dominguez AJCC (KRA)",
+          "Sherman Oaks Martin Pollard Branch Library",
+          "Silver Lake Branch Library",
+          "South El Monte Senior Center ",
+          "Southeast LA Comprehensive AJCC",
+          "Veteran's Memorial Community Regional Park"
+        ],
+        "n_selected": 20,
+        "zips_covered": 139,
+        "pred_coverage": 0.604,
+        "obs_coverage": 0.6058,
+        "equity_income_quartile": {
+          "q1": 0.7558,
+          "q2": 0.6759,
+          "q3": 0.495,
+          "q4": 0.2317,
+          "worst_quartile_coverage": 0.2317
+        },
+        "equity_ces_quartile": {
+          "q1": 0.1456,
+          "q2": 0.4287,
+          "q3": 0.647,
+          "q4": 0.8511,
+          "worst_quartile_coverage": 0.1456
+        }
+      }
+    },
+    {
+      "radius_mi": 3,
+      "k": 40,
+      "budget_cost": 40.0,
+      "greedy": {
+        "sites": [
+          "John Muir Branch Library",
+          "Pio Pico - Koreatown Branch Library",
+          "Panorama City Branch Library",
+          "Mona Park",
+          "City Terrace Park",
+          "Clifton M. Brakensiek Library",
+          "North Torrance Library ",
+          "Canoga Park Branch Library",
+          "South El Monte Senior Center ",
+          "Mar Vista Branch Library",
+          "Eagle Rock Branch Library",
+          "Slawson AJCC",
+          "Los Nietos Community and Senior Center",
+          "La Puente Library",
+          "Rancho Dominguez AJCC (KRA)",
+          "Pomona Public Library",
+          "Sherman Oaks Martin Pollard Branch Library",
+          "Duarte Library",
+          "Northwest Library",
+          "El Cariso Community Regional Park",
+          "Darby Park",
+          "Harbor City - Harbor Gateway Branch Library",
+          "San Gabriel Library",
+          "Granada Hills Branch Library",
+          "West Hollywood Library",
+          "Chatsworth Branch Library",
+          "South Whittier Library",
+          "Silver Lake Branch Library",
+          "Crescenta Valley Community Regional Park",
+          "Potrero Heights Park Community and Senior Center",
+          "Angeles Mesa Branch Library",
+          "Sunshine Park",
+          "Antelope Valley Senior Center",
+          "San Pedro Regional Library",
+          "Loma Alta Park",
+          "Platt Branch Library",
+          "Alexander Hughes Community Center",
+          "Don Knabe Community Regional Park",
+          "Encino - Tarzana Branch Library",
+          "Sierra Madre Library"
+        ],
+        "n_selected": 40,
+        "zips_covered": 206,
+        "pred_coverage": 0.7892,
+        "obs_coverage": 0.7977,
+        "equity_income_quartile": {
+          "q1": 0.8181,
+          "q2": 0.8731,
+          "q3": 0.7318,
+          "q4": 0.6224,
+          "worst_quartile_coverage": 0.6224
+        },
+        "equity_ces_quartile": {
+          "q1": 0.4713,
+          "q2": 0.7199,
+          "q3": 0.82,
+          "q4": 0.9282,
+          "worst_quartile_coverage": 0.4713
+        }
+      },
+      "exact": {
+        "sites": [
+          "Alexander Hughes Community Center",
+          "Angeles Mesa Branch Library",
+          "Artesia Lbrary",
+          "Central Library",
+          "City Terrace Park",
+          "Clifton M. Brakensiek Library",
+          "Crescenta Valley Community Regional Park",
+          "Del Aire Park",
+          "Don Knabe Community Regional Park",
+          "Duarte Library",
+          "Eagle Rock Branch Library",
+          "Fairfax Branch Library",
+          "Granada Hills Branch Library",
+          "Harbor City - Harbor Gateway Branch Library",
+          "La Puente Library",
+          "Lancaster Library",
+          "Loma Alta Park",
+          "Los Feliz Branch Library",
+          "Los Nietos Community and Senior Center",
+          "Mar Vista Branch Library",
+          "North Torrance Library ",
+          "Northwest Library",
+          "Panorama City Branch Library",
+          "Platt Branch Library",
+          "Pomona Public Library",
+          "Porter Ranch Branch Library",
+          "Potrero Heights Park Community and Senior Center",
+          "Rancho Dominguez AJCC (KRA)",
+          "San Gabriel Library",
+          "San Pedro Service Center",
+          "Sherman Oaks Martin Pollard Branch Library",
+          "Sierra Madre Library",
+          "Slawson AJCC",
+          "South El Monte Senior Center ",
+          "South Whittier Library",
+          "Sun Valley Branch Library",
+          "Sunshine Park",
+          "Ted Watkins Memorial Park",
+          "Veteran's Memorial Community Regional Park",
+          "West Valley Regional Branch Library"
+        ],
+        "n_selected": 40,
+        "zips_covered": 212,
+        "pred_coverage": 0.805,
+        "obs_coverage": 0.8129,
+        "equity_income_quartile": {
+          "q1": 0.846,
+          "q2": 0.8856,
+          "q3": 0.741,
+          "q4": 0.6237,
+          "worst_quartile_coverage": 0.6237
+        },
+        "equity_ces_quartile": {
+          "q1": 0.4872,
+          "q2": 0.7199,
+          "q3": 0.8343,
+          "q4": 0.9524,
+          "worst_quartile_coverage": 0.4872
+        }
+      }
+    },
+    {
+      "radius_mi": 5,
+      "k": 5,
+      "budget_cost": 5.0,
+      "greedy": {
+        "sites": [
+          "Junipero Serra Branch Library",
+          "Paramount Community Center",
+          "Panorama City Branch Library",
+          "Potrero Heights Park Community and Senior Center",
+          "Atwater Village Branch Library"
+        ],
+        "n_selected": 5,
+        "zips_covered": 100,
+        "pred_coverage": 0.4476,
+        "obs_coverage": 0.4464,
+        "equity_income_quartile": {
+          "q1": 0.758,
+          "q2": 0.4412,
+          "q3": 0.1873,
+          "q4": 0.0742,
+          "worst_quartile_coverage": 0.0742
+        },
+        "equity_ces_quartile": {
+          "q1": 0.0665,
+          "q2": 0.1503,
+          "q3": 0.514,
+          "q4": 0.7233,
+          "worst_quartile_coverage": 0.0665
+        }
+      },
+      "exact": {
+        "sites": [
+          "Echo Park Branch Library",
+          "Lynwood Senior Center",
+          "Panorama City Branch Library",
+          "Potrero Heights Park Community and Senior Center",
+          "Rogers Park"
+        ],
+        "n_selected": 5,
+        "zips_covered": 104,
+        "pred_coverage": 0.4722,
+        "obs_coverage": 0.4672,
+        "equity_income_quartile": {
+          "q1": 0.8094,
+          "q2": 0.4965,
+          "q3": 0.1539,
+          "q4": 0.0525,
+          "worst_quartile_coverage": 0.0525
+        },
+        "equity_ces_quartile": {
+          "q1": 0.056,
+          "q2": 0.1313,
+          "q3": 0.5239,
+          "q4": 0.7984,
+          "worst_quartile_coverage": 0.056
+        }
+      }
+    },
+    {
+      "radius_mi": 5,
+      "k": 10,
+      "budget_cost": 10.0,
+      "greedy": {
+        "sites": [
+          "Junipero Serra Branch Library",
+          "Paramount Community Center",
+          "Panorama City Branch Library",
+          "Potrero Heights Park Community and Senior Center",
+          "Atwater Village Branch Library",
+          "North Torrance Library ",
+          "Baldwin Park Library",
+          "Canoga Park Branch Library",
+          "Palms - Rancho Park Branch Library",
+          "Palomares Park Community Center"
+        ],
+        "n_selected": 10,
+        "zips_covered": 174,
+        "pred_coverage": 0.6629,
+        "obs_coverage": 0.6662,
+        "equity_income_quartile": {
+          "q1": 0.7842,
+          "q2": 0.7603,
+          "q3": 0.5143,
+          "q4": 0.3709,
+          "worst_quartile_coverage": 0.3709
+        },
+        "equity_ces_quartile": {
+          "q1": 0.3326,
+          "q2": 0.4398,
+          "q3": 0.7206,
+          "q4": 0.8806,
+          "worst_quartile_coverage": 0.3326
+        }
+      },
+      "exact": {
+        "sites": [
+          "Baldwin Park Library",
+          "Echo Park Branch Library",
+          "Harbor City - Harbor Gateway Branch Library",
+          "Mark Twain Branch Library",
+          "Palms - Rancho Park Branch Library",
+          "Palomares Park Community Center",
+          "Paramount Community Center",
+          "Potrero Heights Park Community and Senior Center",
+          "Valley Plaza Branch Library",
+          "West Valley Regional Branch Library"
+        ],
+        "n_selected": 10,
+        "zips_covered": 175,
+        "pred_coverage": 0.6904,
+        "obs_coverage": 0.6934,
+        "equity_income_quartile": {
+          "q1": 0.8185,
+          "q2": 0.7876,
+          "q3": 0.5758,
+          "q4": 0.3301,
+          "worst_quartile_coverage": 0.3301
+        },
+        "equity_ces_quartile": {
+          "q1": 0.2859,
+          "q2": 0.4585,
+          "q3": 0.7335,
+          "q4": 0.9513,
+          "worst_quartile_coverage": 0.2859
+        }
+      }
+    },
+    {
+      "radius_mi": 5,
+      "k": 20,
+      "budget_cost": 20.0,
+      "greedy": {
+        "sites": [
+          "Junipero Serra Branch Library",
+          "Paramount Community Center",
+          "Panorama City Branch Library",
+          "Potrero Heights Park Community and Senior Center",
+          "Atwater Village Branch Library",
+          "North Torrance Library ",
+          "Baldwin Park Library",
+          "Canoga Park Branch Library",
+          "Palms - Rancho Park Branch Library",
+          "Palomares Park Community Center",
+          "Angelo M Iacoboni Library ",
+          "Harbor City - Harbor Gateway Branch Library",
+          "Sylmar Branch Library",
+          "Hacienda Community and Recreation Center",
+          "North Hollywood Amelia Earhart Regional Library",
+          "Arroyo Seco Regional Library",
+          "Ascot Branch Library",
+          "Loma Alta Park",
+          "Sunland - Tujunga Branch Library",
+          "Adventure Park"
+        ],
+        "n_selected": 20,
+        "zips_covered": 235,
+        "pred_coverage": 0.8372,
+        "obs_coverage": 0.8483,
+        "equity_income_quartile": {
+          "q1": 0.8601,
+          "q2": 0.9021,
+          "q3": 0.8346,
+          "q4": 0.6407,
+          "worst_quartile_coverage": 0.6407
+        },
+        "equity_ces_quartile": {
+          "q1": 0.5244,
+          "q2": 0.7879,
+          "q3": 0.8446,
+          "q4": 0.9762,
+          "worst_quartile_coverage": 0.5244
+        }
+      },
+      "exact": {
+        "sites": [
+          "Angelo M Iacoboni Library ",
+          "Baldwin Park Library",
+          "Chatsworth Branch Library",
+          "Community Center District 2",
+          "El Sereno Branch Library",
+          "Franklin D. Roosevelt park",
+          "Katy Geissert Civic Center Library",
+          "Loma Alta Park",
+          "Los Feliz Branch Library",
+          "Palomares Park Community Center",
+          "Potrero Heights Park Community and Senior Center",
+          "Rancho Dominguez AJCC (KRA)",
+          "Rio Hondo Comprehensive AJCC",
+          "Rowland Heights Library",
+          "San Pedro Service Center",
+          "Sunland - Tujunga Branch Library",
+          "Sylmar Branch Library",
+          "Van Nuys Branch Library",
+          "West Los Angeles Regional Library",
+          "Woodland Hills Branch Library"
+        ],
+        "n_selected": 20,
+        "zips_covered": 247,
+        "pred_coverage": 0.8761,
+        "obs_coverage": 0.888,
+        "equity_income_quartile": {
+          "q1": 0.8825,
+          "q2": 0.9337,
+          "q3": 0.8339,
+          "q4": 0.7992,
+          "worst_quartile_coverage": 0.7992
+        },
+        "equity_ces_quartile": {
+          "q1": 0.6913,
+          "q2": 0.8212,
+          "q3": 0.8452,
+          "q4": 1.0,
+          "worst_quartile_coverage": 0.6913
+        }
+      }
+    },
+    {
+      "radius_mi": 5,
+      "k": 40,
+      "budget_cost": 40.0,
+      "greedy": {
+        "sites": [
+          "Junipero Serra Branch Library",
+          "Paramount Community Center",
+          "Panorama City Branch Library",
+          "Potrero Heights Park Community and Senior Center",
+          "Atwater Village Branch Library",
+          "North Torrance Library ",
+          "Baldwin Park Library",
+          "Canoga Park Branch Library",
+          "Palms - Rancho Park Branch Library",
+          "Palomares Park Community Center",
+          "Angelo M Iacoboni Library ",
+          "Harbor City - Harbor Gateway Branch Library",
+          "Sylmar Branch Library",
+          "Hacienda Community and Recreation Center",
+          "North Hollywood Amelia Earhart Regional Library",
+          "Arroyo Seco Regional Library",
+          "Ascot Branch Library",
+          "Loma Alta Park",
+          "Sunland - Tujunga Branch Library",
+          "Adventure Park",
+          "Sherman Oaks Martin Pollard Branch Library",
+          "Stevenson Ranch Library",
+          "San Pedro Regional Library",
+          "Antelope Valley Senior Center",
+          "Rowland Heights Library",
+          "Chatsworth Branch Library",
+          "Rancho Dominguez AJCC (KRA)",
+          "George Lane Park",
+          "Jackie Robinson Park",
+          "Duarte Library",
+          "Community Center District 2",
+          "Topanga Library",
+          "Pearblossom Park",
+          "Artesia Lbrary",
+          "Agoura Hills Library",
+          "Stephen Sorensen Park",
+          "Acton/Agua Dulce Library ",
+          "Malibu Library"
+        ],
+        "n_selected": 38,
+        "zips_covered": 268,
+        "pred_coverage": 0.926,
+        "obs_coverage": 0.9346,
+        "equity_income_quartile": {
+          "q1": 0.912,
+          "q2": 0.9627,
+          "q3": 0.9045,
+          "q4": 0.9142,
+          "worst_quartile_coverage": 0.9045
+        },
+        "equity_ces_quartile": {
+          "q1": 0.8266,
+          "q2": 0.8981,
+          "q3": 0.897,
+          "q4": 1.0,
+          "worst_quartile_coverage": 0.8266
+        }
+      },
+      "exact": {
+        "sites": [
+          "A C Bilbrew Library",
+          "Acton/Agua Dulce Library ",
+          "Agoura Hills Library",
+          "Angelo M Iacoboni Library ",
+          "Atwater Village Branch Library",
+          "Baldwin Park Library",
+          "Claremont Helen Renwick Library",
+          "Jackie Robinson Park",
+          "Lancaster Library",
+          "Loma Alta Park",
+          "Los Nietos Community and Senior Center",
+          "Malibu Library",
+          "Pearblossom Park",
+          "Pio Pico - Koreatown Branch Library",
+          "Platt Branch Library",
+          "Pomona Public Library",
+          "Porter Ranch Branch Library",
+          "Quartz Hill Library ",
+          "Rancho Dominguez AJCC (KRA)",
+          "Rio Hondo Comprehensive AJCC",
+          "Robert Louis Stevenson Branch Library",
+          "Rogers Park",
+          "Rowland Heights Library",
+          "San Gabriel Library",
+          "San Pedro Service Center",
+          "Sierra Madre Library",
+          "Stephen Sorensen Park",
+          "Stevenson Ranch Library",
+          "Sunland - Tujunga Branch Library",
+          "Sylmar Branch Library",
+          "Topanga Library",
+          "Valley Plaza Branch Library",
+          "Walteria Library",
+          "West Los Angeles Regional Library",
+          "West Valley Regional Branch Library",
+          "Westchester - Loyola Village Branch Library"
+        ],
+        "n_selected": 36,
+        "zips_covered": 268,
+        "pred_coverage": 0.926,
+        "obs_coverage": 0.9346,
+        "equity_income_quartile": {
+          "q1": 0.912,
+          "q2": 0.9627,
+          "q3": 0.9045,
+          "q4": 0.9142,
+          "worst_quartile_coverage": 0.9045
+        },
+        "equity_ces_quartile": {
+          "q1": 0.8266,
+          "q2": 0.8981,
+          "q3": 0.897,
+          "q4": 1.0,
+          "worst_quartile_coverage": 0.8266
+        }
+      }
+    }
+  ]
+}

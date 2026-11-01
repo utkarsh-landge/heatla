@@ -1,0 +1,18 @@
+{
+  "title": "HEATLA \u2014 LA County extreme-heat excess ER risk",
+  "n_zips_mapped": 287,
+  "target": "UCLA Heat Maps excess ER rate per 10,000, CalHeatScore-4, 2008-2018",
+  "data_years": {
+    "target": "2008-2018",
+    "CES": "4.0 (~2021)",
+    "ACS": "2022 5-year",
+    "cooling_centers": "LA County official, 2022"
+  },
+  "caveats": [
+    "ZIP-level only; no daily or individual records.",
+    "Small sample (~287 ZIPs); mismatched data years across sources.",
+    "Predictions are out-of-fold (leave-one-geographic-group-out).",
+    "ZIP 90095 (UCLA) may have mis-attributed ER patients; flagged.",
+    "Prototype study, not an operational tool."
+  ]
+}

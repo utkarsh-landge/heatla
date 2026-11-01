@@ -1,0 +1,108 @@
+"""Step 6a - export real pipeline outputs as static site data (no synthetic values).
+
+Writes into site/data/:
+  zips.geojson   - LA ZIP polygons (geometry from the UCLA zip_ER layer) with
+                   observed + out-of-fold predicted excess ER, group, key features
+  centers.json   - real LA County cooling centers (lat/lon, name)
+  metrics.json   - Step 4 model metrics (copied from results/)
+  solutions.json - Step 5 cooling-center solutions (copied from results/)
+  meta.json      - provenance, counts, honest-labeling notes
+
+Everything here is derived from the real pipeline outputs. Nothing is generated.
+"""
+
+from __future__ import annotations
+
+import json
+import pathlib
+import sys
+import urllib.parse
+import urllib.request
+
+import pandas as pd
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "src"))
+from heatla import arcgis  # noqa: E402
+
+SITE = pathlib.Path("site/data")
+RES = pathlib.Path("results")
+
+
+def fetch_zip_polygons() -> dict:
+    """One generalized polygon per LA ZIP from the target layer (outSR 4326)."""
+    base = arcgis.UCLA_SERVICES
+    url = f"{base}/zip_ER/FeatureServer/0/query?" + urllib.parse.urlencode({
+        "where": "cnty_nm='Los Angeles' AND categry=4 AND NumRate='Rate' AND Years='2008-2018'",
+        "outFields": "zip",
+        "returnGeometry": "true",
+        "outSR": "4326",
+        "maxAllowableOffset": "0.0007",  # generalize to keep the file small
+        "f": "geojson",
+    })
+    return json.load(urllib.request.urlopen(url, timeout=120))
+
+
+def main() -> None:
+    SITE.mkdir(parents=True, exist_ok=True)
+    grouped = pd.read_csv("data/processed/model_table_grouped.csv")
+    oof = pd.read_csv("results/predictions_oof.csv")
+    data = grouped.merge(oof, on="zip", suffixes=("", "_oof"))
+    by_zip = {int(r.zip): r for r in data.itertuples()}
+
+    gj = fetch_zip_polygons()
+    keep = []
+    for feat in gj["features"]:
+        z = int(feat["properties"]["zip"])
+        r = by_zip.get(z)
+        if r is None:
+            continue  # zip with no model row (missing coords) - omit from map
+        feat["properties"] = {
+            "zip": z,
+            "observed_rate": round(float(r.excess_er_rate_per_10k), 2),
+            "observed_number": round(float(r.excess_er_number), 1),
+            "pred_poisson": round(float(r.pred_poisson), 2),
+            "pred_rf": round(float(r.pred_random_forest), 2),
+            "pred_gbm": round(float(r.pred_gradient_boosting), 2),
+            "group": int(r.group),
+            "population": int(r.ucla_population),
+            "median_hh_income": None if pd.isna(r.median_hh_income) else int(r.median_hh_income),
+            "pct_poverty": None if pd.isna(r.pct_poverty) else round(float(r.pct_poverty), 1),
+            "ces4_percentile": None if pd.isna(r.ces4_percentile) else round(float(r.ces4_percentile), 1),
+            "is_90095": int(r.is_ucla_campus_90095),
+        }
+        keep.append(feat)
+    gj["features"] = keep
+    (SITE / "zips.geojson").write_text(json.dumps(gj))
+
+    centers = json.load(open("data/raw/cooling_centers_lacounty.json"))
+    clist = [
+        {"name": f["attributes"].get("Site_Name"),
+         "city": (f["attributes"].get("City") or "").strip(),
+         "lat": f["geometry"]["y"], "lon": f["geometry"]["x"]}
+        for f in centers["features"] if f.get("geometry", {}).get("x") is not None
+    ]
+    (SITE / "centers.json").write_text(json.dumps(clist))
+
+    (SITE / "metrics.json").write_text((RES / "metrics.json").read_text())
+    (SITE / "solutions.json").write_text((RES / "coolingcenter_solutions.json").read_text())
+
+    (SITE / "meta.json").write_text(json.dumps({
+        "title": "HEATLA — LA County extreme-heat excess ER risk",
+        "n_zips_mapped": len(keep),
+        "target": "UCLA Heat Maps excess ER rate per 10,000, CalHeatScore-4, 2008-2018",
+        "data_years": {"target": "2008-2018", "CES": "4.0 (~2021)", "ACS": "2022 5-year",
+                       "cooling_centers": "LA County official, 2022"},
+        "caveats": [
+            "ZIP-level only; no daily or individual records.",
+            "Small sample (~287 ZIPs); mismatched data years across sources.",
+            "Predictions are out-of-fold (leave-one-geographic-group-out).",
+            "ZIP 90095 (UCLA) may have mis-attributed ER patients; flagged.",
+            "Prototype study, not an operational tool.",
+        ],
+    }, indent=2))
+
+    print(f"site data written: {len(keep)} zip polygons, {len(clist)} centers")
+
+
+if __name__ == "__main__":
+    main()

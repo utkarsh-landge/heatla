@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HEATLA — Where extreme heat sends people to the ER</title>
+<meta name="description" content="A prototype that predicts which Los Angeles County ZIP codes see the most extra ER visits during extreme heat — and where cooling centers help most. Built from real, sourced data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
+  integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="">
+<style>
+:root{
+  --bg:#fcfbf9; --bg2:#f4f0ea; --ink:#17130e; --ink2:#6a6258; --line:#e6ded2;
+  --card:#ffffff; --accent:#d1410a; --accent2:#f08c1d; --accent-ink:#9a2f06;
+  --shadow-sm:0 1px 2px rgba(40,28,16,.05); --shadow:0 10px 30px -10px rgba(40,28,16,.16);
+  --shadow-lg:0 40px 90px -30px rgba(40,28,16,.3);
+  --r:16px; --r-lg:28px; --maxw:1120px;
+  --c0:#00224e;--c1:#35456c;--c2:#666970;--c3:#948e63;--c4:#c6b94a;--c5:#fee838;
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --disp:"Space Grotesk",var(--sans); --mono:"IBM Plex Mono",monospace;
+  --ease:cubic-bezier(.22,.61,.36,1); --tile:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0c0a07; --bg2:#141009; --ink:#f4efe6; --ink2:#a89d8c; --line:#2a2114; --card:#16110a;
+  --accent:#f59e0b; --accent2:#fbbf24; --accent-ink:#fcd37a;
+  --shadow:0 10px 30px -10px rgba(0,0,0,.6); --shadow-lg:0 40px 90px -24px rgba(0,0,0,.8); --tile:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0c0a07; --bg2:#141009; --ink:#f4efe6; --ink2:#a89d8c; --line:#2a2114; --card:#16110a;
+  --accent:#f59e0b; --accent2:#fbbf24; --accent-ink:#fcd37a;
+  --shadow:0 10px 30px -10px rgba(0,0,0,.6); --shadow-lg:0 40px 90px -24px rgba(0,0,0,.8); --tile:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;text-wrap:pretty;overflow-x:hidden}
+h1,h2,h3{font-family:var(--disp);font-weight:700;letter-spacing:-.03em;line-height:1.04;margin:0}
+h1{font-size:clamp(2.6rem,7.5vw,5.3rem)}
+h2{font-size:clamp(1.9rem,5vw,3.3rem)}
+h3{font-size:clamp(1.15rem,2.6vw,1.5rem);letter-spacing:-.02em}
+p{margin:0}
+a{color:var(--accent);text-decoration:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+.muted{color:var(--ink2)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:100;backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  background:color-mix(in srgb,var(--bg) 74%,transparent);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.nav .wrap{display:flex;align-items:center;gap:8px;height:54px}
+.logo{font-family:var(--disp);font-weight:700;letter-spacing:-.04em;font-size:1.2rem;margin-right:auto}
+.logo b{color:var(--accent)}
+.links{display:none;gap:28px;margin:0 auto}
+.links a{color:var(--ink);opacity:.8;font-size:.88rem;transition:opacity .2s}
+.links a:hover{opacity:1}
+.navbtn{display:inline-grid;place-items:center;height:36px;padding:0 15px;border-radius:980px;border:1px solid var(--line);
+  background:var(--card);color:var(--ink);font:500 .85rem var(--sans);cursor:pointer;transition:transform .18s var(--ease)}
+.navbtn:hover{transform:translateY(-1px)}
+.themebtn{width:38px;height:38px;border-radius:980px;border:1px solid var(--line);background:var(--card);color:var(--ink);
+  cursor:pointer;display:grid;place-items:center;margin-left:6px;transition:transform .4s var(--ease)}
+.themebtn:hover{transform:rotate(18deg)}
+.themebtn svg{width:18px;height:18px}
+.burger{display:inline-grid;place-items:center;width:38px;height:38px;background:none;border:0;cursor:pointer;margin-left:4px}
+.burger span{display:block;width:19px;height:2px;background:var(--ink);transition:.3s var(--ease)}
+.burger span+span{margin-top:5px}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media(min-width:880px){.links{display:flex}.burger{display:none}}
+.mobile{position:fixed;inset:54px 0 auto 0;z-index:99;background:var(--bg);border-bottom:1px solid var(--line);
+  transform:translateY(-130%);transition:transform .35s var(--ease);padding:8px 22px 22px}
+.mobile.open{transform:none}
+.mobile a{display:block;color:var(--ink);font-size:1.25rem;font-weight:600;font-family:var(--disp);padding:13px 0;border-bottom:1px solid var(--line)}
+
+/* hero */
+.hero{position:relative;text-align:center;padding:clamp(48px,8vw,96px) 22px 0;display:flex;flex-direction:column;align-items:center}
+.hero h1{max-width:15ch}
+.hero .sub{font-size:clamp(1.1rem,2.4vw,1.45rem);color:var(--ink2);margin-top:22px;max-width:46ch;font-weight:500}
+.hero .cta{display:flex;gap:24px;align-items:center;margin-top:28px;flex-wrap:wrap;justify-content:center}
+.cta-fill{background:var(--accent);color:#fff;border:0;border-radius:980px;padding:13px 26px;font:500 1.05rem var(--sans);
+  cursor:pointer;transition:transform .18s var(--ease),filter .2s}
+.cta-fill:hover{transform:translateY(-2px);filter:brightness(1.07)}
+.cta-text{font-size:1.05rem;font-weight:500}.cta-text::after{content:" ›";transition:margin .2s}.cta-text:hover::after{margin-left:4px}
+.stage{margin-top:44px;width:min(960px,96vw);aspect-ratio:16/9;border-radius:var(--r-lg);position:relative;
+  overflow:hidden;box-shadow:var(--shadow-lg);background:radial-gradient(130% 120% at 50% -10%,
+  color-mix(in srgb,var(--accent) 26%,var(--bg2)),var(--bg2));cursor:grab}
+#hero3d{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2}
+.stage .cap{position:absolute;left:0;right:0;bottom:14px;z-index:3;text-align:center;font-family:var(--mono);
+  font-size:.72rem;letter-spacing:.06em;color:color-mix(in srgb,var(--ink) 55%,transparent)}
+
+/* stat strip */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;width:100%;max-width:var(--maxw);margin:44px auto 0;padding:0 22px}
+@media(min-width:720px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow-sm);
+  position:relative;overflow:hidden}
+.stat .n{font-family:var(--disp);font-weight:700;font-size:clamp(1.9rem,4vw,2.6rem);line-height:1;color:var(--accent);
+  font-variant-numeric:tabular-nums}
+.stat .l{color:var(--ink2);font-size:.82rem;margin-top:8px}
+.stat::after{content:"";position:absolute;left:0;top:0;height:3px;width:100%;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+
+section{padding:clamp(60px,10vw,120px) 0 0}
+.head{max-width:62ch;margin:0 auto 26px;text-align:center}
+.head p{color:var(--ink2);margin-top:12px;font-size:1.12rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(16px,2.5vw,26px);box-shadow:var(--shadow)}
+.pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.pill{font-family:var(--mono);font-size:.74rem;color:var(--accent-ink);background:color-mix(in srgb,var(--accent) 12%,transparent);
+  border:1px solid color-mix(in srgb,var(--accent) 26%,transparent);border-radius:999px;padding:4px 11px}
+
+.controls{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:14px}
+.seg{display:inline-flex;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:4px;gap:2px;flex-wrap:wrap}
+.seg button{font:.86rem var(--sans);border:0;background:transparent;color:var(--ink2);padding:7px 13px;border-radius:9px;
+  cursor:pointer;transition:all .18s var(--ease);white-space:nowrap}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff;box-shadow:var(--shadow-sm)}
+.chk{display:inline-flex;align-items:center;gap:8px;color:var(--ink2);font-size:.88rem;cursor:pointer}
+.chk input{accent-color:var(--accent);width:16px;height:16px}
+#map{height:min(64vh,540px);border-radius:16px;border:1px solid var(--line);z-index:1;background:var(--bg2)}
+.leaflet-container{background:var(--bg2)!important;font-family:var(--sans)!important}
+.legend{display:flex;align-items:center;gap:3px;margin-top:12px;font-family:var(--mono);font-size:.74rem;color:var(--ink2);flex-wrap:wrap}
+.legend i{width:30px;height:13px;display:inline-block;border-radius:2px}
+
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:right;padding:12px;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+thead th{color:var(--ink2);font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+tbody td{font-variant-numeric:tabular-nums}
+tbody tr{transition:background .18s}tbody tr:hover{background:var(--bg2)}
+tbody tr.best{background:color-mix(in srgb,var(--accent) 11%,transparent)}
+tbody tr.best td:first-child::after{content:" ★";color:var(--accent)}
+
+.slider-row{display:grid;gap:18px;margin:4px 0 20px}
+@media(min-width:620px){.slider-row{grid-template-columns:1fr 1fr 1fr;align-items:end}}
+.slider label{display:block;color:var(--ink2);font-size:.85rem;margin-bottom:8px}
+.slider label b{color:var(--ink);font-family:var(--mono);font-size:1.05rem}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:999px;background:var(--bg2);outline-offset:4px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--accent);
+  border:3px solid var(--card);box-shadow:var(--shadow-sm);cursor:pointer;transition:transform .15s}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--accent);border:3px solid var(--card);cursor:pointer}
+.cov{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:4px 0 20px}
+.cov .stat .n{font-size:clamp(1.5rem,3.4vw,2.1rem)}
+.bar-meter{height:8px;border-radius:999px;background:var(--bg2);overflow:hidden;margin-top:8px}
+.bar-meter>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:999px;transition:width .6s var(--ease)}
+
+.note{border-left:3px solid var(--accent);padding:10px 16px;border-radius:0 12px 12px 0;background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.src{font-size:.84rem;color:var(--ink2)}
+ul.clean{margin:4px 0;padding-left:20px}ul.clean li{margin:7px 0;color:var(--ink2)}
+.closing{text-align:center;padding:clamp(80px,13vw,150px) 22px 0}
+.closing h2{max-width:18ch;margin:0 auto 16px}.closing p{color:var(--ink2);font-size:1.15rem;max-width:44ch;margin:0 auto}
+footer{margin-top:clamp(60px,10vw,110px);border-top:1px solid var(--line);background:var(--bg2);font-size:.85rem;color:var(--ink2)}
+footer .wrap{padding:28px 22px 46px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+.reveal{opacity:0;transform:translateY(30px)}
+.js .reveal{transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+.tilt{transition:transform .25s var(--ease),box-shadow .25s}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="wrap">
+  <span class="logo">HEAT<b>LA</b></span>
+  <div class="links">
+    <a href="#map-sec">Map</a><a href="#models">Models</a><a href="#siting">Cooling centers</a><a href="#limits">Limitations</a>
+  </div>
+  <button class="navbtn" onclick="document.getElementById('map-sec').scrollIntoView()">Explore data</button>
+  <button class="themebtn" id="themeBtn" aria-label="Toggle light/dark theme"></button>
+  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
+</div></nav>
+<div class="mobile" id="mobileMenu">
+  <a href="#map-sec">Map</a><a href="#models">Models</a><a href="#siting">Cooling centers</a><a href="#limits">Limitations</a>
+</div>
+
+<header class="hero">
+  <p class="eyebrow reveal">Los Angeles County · 2008–2018</p>
+  <h1 class="reveal">Where extreme heat sends people to the ER.</h1>
+  <p class="sub reveal">A prototype that predicts the ZIP codes with the most <em>extra</em> emergency-room
+    visits during extreme heat — then decides where cooling centers help most. Built entirely from real, sourced data.</p>
+  <div class="cta reveal">
+    <button class="cta-fill" onclick="document.getElementById('map-sec').scrollIntoView()">Explore the map</button>
+    <a class="cta-text" href="#siting">Site cooling centers</a>
+  </div>
+  <div class="stage reveal" id="stage" role="img" aria-label="Animated 3D field of bars whose height is each LA ZIP's heat-related excess ER rate">
+    <canvas id="hero3d"></canvas>
+    <span class="cap">Excess ER rate by ZIP · landmarks ◆ · cooling-center dots ● · drag to rotate</span>
+  </div>
+  <div class="stats">
+    <div class="stat reveal"><div class="n" data-count="287">0</div><div class="l">LA County ZIPs modeled</div></div>
+    <div class="stat reveal"><div class="n" data-count="17">0</div><div class="l">real features per ZIP</div></div>
+    <div class="stat reveal"><div class="n" data-count="153">0</div><div class="l">real cooling centers</div></div>
+    <div class="stat reveal"><div class="n" data-count="0.79" data-dec="2">0</div><div class="l">best Spearman ρ</div></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section id="overview">
+  <div class="head reveal">
+    <p class="eyebrow">01 — Provenance</p>
+    <h2>Real data, every column sourced.</h2>
+    <p>The target is UCLA Heat Maps’ excess ER visit rate at the most extreme heat level, pulled straight
+    from public ArcGIS layers. Nothing on this page is synthetic.</p>
+    <div class="pills">
+      <span class="pill">UCLA Heat Maps</span><span class="pill">CalEnviroScreen 4.0</span>
+      <span class="pill">Census ACS 2022</span><span class="pill">Census Gazetteer</span><span class="pill">LA County cooling centers</span>
+    </div>
+  </div>
+</section>
+
+<section id="map-sec">
+  <div class="head reveal"><p class="eyebrow">02 — Risk map</p><h2>Observed vs predicted.</h2>
+    <p>Excess ER rate per 10,000, on a colorblind-safe scale. Toggle the UCLA target against each model’s
+    out-of-fold prediction; overlay the real cooling centers.</p></div>
+  <div class="reveal">
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Map layer">
+        <button data-metric="observed_rate" aria-pressed="true">Observed</button>
+        <button data-metric="pred_poisson" aria-pressed="false">Poisson</button>
+        <button data-metric="pred_rf" aria-pressed="false">Random Forest</button>
+        <button data-metric="pred_gbm" aria-pressed="false">Gradient Boosting</button>
+      </div>
+      <label class="chk" style="margin-left:auto"><input type="checkbox" id="showCenters"> show cooling centers</label>
+    </div>
+    <div id="map"></div>
+    <div class="legend" id="legend"></div>
+  </div>
+</section>
+
+<section id="models">
+  <div class="head reveal"><p class="eyebrow">03 — Models</p><h2>How well can we predict it?</h2>
+    <p>Leave-one-geographic-group-out cross-validation over 5 spatial groups. Top-10% = share of the truly
+    highest-risk 10% of ZIPs a model also ranks in its top 10%.</p></div>
+  <div class="card reveal" style="overflow-x:auto">
+    <table id="modelTable"><thead><tr><th>Model</th><th>R²</th><th>R² 95% CI</th><th>Spearman ρ</th><th>Top-10%</th><th>Top-20%</th></tr></thead><tbody></tbody></table>
+    <p class="src" id="baseline-line" style="margin-top:14px"></p>
+  </div>
+</section>
+
+<section id="siting">
+  <div class="head reveal"><p class="eyebrow">04 — Cooling centers</p><h2>Where to open them.</h2>
+    <p>Pick a budget and radius. Benefit = out-of-fold predicted excess ER visits within range of an open
+    center. Exact solves an integer program; greedy adds the best next site.</p></div>
+  <div class="card reveal">
+    <div class="slider-row">
+      <div class="slider"><label>Budget <b id="kval">10</b> centers</label><input type="range" id="k" min="0" max="3" step="1" value="1"></div>
+      <div class="slider"><label>Radius <b id="rval">2</b> miles</label><input type="range" id="r" min="0" max="3" step="1" value="2"></div>
+      <div class="seg" role="group" aria-label="Method" style="justify-self:start">
+        <button data-method="exact" aria-pressed="true">Exact · ILP</button><button data-method="greedy" aria-pressed="false">Greedy</button>
+      </div>
+    </div>
+    <div class="cov">
+      <div class="stat"><div class="n" id="c-pred">—</div><div class="l">predicted excess ER covered</div><div class="bar-meter"><i id="m-pred"></i></div></div>
+      <div class="stat"><div class="n" id="c-obs">—</div><div class="l">observed excess ER covered</div><div class="bar-meter"><i id="m-obs"></i></div></div>
+      <div class="stat"><div class="n" id="c-worst">—</div><div class="l">worst income-quartile coverage</div><div class="bar-meter"><i id="m-worst"></i></div></div>
+    </div>
+    <h3 style="margin-bottom:6px">Coverage equity</h3>
+    <table id="equityTable"><thead><tr><th>Quartile (low → high)</th><th>By income</th><th>By CalEnviroScreen</th></tr></thead><tbody></tbody></table>
+    <p class="src" style="margin-top:10px">q1 = lowest-income / lowest-CES ZIPs. Thin q1 coverage at small budgets is an equity flag — reported, not hidden. Selected sites ring the map above.</p>
+  </div>
+</section>
+
+<section id="limits">
+  <div class="head reveal"><p class="eyebrow">05 — Honesty</p><h2>Limitations.</h2></div>
+  <div class="card reveal"><ul class="clean" id="caveats"></ul>
+    <p class="note" style="margin-top:14px">A prototype research study, not an operational tool. See <code>REPORT.md</code> for the honest write-up.</p></div>
+</section>
+
+<section class="closing">
+  <h2 class="reveal">Heat is not felt equally.</h2>
+  <p class="reveal">The same storm of extreme heat lands hardest on the ZIP codes with the least cooling, the
+  oldest residents, and the fewest cars. This is a first attempt to say where — and to act on it.</p>
+</section>
+
+</main>
+<footer><div class="wrap">
+  <span><strong>HEATLA</strong> · USC — target 2008–2018 · CES 4.0 · ACS 2022 · cooling centers 2022.</span>
+  <span>Built from real pipeline outputs. No synthetic data.</span>
+</div></footer>
+
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}
+</script>
+<script type="module">
+import * as THREE from "three";
+/* 3D hero: the real LA County ZIP map, each ZIP polygon extruded by its observed excess
+   ER rate. Warm heat ramp, slow auto-rotate + drag + pointer parallax, reduced-motion safe. */
+const canvas=document.getElementById("hero3d");
+const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const HEATRAMP=[[0x26,0x2b,0x63],[0x46,0x4c,0x6e],[0x86,0x80,0x52],[0xd1,0x41,0x0a],[0xf0,0x8c,0x1d],[0xfd,0xe0,0x47]];
+function heatColor(h){const t=Math.max(0,Math.min(1,h)),s=t*(HEATRAMP.length-1),i=Math.floor(s),f=s-i,
+  a=HEATRAMP[i],b=HEATRAMP[Math.min(i+1,HEATRAMP.length-1)];
+  return new THREE.Color((a[0]+(b[0]-a[0])*f)/255,(a[1]+(b[1]-a[1])*f)/255,(a[2]+(b[2]-a[2])*f)/255);}
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+renderer.setClearColor(0x000000,0); renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.05;
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(42,1,0.1,100); camera.position.set(0,9.2,11); camera.lookAt(0,-0.6,0);
+scene.add(new THREE.AmbientLight(0xffffff,0.55));
+const key=new THREE.DirectionalLight(0xffe0b0,2.0); key.position.set(4,11,6); scene.add(key);
+const rim=new THREE.DirectionalLight(0xff7a3c,0.8); rim.position.set(-6,4,-6); scene.add(rim);
+const group=new THREE.Group(); scene.add(group);
+const disposables=[];
+const cx=-118.28,cy=34.2,k=8.4,kx=k*Math.cos(cy*Math.PI/180);
+const proj=(lon,lat)=>[(lon-cx)*kx,(lat-cy)*k];
+const zipPolys=[]; // outer rings (projected) + extrude depth, for placing markers on top
+function heightAt(X,Y){
+  for(const zp of zipPolys){ const b=zp.bb; if(X<b[0]||X>b[1]||Y<b[2]||Y>b[3])continue;
+    const p=zp.pts; let inside=false;
+    for(let i=0,j=p.length-1;i<p.length;j=i++){
+      if(((p[i][1]>Y)!=(p[j][1]>Y))&&(X<(p[j][0]-p[i][0])*(Y-p[i][1])/(p[j][1]-p[i][1])+p[i][0]))inside=!inside;}
+    if(inside)return zp.depth; }
+  return 0;
+}
+function textSprite(txt){
+  const fs=38,pad=13,cv=document.createElement("canvas"),ctx=cv.getContext("2d");
+  ctx.font=`600 ${fs}px -apple-system,Helvetica,Arial`;
+  cv.width=Math.ceil(ctx.measureText(txt).width)+pad*2; cv.height=fs+pad*2;
+  ctx.font=`600 ${fs}px -apple-system,Helvetica,Arial`;
+  ctx.fillStyle="rgba(22,16,9,.82)"; ctx.beginPath();
+  (ctx.roundRect?ctx.roundRect(0,0,cv.width,cv.height,14):ctx.rect(0,0,cv.width,cv.height)); ctx.fill();
+  ctx.fillStyle="#fff"; ctx.textBaseline="middle"; ctx.fillText(txt,pad,cv.height/2+2);
+  const tex=new THREE.CanvasTexture(cv); tex.anisotropy=4;
+  const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true,depthTest:false,depthWrite:false}));
+  sp.scale.set((cv.width/cv.height)*0.42,0.42,1); disposables.push(tex,sp.material); return sp;
+}
+const LANDMARKS=[ // name, lat, lon  (real coords) — spread across the county to avoid label pile-up
+  ["Hollywood Sign",34.1341,-118.3215],["Pasadena",34.1478,-118.1445],
+  ["Downtown LA",34.0537,-118.2428],["Santa Monica",34.0094,-118.4973],
+  ["LAX",33.9416,-118.4085],["Long Beach",33.7701,-118.1937],
+];
+Promise.all([fetch("data/zips.geojson").then(r=>r.json()),fetch("data/centers.json").then(r=>r.json())])
+.then(([gj,centers])=>{
+  const rs=gj.features.map(f=>f.properties.observed_rate).filter(v=>v!=null);
+  const lo=Math.min(...rs),hi=Math.max(...rs);
+  for(const f of gj.features){
+    const rate=f.properties.observed_rate; if(rate==null)continue;
+    const norm=(rate-lo)/(hi-lo), depth=0.14+norm*norm*3.1;
+    const polys=f.geometry.type==="Polygon"?[f.geometry.coordinates]:f.geometry.coordinates;
+    for(const poly of polys){
+      const ring=poly[0]; if(!ring||ring.length<4)continue;
+      const shape=new THREE.Shape(); const pts=[]; let minx=1e9,maxx=-1e9,miny=1e9,maxy=-1e9;
+      ring.forEach((p,i)=>{const X=(p[0]-cx)*kx,Y=(p[1]-cy)*k; pts.push([X,Y]);
+        if(X<minx)minx=X;if(X>maxx)maxx=X;if(Y<miny)miny=Y;if(Y>maxy)maxy=Y;
+        i?shape.lineTo(X,Y):shape.moveTo(X,Y);});
+      for(let h=1;h<poly.length;h++){const path=new THREE.Path();
+        poly[h].forEach((p,i)=>{const X=(p[0]-cx)*kx,Y=(p[1]-cy)*k;i?path.lineTo(X,Y):path.moveTo(X,Y);});
+        shape.holes.push(path);}
+      let g; try{ g=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:false}); }catch(e){ continue; }
+      g.rotateX(-Math.PI/2);
+      const col=heatColor(norm);
+      const m=new THREE.MeshStandardMaterial({color:col,metalness:0.16,roughness:0.62,emissive:col.clone().multiplyScalar(0.13)});
+      group.add(new THREE.Mesh(g,m)); disposables.push(g,m);
+      zipPolys.push({pts,depth,bb:[minx,maxx,miny,maxy]});
+    }
+  }
+  // cooling-center dots (cool cyan, stand out against warm terrain)
+  const dotG=new THREE.SphereGeometry(0.066,12,12);
+  const dotM=new THREE.MeshStandardMaterial({color:0x3cd0ff,emissive:0x0e6ea0,emissiveIntensity:0.85,metalness:0.2,roughness:0.3});
+  const dots=new THREE.InstancedMesh(dotG,dotM,centers.length); const dm=new THREE.Object3D();
+  centers.forEach((c,i)=>{const [X,Y]=proj(c.lon,c.lat); dm.position.set(X,heightAt(X,Y)+0.09,-Y); dm.updateMatrix(); dots.setMatrixAt(i,dm.matrix);});
+  dots.instanceMatrix.needsUpdate=true; group.add(dots); disposables.push(dotG,dotM);
+  // landmark pins + billboard labels
+  LANDMARKS.forEach(([name,lat,lon],i)=>{const [X,Y]=proj(lon,lat),h=heightAt(X,Y);
+    const pinG=new THREE.ConeGeometry(0.05,0.2,8),pinM=new THREE.MeshStandardMaterial({color:0xffffff,emissive:0x6a2a00,emissiveIntensity:0.35});
+    const pin=new THREE.Mesh(pinG,pinM); pin.position.set(X,h+0.24,-Y); pin.rotation.x=Math.PI; group.add(pin); disposables.push(pinG,pinM);
+    const sp=textSprite(name); sp.position.set(X,h+0.52+(i%3)*0.3,-Y); group.add(sp);}); // stagger heights
+  group.position.y=-0.3; renderer.render(scene,camera);
+}).catch(()=>{});
+let px=0,py=0,tx=0,ty=0,drag=false,lastX=0,rotY=0;
+canvas.addEventListener("pointermove",e=>{const r=canvas.getBoundingClientRect();
+  tx=((e.clientX-r.left)/r.width-0.5)*0.6; ty=((e.clientY-r.top)/r.height-0.5)*0.3;
+  if(drag){rotY+=(e.clientX-lastX)*0.01; lastX=e.clientX;}});
+canvas.addEventListener("pointerdown",e=>{drag=true;lastX=e.clientX;canvas.style.cursor="grabbing";});
+addEventListener("pointerup",()=>{drag=false;canvas.style.cursor="grab";});
+function resize(){const w=Math.max(1,canvas.clientWidth),h=Math.max(1,canvas.clientHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.9)); renderer.setSize(w,h,false);
+  camera.aspect=w/h; camera.updateProjectionMatrix();}
+let raf;
+function frame(ms){const t=(ms||0)*0.001;
+  px+=(tx-px)*0.05; py+=(ty-py)*0.05;
+  group.rotation.y=rotY+(reduce?0.4:t*0.14)+px; group.rotation.x=py*0.3;
+  renderer.render(scene,camera); raf=requestAnimationFrame(frame);}
+resize(); renderer.render(scene,camera); addEventListener("resize",resize);
+if(!reduce) raf=requestAnimationFrame(frame); else group.rotation.y=0.4;
+addEventListener("beforeunload",()=>{cancelAnimationFrame(raf);disposables.forEach(d=>d.dispose&&d.dispose());renderer.dispose();});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"
+  integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin=""></script>
+<script>
+document.documentElement.classList.add("js");
+const CIVIDIS=["#00224e","#35456c","#666970","#948e63","#c6b94a","#fee838"];
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+const fmtPct=x=>x==null?"—":Math.round(x*100)+"%";
+
+/* theme */
+const sun=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/></svg>`;
+const moon=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8z"/></svg>`;
+const eff=()=>document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+function setTheme(t){document.documentElement.setAttribute("data-theme",t);try{localStorage.setItem("heatla-theme",t)}catch(e){}
+  $("#themeBtn").innerHTML=t==="dark"?sun:moon; swapTiles();}
+$("#themeBtn").onclick=()=>setTheme(eff()==="dark"?"light":"dark");
+try{const s=localStorage.getItem("heatla-theme");if(s)document.documentElement.setAttribute("data-theme",s);}catch(e){}
+$("#themeBtn").innerHTML=eff()==="dark"?sun:moon;
+
+/* mobile menu */
+const burger=$("#burger"),menu=$("#mobileMenu");
+burger.onclick=()=>{const o=burger.getAttribute("aria-expanded")==="true";burger.setAttribute("aria-expanded",!o);menu.classList.toggle("open",!o);};
+menu.querySelectorAll("a").forEach(a=>a.onclick=()=>{burger.setAttribute("aria-expanded","false");menu.classList.remove("open");});
+
+/* reveal + count-up */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");
+  if(e.target.dataset.count!==undefined)countUp(e.target);io.unobserve(e.target);}}),{threshold:.16});
+$$(".reveal,[data-count]").forEach(el=>io.observe(el));
+function countUp(el){const to=+el.dataset.count,dec=+(el.dataset.dec||0),t0=performance.now();
+  (function s(t){const p=Math.min(1,(t-t0)/900),e=1-Math.pow(1-p,3);el.textContent=(to*e).toFixed(dec);
+   if(p<1)requestAnimationFrame(s);else el.textContent=to.toFixed(dec);})(t0);}
+
+/* map */
+let MAP,TILE,ZIPLAYER,CENTERLAYER,SELLAYER,GEO,META,METRICS,SOL,CENTERS,RAMP,METRIC="observed_rate",METHOD="exact";
+const tileURL=()=>`https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/${eff()==="dark"?"World_Dark_Gray_Base":"World_Light_Gray_Base"}/MapServer/tile/{z}/{y}/{x}`;
+function swapTiles(){if(!MAP)return;if(TILE)TILE.remove();TILE=L.tileLayer(tileURL(),{maxZoom:16,attribution:"Tiles © Esri"}).addTo(MAP);TILE.bringToBack();if(ZIPLAYER)ZIPLAYER.setStyle(styleF);}
+function ramp(m){const v=GEO.features.map(f=>f.properties[m]).filter(x=>x!=null),lo=Math.min(...v),hi=Math.max(...v),st=CIVIDIS.map((_,i)=>lo+(hi-lo)*i/5);
+  return{lo,hi,color:x=>{if(x==null)return"#9b9b9b";let i=0;while(i<5&&x>st[i+1])i++;return CIVIDIS[i];}};}
+const styleF=f=>({fillColor:RAMP.color(f.properties[METRIC]),weight:.5,color:"rgba(140,120,95,.55)",fillOpacity:.85});
+function legend(){$("#legend").innerHTML="<span>low</span>"+CIVIDIS.map(c=>`<i style="background:${c}"></i>`).join("")+`<span>high · excess ER /10k · ${RAMP.lo.toFixed(1)}–${RAMP.hi.toFixed(1)}</span>`;}
+function drawZips(){RAMP=ramp(METRIC);if(ZIPLAYER)ZIPLAYER.remove();
+  ZIPLAYER=L.geoJSON(GEO,{style:styleF,onEachFeature:(f,l)=>{const p=f.properties;
+    l.bindPopup(`<b>ZIP ${p.zip}</b>${p.is_90095?' ⚠ UCLA campus':''}<br>Observed <b>${p.observed_rate}</b> /10k (${p.observed_number} visits)<br>Poisson ${p.pred_poisson} · RF ${p.pred_rf} · GBM ${p.pred_gbm}<br>Pop ${p.population.toLocaleString()} · poverty ${p.pct_poverty==null?'n/a':p.pct_poverty+'%'} · CES ${p.ces4_percentile??'n/a'}`);
+  }}).addTo(MAP);legend();}
+function initMap(){MAP=L.map("map",{scrollWheelZoom:false}).setView([34.05,-118.3],9);
+  MAP.attributionControl.addAttribution("ZIP geometry &amp; target: UCLA Heat Maps");
+  swapTiles();drawZips();MAP.fitBounds(ZIPLAYER.getBounds(),{padding:[14,14]});}
+function toggleCenters(on){if(CENTERLAYER){CENTERLAYER.remove();CENTERLAYER=null;}
+  if(on)CENTERLAYER=L.layerGroup(CENTERS.map(c=>L.circleMarker([c.lat,c.lon],{radius:3,color:"#d1410a",fillColor:"#d1410a",weight:1,fillOpacity:.85}).bindPopup(`<b>${c.name}</b><br>${c.city}`))).addTo(MAP);}
+
+const name2={poisson:"Poisson · ridge, pop-weighted",random_forest:"Random Forest",gradient_boosting:"Gradient Boosting"};
+function fillModels(){const tb=$("#modelTable tbody"),m=METRICS.models,rows=Object.entries(m).map(([k,r])=>({k,...r.overall})),best=Math.max(...rows.map(r=>r.r2));
+  tb.innerHTML=rows.map(r=>`<tr class="${r.r2===best?'best':''}"><td>${name2[r.k]||r.k}</td><td>${r.r2.toFixed(3)}</td><td class="mono">[${r.r2_ci[0].toFixed(2)}, ${r.r2_ci[1].toFixed(2)}]</td><td>${r.spearman.toFixed(3)}</td><td>${Math.round(r.top10_recall*100)}%</td><td>${Math.round(r.top20_recall*100)}%</td></tr>`).join("");
+  const b=METRICS.baselines.ces4_percentile;
+  $("#baseline-line").innerHTML=`<b>Baselines.</b> Predict-the-mean ≈ R² 0. CalEnviroScreen 4.0 percentile vs observed: ρ ${b.spearman.toFixed(2)}, top-10% ${Math.round(b.top10_recall*100)}%. The models beat the existing index on ranking — Poisson recovers the most of the true top 10%.`;}
+
+const KS=[5,10,20,40],RS=[1,2,3,5];
+const run=()=>SOL.runs.find(x=>x.k===KS[+$("#k").value]&&x.radius_mi===RS[+$("#r").value]);
+function updateSel(){$("#kval").textContent=KS[+$("#k").value];$("#rval").textContent=RS[+$("#r").value];
+  const m=run()[METHOD],set=(id,mid,v)=>{$(id).textContent=fmtPct(v);$(mid).style.width=((v||0)*100)+"%";};
+  set("#c-pred","#m-pred",m.pred_coverage);set("#c-obs","#m-obs",m.obs_coverage);
+  set("#c-worst","#m-worst",m.equity_income_quartile.worst_quartile_coverage);
+  const eqI=m.equity_income_quartile,eqC=m.equity_ces_quartile;
+  $("#equityTable tbody").innerHTML=[1,2,3,4].map(q=>`<tr><td>q${q}</td><td>${fmtPct(eqI['q'+q])}</td><td>${fmtPct(eqC['q'+q])}</td></tr>`).join("");
+  const names=new Set(m.sites);if(SELLAYER)SELLAYER.remove();
+  SELLAYER=L.layerGroup(CENTERS.filter(c=>names.has(c.name)).map(c=>L.circleMarker([c.lat,c.lon],{radius:7,color:"#d1410a",weight:2.5,fillColor:"#f08c1d",fillOpacity:.95}).bindPopup(`<b>Selected</b><br>${c.name}`))).addTo(MAP);}
+
+Promise.all(["zips.geojson","meta.json","metrics.json","solutions.json","centers.json"].map(f=>fetch("data/"+f).then(r=>r.json())))
+.then(([g,meta,metrics,sol,centers])=>{GEO=g;META=meta;METRICS=metrics;SOL=sol;CENTERS=centers;
+  $("#caveats").innerHTML=meta.caveats.map(c=>`<li>${c}</li>`).join("");
+  initMap();fillModels();
+  $$("[data-metric]").forEach(b=>b.onclick=()=>{$$("[data-metric]").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true");METRIC=b.dataset.metric;drawZips();});
+  $("#showCenters").onchange=e=>toggleCenters(e.target.checked);
+  $$("[data-method]").forEach(b=>b.onclick=()=>{$$("[data-method]").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true");METHOD=b.dataset.method;updateSel();});
+  $("#k").oninput=updateSel;$("#r").oninput=updateSel;updateSel();})
+.catch(e=>$("main").insertAdjacentHTML("afterbegin",`<div class="card note" style="margin-top:20px">Could not load site data (${e}). Serve this folder over HTTP: <code>python3 -m http.server</code></div>`));
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>{if(!localStorage.getItem("heatla-theme")){$("#themeBtn").innerHTML=eff()==="dark"?sun:moon;swapTiles();}});
+</script>
+</body>
+</html>

@@ -15,3 +15,14 @@ data/processed/*
 dashboard/node_modules/
 dashboard/dist/
 .vercel/
+
+# Secrets
+*.env.local
+.env
+
+# Legacy dashboard build + regenerable data (large downloads)
+legacy/dashboard/dist/
+legacy/dashboard/node_modules/
+legacy/data/raw/*
+legacy/data/interim/*
+legacy/data/processed/*

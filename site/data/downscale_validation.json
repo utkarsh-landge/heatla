@@ -1,0 +1,1 @@
+{"n_zips": 287, "n_groups": 47, "mae_model_split": 4.309, "mae_population_split": 5.181, "improvement_vs_population": 0.1682, "note": "lower MAE is better; model split beats population split iff mae_model < mae_pop"}

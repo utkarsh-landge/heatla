@@ -167,14 +167,14 @@ footer .wrap{padding:28px 22px 46px;display:flex;justify-content:space-between;g
 <nav class="nav"><div class="wrap">
   <span class="logo">HEAT<b>LA</b></span>
   <div class="links">
-    <a href="#map-sec">Map</a><a href="#models">Models</a><a href="#siting">Cooling centers</a><a href="#limits">Limitations</a>
+    <a href="#map-sec">Map</a><a href="#models">Models</a><a href="#outlook">2030</a><a href="#siting">Cooling centers</a><a href="#limits">Limitations</a>
   </div>
   <button class="navbtn" onclick="document.getElementById('map-sec').scrollIntoView()">Explore data</button>
   <button class="themebtn" id="themeBtn" aria-label="Toggle light/dark theme"></button>
   <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
 </div></nav>
 <div class="mobile" id="mobileMenu">
-  <a href="#map-sec">Map</a><a href="#models">Models</a><a href="#siting">Cooling centers</a><a href="#limits">Limitations</a>
+  <a href="#map-sec">Map</a><a href="#models">Models</a><a href="#outlook">2030</a><a href="#siting">Cooling centers</a><a href="#limits">Limitations</a>
 </div>
 
 <header class="hero">
@@ -216,7 +216,7 @@ footer .wrap{padding:28px 22px 46px;display:flex;justify-content:space-between;g
 <section id="map-sec">
   <div class="head reveal"><p class="eyebrow">02 — Risk map</p><h2>Observed vs predicted.</h2>
     <p>Excess ER rate per 10,000, on a colorblind-safe scale. Toggle the UCLA target against each model’s
-    out-of-fold prediction; overlay the real cooling centers.</p></div>
+    out-of-fold prediction, or the 2030 Cal-Adapt outlook; overlay the real cooling centers.</p></div>
   <div class="reveal">
     <div class="controls">
       <div class="seg" role="group" aria-label="Map layer">
@@ -224,6 +224,8 @@ footer .wrap{padding:28px 22px 46px;display:flex;justify-content:space-between;g
         <button data-metric="pred_poisson" aria-pressed="false">Poisson</button>
         <button data-metric="pred_rf" aria-pressed="false">Random Forest</button>
         <button data-metric="pred_gbm" aria-pressed="false">Gradient Boosting</button>
+        <button data-metric="proj_rcp45" aria-pressed="false">2030 · RCP 4.5</button>
+        <button data-metric="proj_rcp85" aria-pressed="false">2030 · RCP 8.5</button>
       </div>
       <label class="chk" style="margin-left:auto"><input type="checkbox" id="showCenters"> show cooling centers</label>
     </div>
@@ -242,8 +244,37 @@ footer .wrap{padding:28px 22px 46px;display:flex;justify-content:space-between;g
   </div>
 </section>
 
+<section id="statewide">
+  <div class="head reveal"><p class="eyebrow">04 — Out-of-region test</p><h2>Does it transfer to LA?</h2>
+    <p>We retrained on every California ZIP <em>except</em> LA County (5,552 rows), then tested on LA
+    (1,148). This is the honest test of whether the model learned heat-health risk or just memorized LA.</p></div>
+  <div class="card reveal" style="overflow-x:auto">
+    <table id="caTable"><thead><tr><th>Setup</th><th>Model</th><th>R²</th><th>Spearman ρ</th><th>Top-10%</th></tr></thead><tbody></tbody></table>
+    <p class="note" id="ca-note" style="margin-top:14px"></p>
+  </div>
+</section>
+
+<section id="outlook">
+  <div class="head reveal"><p class="eyebrow">05 — 2030 outlook</p><h2>How much worse by 2030?</h2>
+    <p>Each ZIP’s observed excess-ER rate scaled by its Cal-Adapt heat factor — the ratio of projected
+    extreme-heat days (2026–2035) to the 2008–2018 baseline, from a 32-model climate ensemble.</p></div>
+  <div class="reveal">
+    <div class="cov" id="outlookStats"></div>
+    <div class="card" style="overflow-x:auto">
+      <h3 style="margin-bottom:10px">Highest-projected ZIPs · 2030</h3>
+      <table id="projTable"><thead><tr><th>ZIP</th><th>Observed /10k</th><th>Heat factor</th><th>Projected 2030 /10k</th></tr></thead><tbody></tbody></table>
+      <div class="controls" style="margin:14px 0 0"><div class="seg" role="group" aria-label="Scenario">
+        <button data-scen="rcp45" aria-pressed="true">RCP 4.5</button><button data-scen="rcp85" aria-pressed="false">RCP 8.5</button>
+      </div></div>
+    </div>
+    <p class="note" style="margin-top:14px" id="downscale-note"></p>
+    <p class="src" style="margin-top:10px">Proportional exposure scaling, not a refit epidemiological model: it assumes the heat-to-ER
+    relationship and population hold constant and only heat frequency changes. Source: Cal-Adapt <code>exheat_year_ens32avg</code> (LOCA, 32 models).</p>
+  </div>
+</section>
+
 <section id="siting">
-  <div class="head reveal"><p class="eyebrow">04 — Cooling centers</p><h2>Where to open them.</h2>
+  <div class="head reveal"><p class="eyebrow">06 — Cooling centers</p><h2>Where to open them.</h2>
     <p>Pick a budget and radius. Benefit = out-of-fold predicted excess ER visits within range of an open
     center. Exact solves an integer program; greedy adds the best next site.</p></div>
   <div class="card reveal">
@@ -266,7 +297,7 @@ footer .wrap{padding:28px 22px 46px;display:flex;justify-content:space-between;g
 </section>
 
 <section id="limits">
-  <div class="head reveal"><p class="eyebrow">05 — Honesty</p><h2>Limitations.</h2></div>
+  <div class="head reveal"><p class="eyebrow">07 — Honesty</p><h2>Limitations.</h2></div>
   <div class="card reveal"><ul class="clean" id="caveats"></ul>
     <p class="note" style="margin-top:14px">A prototype research study, not an operational tool. See <code>REPORT.md</code> for the honest write-up.</p></div>
 </section>
@@ -424,6 +455,7 @@ function countUp(el){const to=+el.dataset.count,dec=+(el.dataset.dec||0),t0=perf
 
 /* map */
 let MAP,TILE,ZIPLAYER,CENTERLAYER,SELLAYER,GEO,META,METRICS,SOL,CENTERS,RAMP,METRIC="observed_rate",METHOD="exact";
+let CA,PROJ,DOWN,SCEN="rcp45";
 const tileURL=()=>`https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/${eff()==="dark"?"World_Dark_Gray_Base":"World_Light_Gray_Base"}/MapServer/tile/{z}/{y}/{x}`;
 function swapTiles(){if(!MAP)return;if(TILE)TILE.remove();TILE=L.tileLayer(tileURL(),{maxZoom:16,attribution:"Tiles © Esri"}).addTo(MAP);TILE.bringToBack();if(ZIPLAYER)ZIPLAYER.setStyle(styleF);}
 function ramp(m){const v=GEO.features.map(f=>f.properties[m]).filter(x=>x!=null),lo=Math.min(...v),hi=Math.max(...v),st=CIVIDIS.map((_,i)=>lo+(hi-lo)*i/5);
@@ -432,7 +464,8 @@ const styleF=f=>({fillColor:RAMP.color(f.properties[METRIC]),weight:.5,color:"rg
 function legend(){$("#legend").innerHTML="<span>low</span>"+CIVIDIS.map(c=>`<i style="background:${c}"></i>`).join("")+`<span>high · excess ER /10k · ${RAMP.lo.toFixed(1)}–${RAMP.hi.toFixed(1)}</span>`;}
 function drawZips(){RAMP=ramp(METRIC);if(ZIPLAYER)ZIPLAYER.remove();
   ZIPLAYER=L.geoJSON(GEO,{style:styleF,onEachFeature:(f,l)=>{const p=f.properties;
-    l.bindPopup(`<b>ZIP ${p.zip}</b>${p.is_90095?' ⚠ UCLA campus':''}<br>Observed <b>${p.observed_rate}</b> /10k (${p.observed_number} visits)<br>Poisson ${p.pred_poisson} · RF ${p.pred_rf} · GBM ${p.pred_gbm}<br>Pop ${p.population.toLocaleString()} · poverty ${p.pct_poverty==null?'n/a':p.pct_poverty+'%'} · CES ${p.ces4_percentile??'n/a'}`);
+    const proj=p.proj_rcp45==null?'':`<br>2030 projection: RCP 4.5 <b>${p.proj_rcp45}</b> (×${p.factor_rcp45}) · RCP 8.5 <b>${p.proj_rcp85}</b> (×${p.factor_rcp85})`;
+    l.bindPopup(`<b>ZIP ${p.zip}</b>${p.is_90095?' ⚠ UCLA campus':''}<br>Observed <b>${p.observed_rate}</b> /10k (${p.observed_number} visits)<br>Poisson ${p.pred_poisson} · RF ${p.pred_rf} · GBM ${p.pred_gbm}${proj}<br>Pop ${p.population.toLocaleString()} · poverty ${p.pct_poverty==null?'n/a':p.pct_poverty+'%'} · CES ${p.ces4_percentile??'n/a'}`);
   }}).addTo(MAP);legend();}
 function initMap(){MAP=L.map("map",{scrollWheelZoom:false}).setView([34.05,-118.3],9);
   MAP.attributionControl.addAttribution("ZIP geometry &amp; target: UCLA Heat Maps");
@@ -457,10 +490,33 @@ function updateSel(){$("#kval").textContent=KS[+$("#k").value];$("#rval").textCo
   const names=new Set(m.sites);if(SELLAYER)SELLAYER.remove();
   SELLAYER=L.layerGroup(CENTERS.filter(c=>names.has(c.name)).map(c=>L.circleMarker([c.lat,c.lon],{radius:7,color:"#d1410a",weight:2.5,fillColor:"#f08c1d",fillOpacity:.95}).bindPopup(`<b>Selected</b><br>${c.name}`))).addTo(MAP);}
 
-Promise.all(["zips.geojson","meta.json","metrics.json","solutions.json","centers.json"].map(f=>fetch("data/"+f).then(r=>r.json())))
-.then(([g,meta,metrics,sol,centers])=>{GEO=g;META=meta;METRICS=metrics;SOL=sol;CENTERS=centers;
+function fillCA(){if(!CA)return;const A=CA.test_a_spatial_cv.models,B=CA.test_b_la_holdout.models;
+  const row=(label,m,star)=>`<tr class="${star?'best':''}"><td>${label}</td><td>${m.r2.toFixed(3)}</td><td>${m.spearman.toFixed(3)}</td><td>${Math.round(m.top10_recall*100)}%</td></tr>`;
+  const rows=[
+    {l:"Statewide spatial CV",n:"Gradient Boosting",m:A.gradient_boosting},
+    {l:"LA hold-out · all CHS",n:"Poisson",m:B.poisson.all_chs},
+    {l:"LA hold-out · CHS-4 only",n:"Poisson",m:B.poisson.chs4,star:true},
+    {l:"LA hold-out · CHS-4 only",n:"Random Forest",m:B.random_forest.chs4},
+  ];
+  $("#caTable tbody").innerHTML=rows.map(r=>`<tr class="${r.star?'best':''}"><td>${r.l}</td><td>${r.n}</td><td>${r.m.r2.toFixed(3)}</td><td>${r.m.spearman.toFixed(3)}</td><td>${Math.round(r.m.top10_recall*100)}%</td></tr>`).join("");
+  const ces=CA.test_b_la_holdout.baselines.ces4_percentile.spearman;
+  $("#ca-note").innerHTML=`<b>Honest headline.</b> The all-CHS numbers (ρ ≈ 0.89) are <em>inflated</em> — the CHS level itself carries most of the signal. The fair measure of out-of-region skill is the <b>CHS-4-only LA hold-out: Poisson ρ ${B.poisson.chs4.spearman.toFixed(3)}</b> (★). Tree models give negative R² on that slice, so Poisson is the one to trust. Even so, ρ ${B.poisson.chs4.spearman.toFixed(2)} still beats the existing CalEnviroScreen index (ρ ${ces.toFixed(2)}).`;}
+
+function fillOutlook(){if(!PROJ)return;const s=PROJ.scenarios[SCEN];
+  $("#outlookStats").innerHTML=`
+    <div class="stat"><div class="n">×${s.heat_factor_median.toFixed(2)}</div><div class="l">median heat factor (${s.heat_factor_min.toFixed(2)}–${s.heat_factor_max.toFixed(2)})</div></div>
+    <div class="stat"><div class="n">${s.observed_rate_mean.toFixed(1)} → ${s.projected_rate_mean_2030.toFixed(1)}</div><div class="l">mean excess-ER rate /10k, 2008–18 → 2030</div></div>
+    <div class="stat"><div class="n">+${Math.round(s.mean_increase_pct)}%</div><div class="l">mean increase by 2030</div></div>`;
+  $("#projTable tbody").innerHTML=s.top15_zips.slice(0,10).map((z,i)=>`<tr class="${i===0?'best':''}"><td>${z.zip}</td><td>${z.observed_rate}</td><td>×${z.heat_factor}</td><td>${z.projected_rate_2030}</td></tr>`).join("");}
+
+function fillDownscale(){if(!DOWN)return;
+  $("#downscale-note").innerHTML=`<b>ZIP → tract downscale.</b> Splitting each ZIP’s excess-ER count across its census tracts by predicted rate × population cuts tract-level error to MAE ${DOWN.mae_model_split.toFixed(2)} vs ${DOWN.mae_population_split.toFixed(2)} for a plain population split — ${Math.round(DOWN.improvement_vs_population*100)}% better (${DOWN.n_zips} ZIPs, ${DOWN.n_groups}-group hold-out).`;}
+
+Promise.all(["zips.geojson","meta.json","metrics.json","solutions.json","centers.json","metrics_ca.json","projection_2030.json","downscale_validation.json"].map(f=>fetch("data/"+f).then(r=>r.json())))
+.then(([g,meta,metrics,sol,centers,ca,proj,down])=>{GEO=g;META=meta;METRICS=metrics;SOL=sol;CENTERS=centers;CA=ca;PROJ=proj;DOWN=down;
   $("#caveats").innerHTML=meta.caveats.map(c=>`<li>${c}</li>`).join("");
-  initMap();fillModels();
+  initMap();fillModels();fillCA();fillOutlook();fillDownscale();
+  $$("[data-scen]").forEach(b=>b.onclick=()=>{$$("[data-scen]").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true");SCEN=b.dataset.scen;fillOutlook();});
   $$("[data-metric]").forEach(b=>b.onclick=()=>{$$("[data-metric]").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true");METRIC=b.dataset.metric;drawZips();});
   $("#showCenters").onchange=e=>toggleCenters(e.target.checked);
   $$("[data-method]").forEach(b=>b.onclick=()=>{$$("[data-method]").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true");METHOD=b.dataset.method;updateSel();});

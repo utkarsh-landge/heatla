@@ -14,6 +14,7 @@ Everything here is derived from the real pipeline outputs. Nothing is generated.
 from __future__ import annotations
 
 import json
+import math
 import pathlib
 import sys
 import urllib.parse
@@ -42,12 +43,29 @@ def fetch_zip_polygons() -> dict:
     return json.load(urllib.request.urlopen(url, timeout=120))
 
 
+def load_projection_2030() -> dict:
+    """Per-ZIP 2030 projection, pivoted wide from the long heat_factor table."""
+    path = pathlib.Path("data/processed/heat_factor_2030.csv")
+    if not path.exists():
+        return {}
+    df = pd.read_csv(path)
+    out: dict[int, dict] = {}
+    for scen, sub in df.groupby("scenario"):
+        tag = str(scen).replace("rcp", "rcp")  # rcp45 / rcp85
+        for r in sub.itertuples():
+            d = out.setdefault(int(r.zip), {})
+            d[f"factor_{tag}"] = round(float(r.heat_factor), 3)
+            d[f"proj_{tag}"] = round(float(r.projected_rate_2030), 2)
+    return out
+
+
 def main() -> None:
     SITE.mkdir(parents=True, exist_ok=True)
     grouped = pd.read_csv("data/processed/model_table_grouped.csv")
     oof = pd.read_csv("results/predictions_oof.csv")
     data = grouped.merge(oof, on="zip", suffixes=("", "_oof"))
     by_zip = {int(r.zip): r for r in data.itertuples()}
+    proj2030 = load_projection_2030()
 
     gj = fetch_zip_polygons()
     keep = []
@@ -70,6 +88,7 @@ def main() -> None:
             "ces4_percentile": None if pd.isna(r.ces4_percentile) else round(float(r.ces4_percentile), 1),
             "is_90095": int(r.is_ucla_campus_90095),
         }
+        feat["properties"].update(proj2030.get(z, {}))
         keep.append(feat)
     gj["features"] = keep
     (SITE / "zips.geojson").write_text(json.dumps(gj))
@@ -86,22 +105,45 @@ def main() -> None:
     (SITE / "metrics.json").write_text((RES / "metrics.json").read_text())
     (SITE / "solutions.json").write_text((RES / "coolingcenter_solutions.json").read_text())
 
+    # Statewide validation, ZIP->tract downscale, and 2030 outlook.
+    # Results contain NaN (valid in Python, invalid JSON -> browsers reject). Scrub NaN/Inf to null.
+    def scrub(o):
+        if isinstance(o, float) and not math.isfinite(o):
+            return None
+        if isinstance(o, dict):
+            return {k: scrub(v) for k, v in o.items()}
+        if isinstance(o, list):
+            return [scrub(v) for v in o]
+        return o
+    extra = 0
+    for name in ("metrics_ca.json", "downscale_validation.json", "projection_2030.json"):
+        src = RES / name
+        if src.exists():
+            (SITE / name).write_text(json.dumps(scrub(json.loads(src.read_text()))))
+            extra += 1
+
     (SITE / "meta.json").write_text(json.dumps({
         "title": "HEATLA — LA County extreme-heat excess ER risk",
         "n_zips_mapped": len(keep),
+        "n_zips_projected_2030": len(proj2030),
         "target": "UCLA Heat Maps excess ER rate per 10,000, CalHeatScore-4, 2008-2018",
         "data_years": {"target": "2008-2018", "CES": "4.0 (~2021)", "ACS": "2022 5-year",
-                       "cooling_centers": "LA County official, 2022"},
+                       "cooling_centers": "LA County official, 2022",
+                       "climate": "Cal-Adapt exheat_year_ens32avg (LOCA 32-model), 2026-2035 vs 2008-2018"},
+        "headline": "Fair out-of-region skill (CHS-4-only LA hold-out, Poisson): Spearman 0.674.",
         "caveats": [
             "ZIP-level only; no daily or individual records.",
             "Small sample (~287 ZIPs); mismatched data years across sources.",
-            "Predictions are out-of-fold (leave-one-geographic-group-out).",
+            "LA predictions are out-of-fold (leave-one-geographic-group-out).",
+            "Pooled all-CHS hold-out numbers are inflated by chs_level; the fair measure is CHS-4-only Poisson Spearman 0.674.",
+            "2030 outlook is a proportional heat-exposure scaling, not a refit epidemiological model.",
             "ZIP 90095 (UCLA) may have mis-attributed ER patients; flagged.",
             "Prototype study, not an operational tool.",
         ],
     }, indent=2))
 
-    print(f"site data written: {len(keep)} zip polygons, {len(clist)} centers")
+    print(f"site data written: {len(keep)} zip polygons, {len(clist)} centers, "
+          f"{len(proj2030)} with 2030 projection, {extra} extra result files")
 
 
 if __name__ == "__main__":

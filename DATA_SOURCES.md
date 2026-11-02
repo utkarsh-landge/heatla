@@ -159,6 +159,60 @@ relative difference (ZIPs with pop > 500), confirming the ZIP↔ZCTA join is cor
 
 ---
 
+## 5a. California-wide training table (`data/processed/model_table_ca.csv`)
+
+For the honest LA-holdout test and the ZIP→tract downscale, the same target and
+CES feature pulls were extended from LA County to **all of California**, one row per
+ZIP × CalHeatScore level.
+
+**Target.** Same UCLA `zip_ER` FeatureServer layer as section 1, queried statewide
+(all counties, all four CHS levels, `Years = "2008-2018"`). Raw rows saved untouched
+to `data/raw/ca_excess_er_zip.csv`. Retrieval date 2026-10-31.
+
+**Features.** CalEnviroScreen 4.0 statewide (`calenviroscreen_test3`, all counties,
+`data/raw/ces40_ca_tracts.csv`), aggregated tract → ZIP by `TotPop19` population
+weight exactly as in section 2, plus population density and the ZCTA centroid. No
+ACS key was required for the statewide table; it uses CES-sourced social columns.
+Script: `scripts/fetch_statewide.py`. Every column traces to the sources already
+documented above — nothing new is invented.
+
+---
+
+## 5b. Cal-Adapt projected extreme-heat days (`data/processed/heat_days_la.csv`, `heat_factor_2030.csv`)
+
+**Source.** Cal-Adapt API (UC Berkeley Geospatial Innovation Facility),
+<https://api.cal-adapt.org>. Series `exheat_year_ens32avg_rcp45` and
+`exheat_year_ens32avg_rcp85` = **average number of extreme-heat days per year across
+32 LOCA-downscaled climate models** (Scripps/Pierce et al. 2014), on a 1/16°
+(~6 km) grid, one value per year 2006–2100. Retrieval date 2026-11-02. No key.
+
+**Definition (Cal-Adapt API docs, "Climate Indicators").** An *extreme-heat day* is
+a day whose daily maximum temperature exceeds the **98th percentile of observed
+1961–1990 April–October** maximum temperature at that grid cell. This is Cal-Adapt's
+own published definition, not one we chose.
+
+**Query.** For each LA ZIP, the grid cell under the ZCTA centroid (lat/lon from the
+2023 Gazetteer, section 3) was queried via `/series/{slug}/events/?g=POINT(lon lat)`.
+Raw JSON responses saved untouched to `data/raw/caladapt_exheat/<scenario>/<zip>.json`.
+287 ZIPs retrieved; **2 skipped** (`91123`, `91522` — no centroid, section "Known
+gaps"); never filled in.
+
+**Derived `heat_factor` (`heat_factor_2030.csv`).**
+`heat_factor(zip) = mean exheat days 2026–2035 ÷ mean exheat days 2008–2018`, using
+the **same** ens32avg series for numerator and denominator (no historical/projection
+splice; 2008–2018 matches the UCLA observation window). 2026–2035 is a 10-year window
+centred on 2030. The projection in `results/projection_2030.json` is
+`observed CHS-4 excess-ER rate × heat_factor`.
+
+**Assumptions (stated, not hidden).** Per-heat-day vulnerability is held constant —
+only the count of extreme-heat days changes, not the ER response per heat day.
+Demographic/health features are today's (CES/ACS) and are **not** projected forward;
+doing so would be fabrication. The factor is a multiplicative climate signal, not a
+fitted per-ZIP time series (no per-ZIP yearly ER series exists to fit). Script:
+`scripts/fetch_climate_caladapt.py`, `scripts/run_projection_2030.py`.
+
+---
+
 ## 5. Final modeling table (`data/processed/model_table.csv`)
 
 One row per target ZIP (289), joining the target (section 1) with CES/geography

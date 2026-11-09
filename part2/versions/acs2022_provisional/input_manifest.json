@@ -1,0 +1,44 @@
+{
+  "expected_code_commit": "0980d9a",
+  "sources": {
+    "statewide_table": {
+      "sha256": "ac154a596deb34261ae5d6b2aff0a18d7bf37abe9ede1639352356a48cf1967b",
+      "original_filename": "model_table_ca_ces40_fixed.csv",
+      "location_note": "Original preparation source; provenance hash retained. Not necessarily bundled. Use data/la_base.csv and data/la_augmented.csv for model reproduction."
+    },
+    "original_la_table": {
+      "sha256": "e097abb4ed58230d1cde626cdf7ea78b73130268f032256d4257a5119d2aa791",
+      "original_filename": "model_table.csv",
+      "location_note": "Original preparation source; provenance hash retained. Not necessarily bundled. Use data/la_base.csv and data/la_augmented.csv for model reproduction."
+    },
+    "acs_features": {
+      "sha256": "1c9a8dac6f80a63752bb2419df2287a2a22fc82490b2febfdf50045f891cca05",
+      "original_filename": "features_acs.csv",
+      "location_note": "Original preparation source; provenance hash retained. Not necessarily bundled. Use data/la_base.csv and data/la_augmented.csv for model reproduction."
+    },
+    "original_oof_predictions": {
+      "sha256": "16d555c0056b3257debd8d409d3bde951a31964bf984bed2c9502d2e2eced5c1",
+      "original_filename": "predictions_oof.csv",
+      "location_note": "Original preparation source; provenance hash retained. Not necessarily bundled. Use data/la_base.csv and data/la_augmented.csv for model reproduction."
+    },
+    "statewide_code": {
+      "sha256": "c65d114e4215e465f5f248db112313fda81004c8158926a11a5e4380f3458bb8",
+      "original_filename": "run_models_ca.py",
+      "location_note": "Original preparation source; provenance hash retained. Not necessarily bundled. Use data/la_base.csv and data/la_augmented.csv for model reproduction."
+    },
+    "original_la_code": {
+      "sha256": "fe72cf892ba126541ce16e96e7c15a29c20143fdd24442a0c324f3cc2dd3f64f",
+      "original_filename": "model.py",
+      "location_note": "Original preparation source; provenance hash retained. Not necessarily bundled. Use data/la_base.csv and data/la_augmented.csv for model reproduction."
+    }
+  },
+  "n_LA4_before_geometry_filter": 289,
+  "n_LA4_matched_experiment": 287,
+  "n_base_features": 11,
+  "n_augmented_features": 15,
+  "n_groups": 5,
+  "n_complete_base": 270,
+  "n_complete_augmented": 267,
+  "n_flagged_UCLA_campus": 1,
+  "delivery_note": "Personal absolute paths removed from delivery metadata; source hashes and sample counts unchanged."
+}

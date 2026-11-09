@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "n_zip_rows": 287,
+  "n_prediction_columns": 6,
+  "metric_values_independently_checked": 78,
+  "checks": [
+    "saved-input/script hashes",
+    "original ZIP/fold/target alignment",
+    "six model error identities",
+    "NumPy/scipy metric recomputation",
+    "independent pandas stable top-k ranking",
+    "training-only mean baseline",
+    "no recorded training warnings"
+  ],
+  "note": "Training-time checks also verify imputation medians and scaling means against training rows only."
+}

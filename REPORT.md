@@ -20,30 +20,39 @@ During extreme-heat events, ER visits rise unevenly across neighborhoods. HEATLA
 
 The statewide extraction pulls all California ZIPs across all four CHS levels (`chs_level` becomes a feature), giving 6,700 ZIP × CHS rows.
 
-## 3. Features (17)
+## 3. Features
 
-- **CalEnviroScreen 4.0** (UCLA ArcGIS, tract → ZIP population-weighted): pm25, ozone, asthma ED rate, cardiovascular ED rate, CES 4.0 percentile.
-- **Census Gazetteer 2023 ZCTA:** lat, lon, land area.
-- **Census ACS 2022 5-year** (free API key, read from `CENSUS_API_KEY` env, never stored): income, % poverty, % 65+, % renters, % no-vehicle, % uninsured, % construction, total pop, density.
+| Configuration | Inputs | Used in |
+|---|---|---|
+| Statewide (Model A) | 12: heat level, 10 CalEnviroScreen 4.0 fields, population density | Spatial cross-validation and LA hold-out |
+| LA base | 11: the statewide inputs without heat level, which is constant at level 4 | LA-only comparison |
+| LA augmented | 15: LA base plus % renters, % no-vehicle, % uninsured, % construction (ACS 2014–2018) | LA-only comparison |
 
-Final LA model table: `data/processed/model_table.csv`, 289 rows, 269 complete-case. The 20 incomplete rows are institutional or very small ZIPs. Statewide table: `data/processed/model_table_ca.csv`.
+CalEnviroScreen values use the −999 correction and are aggregated from tract to ZIP by population weight. Total population is not a model input. UCLA's population (2020 Census) is used for density and as the Poisson weight. Full definitions and reference periods: `part2/FEATURE_COMPARISON_TABLE.md` and `reports/member1_statewide.md`, section 3.
 
-> **Caveat:** `asthma_ed_per10k` dominates random-forest importance and is partly an ER-utilization proxy, not a pure exposure signal. Treat its contribution with care.
+> **Caveat:** the asthma and cardiovascular inputs are ER-visit rates from the same state records as the label, so they are partly ER-utilization proxies. `reports/member1_statewide.md`, section 11, reports results without them.
 
 ## 4. Models
 
 Three model families throughout: Poisson GLM, random forest, gradient boosting. Spatial cross-validation uses leave-one-geographic-group-out (k-means on lat/lon) so that no ZIP is scored by a model trained on its immediate neighbors.
 
-### 4a. LA-only (out-of-fold, 287 ZIPs, CHS-4)
+### 4a. LA-only (spatial cross-validation, 287 ZIPs, CHS-4 label)
 
-| Model | R² | Spearman ρ | Top-10 recall |
-|---|---|---|---|
-| Poisson | 0.445 | 0.785 | 0.34 |
-| Random forest | 0.449 | 0.703 | 0.21 |
-| Gradient boosting | 0.438 | 0.713 | — |
-| CES 4.0 percentile (baseline) | — | 0.524 | — |
+Five geographic folds within LA County; every ZIP is predicted once by a model trained on the other four folds. Corrected CalEnviroScreen inputs.
 
-The models beat the existing CES index on rank correlation but explain under half the variance. Small sample and mismatched data years limit this.
+| Model | Inputs | R² | Spearman ρ | Top-10 recall | Top-20 recall |
+|---|---|---|---|---|---|
+| Poisson | LA base (11) | 0.403 | 0.718 | 0.34 | 0.58 |
+| Poisson | **LA augmented (15)** | **0.483** | **0.780** | **0.34** | **0.60** |
+| Random forest | LA base (11) | 0.421 | 0.685 | 0.17 | 0.46 |
+| Random forest | LA augmented (15) | 0.460 | 0.710 | 0.21 | 0.46 |
+| Gradient boosting | LA base (11) | 0.425 | 0.718 | 0.31 | 0.51 |
+| Gradient boosting | LA augmented (15) | 0.468 | 0.731 | 0.28 | 0.44 |
+| Baseline: predict the training-fold mean | — | −0.111 | — | — | — |
+
+On the same 273 ZIPs with a corrected CalEnviroScreen percentile, the percentile has ρ = 0.566 and top-10 recall 0.15; Poisson augmented has ρ = 0.811 and top-10 recall 0.33.
+
+The four added ACS features improve R² and Spearman for all three models, most clearly for Poisson. Top-10 recall does not improve consistently. Details: `part2/PART2_MODEL_COMPARISON_REPORT.md`.
 
 ### 4b. Statewide spatial CV (1,675 ZIPs × 4 heat levels = 6,700 rows, 10 geographic folds)
 
@@ -132,7 +141,7 @@ Highest-projected ZIP in both scenarios is **91767** (Pomona area): 19.7 → 28.
 ## 8. Limitations
 
 - ZIP-level only; no daily or individual records.
-- Small LA sample (~287 ZIPs); data years differ across sources (target 2008–18, CES ~2021, ACS 2022).
+- Small LA sample (287 ZIPs). Data years differ across sources: label 2008–18, CalEnviroScreen 4.0 about 2013–2019, the four added ACS features 2014–2018, UCLA population 2020. The effect of the population year has not been tested.
 - Out-of-fold / out-of-region predictions, not an operational tool.
 - ZIP 90095 (UCLA) flagged for possible mis-attributed ER patients.
 - `asthma_ed_per10k` is partly an ER-utilization proxy.

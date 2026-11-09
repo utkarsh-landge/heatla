@@ -1,0 +1,196 @@
+{
+  "module": "Member 1 - statewide models and geographic transfer",
+  "input_variant": "ces40_fixed_both2010",
+  "inputs_dropped": [],
+  "starting_commit": "0980d9a",
+  "code_commit_at_run": "493973fc11d894e33a603e8c22aa2a1fd84f288c",
+  "data_version": {
+    "file": "data/processed/model_table_ca_ces40_fixed_both2010.csv",
+    "sha256": "3a467b57678d3139e81a76d14629e099a37e18da2cb17ecf8622c57207f85abd",
+    "snapshot": "heatla_data_0980d9a.zip"
+  },
+  "seed": 42,
+  "target": "excess_er_rate_per_10k",
+  "label_years": "2008-2018",
+  "error_definition": "error = prediction - UCLA label (per 10,000); positive = overprediction, negative = underprediction",
+  "models": {
+    "poisson": "PoissonRegressor(max_iter=5000)",
+    "random_forest": "RandomForestRegressor(min_samples_leaf=2, n_estimators=500, n_jobs=1,\n                      random_state=42)",
+    "gradient_boosting": "GradientBoostingRegressor(random_state=42)"
+  },
+  "preprocessing": "median imputation (and standardization for Poisson) fitted on the training rows of each split only",
+  "features_all_level": [
+    "chs_level",
+    "pm25",
+    "ozone",
+    "asthma_ed_per10k",
+    "cardiovascular_ed_per10k",
+    "poverty_pct",
+    "elderly65_pct",
+    "edu_lt_hs_pct",
+    "ling_isol_pct",
+    "unemployment_pct",
+    "housing_burden_pct",
+    "pop_density_per_sqmi"
+  ],
+  "features_level_specific": [
+    "pm25",
+    "ozone",
+    "asthma_ed_per10k",
+    "cardiovascular_ed_per10k",
+    "poverty_pct",
+    "elderly65_pct",
+    "edu_lt_hs_pct",
+    "ling_isol_pct",
+    "unemployment_pct",
+    "housing_burden_pct",
+    "pop_density_per_sqmi"
+  ],
+  "baseline_index": "ces4_percentile",
+  "evaluations": {
+    "spatial_cv": {
+      "train": "nine of ten geographic folds (California)",
+      "test": "the held-out fold; every ZIP is predicted exactly once",
+      "folds": 10,
+      "fold_method": "k-means on standardized ZCTA centroid lat/lon",
+      "heat_levels": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "la_holdout": {
+      "train": "all California counties except Los Angeles",
+      "test": "Los Angeles County",
+      "heat_levels": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "train_sizes": {
+        "all_level": {
+          "n_train_rows": 5552,
+          "n_test_rows": 1148,
+          "train_label_mean": 6.807420749279539
+        },
+        "level_specific_L1": {
+          "n_train_rows": 1388,
+          "n_test_rows": 287,
+          "train_label_mean": 2.00007204610951
+        },
+        "level_specific_L2": {
+          "n_train_rows": 1388,
+          "n_test_rows": 287,
+          "train_label_mean": 3.827593659942363
+        },
+        "level_specific_L3": {
+          "n_train_rows": 1388,
+          "n_test_rows": 287,
+          "train_label_mean": 6.826080691642652
+        },
+        "level_specific_L4": {
+          "n_train_rows": 1388,
+          "n_test_rows": 287,
+          "train_label_mean": 14.575936599423633
+        }
+      }
+    }
+  },
+  "samples": {
+    "raw_rows": 6744,
+    "raw_unique_zips": 1686,
+    "clean_rows": 6700,
+    "clean_unique_zips": 1675,
+    "exclusion_rule": "drop rows missing the label, ZCTA centroid (lat/lon) or population; rows missing CalEnviroScreen inputs are KEPT and median-imputed inside each training fold",
+    "zips_dropped_by_cleaning": [
+      "91123",
+      "91522",
+      "92152",
+      "92318",
+      "93435",
+      "94035",
+      "95141",
+      "95192",
+      "95724",
+      "95836",
+      "96162"
+    ],
+    "every_zip_has_all_4_levels": true,
+    "n_counties": 58,
+    "la_zips_missing_ces": [
+      "90014",
+      "90067",
+      "90073",
+      "90089",
+      "90095",
+      "90263",
+      "90639",
+      "90822",
+      "90840",
+      "91210",
+      "91330",
+      "91608",
+      "91759",
+      "93532",
+      "93544",
+      "93553",
+      "93563"
+    ],
+    "la_zips_missing_ces_percentile": [
+      "90014",
+      "90073",
+      "90089",
+      "90095",
+      "90263",
+      "90639",
+      "90822",
+      "90840",
+      "91210",
+      "91330",
+      "91608",
+      "91759",
+      "93553",
+      "93563"
+    ],
+    "missing_rows_per_input": {
+      "pm25": 1348,
+      "ozone": 1348,
+      "asthma_ed_per10k": 1348,
+      "cardiovascular_ed_per10k": 1348,
+      "poverty_pct": 1372,
+      "elderly65_pct": 1348,
+      "edu_lt_hs_pct": 1372,
+      "ling_isol_pct": 1484,
+      "unemployment_pct": 1488,
+      "housing_burden_pct": 1404,
+      "ces4_percentile": 1396
+    },
+    "negative_rows_per_input": {
+      "pm25": 0,
+      "ozone": 0,
+      "asthma_ed_per10k": 0,
+      "cardiovascular_ed_per10k": 0,
+      "poverty_pct": 0,
+      "elderly65_pct": 0,
+      "edu_lt_hs_pct": 0,
+      "ling_isol_pct": 0,
+      "unemployment_pct": 0,
+      "housing_burden_pct": 0,
+      "ces4_percentile": 0
+    },
+    "all_levels_of_a_zip_in_same_fold": true
+  },
+  "matches_committed_metrics_ca": {},
+  "outputs": [
+    "baseline_ces_matched.csv",
+    "fold_assignment_statewide.csv",
+    "fold_counts_statewide.csv",
+    "metrics_by_level.csv",
+    "predictions_la_holdout.csv",
+    "predictions_spatial_cv.csv",
+    "sample_counts.csv"
+  ],
+  "command": ".venv/bin/python scripts/run_member1_statewide.py --tag ces40_fixed_both2010 --table data/processed/model_table_ca_ces40_fixed_both2010.csv --out results/member1/popyear_both2010 --baseline ces4_percentile"
+}

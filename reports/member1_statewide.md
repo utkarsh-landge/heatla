@@ -42,7 +42,7 @@ Every table below names its variant. Complete tables for all three variants are 
 | Sample counts, metrics and figures verified | Done — see section 13 |
 | Supporting literature | Bibliographic details checked; full texts not yet read by the team |
 | Still to confirm | Year of the 3.0 age-65+ field |
-| Population year | 2020 Census, after the label period; kept in Parts 1 and 2 and documented as a limitation (section 3, note C). Impact not tested |
+| Population year | 2020 Census, after the label period; kept in Parts 1 and 2 and documented as a limitation (section 3, note C). Checked with 2010 Census population: Spearman changed by at most 0.022 (`results/population_year_check.md`) |
 
 ---
 
@@ -174,7 +174,7 @@ ZIPs are ranked similarly by both versions for most inputs. Unemployment, housin
 
 **Note C — population year (retained).** Density and the Poisson weights use UCLA's population field, which represents 2020. Its California total is 39,535,231 against 39,538,212 in the Census Bureau's 2020 base, and its county totals fit 2020 better than any year from 2010 to 2023 (median county difference 0.55%; this check is at county level only). An earlier UCLA methods document, since removed from UCLA's repository, describes it as EPA EnviroAtlas dasymetric population built from 2020 Census blocks and summed to 2019 ZIP boundaries; EPA issued that dataset in 2022. It is a single snapshot used for every year and heat level, and it is the denominator of UCLA's rate.
 
-The label covers 2008–2018, so this population comes from after the label period. Statewide, 2020 is about 3.4% above 2013 and 6.1% above 2010; the gap for individual ZIPs may be larger. The mismatch matters most for density, a model input, which also uses 2023 land area. For the Poisson weights, the 2020 population at least matches the denominator of the label. The team chose to keep the 2020 population in both Part 1 and Part 2 and to document the mismatch as a limitation. **The effect on the results has not been tested.**
+The label covers 2008–2018, so this population comes from after the label period. Statewide, 2020 is about 3.4% above 2013 and 6.1% above 2010; the gap for individual ZIPs may be larger. The mismatch matters most for density, a model input, which also uses 2023 land area. For the Poisson weights, the 2020 population at least matches the denominator of the label. The team chose to keep the 2020 population in both Part 1 and Part 2 and to document the mismatch as a limitation. **We checked the effect** by rerunning with 2010 Census population (Census 2010 Gazetteer ZCTA file; 1,658 of 1,675 statewide ZIPs matched). At heat level 4, Spearman changed by at most 0.022 (random forest, LA holdout) and R² by about 0.01, except random forest's LA-holdout R², which went from −0.48 to −0.34 and stays well below zero. The conclusions did not change; see `results/population_year_check.md`.
 
 **Aggregation limitation.** Each tract is assigned to one ZIP, but tracts and ZIPs overlap many-to-many. A population-weighted crosswalk would be more accurate and would likely recover most of the 337 ZIPs that have no CalEnviroScreen values.
 
@@ -589,7 +589,7 @@ Bootstrap 95% intervals for the LA holdout Poisson ρ without the two inputs: 0.
 - **Input years.** CalEnviroScreen 4.0 inputs describe 2013–2019 against a 2008–2018 label. Rerunning on 3.0 (2009–2015) changes level-4 results by less than their confidence intervals, so the measured effect of the mismatch is small; it is not zero, and it could not be isolated from method changes in four inputs.
 - **Two inputs share a data source with the label** (asthma and cardiovascular ED rates; section 3, note A; ablation in section 11).
 - **Imputed ZIPs.** 394 of 1,675 ZIPs (17 of 287 in LA) have at least one input filled with a training median, and 337 of them have no CalEnviroScreen data at all. Tree models are especially poor on these.
-- **The population used for density and Poisson weights is from 2020, after the 2008–2018 label period** (section 3, note C). It is kept in Parts 1 and 2; its effect on the results has not been tested.
+- **The population used for density and Poisson weights is from 2020, after the 2008–2018 label period** (section 3, note C). It is kept in Parts 1 and 2. A rerun with 2010 Census population changed Spearman by at most 0.022 and did not change the conclusions (`results/population_year_check.md`).
 - **The CES 3.0 age-65+ field has an unconfirmed reference year** (section 3).
 - **LA differs from the rest of the state at level 4** (mean 10.04 vs 14.58). Transfer results for LA are limited by this shift and would not necessarily hold for another county.
 - **One spatial split for LA.** The LA holdout is a single train/test split, and the cross-validation result for LA is effectively the same split.

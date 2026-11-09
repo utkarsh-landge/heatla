@@ -177,7 +177,7 @@ So the predictions pick nearly the same sites the labels would. Most of the gain
 ## 8. Limitations
 
 - ZIP-level only; no daily or individual records.
-- Small LA sample (287 ZIPs). Data years differ across sources: label 2008–18, CalEnviroScreen 4.0 about 2013–2019, the four added ACS features 2014–2018, UCLA population 2020. The effect of the population year has not been tested.
+- Small LA sample (287 ZIPs). Data years differ across sources: label 2008–18, CalEnviroScreen 4.0 about 2013–2019, the four added ACS features 2014–2018, UCLA population 2020. Rerunning Parts 1 and 2 with 2010 Census population changed Spearman by at most 0.022 and did not change the conclusions (`results/population_year_check.md`).
 - Out-of-fold / out-of-region predictions, not an operational tool.
 - ZIP 90095 (UCLA) flagged for possible mis-attributed ER patients.
 - The asthma and cardiovascular inputs (`asthma_ed_per10k`, `cardiovascular_ed_per10k`) come from the same state ER records as the label and are partly ER-utilization proxies; see the caveat in §4c.

@@ -23,6 +23,9 @@ What is reported:
 Run (original CES 4.0 inputs, as committed in results/member1/):
   .venv/bin/python scripts/run_member1_statewide.py
 
+Leave inputs out (ablation) with --drop asthma_ed_per10k,cardiovascular_ed_per10k.
+Use the level-only target with the table from scripts/build_member1_level_only_table.py.
+
 Run on another input table (same columns; see scripts/build_member1_ces_tables.py):
   .venv/bin/python scripts/run_member1_statewide.py --tag ces40_fixed \
       --table data/processed/model_table_ca_ces40_fixed.csv --out results/member1/ces40_fixed
@@ -325,8 +328,19 @@ def main() -> None:
     ap.add_argument("--baseline", default="ces4_percentile",
                     help="column holding the CalEnviroScreen percentile used as baseline")
     ap.add_argument("--tag", default="ces40_original", help="name of this input variant")
+    ap.add_argument("--drop", default="", help="comma-separated model inputs to leave out "
+                    "(ablation), e.g. asthma_ed_per10k,cardiovascular_ed_per10k")
     a = ap.parse_args()
     OUT, TABLE, BASELINE, TAG = pathlib.Path(a.out), pathlib.Path(a.table), a.baseline, a.tag
+    dropped = [f for f in a.drop.split(",") if f]
+    unknown = [f for f in dropped if f not in FEATURES]
+    if unknown:
+        raise SystemExit(f"--drop: not a model input: {unknown}")
+    for f in dropped:  # edit the shared lists in place so every function sees the change
+        FEATURES.remove(f)
+        LEVEL_FEATURES.remove(f)
+        if f in CES_INPUTS:
+            CES_INPUTS.remove(f)
 
     OUT.mkdir(parents=True, exist_ok=True)
     df = load()
@@ -373,6 +387,7 @@ def main() -> None:
     config = {
         "module": "Member 1 - statewide models and geographic transfer",
         "input_variant": TAG,
+        "inputs_dropped": dropped,
         "starting_commit": "0980d9a", "code_commit_at_run": git_commit(),
         "data_version": {"file": str(TABLE),
                          "sha256": hashlib.sha256(TABLE.read_bytes()).hexdigest(),
@@ -400,7 +415,8 @@ def main() -> None:
         "outputs": sorted(p.name for p in OUT.glob("*.csv")),
         "command": ".venv/bin/python scripts/run_member1_statewide.py"
                    + ("" if TABLE == DEFAULT_TABLE else
-                      f" --tag {TAG} --table {TABLE} --out {OUT} --baseline {BASELINE}"),
+                      f" --tag {TAG} --table {TABLE} --out {OUT} --baseline {BASELINE}"
+                      + (f" --drop {a.drop}" if dropped else "")),
     }
     (OUT / "config.json").write_text(json.dumps(config, indent=2))
     (OUT / "metrics_member1.json").write_text(json.dumps(

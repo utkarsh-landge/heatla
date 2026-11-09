@@ -2,7 +2,12 @@
 
 **Main question.** Can patterns learned elsewhere in California predict Los Angeles County, especially under extreme heat?
 
-**Short answer.** Partly. A Poisson model trained on the rest of California ranks LA ZIPs at heat level 4 reasonably well (Spearman ρ = 0.73, 95% CI 0.65–0.79) but explains about a third of the variance (R² = 0.35, CI 0.25–0.43) and finds about a third of the true top-10% ZIPs. The pooled numbers in the current report (ρ ≈ 0.89) describe the difference between heat levels, not skill within a level. Training a separate model per heat level did not improve the LA level-4 result. Replacing the inputs with ones measured inside the label period (CalEnviroScreen 3.0) did not change these conclusions.
+**Short answer.** Partly, and less well for extreme heat alone than for heat overall.
+
+- **UCLA's published level-4 label** is a total over all heat levels (section 10). For it, a Poisson model trained on the rest of California ranks LA ZIPs reasonably well (Spearman ρ = 0.73, 95% CI 0.65–0.79), explains about a third of the variance (R² = 0.35, CI 0.25–0.43) and finds about a third of the true top-10% ZIPs.
+- **The excess on level-4 days alone** is the quantity that matches "extreme heat". For it, the ranking holds up (ρ = 0.68, CI 0.61–0.74) but the scale does not transfer (R² = 0.09, CI −0.12 to 0.24): extreme-day excess averages 7.75 per 10,000 in the rest of California against 3.11 in LA.
+- **Much of the skill comes from two inputs that share a data source with the label.** Without the asthma and cardiovascular ED rates, ρ falls to 0.63 on the published label and to 0.50 on the extreme-day target, where the model no longer clearly beats the CalEnviroScreen percentile (section 11).
+- The pooled numbers in the current report (ρ ≈ 0.89) describe the difference between heat levels, not skill within a level. Training a separate model per heat level did not improve the LA level-4 result on either target. Replacing the inputs with ones measured inside the label period (CalEnviroScreen 3.0) did not change these conclusions.
 
 ## Read this first: three input variants
 
@@ -14,6 +19,14 @@ The first version of this module found, and this version fixes, a data error: Ca
 | CES 3.0 | CalEnviroScreen 3.0 (2009–2015 data), missing values treated as missing | Sensitivity to input year | `results/member1/ces30/` |
 | CES 4.0 original | CalEnviroScreen 4.0 with −999 averaged in | Superseded; kept unchanged for comparison | `results/member1/` |
 
+Three follow-up runs use the corrected CES 4.0 inputs and change one more thing each:
+
+| Run | What differs from "CES 4.0 corrected" | Role | Results folder |
+|---|---|---|---|
+| Level-only target | Target is each level's days alone (label k − label k−1) instead of the cumulative label | Answers the extreme-heat question (section 10) | `results/member1/ces40_fixed_level_only/` |
+| No ED-rate inputs | Asthma and cardiovascular ED rates left out (10 inputs instead of 12) | Ablation (section 11) | `results/member1/ces40_fixed_no_ed/` |
+| Level-only, no ED-rate inputs | Both changes | Ablation on the extreme-heat target | `results/member1/ces40_fixed_level_only_no_ed/` |
+
 Every table below names its variant. Complete tables for all three variants are in [member1_tables.md](member1_tables.md), generated directly from the result files.
 
 | Item | Status |
@@ -23,7 +36,10 @@ Every table below names its variant. Complete tables for all three variants are 
 | CalEnviroScreen 3.0 downloaded, definitions and years verified | Done — from OEHHA's dataset on data.ca.gov and the 3.0 report |
 | All ten CalEnviroScreen inputs available in 3.0 | Yes. Nine from the June 2018 results file; age 65+ from the 3.0 shapefile (not in the results file) |
 | Experiments rerun on corrected 4.0 and on 3.0 | Done — spatial cross-validation, LA holdout, baseline, all-level vs level-specific |
-| Sample counts, metrics and figures verified | Done — see section 11 |
+| Level-only (extreme-heat) target | Done — section 10 |
+| Ablation without the asthma and cardiovascular inputs | Done — section 11 |
+| `REPORT.md` statewide sections 4b and 4c | Corrected in this branch |
+| Sample counts, metrics and figures verified | Done — see section 13 |
 | Supporting literature | Bibliographic details checked; full texts not yet read by the team |
 | Still to confirm | Year of the 3.0 age-65+ field; year of the UCLA population used for density |
 
@@ -151,7 +167,7 @@ The statewide model uses 12 inputs: heat level, population density and ten CalEn
 
 ZIPs are ranked similarly by both versions for most inputs. Unemployment, housing burden, PM2.5 and the cardiovascular rate differ most, so a 3.0-versus-4.0 comparison mixes the effect of the year with changes in method for those four.
 
-**Note A — asthma and cardiovascular inputs share a data source with the label.** In both versions these are ED-visit rates built from the same statewide ED records that UCLA uses for the label, for years inside 2008–2018. They are partly measures of how much a community uses the ER at all, and an asthma or heart-attack visit on a heat day is counted on both sides. They should be described as ER-utilisation proxies, and their importance should not be read as a causal heat-vulnerability signal.
+**Note A — asthma and cardiovascular inputs share a data source with the label.** In both versions these are ED-visit rates built from the same statewide ED records that UCLA uses for the label, for years inside 2008–2018. They are partly measures of how much a community uses the ER at all, and an asthma or heart-attack visit on a heat day is counted on both sides. They should be described as ER-utilisation proxies, and their importance should not be read as a causal heat-vulnerability signal. Section 11 reports what happens without them.
 
 **Note B — poverty threshold.** The indicator is "below two times the federal poverty level", confirmed in the 3.0 report. (The 4.0 summary document says "below half", which appears to be an error in that document.) It is not the same threshold as the ACS poverty rate Member 2 uses.
 
@@ -265,10 +281,10 @@ Models: Poisson regression (ridge penalty 1.0, population-weighted, standardised
 
 Top-10% recall at one level in LA is computed on 29 ZIPs, so one ZIP moves it by 0.03. Top-20% recall is supplementary and is in [member1_tables.md](member1_tables.md), section C.
 
-**What the breakdown shows (all three variants agree on these points).**
+**What the breakdown shows for the published, cumulative label (all three input variants agree on these points).**
 
 1. **Pooled scores mostly measure the gap between heat levels.** Mean labels statewide rise from 2.08 at level 1 to 13.80 at level 4. Any model that knows the heat level gets a high pooled correlation. Within a level, no all-level model exceeds ρ = 0.75 or R² = 0.37.
-2. **Level 4 is the best-predicted level, not the worst, when judged by ranking.** Within-level skill rises from level 1 to level 4 in both evaluations. The impression that "the numbers plummet" at level 4 comes from comparing level 4 with the pooled score; compared with the other levels, level 4 ranks best.
+2. **On the published (cumulative) label, level 4 is the best-predicted level, not the worst, when judged by ranking.** Within-level skill rises from level 1 to level 4 in both evaluations. The impression that "the numbers plummet" at level 4 comes from comparing level 4 with the pooled score; compared with the other levels, level 4 ranks best. **This does not carry over to extreme heat alone.** The level-4 label includes all lower levels, so part of this is the lower levels being counted again. On each level's own days (section 10), level 3 is ranked best in LA and level 4's scale transfers worst.
 3. **Levels 1 and 2 are barely predictable.** Their labels vary little (statewide SD 0.73 and 1.17, reported to one decimal place), so there is little signal to rank, and the Poisson model ranks level 1 worse than chance in cross-validation.
 4. **At level 4 in LA, the tree models rank well but miss the scale.** Random forest and gradient boosting have ρ ≈ 0.68 but negative R². The rest of California averages 14.58 at level 4, against 10.04 in LA, and the tree models carry that higher level into LA. Much of the damage comes from the 17 LA ZIPs with incomplete inputs: with corrected 4.0 inputs the random forest overpredicts those by +6.09 on average, against +1.96 for the 270 ZIPs with complete inputs. The Poisson model overpredicts them by +1.78.
 
@@ -451,11 +467,122 @@ At level 4 the all-level Poisson model overpredicts 64% of LA ZIPs by an average
 
 Overprediction is largest on the coast, where labels are lowest: the five Santa Monica ZIPs (prefix 904, mean label 5.82) are overpredicted by +3.87 on average. Underprediction is concentrated in the inland valleys, where labels are highest. The Antelope Valley is the exception: its labels are high and it is still overpredicted, most strongly by the level-specific model. The same pattern appears with 3.0 inputs ([member1_tables.md](member1_tables.md), section G). Area names for prefixes are approximate. Statewide error maps for cross-validation are in each variant's `figures/` folder.
 
-## 10. Limitations
+## 10. Extreme heat specifically: the level-4-only target
 
-- **Labels are estimates, not observations.** "UCLA label" means UCLA's estimated excess rate. How it was estimated is Member 3's task; until that is settled, results here describe agreement with UCLA's estimates.
+**Why this section exists.** Member 3's review of UCLA's methods found that the published level-k value is cumulative: it covers every warm-season day at or below level k. The level-4 label modelled in sections 5–9 is therefore the total over all heat levels, not the excess on extreme-heat days. The project's question says "especially under extreme heat", and the quantity that matches it is the excess on level-4 days alone:
+
+- level-only(k) = label(k) − label(k−1) for k = 2, 3, 4
+- level-only(1) = label(1), which covers level 1 and all milder days
+
+The cumulative reading is an inference from the data, not something UCLA states (the level-4 day count is all 2,024 warm-season days in every ZIP; details in Member 3's report, pull request 4). If it is wrong, this section does not apply and sections 5–9 stand as they are.
+
+**Setup.** Everything is as in the corrected CES 4.0 runs — the same 1,675 ZIPs, folds, 12 inputs and models — except the target (`scripts/build_member1_level_only_table.py`). The four level-only values of a ZIP add back to its level-4 label in all 1,675 ZIPs, and none is negative.
+
+**Table 16. The level-only target (excess ER visits per 10,000, total over May–October 2008–2018).**
+
+| Level's days alone | LA mean | LA SD | Rest of California mean | Rest of California SD |
+|---|---|---|---|---|
+| Level 1 and below | 2.47 | 0.61 | 2.00 | 0.72 |
+| Level 2 only | 1.92 | 0.59 | 1.83 | 0.66 |
+| Level 3 only | 2.53 | 0.88 | 3.00 | 1.27 |
+| Level 4 only | 3.11 | 1.68 | 7.75 | 7.52 |
+
+LA and the rest of the state are similar at levels 1–3 and very different at level 4: extreme-day excess is two and a half times higher, and about four and a half times more variable, outside LA.
+
+**Table 17. Level 4: published cumulative label versus level-4-only target.**
+
+| Evaluation | Model | R² cumulative | R² level-4 only | ρ cumulative | ρ level-4 only | Top-10% cumulative | Top-10% level-4 only |
+|---|---|---|---|---|---|---|---|
+| LA holdout (287 ZIPs) | Poisson | 0.349 | 0.089 | 0.730 | 0.681 | 0.34 | 0.34 |
+| LA holdout | Random forest | −0.483 | −2.748 | 0.688 | 0.650 | 0.14 | 0.28 |
+| LA holdout | Gradient boosting | −0.291 | −2.143 | 0.683 | 0.646 | 0.24 | 0.38 |
+| Spatial CV (1,675 ZIPs) | Poisson | −0.015 | −0.078 | 0.512 | 0.451 | 0.16 | 0.19 |
+| Spatial CV | Random forest | 0.199 | 0.181 | 0.567 | 0.563 | 0.32 | 0.33 |
+| Spatial CV | Gradient boosting | 0.284 | 0.269 | 0.585 | 0.574 | 0.33 | 0.33 |
+
+All-level models (one model for the four levels, heat level as an input). Bootstrap 95% intervals for the LA holdout Poisson model on the level-4-only target: R² −0.12 to 0.24, ρ 0.61 to 0.74.
+
+**Table 18. LA holdout, level-only target, every level (all-level models; level-specific Poisson for comparison).**
+
+| Level's days alone | ρ Poisson | ρ random forest | ρ gradient boosting | ρ Poisson, level-specific | R² Poisson | R² Poisson, level-specific |
+|---|---|---|---|---|---|---|
+| Level 1 and below | 0.288 | 0.159 | 0.075 | −0.072 | −1.482 | −0.253 |
+| Level 2 only | 0.581 | 0.561 | 0.438 | 0.636 | −0.485 | 0.266 |
+| Level 3 only | 0.700 | 0.691 | 0.675 | 0.764 | −0.009 | 0.448 |
+| Level 4 only | 0.681 | 0.650 | 0.646 | 0.625 | 0.089 | −0.597 |
+
+**Table 19. CalEnviroScreen baseline on the level-4-only target, matched samples.**
+
+| Evaluation | ZIPs | CES 4.0 percentile ρ | Poisson ρ | Random forest ρ | Gradient boosting ρ | CES top-10% | Poisson top-10% |
+|---|---|---|---|---|---|---|---|
+| LA holdout | 273 | 0.498 | 0.707 | 0.695 | 0.698 | 0.15 | 0.37 |
+| Spatial CV | 1,326 | 0.254 | 0.597 | 0.614 | 0.624 | 0.09 | 0.29 |
+
+![Label vs prediction, level-only target, LA holdout, Poisson](../results/member1/ces40_fixed_level_only/figures/scatter_la_holdout_poisson.png)
+
+*Figure 7. UCLA level-only label against prediction for each heat level. LA holdout, Poisson, CES 4.0 corrected inputs. Top row: all-level model. Bottom row: level-specific models. 287 LA ZIPs per panel; models trained on the rest of California.*
+
+**Findings.**
+
+- **Ranking of extreme-day excess transfers to LA almost as well as ranking of the total.** Poisson ρ is 0.68 against 0.73, and the tree models 0.65 against 0.68–0.69. Top-10% recall does not fall for any model.
+- **The level does not transfer.** R² on the LA holdout drops to 0.09 for Poisson, with an interval that includes zero, and to below −2 for the tree models. Predicting the rest-of-California mean for every LA ZIP gives R² = −7.65, so the models still correct most of the shift, but not enough: the all-level Poisson model predicts an LA mean of 4.00 against a true 3.11 and overpredicts 77% of ZIPs.
+- **Statewide, the two targets behave almost the same** at level 4 for the tree models (ρ 0.56–0.57), and somewhat worse for Poisson (0.45 against 0.51).
+- **Level 4 is no longer the best-predicted level in LA.** On each level's own days, level 3 is ranked best by all three models (ρ 0.68–0.70, and 0.76 for a level-specific Poisson model), with level 4 close behind. Statewide the tree models still rank level 4 best. The earlier statement that level 4 is the best-predicted level is true of the cumulative label only.
+- **A level-specific model still does not help at level 4** (Poisson ρ 0.625 and R² −0.60 on the LA holdout), but it helps clearly at levels 2 and 3 on this target (level 3: R² −0.01 → 0.45, ρ 0.70 → 0.76). An all-level Poisson model assumes the target changes steadily with level, which is not true of the level-only values (means 2.47, 1.92, 2.53, 3.11 in LA).
+- **The models still beat the CalEnviroScreen index on the extreme-day target**: ρ about 0.70 against 0.50 in LA on the same 273 ZIPs.
+
+**A check the reviewer ran.** Scoring the existing cumulative-label predictions against the level-4-only label gives ρ = 0.67 on the LA holdout. That is reproduced here (0.666). It measures a model trained for one quantity against another; the 0.68 above is from a model trained on the level-4-only target itself. The two agree closely because the cumulative and level-4-only labels rank LA ZIPs similarly.
+
+**Which number answers the main question.** For "can patterns learned elsewhere predict LA under extreme heat", the answer is the level-4-only row: ZIPs can be ranked (ρ ≈ 0.68) but the amount of excess cannot be transferred from the rest of the state (R² ≈ 0.09). The cumulative-label result (ρ 0.73, R² 0.35) answers a broader question: total heat-attributable ER burden across the whole warm season. Both are reported; they should not be used interchangeably, and the siting and website currently use the cumulative label.
+
+## 11. Without the asthma and cardiovascular inputs
+
+The asthma and cardiovascular inputs are ER-visit rates from the same state records as the label, for years inside the label period (section 3, note A). A model that leans on them may be learning "ZIPs whose residents use the ER more" as much as "ZIPs vulnerable to heat". This ablation removes both and keeps everything else the same: 10 inputs instead of 12, same ZIPs, folds and models.
+
+**Table 20. Level 4, with and without the two ED-rate inputs (all-level models).**
+
+| Evaluation | Target | Model | R² with | R² without | ρ with | ρ without | Top-10% with | Top-10% without |
+|---|---|---|---|---|---|---|---|---|
+| LA holdout | Cumulative | Poisson | 0.349 | 0.233 | 0.730 | 0.633 | 0.34 | 0.31 |
+| LA holdout | Cumulative | Random forest | −0.483 | −0.329 | 0.688 | 0.559 | 0.14 | 0.17 |
+| LA holdout | Cumulative | Gradient boosting | −0.291 | −0.121 | 0.683 | 0.586 | 0.24 | 0.21 |
+| LA holdout | Level-4 only | Poisson | 0.089 | −0.161 | 0.681 | 0.502 | 0.34 | 0.14 |
+| LA holdout | Level-4 only | Random forest | −2.748 | −1.915 | 0.650 | 0.372 | 0.28 | 0.17 |
+| LA holdout | Level-4 only | Gradient boosting | −2.143 | −1.628 | 0.646 | 0.390 | 0.38 | 0.24 |
+| Spatial CV | Cumulative | Poisson | −0.015 | −0.021 | 0.512 | 0.441 | 0.16 | 0.14 |
+| Spatial CV | Cumulative | Random forest | 0.199 | 0.115 | 0.567 | 0.461 | 0.32 | 0.29 |
+| Spatial CV | Cumulative | Gradient boosting | 0.284 | 0.199 | 0.585 | 0.469 | 0.33 | 0.32 |
+| Spatial CV | Level-4 only | Poisson | −0.078 | −0.082 | 0.451 | 0.345 | 0.19 | 0.21 |
+| Spatial CV | Level-4 only | Random forest | 0.181 | 0.104 | 0.563 | 0.446 | 0.33 | 0.28 |
+| Spatial CV | Level-4 only | Gradient boosting | 0.269 | 0.202 | 0.574 | 0.480 | 0.33 | 0.32 |
+
+Bootstrap 95% intervals for the LA holdout Poisson ρ without the two inputs: 0.55 to 0.70 on the cumulative label and 0.41 to 0.58 on the level-4-only target.
+
+**Table 21. Against the CalEnviroScreen percentile, LA holdout, level 4, same 273 ZIPs.**
+
+| Target | CES 4.0 percentile ρ | Poisson ρ with | Poisson ρ without | CES top-10% | Poisson top-10% with | Poisson top-10% without |
+|---|---|---|---|---|---|---|
+| Cumulative | 0.566 | 0.757 | 0.658 | 0.15 | 0.30 | 0.30 |
+| Level-4 only | 0.498 | 0.707 | 0.535 | 0.15 | 0.37 | 0.11 |
+
+**Findings.**
+
+- **The two inputs carry a real share of the level-4 skill.** Removing them lowers rank correlation at level 4 in every model, both evaluations and both targets: by about 0.10 on the cumulative label and by 0.18 to 0.28 on the level-4-only target in LA.
+- **The effect is largest where it matters most.** On the extreme-day target in LA, Poisson ρ falls from 0.68 to 0.50 and top-10% recall from 0.34 to 0.14.
+- **Without them, the model's advantage over the CalEnviroScreen index on extreme-day excess in LA nearly disappears**: ρ 0.535 against 0.498 on the same ZIPs, and lower top-10% recall (0.11 against 0.15). On the cumulative label the model stays ahead (0.658 against 0.566).
+- **R² moves little or improves for the tree models** in LA, because they were already mis-scaled and the two inputs added to the overprediction. R² falls for Poisson.
+- **Lower levels are not hurt.** At levels 1–3 on the LA holdout, rank correlation changes little for Poisson and random forest and rises for gradient boosting (full tables in [member1_tables.md](member1_tables.md), section J). The dependence on these two inputs is specific to the top level.
+
+**How to read this.** It does not show the two inputs are invalid: prior asthma and cardiovascular ER use may genuinely mark heat-vulnerable communities, and the literature in section 3 supports that. It does show that the model's skill at extreme heat rests heavily on inputs that measure ER use from the same records as the label, and that the remaining ten inputs alone predict extreme-day excess in LA about as well as an existing index does. Both results should be reported together. An input that measured chronic disease without going through ER records (for example prevalence estimates) would separate the two explanations; none is in the current data.
+
+## 12. Limitations
+
+- **Labels are estimates, not observations.** "UCLA label" means UCLA's model-based estimate, totalled over May–October 2008–2018 (Member 3's report, pull request 4). Results here describe agreement with those estimates.
+- **The level-only target rests on an inference.** Section 10 assumes UCLA's level values are cumulative. That fits every ZIP but UCLA does not state it.
+- **Sections 5–9 describe the cumulative label.** They answer a question about total warm-season heat burden. Section 10 is the one that addresses extreme heat alone.
+- **Extreme-day skill depends on two ER-derived inputs** (section 11). Without them the model is close to the CalEnviroScreen index on that target in LA.
 - **Input years.** CalEnviroScreen 4.0 inputs describe 2013–2019 against a 2008–2018 label. Rerunning on 3.0 (2009–2015) changes level-4 results by less than their confidence intervals, so the measured effect of the mismatch is small; it is not zero, and it could not be isolated from method changes in four inputs.
-- **Two inputs share a data source with the label** (asthma and cardiovascular ED rates; section 3, note A).
+- **Two inputs share a data source with the label** (asthma and cardiovascular ED rates; section 3, note A; ablation in section 11).
 - **Imputed ZIPs.** 394 of 1,675 ZIPs (17 of 287 in LA) have at least one input filled with a training median, and 337 of them have no CalEnviroScreen data at all. Tree models are especially poor on these.
 - **The age-65+ and density inputs have unconfirmed reference years** (section 3).
 - **LA differs from the rest of the state at level 4** (mean 10.04 vs 14.58). Transfer results for LA are limited by this shift and would not necessarily hold for another county.
@@ -467,13 +594,14 @@ Overprediction is largest on the coast, where labels are lowest: the five Santa 
 **Corrections needed at integration:**
 
 - `scripts/fetch_statewide.py` and `scripts/fetch_features_ces_geo.py`: treat −999 as missing before aggregating. This changes `model_table_ca.csv`, `results/metrics_ca.json`, the downscale and anything else built on them. Not changed here, so that the original results stay available for comparison.
-- `REPORT.md` section 4b and 4c: all statewide numbers are from uncorrected inputs; replace with the corrected values in Tables 6 and 7.
-- `REPORT.md` section 4c: the "clearly beats the CES baseline (0.237)" sentence and the baseline row. Replace with the matched comparison in Table 13.
+- `REPORT.md` sections 4b and 4c: **done in this branch.** They now carry the corrected statewide numbers, the matched CalEnviroScreen comparison, the level-4-only result and the ablation.
+- `REPORT.md` section 4a (LA-only models) is Member 2's and still shows numbers from before the −999 correction; its CES baseline changes with the corrected percentile.
 - `REPORT.md` opening paragraph: "No value is imputed" is not true of the models.
 - `REPORT.md` section 8 and `site/data/meta.json`: "CES ~2021" should give the data years (2013–2019), not the publication year.
-- `site/data/meta.json` headline ("Spearman 0.674") is the uncorrected value; the corrected value is 0.730.
+- `site/data/meta.json` headline ("Spearman 0.674") is the uncorrected value; the corrected value is 0.730 for the cumulative label and 0.681 for level-4 only. That file is also edited by pull request 4, so it is left for the integration step to avoid a conflict.
+- `site/data/metrics_ca.json` and `results/metrics_ca.json` come from the original pipeline and still hold uncorrected numbers. They change only when the shared fetch scripts adopt the fix and the pipeline is rerun.
 
-## 11. Verification
+## 13. Verification
 
 | Check | Result |
 |---|---|
@@ -486,9 +614,14 @@ Overprediction is largest on the coast, where labels are lowest: the five Santa 
 | Fold assignment identical across variants | Yes (depends only on coordinates) |
 | 3.0 age-65+ join | 8,035 of 8,035 tracts matched on tract ID |
 | Figures | 22 per variant plus 3 comparison figures; fold map, scatter, error map, side-by-side map and comparison chart inspected |
+| Follow-up runs use the same samples and folds | Fold assignment files identical to the corrected run; 1,675 ZIPs, 6,700 rows, 287 LA ZIPs in each |
+| Level-only values add back to the level-4 label | Yes, in all 1,675 ZIPs; no negative values |
+| Corrected run reproduces after adding the `--drop` option | All seven output files byte-identical |
+| Ablation runs use 10 inputs | Yes; `asthma_ed_per10k` and `cardiovascular_ed_per10k` recorded as dropped in each run's `config.json` |
+| Reviewer's 0.67 check | Reproduced: 0.666 |
 | Report tables | Copied from `member1_tables.md`, which is generated from the result files |
 
-## 12. References
+## 14. References
 
 1. Analitis A, et al. (2014). Effects of heat waves on mortality: effect modification and confounding by air pollutants. *Epidemiology* 25(1):15–22. doi:10.1097/EDE.0b013e31828ac01b
 2. Anderson GB, et al. (2013). Heat-related emergency hospitalizations for respiratory diseases in the Medicare population. *American Journal of Respiratory and Critical Care Medicine* 187(10):1098–1103. doi:10.1164/rccm.201211-1969OC
@@ -503,7 +636,7 @@ Overprediction is largest on the coast, where labels are lowest: the five Santa 
 11. Uejio CK, et al. (2011). Intra-urban societal vulnerability to extreme heat: the role of heat exposure and the built environment, socioeconomics, and neighborhood stability. *Health & Place* 17(2):498–507.
 12. Xu Z, Huang C, Hu W, Turner LR, Su H, Tong S (2013). Extreme temperatures and emergency department admissions for childhood asthma in Brisbane, Australia. *Occupational and Environmental Medicine* 70(10):730–735. doi:10.1136/oemed-2013-101538
 
-## 13. Reproduce
+## 15. Reproduce
 
 Starting point: commit `0980d9a`, data snapshot `heatla_data_0980d9a.zip` unpacked into `data/`. Work is on branch `member1/statewide-models`.
 
@@ -532,7 +665,14 @@ python3.11 -m venv .venv
 .venv/bin/python scripts/make_member1_figures.py --dir results/member1/ces40_fixed --inputs "CalEnviroScreen 4.0, -999 corrected"
 .venv/bin/python scripts/make_member1_figures.py --dir results/member1/ces30 --inputs "CalEnviroScreen 3.0 (2009-2015 data)"
 
-# 4. three-way comparison and report tables
+# 4. level-only target and the ablation without the asthma and cardiovascular inputs
+.venv/bin/python scripts/build_member1_level_only_table.py
+.venv/bin/python scripts/run_member1_statewide.py --tag ces40_fixed_level_only --table data/processed/model_table_ca_ces40_fixed_level_only.csv --out results/member1/ces40_fixed_level_only
+.venv/bin/python scripts/run_member1_statewide.py --tag ces40_fixed_no_ed --table data/processed/model_table_ca_ces40_fixed.csv --out results/member1/ces40_fixed_no_ed --drop asthma_ed_per10k,cardiovascular_ed_per10k
+.venv/bin/python scripts/run_member1_statewide.py --tag ces40_fixed_level_only_no_ed --table data/processed/model_table_ca_ces40_fixed_level_only.csv --out results/member1/ces40_fixed_level_only_no_ed --drop asthma_ed_per10k,cardiovascular_ed_per10k
+.venv/bin/python scripts/make_member1_figures.py --dir results/member1/ces40_fixed_level_only --inputs "CalEnviroScreen 4.0 corrected; target = each level's days alone"
+
+# 5. three-way comparison and report tables
 .venv/bin/python scripts/compare_member1_variants.py
 .venv/bin/python scripts/build_member1_tables.py
 ```
@@ -544,6 +684,8 @@ Python 3.11.15 was used. Existing files in `results/` outside `results/member1/`
 | `results/member1/` | Original-input run: config, sample counts, folds, row-level predictions, metrics, baseline, 22 figures |
 | `results/member1/ces40_fixed/` | The same set for corrected CES 4.0 inputs |
 | `results/member1/ces30/` | The same set for CES 3.0 inputs |
+| `results/member1/ces40_fixed_level_only/` | Level-only target, with figures |
+| `results/member1/ces40_fixed_no_ed/`, `results/member1/ces40_fixed_level_only_no_ed/` | Ablation runs (no figures) |
 | `results/member1/input_checks/` | Sentinel audit by tract field, ZIP-level feature comparison, table checks, run logs |
 | `results/member1/inputs/` | Copies of the two corrected model tables the runs used (the originals live in the untracked `data/processed/`) |
 | `results/member1/comparison/` | Three-way metrics on all rows and on the same complete-input ZIPs; 3 comparison figures |

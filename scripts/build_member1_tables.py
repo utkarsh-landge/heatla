@@ -1,5 +1,8 @@
 """Member 1 - write every result table as markdown, straight from the CSV outputs.
 
+Sections I-K cover the follow-up runs (level-only target, and the ablation without the
+asthma and cardiovascular inputs); they are skipped if those run folders do not exist.
+
 Nothing is typed by hand: reports/member1_tables.md is regenerated from
 results/member1/** so the report tables cannot drift from the metric files.
 
@@ -189,6 +192,101 @@ def main() -> None:
                          "ρ CI": f"{f3(r['spearman_ci'][0])} to {f3(r['spearman_ci'][1])}",
                          "Top-10% k": r["top10_k"]})
     L += [md(rows), ""]
+
+    # ---- I. level-only target (extreme heat specifically)
+    FX = BASE / "ces40_fixed"
+    LO, NE, LONE = (BASE / "ces40_fixed_level_only", BASE / "ces40_fixed_no_ed",
+                    BASE / "ces40_fixed_level_only_no_ed")
+    if LO.exists():
+        mc, ml = pd.read_csv(FX / "metrics_by_level.csv"), pd.read_csv(LO / "metrics_by_level.csv")
+
+        def pick(m, ev, cfg, mk, sc):
+            return m[(m.evaluation == ev) & (m.config == cfg) & (m.model == mk) & (m.scope == sc)].iloc[0]
+        L += ["## I. Level-only target: the excess on each level's days alone", "",
+              "Corrected CES 4.0 inputs. Cumulative = the label as published (all days at or "
+              "below the level). Level-only = label(k) minus label(k-1); level 1 is unchanged. "
+              "Same ZIPs, folds, inputs and models in both.", ""]
+        for ev, evname in EVALS:
+            rows = []
+            for mk, mname in MODELS:
+                for sc in SCOPES[1:] + SCOPES[:1]:
+                    c, a, b = (pick(mc, ev, "all_level", mk, sc), pick(ml, ev, "all_level", mk, sc),
+                               pick(ml, ev, "level_specific", mk, sc))
+                    rows.append({"Model": mname, "Scope": sc, "n": int(c.n),
+                                 "R² cumulative": f3(c.r2), "R² level-only": f3(a.r2),
+                                 "R² level-only, level-specific model": f3(b.r2),
+                                 "ρ cumulative": f3(c.spearman), "ρ level-only": f3(a.spearman),
+                                 "ρ level-only, level-specific model": f3(b.spearman),
+                                 "Top-10% cumulative": f2(c.top10_recall),
+                                 "Top-10% level-only": f2(a.top10_recall),
+                                 "Top-10% level-only, level-specific model": f2(b.top10_recall)})
+            L += [f"### {evname}", "", md(rows), ""]
+        cl = pd.read_csv(LO / "baseline_ces_matched.csv")
+        for ev, evname in EVALS:
+            rows = []
+            for sc in SCOPES[1:]:
+                sub = cl[(cl.evaluation == ev) & (cl.scope == sc)]
+                for r in sub.itertuples():
+                    rows.append({"Heat level": sc, "ZIPs matched": r.n_matched,
+                                 "Predictor": names.get(r.predictor, r.predictor),
+                                 "Config": r.config, "ρ": f3(r.spearman),
+                                 "Top-10%": f2(r.top10_recall), "Top-20%": f2(r.top20_recall)})
+            L += [f"### CES baseline on the level-only target — {evname}", "", md(rows), ""]
+        pl = pd.read_csv(LO / "predictions_la_holdout.csv", dtype={"zip": str})
+        rows = []
+        for cfg in ("all_level", "level_specific"):
+            for lv, g in pl.groupby("chs_level"):
+                e = g[f"error_poisson_{cfg}"]
+                rows.append({"Config": cfg, "Heat level": lv, "Label mean": f2(g.ucla_label.mean()),
+                             "Label SD": f2(g.ucla_label.std()),
+                             "Prediction mean": f2(g[f"pred_poisson_{cfg}"].mean()),
+                             "Prediction SD": f2(g[f"pred_poisson_{cfg}"].std()),
+                             "Mean error": f"{e.mean():+.2f}".replace("-", "−"),
+                             "Mean abs error": f2(e.abs().mean()),
+                             "Overpredicted": f"{(e > 0).mean():.0%}"})
+        L += ["### Poisson error on the level-only target, LA holdout", "", md(rows), ""]
+
+    # ---- J. ablation: without the asthma and cardiovascular ED-rate inputs
+    if NE.exists():
+        L += ["## J. Without the asthma and cardiovascular inputs", "",
+              "Corrected CES 4.0 inputs. 'With' uses all 12 inputs; 'without' leaves out "
+              "asthma_ed_per10k and cardiovascular_ed_per10k (10 inputs). Same ZIPs and folds.", ""]
+        pairs = [("cumulative target", FX, NE)]
+        if LONE.exists():
+            pairs.append(("level-only target", LO, LONE))
+        for tname, with_dir, wo_dir in pairs:
+            mw, mo = pd.read_csv(with_dir / "metrics_by_level.csv"), pd.read_csv(wo_dir / "metrics_by_level.csv")
+            for ev, evname in EVALS:
+                rows = []
+                for mk, mname in MODELS:
+                    for cfg in ("all_level", "level_specific"):
+                        for sc in SCOPES[1:] + SCOPES[:1]:
+                            a = mw[(mw.evaluation == ev) & (mw.config == cfg) & (mw.model == mk) & (mw.scope == sc)].iloc[0]
+                            b = mo[(mo.evaluation == ev) & (mo.config == cfg) & (mo.model == mk) & (mo.scope == sc)].iloc[0]
+                            rows.append({"Model": mname, "Config": cfg, "Scope": sc, "n": int(a.n),
+                                         "R² with": f3(a.r2), "R² without": f3(b.r2),
+                                         "ρ with": f3(a.spearman), "ρ without": f3(b.spearman),
+                                         "Top-10% with": f2(a.top10_recall),
+                                         "Top-10% without": f2(b.top10_recall),
+                                         "Top-20% with": f2(a.top20_recall),
+                                         "Top-20% without": f2(b.top20_recall)})
+                L += [f"### {tname} — {evname}", "", md(rows), ""]
+
+    # ---- K. confidence intervals for the follow-up runs
+    extra = [(d, n) for d, n in ((LO, "Level-only target"), (NE, "Cumulative, no ED-rate inputs"),
+                                 (LONE, "Level-only, no ED-rate inputs")) if d.exists()]
+    if extra:
+        rows = []
+        for d, name in extra:
+            for r in json.loads((d / "metrics_member1.json").read_text())["metrics"]:
+                if r["model"] == "trainmean" or r["scope"] != "level 4":
+                    continue
+                rows.append({"Variant": name, "Evaluation": r["evaluation"], "Config": r["config"],
+                             "Model": names[r["model"]], "n": r["n"], "R²": f3(r["r2"]),
+                             "R² CI": f"{f3(r['r2_ci'][0])} to {f3(r['r2_ci'][1])}",
+                             "ρ": f3(r["spearman"]),
+                             "ρ CI": f"{f3(r['spearman_ci'][0])} to {f3(r['spearman_ci'][1])}"})
+        L += ["## K. Level 4: bootstrap 95% confidence intervals, follow-up runs", "", md(rows), ""]
 
     OUT.write_text("\n".join(L))
     print("wrote", OUT, f"({len(L)} lines)")

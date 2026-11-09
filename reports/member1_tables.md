@@ -725,3 +725,311 @@ Each block uses only ZIPs with a percentile in that variant, at one heat level. 
 | CES 3.0 | spatial_cv | level_specific | Random forest | level 4 | 1675 | 0.225 | 0.163 to 0.285 | 0.599 | 0.562 to 0.639 | 168 |
 | CES 3.0 | spatial_cv | level_specific | Gradient boosting | pooled (levels 1-4) | 6700 | 0.661 | 0.635 to 0.685 | 0.903 | 0.898 to 0.909 | 670 |
 | CES 3.0 | spatial_cv | level_specific | Gradient boosting | level 4 | 1675 | 0.271 | 0.220 to 0.315 | 0.599 | 0.562 to 0.636 | 168 |
+
+## I. Level-only target: the excess on each level's days alone
+
+Corrected CES 4.0 inputs. Cumulative = the label as published (all days at or below the level). Level-only = label(k) minus label(k-1); level 1 is unchanged. Same ZIPs, folds, inputs and models in both.
+
+### LA holdout (train: rest of California; test: LA County)
+
+| Model | Scope | n | R² cumulative | R² level-only | R² level-only, level-specific model | ρ cumulative | ρ level-only | ρ level-only, level-specific model | Top-10% cumulative | Top-10% level-only | Top-10% level-only, level-specific model |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Poisson | level 1 | 287 | −0.235 | −1.482 | −0.253 | 0.282 | 0.288 | −0.072 | 0.14 | 0.10 | 0.00 |
+| Poisson | level 2 | 287 | 0.046 | −0.485 | 0.266 | 0.468 | 0.581 | 0.636 | 0.21 | 0.07 | 0.34 |
+| Poisson | level 3 | 287 | 0.277 | −0.009 | 0.448 | 0.630 | 0.700 | 0.764 | 0.24 | 0.24 | 0.45 |
+| Poisson | level 4 | 287 | 0.349 | 0.089 | −0.597 | 0.730 | 0.681 | 0.625 | 0.34 | 0.34 | 0.31 |
+| Poisson | pooled (levels 1-4) | 1148 | 0.781 | 0.045 | −0.128 | 0.905 | 0.390 | 0.523 | 0.75 | 0.48 | 0.52 |
+| Random forest | level 1 | 287 | −0.047 | −0.081 | −0.031 | 0.213 | 0.159 | 0.219 | 0.17 | 0.21 | 0.14 |
+| Random forest | level 2 | 287 | 0.212 | 0.343 | 0.272 | 0.480 | 0.561 | 0.491 | 0.34 | 0.34 | 0.34 |
+| Random forest | level 3 | 287 | 0.321 | 0.303 | 0.302 | 0.531 | 0.691 | 0.685 | 0.31 | 0.52 | 0.52 |
+| Random forest | level 4 | 287 | −0.483 | −2.748 | −2.710 | 0.688 | 0.650 | 0.658 | 0.14 | 0.28 | 0.28 |
+| Random forest | pooled (levels 1-4) | 1148 | 0.619 | −1.344 | −1.324 | 0.911 | 0.619 | 0.626 | 0.66 | 0.54 | 0.53 |
+| Gradient boosting | level 1 | 287 | −0.259 | −0.595 | −0.123 | 0.148 | 0.075 | 0.132 | 0.03 | 0.03 | 0.10 |
+| Gradient boosting | level 2 | 287 | −0.140 | 0.154 | 0.352 | 0.267 | 0.438 | 0.566 | 0.21 | 0.17 | 0.28 |
+| Gradient boosting | level 3 | 287 | 0.243 | 0.258 | 0.374 | 0.487 | 0.675 | 0.687 | 0.21 | 0.41 | 0.48 |
+| Gradient boosting | level 4 | 287 | −0.291 | −2.143 | −2.509 | 0.683 | 0.646 | 0.593 | 0.24 | 0.38 | 0.38 |
+| Gradient boosting | pooled (levels 1-4) | 1148 | 0.642 | −1.061 | −1.201 | 0.898 | 0.500 | 0.590 | 0.70 | 0.55 | 0.50 |
+
+### Statewide spatial cross-validation (10 folds)
+
+| Model | Scope | n | R² cumulative | R² level-only | R² level-only, level-specific model | ρ cumulative | ρ level-only | ρ level-only, level-specific model | Top-10% cumulative | Top-10% level-only | Top-10% level-only, level-specific model |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Poisson | level 1 | 1675 | −1.791 | −1.100 | −0.118 | −0.314 | −0.328 | −0.062 | 0.03 | 0.02 | 0.05 |
+| Poisson | level 2 | 1675 | −0.621 | −2.220 | 0.049 | −0.017 | 0.241 | 0.287 | 0.05 | 0.10 | 0.12 |
+| Poisson | level 3 | 1675 | 0.001 | 0.030 | 0.230 | 0.342 | 0.540 | 0.557 | 0.14 | 0.19 | 0.20 |
+| Poisson | level 4 | 1675 | −0.015 | −0.078 | 0.075 | 0.512 | 0.451 | 0.534 | 0.16 | 0.19 | 0.28 |
+| Poisson | pooled (levels 1-4) | 6700 | 0.525 | 0.166 | 0.302 | 0.871 | 0.486 | 0.600 | 0.56 | 0.42 | 0.56 |
+| Random forest | level 1 | 1675 | −0.022 | −0.010 | −0.015 | 0.250 | 0.265 | 0.260 | 0.11 | 0.10 | 0.12 |
+| Random forest | level 2 | 1675 | 0.020 | 0.064 | 0.042 | 0.286 | 0.325 | 0.304 | 0.20 | 0.23 | 0.21 |
+| Random forest | level 3 | 1675 | 0.106 | 0.162 | 0.168 | 0.348 | 0.472 | 0.477 | 0.25 | 0.12 | 0.13 |
+| Random forest | level 4 | 1675 | 0.199 | 0.181 | 0.182 | 0.567 | 0.563 | 0.567 | 0.32 | 0.33 | 0.32 |
+| Random forest | pooled (levels 1-4) | 6700 | 0.629 | 0.378 | 0.378 | 0.900 | 0.637 | 0.635 | 0.61 | 0.62 | 0.63 |
+| Gradient boosting | level 1 | 1675 | −0.259 | −0.281 | 0.014 | −0.101 | −0.296 | 0.256 | 0.04 | 0.05 | 0.10 |
+| Gradient boosting | level 2 | 1675 | −0.032 | 0.009 | 0.138 | 0.042 | 0.218 | 0.327 | 0.14 | 0.10 | 0.29 |
+| Gradient boosting | level 3 | 1675 | 0.146 | 0.238 | 0.274 | 0.330 | 0.501 | 0.543 | 0.23 | 0.21 | 0.20 |
+| Gradient boosting | level 4 | 1675 | 0.284 | 0.269 | 0.250 | 0.585 | 0.574 | 0.569 | 0.33 | 0.33 | 0.36 |
+| Gradient boosting | pooled (levels 1-4) | 6700 | 0.665 | 0.441 | 0.431 | 0.888 | 0.562 | 0.646 | 0.64 | 0.66 | 0.66 |
+
+### CES baseline on the level-only target — LA holdout (train: rest of California; test: LA County)
+
+| Heat level | ZIPs matched | Predictor | Config | ρ | Top-10% | Top-20% |
+|---|---|---|---|---|---|---|
+| level 1 | 273 | CES 4.0 percentile | index | 0.510 | 0.30 | 0.51 |
+| level 1 | 273 | Poisson | all_level | 0.305 | 0.07 | 0.29 |
+| level 1 | 273 | Random forest | all_level | 0.152 | 0.22 | 0.38 |
+| level 1 | 273 | Gradient boosting | all_level | 0.075 | 0.04 | 0.27 |
+| level 1 | 273 | Poisson | level_specific | −0.096 | 0.00 | 0.07 |
+| level 1 | 273 | Random forest | level_specific | 0.215 | 0.19 | 0.36 |
+| level 1 | 273 | Gradient boosting | level_specific | 0.111 | 0.11 | 0.25 |
+| level 2 | 273 | CES 4.0 percentile | index | 0.455 | 0.19 | 0.36 |
+| level 2 | 273 | Poisson | all_level | 0.604 | 0.07 | 0.35 |
+| level 2 | 273 | Random forest | all_level | 0.581 | 0.33 | 0.44 |
+| level 2 | 273 | Gradient boosting | all_level | 0.455 | 0.19 | 0.35 |
+| level 2 | 273 | Poisson | level_specific | 0.650 | 0.30 | 0.53 |
+| level 2 | 273 | Random forest | level_specific | 0.511 | 0.37 | 0.40 |
+| level 2 | 273 | Gradient boosting | level_specific | 0.574 | 0.30 | 0.44 |
+| level 3 | 273 | CES 4.0 percentile | index | 0.459 | 0.07 | 0.27 |
+| level 3 | 273 | Poisson | all_level | 0.726 | 0.26 | 0.42 |
+| level 3 | 273 | Random forest | all_level | 0.744 | 0.52 | 0.49 |
+| level 3 | 273 | Gradient boosting | all_level | 0.726 | 0.44 | 0.55 |
+| level 3 | 273 | Poisson | level_specific | 0.785 | 0.44 | 0.56 |
+| level 3 | 273 | Random forest | level_specific | 0.739 | 0.52 | 0.49 |
+| level 3 | 273 | Gradient boosting | level_specific | 0.727 | 0.52 | 0.47 |
+| level 4 | 273 | CES 4.0 percentile | index | 0.498 | 0.15 | 0.35 |
+| level 4 | 273 | Poisson | all_level | 0.707 | 0.37 | 0.55 |
+| level 4 | 273 | Random forest | all_level | 0.695 | 0.30 | 0.47 |
+| level 4 | 273 | Gradient boosting | all_level | 0.698 | 0.37 | 0.51 |
+| level 4 | 273 | Poisson | level_specific | 0.662 | 0.30 | 0.45 |
+| level 4 | 273 | Random forest | level_specific | 0.703 | 0.30 | 0.49 |
+| level 4 | 273 | Gradient boosting | level_specific | 0.642 | 0.41 | 0.51 |
+
+### CES baseline on the level-only target — Statewide spatial cross-validation (10 folds)
+
+| Heat level | ZIPs matched | Predictor | Config | ρ | Top-10% | Top-20% |
+|---|---|---|---|---|---|---|
+| level 1 | 1326 | CES 4.0 percentile | index | 0.081 | 0.26 | 0.30 |
+| level 1 | 1326 | Poisson | all_level | −0.360 | 0.03 | 0.07 |
+| level 1 | 1326 | Random forest | all_level | 0.306 | 0.09 | 0.28 |
+| level 1 | 1326 | Gradient boosting | all_level | −0.306 | 0.02 | 0.07 |
+| level 1 | 1326 | Poisson | level_specific | −0.036 | 0.05 | 0.12 |
+| level 1 | 1326 | Random forest | level_specific | 0.301 | 0.12 | 0.28 |
+| level 1 | 1326 | Gradient boosting | level_specific | 0.292 | 0.09 | 0.25 |
+| level 2 | 1326 | CES 4.0 percentile | index | 0.270 | 0.17 | 0.25 |
+| level 2 | 1326 | Poisson | all_level | 0.288 | 0.11 | 0.21 |
+| level 2 | 1326 | Random forest | all_level | 0.422 | 0.27 | 0.38 |
+| level 2 | 1326 | Gradient boosting | all_level | 0.298 | 0.11 | 0.20 |
+| level 2 | 1326 | Poisson | level_specific | 0.345 | 0.13 | 0.28 |
+| level 2 | 1326 | Random forest | level_specific | 0.396 | 0.26 | 0.36 |
+| level 2 | 1326 | Gradient boosting | level_specific | 0.400 | 0.35 | 0.38 |
+| level 3 | 1326 | CES 4.0 percentile | index | 0.294 | 0.11 | 0.22 |
+| level 3 | 1326 | Poisson | all_level | 0.647 | 0.32 | 0.46 |
+| level 3 | 1326 | Random forest | all_level | 0.577 | 0.24 | 0.42 |
+| level 3 | 1326 | Gradient boosting | all_level | 0.573 | 0.26 | 0.40 |
+| level 3 | 1326 | Poisson | level_specific | 0.675 | 0.26 | 0.46 |
+| level 3 | 1326 | Random forest | level_specific | 0.583 | 0.25 | 0.42 |
+| level 3 | 1326 | Gradient boosting | level_specific | 0.621 | 0.23 | 0.46 |
+| level 4 | 1326 | CES 4.0 percentile | index | 0.254 | 0.09 | 0.26 |
+| level 4 | 1326 | Poisson | all_level | 0.597 | 0.29 | 0.52 |
+| level 4 | 1326 | Random forest | all_level | 0.614 | 0.48 | 0.53 |
+| level 4 | 1326 | Gradient boosting | all_level | 0.624 | 0.50 | 0.54 |
+| level 4 | 1326 | Poisson | level_specific | 0.661 | 0.41 | 0.55 |
+| level 4 | 1326 | Random forest | level_specific | 0.618 | 0.47 | 0.54 |
+| level 4 | 1326 | Gradient boosting | level_specific | 0.617 | 0.47 | 0.53 |
+
+### Poisson error on the level-only target, LA holdout
+
+| Config | Heat level | Label mean | Label SD | Prediction mean | Prediction SD | Mean error | Mean abs error | Overpredicted |
+|---|---|---|---|---|---|---|---|---|
+| all_level | 1 | 2.47 | 0.61 | 1.78 | 0.39 | −0.69 | 0.80 | 12% |
+| all_level | 2 | 1.92 | 0.59 | 2.34 | 0.51 | +0.41 | 0.54 | 78% |
+| all_level | 3 | 2.53 | 0.88 | 3.06 | 0.67 | +0.52 | 0.71 | 77% |
+| all_level | 4 | 3.11 | 1.68 | 4.00 | 0.88 | +0.90 | 1.36 | 77% |
+| level_specific | 1 | 2.47 | 0.61 | 2.20 | 0.12 | −0.27 | 0.54 | 34% |
+| level_specific | 2 | 1.92 | 0.59 | 1.88 | 0.22 | −0.05 | 0.39 | 50% |
+| level_specific | 3 | 2.53 | 0.88 | 2.72 | 0.53 | +0.18 | 0.52 | 62% |
+| level_specific | 4 | 3.11 | 1.68 | 4.24 | 1.91 | +1.13 | 1.51 | 80% |
+
+## J. Without the asthma and cardiovascular inputs
+
+Corrected CES 4.0 inputs. 'With' uses all 12 inputs; 'without' leaves out asthma_ed_per10k and cardiovascular_ed_per10k (10 inputs). Same ZIPs and folds.
+
+### cumulative target — LA holdout (train: rest of California; test: LA County)
+
+| Model | Config | Scope | n | R² with | R² without | ρ with | ρ without | Top-10% with | Top-10% without | Top-20% with | Top-20% without |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Poisson | all_level | level 1 | 287 | −0.235 | −0.059 | 0.282 | 0.291 | 0.14 | 0.17 | 0.30 | 0.37 |
+| Poisson | all_level | level 2 | 287 | 0.046 | 0.126 | 0.468 | 0.462 | 0.21 | 0.24 | 0.44 | 0.53 |
+| Poisson | all_level | level 3 | 287 | 0.277 | 0.275 | 0.630 | 0.595 | 0.24 | 0.28 | 0.47 | 0.47 |
+| Poisson | all_level | level 4 | 287 | 0.349 | 0.233 | 0.730 | 0.633 | 0.34 | 0.31 | 0.56 | 0.51 |
+| Poisson | all_level | pooled (levels 1-4) | 1148 | 0.781 | 0.760 | 0.905 | 0.903 | 0.75 | 0.70 | 0.77 | 0.75 |
+| Poisson | level_specific | level 1 | 287 | −0.253 | −0.239 | −0.072 | 0.028 | 0.00 | 0.07 | 0.09 | 0.23 |
+| Poisson | level_specific | level 2 | 287 | 0.044 | 0.052 | 0.423 | 0.439 | 0.21 | 0.24 | 0.37 | 0.40 |
+| Poisson | level_specific | level 3 | 287 | 0.317 | 0.305 | 0.633 | 0.603 | 0.38 | 0.34 | 0.51 | 0.51 |
+| Poisson | level_specific | level 4 | 287 | 0.174 | 0.054 | 0.711 | 0.569 | 0.28 | 0.24 | 0.51 | 0.39 |
+| Poisson | level_specific | pooled (levels 1-4) | 1148 | 0.748 | 0.723 | 0.904 | 0.898 | 0.71 | 0.63 | 0.78 | 0.76 |
+| Random forest | all_level | level 1 | 287 | −0.047 | 0.010 | 0.213 | 0.240 | 0.17 | 0.17 | 0.39 | 0.37 |
+| Random forest | all_level | level 2 | 287 | 0.212 | 0.200 | 0.480 | 0.466 | 0.34 | 0.28 | 0.40 | 0.40 |
+| Random forest | all_level | level 3 | 287 | 0.321 | 0.360 | 0.531 | 0.587 | 0.31 | 0.34 | 0.47 | 0.60 |
+| Random forest | all_level | level 4 | 287 | −0.483 | −0.329 | 0.688 | 0.559 | 0.14 | 0.17 | 0.44 | 0.35 |
+| Random forest | all_level | pooled (levels 1-4) | 1148 | 0.619 | 0.654 | 0.911 | 0.906 | 0.66 | 0.63 | 0.82 | 0.79 |
+| Random forest | level_specific | level 1 | 287 | −0.031 | −0.012 | 0.219 | 0.227 | 0.14 | 0.17 | 0.37 | 0.37 |
+| Random forest | level_specific | level 2 | 287 | 0.198 | 0.186 | 0.474 | 0.453 | 0.31 | 0.34 | 0.42 | 0.40 |
+| Random forest | level_specific | level 3 | 287 | 0.313 | 0.358 | 0.525 | 0.582 | 0.31 | 0.38 | 0.46 | 0.58 |
+| Random forest | level_specific | level 4 | 287 | −0.485 | −0.300 | 0.683 | 0.553 | 0.14 | 0.17 | 0.44 | 0.39 |
+| Random forest | level_specific | pooled (levels 1-4) | 1148 | 0.618 | 0.659 | 0.911 | 0.905 | 0.66 | 0.63 | 0.81 | 0.77 |
+| Gradient boosting | all_level | level 1 | 287 | −0.259 | −0.066 | 0.148 | 0.339 | 0.03 | 0.14 | 0.19 | 0.28 |
+| Gradient boosting | all_level | level 2 | 287 | −0.140 | 0.012 | 0.267 | 0.442 | 0.21 | 0.24 | 0.26 | 0.40 |
+| Gradient boosting | all_level | level 3 | 287 | 0.243 | 0.285 | 0.487 | 0.576 | 0.21 | 0.38 | 0.32 | 0.53 |
+| Gradient boosting | all_level | level 4 | 287 | −0.291 | −0.121 | 0.683 | 0.586 | 0.24 | 0.21 | 0.40 | 0.33 |
+| Gradient boosting | all_level | pooled (levels 1-4) | 1148 | 0.642 | 0.686 | 0.898 | 0.908 | 0.70 | 0.65 | 0.78 | 0.78 |
+| Gradient boosting | level_specific | level 1 | 287 | −0.123 | −0.091 | 0.132 | 0.187 | 0.10 | 0.14 | 0.28 | 0.35 |
+| Gradient boosting | level_specific | level 2 | 287 | 0.045 | 0.032 | 0.309 | 0.316 | 0.14 | 0.17 | 0.26 | 0.26 |
+| Gradient boosting | level_specific | level 3 | 287 | 0.395 | 0.413 | 0.633 | 0.636 | 0.41 | 0.45 | 0.47 | 0.54 |
+| Gradient boosting | level_specific | level 4 | 287 | −0.325 | −0.090 | 0.670 | 0.513 | 0.24 | 0.24 | 0.40 | 0.25 |
+| Gradient boosting | level_specific | pooled (levels 1-4) | 1148 | 0.652 | 0.701 | 0.907 | 0.905 | 0.68 | 0.59 | 0.80 | 0.79 |
+
+### cumulative target — Statewide spatial cross-validation (10 folds)
+
+| Model | Config | Scope | n | R² with | R² without | ρ with | ρ without | Top-10% with | Top-10% without | Top-20% with | Top-20% without |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Poisson | all_level | level 1 | 1675 | −1.791 | −1.860 | −0.314 | −0.324 | 0.03 | 0.02 | 0.08 | 0.08 |
+| Poisson | all_level | level 2 | 1675 | −0.621 | −0.659 | −0.017 | −0.048 | 0.05 | 0.04 | 0.16 | 0.16 |
+| Poisson | all_level | level 3 | 1675 | 0.001 | −0.036 | 0.342 | 0.299 | 0.14 | 0.11 | 0.27 | 0.26 |
+| Poisson | all_level | level 4 | 1675 | −0.015 | −0.021 | 0.512 | 0.441 | 0.16 | 0.14 | 0.35 | 0.32 |
+| Poisson | all_level | pooled (levels 1-4) | 6700 | 0.525 | 0.521 | 0.871 | 0.869 | 0.56 | 0.52 | 0.81 | 0.78 |
+| Poisson | level_specific | level 1 | 1675 | −0.118 | −0.110 | −0.062 | −0.060 | 0.05 | 0.05 | 0.13 | 0.14 |
+| Poisson | level_specific | level 2 | 1675 | −0.080 | −0.070 | 0.050 | 0.072 | 0.11 | 0.11 | 0.28 | 0.30 |
+| Poisson | level_specific | level 3 | 1675 | 0.088 | 0.072 | 0.356 | 0.328 | 0.20 | 0.17 | 0.33 | 0.33 |
+| Poisson | level_specific | level 4 | 1675 | 0.123 | 0.108 | 0.564 | 0.501 | 0.23 | 0.23 | 0.44 | 0.37 |
+| Poisson | level_specific | pooled (levels 1-4) | 6700 | 0.596 | 0.589 | 0.889 | 0.886 | 0.58 | 0.55 | 0.82 | 0.80 |
+| Random forest | all_level | level 1 | 1675 | −0.022 | −0.040 | 0.250 | 0.232 | 0.11 | 0.12 | 0.27 | 0.28 |
+| Random forest | all_level | level 2 | 1675 | 0.020 | 0.014 | 0.286 | 0.292 | 0.20 | 0.20 | 0.30 | 0.33 |
+| Random forest | all_level | level 3 | 1675 | 0.106 | 0.074 | 0.348 | 0.323 | 0.25 | 0.29 | 0.35 | 0.37 |
+| Random forest | all_level | level 4 | 1675 | 0.199 | 0.115 | 0.567 | 0.461 | 0.32 | 0.29 | 0.43 | 0.42 |
+| Random forest | all_level | pooled (levels 1-4) | 6700 | 0.629 | 0.593 | 0.900 | 0.895 | 0.61 | 0.58 | 0.81 | 0.79 |
+| Random forest | level_specific | level 1 | 1675 | −0.015 | −0.041 | 0.260 | 0.233 | 0.12 | 0.12 | 0.28 | 0.28 |
+| Random forest | level_specific | level 2 | 1675 | 0.020 | 0.011 | 0.285 | 0.284 | 0.20 | 0.18 | 0.30 | 0.33 |
+| Random forest | level_specific | level 3 | 1675 | 0.106 | 0.073 | 0.348 | 0.322 | 0.27 | 0.27 | 0.36 | 0.36 |
+| Random forest | level_specific | level 4 | 1675 | 0.201 | 0.113 | 0.569 | 0.458 | 0.33 | 0.29 | 0.45 | 0.41 |
+| Random forest | level_specific | pooled (levels 1-4) | 6700 | 0.630 | 0.593 | 0.901 | 0.895 | 0.61 | 0.57 | 0.81 | 0.79 |
+| Gradient boosting | all_level | level 1 | 1675 | −0.259 | −0.239 | −0.101 | 0.050 | 0.04 | 0.05 | 0.16 | 0.21 |
+| Gradient boosting | all_level | level 2 | 1675 | −0.032 | −0.048 | 0.042 | 0.106 | 0.14 | 0.11 | 0.23 | 0.24 |
+| Gradient boosting | all_level | level 3 | 1675 | 0.146 | 0.105 | 0.330 | 0.295 | 0.23 | 0.17 | 0.27 | 0.28 |
+| Gradient boosting | all_level | level 4 | 1675 | 0.284 | 0.199 | 0.585 | 0.469 | 0.33 | 0.32 | 0.41 | 0.39 |
+| Gradient boosting | all_level | pooled (levels 1-4) | 6700 | 0.665 | 0.628 | 0.888 | 0.887 | 0.64 | 0.59 | 0.81 | 0.79 |
+| Gradient boosting | level_specific | level 1 | 1675 | 0.014 | 0.013 | 0.256 | 0.255 | 0.10 | 0.08 | 0.24 | 0.25 |
+| Gradient boosting | level_specific | level 2 | 1675 | 0.077 | 0.070 | 0.306 | 0.297 | 0.18 | 0.18 | 0.35 | 0.35 |
+| Gradient boosting | level_specific | level 3 | 1675 | 0.181 | 0.147 | 0.378 | 0.336 | 0.27 | 0.28 | 0.34 | 0.35 |
+| Gradient boosting | level_specific | level 4 | 1675 | 0.289 | 0.203 | 0.595 | 0.499 | 0.36 | 0.33 | 0.41 | 0.39 |
+| Gradient boosting | level_specific | pooled (levels 1-4) | 6700 | 0.670 | 0.633 | 0.905 | 0.899 | 0.65 | 0.59 | 0.82 | 0.80 |
+
+### level-only target — LA holdout (train: rest of California; test: LA County)
+
+| Model | Config | Scope | n | R² with | R² without | ρ with | ρ without | Top-10% with | Top-10% without | Top-20% with | Top-20% without |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Poisson | all_level | level 1 | 287 | −1.482 | −1.234 | 0.288 | 0.281 | 0.10 | 0.17 | 0.28 | 0.37 |
+| Poisson | all_level | level 2 | 287 | −0.485 | −0.441 | 0.581 | 0.547 | 0.07 | 0.17 | 0.37 | 0.37 |
+| Poisson | all_level | level 3 | 287 | −0.009 | −0.126 | 0.700 | 0.606 | 0.24 | 0.28 | 0.42 | 0.44 |
+| Poisson | all_level | level 4 | 287 | 0.089 | −0.161 | 0.681 | 0.502 | 0.34 | 0.14 | 0.56 | 0.37 |
+| Poisson | all_level | pooled (levels 1-4) | 1148 | 0.045 | −0.093 | 0.390 | 0.332 | 0.48 | 0.47 | 0.56 | 0.54 |
+| Poisson | level_specific | level 1 | 287 | −0.253 | −0.239 | −0.072 | 0.028 | 0.00 | 0.07 | 0.09 | 0.23 |
+| Poisson | level_specific | level 2 | 287 | 0.266 | 0.252 | 0.636 | 0.627 | 0.34 | 0.41 | 0.51 | 0.47 |
+| Poisson | level_specific | level 3 | 287 | 0.448 | 0.360 | 0.764 | 0.692 | 0.45 | 0.45 | 0.54 | 0.54 |
+| Poisson | level_specific | level 4 | 287 | −0.597 | −1.048 | 0.625 | 0.450 | 0.31 | 0.21 | 0.44 | 0.30 |
+| Poisson | level_specific | pooled (levels 1-4) | 1148 | −0.128 | −0.396 | 0.523 | 0.467 | 0.52 | 0.47 | 0.60 | 0.57 |
+| Random forest | all_level | level 1 | 287 | −0.081 | −0.072 | 0.159 | 0.161 | 0.21 | 0.24 | 0.39 | 0.37 |
+| Random forest | all_level | level 2 | 287 | 0.343 | 0.346 | 0.561 | 0.556 | 0.34 | 0.31 | 0.46 | 0.51 |
+| Random forest | all_level | level 3 | 287 | 0.303 | 0.322 | 0.691 | 0.654 | 0.52 | 0.48 | 0.49 | 0.54 |
+| Random forest | all_level | level 4 | 287 | −2.748 | −1.915 | 0.650 | 0.372 | 0.28 | 0.17 | 0.46 | 0.30 |
+| Random forest | all_level | pooled (levels 1-4) | 1148 | −1.344 | −0.870 | 0.619 | 0.528 | 0.54 | 0.41 | 0.60 | 0.55 |
+| Random forest | level_specific | level 1 | 287 | −0.031 | −0.012 | 0.219 | 0.227 | 0.14 | 0.17 | 0.37 | 0.37 |
+| Random forest | level_specific | level 2 | 287 | 0.272 | 0.303 | 0.491 | 0.510 | 0.34 | 0.34 | 0.40 | 0.49 |
+| Random forest | level_specific | level 3 | 287 | 0.302 | 0.311 | 0.685 | 0.647 | 0.52 | 0.48 | 0.49 | 0.54 |
+| Random forest | level_specific | level 4 | 287 | −2.710 | −1.965 | 0.658 | 0.361 | 0.28 | 0.17 | 0.46 | 0.30 |
+| Random forest | level_specific | pooled (levels 1-4) | 1148 | −1.324 | −0.899 | 0.626 | 0.535 | 0.53 | 0.39 | 0.59 | 0.55 |
+| Gradient boosting | all_level | level 1 | 287 | −0.595 | −0.687 | 0.075 | 0.124 | 0.03 | 0.00 | 0.28 | 0.19 |
+| Gradient boosting | all_level | level 2 | 287 | 0.154 | 0.061 | 0.438 | 0.349 | 0.17 | 0.24 | 0.37 | 0.40 |
+| Gradient boosting | all_level | level 3 | 287 | 0.258 | 0.255 | 0.675 | 0.614 | 0.41 | 0.45 | 0.51 | 0.54 |
+| Gradient boosting | all_level | level 4 | 287 | −2.143 | −1.628 | 0.646 | 0.390 | 0.38 | 0.24 | 0.51 | 0.32 |
+| Gradient boosting | all_level | pooled (levels 1-4) | 1148 | −1.061 | −0.785 | 0.500 | 0.442 | 0.55 | 0.41 | 0.56 | 0.53 |
+| Gradient boosting | level_specific | level 1 | 287 | −0.123 | −0.091 | 0.132 | 0.187 | 0.10 | 0.14 | 0.28 | 0.35 |
+| Gradient boosting | level_specific | level 2 | 287 | 0.352 | 0.304 | 0.566 | 0.505 | 0.28 | 0.34 | 0.44 | 0.51 |
+| Gradient boosting | level_specific | level 3 | 287 | 0.374 | 0.377 | 0.687 | 0.633 | 0.48 | 0.55 | 0.46 | 0.56 |
+| Gradient boosting | level_specific | level 4 | 287 | −2.509 | −1.528 | 0.593 | 0.324 | 0.38 | 0.21 | 0.47 | 0.26 |
+| Gradient boosting | level_specific | pooled (levels 1-4) | 1148 | −1.201 | −0.649 | 0.590 | 0.546 | 0.50 | 0.40 | 0.57 | 0.56 |
+
+### level-only target — Statewide spatial cross-validation (10 folds)
+
+| Model | Config | Scope | n | R² with | R² without | ρ with | ρ without | Top-10% with | Top-10% without | Top-20% with | Top-20% without |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Poisson | all_level | level 1 | 1675 | −1.100 | −0.989 | −0.328 | −0.339 | 0.02 | 0.03 | 0.08 | 0.09 |
+| Poisson | all_level | level 2 | 1675 | −2.220 | −2.476 | 0.241 | 0.189 | 0.10 | 0.08 | 0.21 | 0.19 |
+| Poisson | all_level | level 3 | 1675 | 0.030 | −0.069 | 0.540 | 0.470 | 0.19 | 0.21 | 0.35 | 0.35 |
+| Poisson | all_level | level 4 | 1675 | −0.078 | −0.082 | 0.451 | 0.345 | 0.19 | 0.21 | 0.41 | 0.36 |
+| Poisson | all_level | pooled (levels 1-4) | 6700 | 0.166 | 0.160 | 0.486 | 0.461 | 0.42 | 0.39 | 0.56 | 0.57 |
+| Poisson | level_specific | level 1 | 1675 | −0.118 | −0.110 | −0.062 | −0.060 | 0.05 | 0.05 | 0.13 | 0.14 |
+| Poisson | level_specific | level 2 | 1675 | 0.049 | 0.035 | 0.287 | 0.257 | 0.12 | 0.15 | 0.32 | 0.31 |
+| Poisson | level_specific | level 3 | 1675 | 0.230 | 0.202 | 0.557 | 0.508 | 0.20 | 0.20 | 0.36 | 0.36 |
+| Poisson | level_specific | level 4 | 1675 | 0.075 | 0.064 | 0.534 | 0.473 | 0.28 | 0.27 | 0.45 | 0.40 |
+| Poisson | level_specific | pooled (levels 1-4) | 6700 | 0.302 | 0.294 | 0.600 | 0.574 | 0.56 | 0.53 | 0.70 | 0.66 |
+| Random forest | all_level | level 1 | 1675 | −0.010 | −0.028 | 0.265 | 0.245 | 0.10 | 0.13 | 0.27 | 0.29 |
+| Random forest | all_level | level 2 | 1675 | 0.064 | 0.038 | 0.325 | 0.302 | 0.23 | 0.24 | 0.34 | 0.35 |
+| Random forest | all_level | level 3 | 1675 | 0.162 | 0.125 | 0.472 | 0.428 | 0.12 | 0.17 | 0.32 | 0.35 |
+| Random forest | all_level | level 4 | 1675 | 0.181 | 0.104 | 0.563 | 0.446 | 0.33 | 0.28 | 0.48 | 0.45 |
+| Random forest | all_level | pooled (levels 1-4) | 6700 | 0.378 | 0.321 | 0.637 | 0.593 | 0.62 | 0.57 | 0.67 | 0.64 |
+| Random forest | level_specific | level 1 | 1675 | −0.015 | −0.041 | 0.260 | 0.233 | 0.12 | 0.12 | 0.28 | 0.28 |
+| Random forest | level_specific | level 2 | 1675 | 0.042 | 0.034 | 0.304 | 0.292 | 0.21 | 0.27 | 0.33 | 0.33 |
+| Random forest | level_specific | level 3 | 1675 | 0.168 | 0.123 | 0.477 | 0.426 | 0.13 | 0.17 | 0.33 | 0.35 |
+| Random forest | level_specific | level 4 | 1675 | 0.182 | 0.099 | 0.567 | 0.446 | 0.32 | 0.29 | 0.49 | 0.45 |
+| Random forest | level_specific | pooled (levels 1-4) | 6700 | 0.378 | 0.318 | 0.635 | 0.590 | 0.63 | 0.57 | 0.67 | 0.64 |
+| Gradient boosting | all_level | level 1 | 1675 | −0.281 | −0.152 | −0.296 | −0.107 | 0.05 | 0.05 | 0.10 | 0.13 |
+| Gradient boosting | all_level | level 2 | 1675 | 0.009 | 0.012 | 0.218 | 0.195 | 0.10 | 0.10 | 0.20 | 0.25 |
+| Gradient boosting | all_level | level 3 | 1675 | 0.238 | 0.174 | 0.501 | 0.429 | 0.21 | 0.17 | 0.35 | 0.31 |
+| Gradient boosting | all_level | level 4 | 1675 | 0.269 | 0.202 | 0.574 | 0.480 | 0.33 | 0.32 | 0.46 | 0.43 |
+| Gradient boosting | all_level | pooled (levels 1-4) | 6700 | 0.441 | 0.392 | 0.562 | 0.554 | 0.66 | 0.62 | 0.68 | 0.65 |
+| Gradient boosting | level_specific | level 1 | 1675 | 0.014 | 0.013 | 0.256 | 0.255 | 0.10 | 0.08 | 0.24 | 0.25 |
+| Gradient boosting | level_specific | level 2 | 1675 | 0.138 | 0.116 | 0.327 | 0.307 | 0.29 | 0.31 | 0.36 | 0.39 |
+| Gradient boosting | level_specific | level 3 | 1675 | 0.274 | 0.228 | 0.543 | 0.503 | 0.20 | 0.21 | 0.40 | 0.40 |
+| Gradient boosting | level_specific | level 4 | 1675 | 0.250 | 0.193 | 0.569 | 0.483 | 0.36 | 0.32 | 0.46 | 0.42 |
+| Gradient boosting | level_specific | pooled (levels 1-4) | 6700 | 0.431 | 0.388 | 0.646 | 0.611 | 0.66 | 0.61 | 0.68 | 0.65 |
+
+## K. Level 4: bootstrap 95% confidence intervals, follow-up runs
+
+| Variant | Evaluation | Config | Model | n | R² | R² CI | ρ | ρ CI |
+|---|---|---|---|---|---|---|---|---|
+| Level-only target | la_holdout | all_level | Poisson | 287 | 0.089 | −0.123 to 0.243 | 0.681 | 0.606 to 0.742 |
+| Level-only target | la_holdout | all_level | Random forest | 287 | −2.748 | −4.442 to −1.570 | 0.650 | 0.558 to 0.725 |
+| Level-only target | la_holdout | all_level | Gradient boosting | 287 | −2.143 | −3.439 to −1.226 | 0.646 | 0.551 to 0.720 |
+| Level-only target | la_holdout | level_specific | Poisson | 287 | −0.597 | −1.431 to −0.038 | 0.625 | 0.541 to 0.696 |
+| Level-only target | la_holdout | level_specific | Random forest | 287 | −2.710 | −4.402 to −1.538 | 0.658 | 0.565 to 0.734 |
+| Level-only target | la_holdout | level_specific | Gradient boosting | 287 | −2.509 | −3.965 to −1.467 | 0.593 | 0.495 to 0.675 |
+| Level-only target | spatial_cv | all_level | Poisson | 1675 | −0.078 | −0.108 to −0.051 | 0.451 | 0.410 to 0.490 |
+| Level-only target | spatial_cv | all_level | Random forest | 1675 | 0.181 | 0.110 to 0.247 | 0.563 | 0.526 to 0.603 |
+| Level-only target | spatial_cv | all_level | Gradient boosting | 1675 | 0.269 | 0.228 to 0.307 | 0.574 | 0.536 to 0.612 |
+| Level-only target | spatial_cv | level_specific | Poisson | 1675 | 0.075 | 0.021 to 0.128 | 0.534 | 0.495 to 0.573 |
+| Level-only target | spatial_cv | level_specific | Random forest | 1675 | 0.182 | 0.113 to 0.248 | 0.567 | 0.530 to 0.606 |
+| Level-only target | spatial_cv | level_specific | Gradient boosting | 1675 | 0.250 | 0.197 to 0.297 | 0.569 | 0.528 to 0.606 |
+| Cumulative, no ED-rate inputs | la_holdout | all_level | Poisson | 287 | 0.233 | 0.128 to 0.313 | 0.633 | 0.554 to 0.703 |
+| Cumulative, no ED-rate inputs | la_holdout | all_level | Random forest | 287 | −0.329 | −0.835 to 0.036 | 0.559 | 0.466 to 0.638 |
+| Cumulative, no ED-rate inputs | la_holdout | all_level | Gradient boosting | 287 | −0.121 | −0.476 to 0.138 | 0.586 | 0.490 to 0.662 |
+| Cumulative, no ED-rate inputs | la_holdout | level_specific | Poisson | 287 | 0.054 | −0.174 to 0.237 | 0.569 | 0.475 to 0.649 |
+| Cumulative, no ED-rate inputs | la_holdout | level_specific | Random forest | 287 | −0.300 | −0.781 to 0.049 | 0.553 | 0.458 to 0.634 |
+| Cumulative, no ED-rate inputs | la_holdout | level_specific | Gradient boosting | 287 | −0.090 | −0.464 to 0.183 | 0.513 | 0.407 to 0.602 |
+| Cumulative, no ED-rate inputs | spatial_cv | all_level | Poisson | 1675 | −0.021 | −0.051 to 0.009 | 0.441 | 0.404 to 0.480 |
+| Cumulative, no ED-rate inputs | spatial_cv | all_level | Random forest | 1675 | 0.115 | 0.050 to 0.178 | 0.461 | 0.418 to 0.504 |
+| Cumulative, no ED-rate inputs | spatial_cv | all_level | Gradient boosting | 1675 | 0.199 | 0.156 to 0.239 | 0.469 | 0.427 to 0.509 |
+| Cumulative, no ED-rate inputs | spatial_cv | level_specific | Poisson | 1675 | 0.108 | 0.066 to 0.149 | 0.501 | 0.462 to 0.540 |
+| Cumulative, no ED-rate inputs | spatial_cv | level_specific | Random forest | 1675 | 0.113 | 0.048 to 0.176 | 0.458 | 0.415 to 0.502 |
+| Cumulative, no ED-rate inputs | spatial_cv | level_specific | Gradient boosting | 1675 | 0.203 | 0.151 to 0.249 | 0.499 | 0.458 to 0.538 |
+| Level-only, no ED-rate inputs | la_holdout | all_level | Poisson | 287 | −0.161 | −0.403 to 0.013 | 0.502 | 0.408 to 0.581 |
+| Level-only, no ED-rate inputs | la_holdout | all_level | Random forest | 287 | −1.915 | −3.364 to −0.967 | 0.372 | 0.266 to 0.470 |
+| Level-only, no ED-rate inputs | la_holdout | all_level | Gradient boosting | 287 | −1.628 | −2.708 to −0.889 | 0.390 | 0.281 to 0.490 |
+| Level-only, no ED-rate inputs | la_holdout | level_specific | Poisson | 287 | −1.048 | −2.214 to −0.293 | 0.450 | 0.339 to 0.541 |
+| Level-only, no ED-rate inputs | la_holdout | level_specific | Random forest | 287 | −1.965 | −3.371 to −1.046 | 0.361 | 0.259 to 0.461 |
+| Level-only, no ED-rate inputs | la_holdout | level_specific | Gradient boosting | 287 | −1.528 | −2.618 to −0.790 | 0.324 | 0.207 to 0.431 |
+| Level-only, no ED-rate inputs | spatial_cv | all_level | Poisson | 1675 | −0.082 | −0.111 to −0.056 | 0.345 | 0.301 to 0.386 |
+| Level-only, no ED-rate inputs | spatial_cv | all_level | Random forest | 1675 | 0.104 | 0.031 to 0.170 | 0.446 | 0.405 to 0.488 |
+| Level-only, no ED-rate inputs | spatial_cv | all_level | Gradient boosting | 1675 | 0.202 | 0.154 to 0.243 | 0.480 | 0.438 to 0.519 |
+| Level-only, no ED-rate inputs | spatial_cv | level_specific | Poisson | 1675 | 0.064 | 0.010 to 0.116 | 0.473 | 0.432 to 0.513 |
+| Level-only, no ED-rate inputs | spatial_cv | level_specific | Random forest | 1675 | 0.099 | 0.026 to 0.165 | 0.446 | 0.405 to 0.487 |
+| Level-only, no ED-rate inputs | spatial_cv | level_specific | Gradient boosting | 1675 | 0.193 | 0.138 to 0.240 | 0.483 | 0.442 to 0.522 |

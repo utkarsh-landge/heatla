@@ -1,0 +1,9 @@
+region,heat_level,zips,level_only_mean,level_only_sd,level_only_min,level_only_max,negative_values,zero_values,cumulative_mean,cumulative_sd
+California,1,1675,2.08,0.73,0.3,6.1,0,0,2.08,0.73
+California,2,1675,1.84,0.65,0.1,4.7,0,0,3.93,1.17
+California,3,1675,2.92,1.22,0.0,8.6,0,1,6.84,1.94
+California,4,1675,6.95,7.1,0.0,48.7,0,5,13.8,7.82
+Los Angeles County,1,287,2.47,0.61,0.9,4.0,0,0,2.47,0.61
+Los Angeles County,2,287,1.92,0.59,0.6,3.8,0,0,4.4,1.09
+Los Angeles County,3,287,2.53,0.88,0.5,5.2,0,0,6.93,1.83
+Los Angeles County,4,287,3.11,1.68,0.3,11.3,0,0,10.04,3.1

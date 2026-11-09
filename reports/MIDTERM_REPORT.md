@@ -5,7 +5,7 @@
 > **Draft notes for the team. Delete this box before submitting.**
 >
 > - **Decisions assumed, not yet agreed:** the published level-4 label is the main target with level-4-only beside it; Part 2 augmented Poisson is the official LA model; siting is not rerun. The website now shows the corrected Part 1 and Part 2 results.
-> - **Pending from Part 2:** the level-4-only and no-asthma/cardiovascular runs (section 5.8). Results here are not invented; the section says they are pending.
+> - **Part 2 follow-up runs (level-4-only target, no asthma/cardiovascular inputs) are done** (section 5.8, `part2/FOLLOWUP_EXPERIMENTS.md`); Char should review them.
 > - **Check against a course sample report:** nobody has confirmed the expected format or length.
 > - **Literature:** Riley, Derakhshan and Hess were checked in full and Scott from its abstract only. The other papers had only their bibliographic details checked, so read them before submitting. Every journal reference's authors, volume, pages and DOI were checked against Crossref.
 > - **Unconfirmed:** that UCLA's level values are cumulative, whether UCLA's published layer used its optional socioeconomic adjustment, and the reference year of the CalEnviroScreen age-65+ field.
@@ -298,7 +298,16 @@ Adding the four features improves R² and rank correlation for all three models,
 
 **Local training versus transfer.** LA-only Poisson has R² 0.403 and ρ 0.718, and the LA holdout Poisson has R² 0.349 and ρ 0.730 on the level-4 label. These come from different designs, so they are not directly comparable. Part 1 trains outside LA on all four heat levels with 12 inputs. Part 2 trains on the other LA folds at level 4 only with 11 inputs. The higher LA-only figures in earlier drafts (R² 0.445, ρ 0.785, `results/metrics.json`) came from the original 13-input model on inputs before the −999 correction.
 
-*Pending: level-4-only and no-asthma/cardiovascular runs for this experiment.*
+**Extreme heat alone and without the ER-rate inputs.** The same comparison was repeated on the level-4-only target and without the asthma and heart-attack ER-rate inputs (`part2/FOLLOWUP_EXPERIMENTS.md`; same ZIPs, folds and models).
+
+| Variant | Poisson ρ base → augmented | Best ρ, any model | Augmented Poisson vs CES percentile, ρ (273 ZIPs) |
+|---|---|---|---|
+| Published label | 0.718 → 0.780 | 0.780 | 0.811 vs 0.566 |
+| Level-4 only | 0.637 → 0.648 | 0.673 | 0.674 vs 0.498 |
+| Published label, no ER rates | 0.553 → 0.691 | 0.691 | 0.716 vs 0.566 |
+| Level-4 only, no ER rates | 0.275 → 0.424 | 0.472 | 0.432 vs 0.498 |
+
+On extreme-heat days alone, the four ACS features no longer improve ranking, though the models still beat the index. Without the ER-rate inputs, the ACS features help more on the published label (Poisson +0.14; exploratory interval 0.06 to 0.18). For extreme-heat days without the ER-rate inputs, no model clearly beats the CalEnviroScreen percentile, which matches Part 1 (section 5.5). The Poisson R² of −3.06 in that last setting comes mostly from ZIP 90089 (USC campus: 100% renters and 100% no-vehicle households), where the log link extrapolates to 48.8 against a label of 2.0.
 
 ![Model comparison](../part2/results/feature_comparison/figures/model_comparison.png)
 

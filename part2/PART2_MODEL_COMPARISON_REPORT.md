@@ -10,7 +10,7 @@ For Poisson, pooled R² changes from 0.403 to 0.483, Spearman from 0.718 to 0.78
 
 ## Data and controlled comparison
 
-- Target: unchanged UCLA category-4 estimated excess ER visits per 10,000 residents, labelled 2008–2018. Its cumulative interpretation is pending confirmation; no L4−L3 replacement is used.
+- Target: unchanged UCLA category-4 estimated excess ER visits per 10,000 residents, labelled 2008–2018. Its cumulative interpretation is pending confirmation; no L4−L3 replacement is used in this main run. The level-4-only (L4−L3) target and a run without the asthma and cardiovascular inputs are in [FOLLOWUP_EXPERIMENTS.md](FOLLOWUP_EXPERIMENTS.md).
 - Sample: all 287 original LA ZIPs. The same ZIPs and original five geographic groups are used in both configurations. Fold sizes: 0: 100, 1: 57, 2: 70, 3: 48, 4: 12.
 - Base: 11 features from Member 1's corrected CES 4.0 statewide table, with heat level omitted because it is constant. Features: pm25, ozone, asthma_ed_per10k, cardiovascular_ed_per10k, poverty_pct, elderly65_pct, edu_lt_hs_pct, ling_isol_pct, unemployment_pct, housing_burden_pct, pop_density_per_sqmi.
 - Augmented: the same base values plus renters, no-vehicle households, uninsured population and construction-industry employment percentages from ACS 2018 five-year estimates (2014–2018).

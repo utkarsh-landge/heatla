@@ -67,7 +67,7 @@ Do four additional historical ACS community indicators improve estimation of UCL
 
 ## Data and controlled comparison
 
-- Target: unchanged UCLA category-4 estimated excess ER visits per 10,000 residents, labelled 2008–2018. Its cumulative interpretation is pending confirmation; no L4−L3 replacement is used.
+- Target: unchanged UCLA category-4 estimated excess ER visits per 10,000 residents, labelled 2008–2018. Its cumulative interpretation is pending confirmation; no L4−L3 replacement is used in this main run. The level-4-only (L4−L3) target and a run without the asthma and cardiovascular inputs are in [FOLLOWUP_EXPERIMENTS.md](FOLLOWUP_EXPERIMENTS.md).
 - Sample: all 287 original LA ZIPs. The same ZIPs and original five geographic groups are used in both configurations. Fold sizes: {', '.join(f'{g}: {n}' for g,n in counts.items())}.
 - Base: 11 features from Member 1's corrected CES 4.0 statewide table, with heat level omitted because it is constant. Features: {', '.join(cfg['base_features'])}.
 - Augmented: the same base values plus renters, no-vehicle households, uninsured population and construction-industry employment percentages from ACS 2018 five-year estimates (2014–2018).

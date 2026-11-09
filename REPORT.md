@@ -54,6 +54,8 @@ On the same 273 ZIPs with a corrected CalEnviroScreen percentile, the percentile
 
 The four added ACS features improve R² and Spearman for all three models, most clearly for Poisson. Top-10 recall does not improve consistently. Details: `part2/PART2_MODEL_COMPARISON_REPORT.md`.
 
+Follow-up (`part2/FOLLOWUP_EXPERIMENTS.md`, same ZIPs, folds and models): on the excess for level-4 days alone, the ACS features no longer improve ranking (Poisson ρ 0.637 → 0.648), though augmented Poisson still beats the CalEnviroScreen percentile on matched ZIPs (0.674 against 0.498). Without the asthma and cardiovascular inputs, the ACS features help more on the published label (Poisson ρ 0.553 → 0.691), but on level-4 days alone no model clearly beats the percentile (augmented Poisson 0.432 against 0.498).
+
 ### 4b. Statewide spatial CV (1,675 ZIPs × 4 heat levels = 6,700 rows, 10 geographic folds)
 
 Corrected CalEnviroScreen inputs (the −999 missing-value marker is treated as missing; see `reports/member1_statewide.md`, section 1). Every ZIP is predicted by a model that did not see its fold.

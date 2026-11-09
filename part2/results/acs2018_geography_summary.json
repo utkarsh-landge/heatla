@@ -1,0 +1,1071 @@
+{
+  "n_target_zips": 287,
+  "same_code_pair_in_official_relationship_file": 285,
+  "mutual_land_overlap_at_least_95pct": 181,
+  "flagged_zips": [
+    "90001",
+    "90005",
+    "90008",
+    "90012",
+    "90013",
+    "90014",
+    "90017",
+    "90021",
+    "90026",
+    "90031",
+    "90035",
+    "90039",
+    "90046",
+    "90056",
+    "90059",
+    "90064",
+    "90067",
+    "90071",
+    "90073",
+    "90089",
+    "90094",
+    "90210",
+    "90222",
+    "90260",
+    "90263",
+    "90265",
+    "90270",
+    "90290",
+    "90293",
+    "90303",
+    "90304",
+    "90305",
+    "90401",
+    "90405",
+    "90601",
+    "90602",
+    "90605",
+    "90639",
+    "90731",
+    "90732",
+    "90744",
+    "90747",
+    "90804",
+    "90806",
+    "90807",
+    "90840",
+    "91008",
+    "91010",
+    "91011",
+    "91020",
+    "91024",
+    "91040",
+    "91042",
+    "91101",
+    "91103",
+    "91105",
+    "91106",
+    "91202",
+    "91203",
+    "91204",
+    "91207",
+    "91208",
+    "91210",
+    "91302",
+    "91316",
+    "91321",
+    "91330",
+    "91331",
+    "91342",
+    "91344",
+    "91350",
+    "91351",
+    "91354",
+    "91355",
+    "91371",
+    "91381",
+    "91384",
+    "91387",
+    "91390",
+    "91405",
+    "91411",
+    "91423",
+    "91436",
+    "91501",
+    "91504",
+    "91505",
+    "91604",
+    "91702",
+    "91741",
+    "91746",
+    "91750",
+    "91768",
+    "91773",
+    "93510",
+    "93532",
+    "93534",
+    "93535",
+    "93536",
+    "93543",
+    "93544",
+    "93550",
+    "93551",
+    "93552",
+    "93553",
+    "93563",
+    "93591"
+  ],
+  "flagged_records": [
+    {
+      "zip": "90001",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9317871742,
+      "land_overlap_share_2020": 0.9949263244,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90005",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9439316049,
+      "land_overlap_share_2020": 0.8672676971,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90008",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.7770679507,
+      "land_overlap_share_2020": 0.9864776071,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90012",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.985376084,
+      "land_overlap_share_2020": 0.8754521249,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90013",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9557838534,
+      "land_overlap_share_2020": 0.90919925,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90014",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9573075623,
+      "land_overlap_share_2020": 0.9055032809,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90017",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9247365732,
+      "land_overlap_share_2020": 0.9499722299,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90021",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9465420539,
+      "land_overlap_share_2020": 0.9912989491,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90026",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9378236964,
+      "land_overlap_share_2020": 0.9830277272,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90031",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9385069083,
+      "land_overlap_share_2020": 0.9261182799,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90035",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9930207936,
+      "land_overlap_share_2020": 0.8936048136,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90039",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9459314376,
+      "land_overlap_share_2020": 0.9798605127,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90046",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9343308118,
+      "land_overlap_share_2020": 0.9538886841,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90056",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9721908794,
+      "land_overlap_share_2020": 0.6801838271,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90059",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9448850242,
+      "land_overlap_share_2020": 0.9904695646,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90064",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9188757757,
+      "land_overlap_share_2020": 0.989625354,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90067",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 1.0,
+      "land_overlap_share_2020": 0.7628607255,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90071",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9354484954,
+      "land_overlap_share_2020": 0.8551786957,
+      "historical_features_missing": 4,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90073",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9910827735,
+      "land_overlap_share_2020": 0.6265271486,
+      "historical_features_missing": 2,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90089",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9095239377,
+      "land_overlap_share_2020": 0.8000288957,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90094",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 1.0,
+      "land_overlap_share_2020": 0.8532423909,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90210",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9944653065,
+      "land_overlap_share_2020": 0.9372544695,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90222",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9967187686,
+      "land_overlap_share_2020": 0.9470907706,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90260",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9167311264,
+      "land_overlap_share_2020": 0.9939085438,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90263",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9779020444,
+      "land_overlap_share_2020": 0.9447022792,
+      "historical_features_missing": 2,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90265",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9579999609,
+      "land_overlap_share_2020": 0.9301163495,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90270",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9389523772,
+      "land_overlap_share_2020": 0.9961175501,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90290",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8428291309,
+      "land_overlap_share_2020": 0.9023481528,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90293",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9366093203,
+      "land_overlap_share_2020": 0.9769391047,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90303",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.852189177,
+      "land_overlap_share_2020": 0.9778387273,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90304",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9926366624,
+      "land_overlap_share_2020": 0.9484704615,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90305",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 1.0,
+      "land_overlap_share_2020": 0.884292674,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90401",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8519111989,
+      "land_overlap_share_2020": 0.9581900308,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90405",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.992094474,
+      "land_overlap_share_2020": 0.9434978237,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90601",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.925050629,
+      "land_overlap_share_2020": 0.9894545942,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90602",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8574246958,
+      "land_overlap_share_2020": 0.8497576419,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90605",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9962463937,
+      "land_overlap_share_2020": 0.8816484208,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90639",
+      "exists_2010": false,
+      "exists_2020": true,
+      "land_overlap_share_2010": null,
+      "land_overlap_share_2020": null,
+      "historical_features_missing": 4,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90731",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9401484885,
+      "land_overlap_share_2020": 0.9837554724,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90732",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9715049293,
+      "land_overlap_share_2020": 0.9306984615,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90744",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9915864028,
+      "land_overlap_share_2020": 0.9396289674,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90747",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 1.0,
+      "land_overlap_share_2020": 0.2997080239,
+      "historical_features_missing": 4,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90804",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9641459199,
+      "land_overlap_share_2020": 0.9440939238,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90806",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9894694699,
+      "land_overlap_share_2020": 0.6969404386,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90807",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.7511126397,
+      "land_overlap_share_2020": 0.9919925422,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "90840",
+      "exists_2010": false,
+      "exists_2020": true,
+      "land_overlap_share_2010": null,
+      "land_overlap_share_2020": null,
+      "historical_features_missing": 4,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91008",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9401672838,
+      "land_overlap_share_2020": 0.9897902648,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91010",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8960129652,
+      "land_overlap_share_2020": 0.9808967704,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91011",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9112229093,
+      "land_overlap_share_2020": 0.9591789448,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91020",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9445069886,
+      "land_overlap_share_2020": 0.9887074508,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91024",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 1.0,
+      "land_overlap_share_2020": 0.8444621048,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91040",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8521268269,
+      "land_overlap_share_2020": 0.8401505325,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91042",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8180128678,
+      "land_overlap_share_2020": 0.8194567845,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91101",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9329856745,
+      "land_overlap_share_2020": 0.9768830157,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91103",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8349289518,
+      "land_overlap_share_2020": 0.9811181574,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91105",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9981832129,
+      "land_overlap_share_2020": 0.8783239689,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91106",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9103456829,
+      "land_overlap_share_2020": 0.9868663475,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91202",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.982063059,
+      "land_overlap_share_2020": 0.4089976425,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91203",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9938122554,
+      "land_overlap_share_2020": 0.9266293472,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91204",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.925901613,
+      "land_overlap_share_2020": 0.9966440906,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91207",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.348536276,
+      "land_overlap_share_2020": 0.9948740465,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91208",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9973774819,
+      "land_overlap_share_2020": 0.931352984,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91210",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 1.0,
+      "land_overlap_share_2020": 0.4610590766,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91302",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9628901583,
+      "land_overlap_share_2020": 0.9369173441,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91316",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9931080892,
+      "land_overlap_share_2020": 0.91117269,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91321",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8049976811,
+      "land_overlap_share_2020": 0.7815892347,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91330",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 1.0,
+      "land_overlap_share_2020": 0.6748271814,
+      "historical_features_missing": 2,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91331",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9922063708,
+      "land_overlap_share_2020": 0.9399751547,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91342",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.7490725771,
+      "land_overlap_share_2020": 0.9115716477,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91344",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8712072679,
+      "land_overlap_share_2020": 0.988981453,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91350",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8055292889,
+      "land_overlap_share_2020": 0.8605843729,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91351",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8059754675,
+      "land_overlap_share_2020": 0.8880998047,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91354",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8390536893,
+      "land_overlap_share_2020": 0.9991456132,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91355",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8220405935,
+      "land_overlap_share_2020": 0.9684494691,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91371",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8540648664,
+      "land_overlap_share_2020": 1.0,
+      "historical_features_missing": 4,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91381",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9658625739,
+      "land_overlap_share_2020": 0.9191359603,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91384",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8461837177,
+      "land_overlap_share_2020": 0.886670672,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91387",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9883966997,
+      "land_overlap_share_2020": 0.9162863605,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91390",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9256589219,
+      "land_overlap_share_2020": 0.8378250625,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91405",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9744240527,
+      "land_overlap_share_2020": 0.9490764242,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91411",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9447500652,
+      "land_overlap_share_2020": 0.9886705437,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91423",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9098672529,
+      "land_overlap_share_2020": 0.9772642507,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91436",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9072167639,
+      "land_overlap_share_2020": 0.9896242668,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91501",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.6848515738,
+      "land_overlap_share_2020": 0.9972445903,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91504",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9756207499,
+      "land_overlap_share_2020": 0.516686893,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91505",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9960905315,
+      "land_overlap_share_2020": 0.9378066857,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91604",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8956466887,
+      "land_overlap_share_2020": 0.9731684456,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91702",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.3597950216,
+      "land_overlap_share_2020": 0.9369147983,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91741",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9120510875,
+      "land_overlap_share_2020": 0.6638534488,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91746",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9779488121,
+      "land_overlap_share_2020": 0.9380883263,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91750",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.7245943283,
+      "land_overlap_share_2020": 0.9868185704,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91768",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8803999469,
+      "land_overlap_share_2020": 0.9291076172,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "91773",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9769582368,
+      "land_overlap_share_2020": 0.9331834514,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "93510",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9475259766,
+      "land_overlap_share_2020": 0.8508855663,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "93532",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8429883316,
+      "land_overlap_share_2020": 0.7849235299,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "93534",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9975214152,
+      "land_overlap_share_2020": 0.935554532,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "93535",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8610326871,
+      "land_overlap_share_2020": 0.929577995,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "93536",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9694105391,
+      "land_overlap_share_2020": 0.925945521,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "93543",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9467186363,
+      "land_overlap_share_2020": 0.8308520529,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "93544",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9864193094,
+      "land_overlap_share_2020": 0.9398347078,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "93550",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8875427338,
+      "land_overlap_share_2020": 0.6715523349,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "93551",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.9971248097,
+      "land_overlap_share_2020": 0.8604816653,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "93552",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.7145987562,
+      "land_overlap_share_2020": 0.9011079388,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "93553",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.6396098814,
+      "land_overlap_share_2020": 0.9671316261,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "93563",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.5592145899,
+      "land_overlap_share_2020": 0.5943401773,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    },
+    {
+      "zip": "93591",
+      "exists_2010": true,
+      "exists_2020": true,
+      "land_overlap_share_2010": 0.8504665891,
+      "land_overlap_share_2020": 0.9426232918,
+      "historical_features_missing": 0,
+      "boundary_review_flag": true
+    }
+  ],
+  "policy": "Retain historical same-code measurements, preserve all ZIPs and missing values. Flag boundaries; do not fabricate area-weighted percentage conversions. The 95% cutoff is a descriptive review flag, not a row exclusion rule.",
+  "limitation": "Land overlap does not establish population equivalence or confirm the UCLA map vintage. Historical 2010 ZCTA values remain approximate community proxies."
+}

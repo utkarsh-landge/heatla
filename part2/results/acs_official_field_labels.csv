@@ -1,0 +1,17 @@
+﻿year,group,field,label,concept,metadata_url
+2018,B25003,B25003_001E,Estimate!!Total,TENURE,https://api.census.gov/data/2018/acs/acs5/groups/B25003.json
+2018,B25003,B25003_003E,Estimate!!Total!!Renter occupied,TENURE,https://api.census.gov/data/2018/acs/acs5/groups/B25003.json
+2022,B25003,B25003_001E,Estimate!!Total:,Tenure,https://api.census.gov/data/2022/acs/acs5/groups/B25003.json
+2022,B25003,B25003_003E,Estimate!!Total:!!Renter occupied,Tenure,https://api.census.gov/data/2022/acs/acs5/groups/B25003.json
+2018,B25044,B25044_001E,Estimate!!Total,TENURE BY VEHICLES AVAILABLE,https://api.census.gov/data/2018/acs/acs5/groups/B25044.json
+2018,B25044,B25044_003E,Estimate!!Total!!Owner occupied!!No vehicle available,TENURE BY VEHICLES AVAILABLE,https://api.census.gov/data/2018/acs/acs5/groups/B25044.json
+2018,B25044,B25044_010E,Estimate!!Total!!Renter occupied!!No vehicle available,TENURE BY VEHICLES AVAILABLE,https://api.census.gov/data/2018/acs/acs5/groups/B25044.json
+2022,B25044,B25044_001E,Estimate!!Total:,Tenure by Vehicles Available,https://api.census.gov/data/2022/acs/acs5/groups/B25044.json
+2022,B25044,B25044_003E,Estimate!!Total:!!Owner occupied:!!No vehicle available,Tenure by Vehicles Available,https://api.census.gov/data/2022/acs/acs5/groups/B25044.json
+2022,B25044,B25044_010E,Estimate!!Total:!!Renter occupied:!!No vehicle available,Tenure by Vehicles Available,https://api.census.gov/data/2022/acs/acs5/groups/B25044.json
+2018,S2701,S2701_C05_001E,Estimate!!Percent Uninsured!!Civilian noninstitutionalized population,SELECTED CHARACTERISTICS OF HEALTH INSURANCE COVERAGE IN THE UNITED STATES,https://api.census.gov/data/2018/acs/acs5/subject/groups/S2701.json
+2022,S2701,S2701_C05_001E,Estimate!!Percent Uninsured!!Civilian noninstitutionalized population,Selected Characteristics of Health Insurance Coverage in the United States,https://api.census.gov/data/2022/acs/acs5/subject/groups/S2701.json
+2018,C24050,C24050_001E,Estimate!!Total,INDUSTRY BY OCCUPATION FOR THE CIVILIAN  EMPLOYED POPULATION 16 YEARS AND OVER,https://api.census.gov/data/2018/acs/acs5/groups/C24050.json
+2018,C24050,C24050_003E,Estimate!!Total!!Construction,INDUSTRY BY OCCUPATION FOR THE CIVILIAN  EMPLOYED POPULATION 16 YEARS AND OVER,https://api.census.gov/data/2018/acs/acs5/groups/C24050.json
+2022,C24050,C24050_001E,Estimate!!Total:,Industry by Occupation for the Civilian Employed Population 16 Years and Over,https://api.census.gov/data/2022/acs/acs5/groups/C24050.json
+2022,C24050,C24050_003E,Estimate!!Total:!!Construction,Industry by Occupation for the Civilian Employed Population 16 Years and Over,https://api.census.gov/data/2022/acs/acs5/groups/C24050.json

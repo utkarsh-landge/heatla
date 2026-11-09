@@ -1,0 +1,46 @@
+{
+  "versions": {
+    "base": {
+      "file": "predictions_oof_base.csv",
+      "features": [
+        "pm25",
+        "ozone",
+        "asthma_ed_per10k",
+        "cardiovascular_ed_per10k",
+        "poverty_pct",
+        "elderly65_pct",
+        "edu_lt_hs_pct",
+        "ling_isol_pct",
+        "unemployment_pct",
+        "housing_burden_pct",
+        "pop_density_per_sqmi"
+      ]
+    },
+    "augmented": {
+      "file": "predictions_oof_augmented.csv",
+      "features": [
+        "pm25",
+        "ozone",
+        "asthma_ed_per10k",
+        "cardiovascular_ed_per10k",
+        "poverty_pct",
+        "elderly65_pct",
+        "edu_lt_hs_pct",
+        "ling_isol_pct",
+        "unemployment_pct",
+        "housing_burden_pct",
+        "pop_density_per_sqmi",
+        "pct_renters",
+        "pct_no_vehicle",
+        "pct_uninsured",
+        "pct_construction"
+      ]
+    }
+  },
+  "target": "Unchanged UCLA category-4 published label. Cumulative interpretation is unconfirmed; no L4-L3 substitution.",
+  "period": "2008-2018",
+  "ACS_period": "2014-2018",
+  "evaluation": "LA-only original 5 spatial folds, OOF, 287 ZIPs",
+  "error": "prediction minus UCLA label",
+  "run_manifest": "../run_manifest.json"
+}

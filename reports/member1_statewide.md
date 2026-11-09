@@ -61,7 +61,17 @@ CalEnviroScreen 3.0's results file uses blanks rather than −999; the same rule
 
 **Effect on results** (details in section 5): the correction raises the LA level-4 Poisson result from R² 0.266 to 0.349 and from ρ 0.674 to 0.730. Statewide cross-validation and the tree models change little.
 
-**Note for Member 2 — not changed here.** The LA table has the same problem. `data/raw/ces40_la_tracts.csv` contains −999 in `Asthma` (9 tracts), `Cardiovas` (9), `Poverty` (38), `Elderly65` (17) and `CIscoreP` (46). In `data/processed/model_table.csv`, `ces4_percentile` is negative for 8 LA ZIPs, which affects the LA-only CES baseline, and the asthma and cardiovascular inputs are distorted for the ZIPs containing those 9 tracts. Member 2's code and results have not been modified.
+**Asthma and cardiovascular values are not affected, statewide or in LA.** Those two fields do contain −999 (11 tracts statewide, 9 of them in the LA file), but every one of those tracts has zero population. A zero-population tract carries no weight in a population-weighted mean, so the marker never entered any ZIP value. This is why Table 1 shows no affected ZIPs for those two inputs, and why PM2.5, ozone, asthma and cardiovascular are identical in the original and corrected tables.
+
+**Note for Member 2 — not changed here.** The LA table has the same problem, in fewer columns. `data/raw/ces40_la_tracts.csv` contains −999 in `Asthma` (9 tracts), `Cardiovas` (9), `Poverty` (38), `Elderly65` (17) and `CIscoreP` (46).
+
+- The four CalEnviroScreen inputs of the current LA model (PM2.5, ozone, asthma, cardiovascular) are unchanged, for the reason above, so existing LA model metrics are not affected.
+- `ces4_percentile` in `data/processed/model_table.csv` is wrong for 26 LA ZIPs and negative for 8 of them. This affects the LA-only CES baseline.
+- The CES poverty and age columns in the LA feature file are wrong for 22 ZIPs and 1 ZIP.
+
+Corrected LA and statewide tables, every changed value and the affected ZIP lists are on branch `fix/ces-sentinel-preprocessing` (see `reports/ces_sentinel_fix.md` there). Member 2's code and results have not been modified.
+
+*Correction, 2026-11-08: an earlier version of this note said the LA asthma and cardiovascular inputs were distorted. That was wrong; the statement above replaces it.*
 
 ## 2. Data and samples
 

@@ -29,6 +29,10 @@ definitions in `data/raw/ucla_excess_er_zip.meta.json`.
   CalHeatScore Category". Per the app text, CHS levels are temperature thresholds
   derived from historical heat–health relationships, categorized into four levels
   of risk (CHS 1 = mildest heat threshold … CHS 4 = most extreme heat).
+  **The values are cumulative across levels** (inferred from the data, see
+  `reports/member3_labels_website_siting.md` section 1): the level-k row covers
+  every warm-season day at or below level k, so the level-4 row is the total over
+  all heat levels and the level-k-only contribution is level k minus level k−1.
 - `NumRate` = `"Rate"` or `"Number"`.
 - `Years` = `"2008-2018"` (All Years) or `"2014-2018"` (Last Five Years).
 
@@ -43,10 +47,10 @@ saved to `data/processed/target_all_chs.csv` for sensitivity analysis.
 | column | source field | unit | notes |
 |---|---|---|---|
 | `zip` | `zip` | — | LA County ZIP (289 rows) |
-| `excess_er_rate_per_10k` | `excs_ER` where `NumRate='Rate'` | excess ER visits per 10,000 persons | layer label: "Rate (per 10,000)" |
+| `excess_er_rate_per_10k` | `excs_ER` where `NumRate='Rate'` | excess ER visits per 10,000 persons, **total over May–October 2008–2018** | layer label: "Rate (per 10,000)". Not a daily or yearly rate: UCLA's yearly layer (`time_trend_zip`) sums to this value over the 11 years |
 | `excess_er_number` | `excs_ER` where `NumRate='Number'` | excess ER visit count | — |
 | `population` | `popultn` | persons | layer-provided ZIP population |
-| `n_heat_days` | `n_ht_dy` | days | heat days at CHS-4 threshold over 2008–2018 (constant across ZIPs = 2024) |
+| `n_heat_days` | `n_ht_dy` | days | number of warm-season days at or below the row's CHS level. For CHS 4 it equals 2,024 in every ZIP, which is all warm-season days in 2008–2018 (184 days × 11 years); it is **not** a count of extreme-heat days |
 | `chs_category` | `categry` | — | 4 |
 | `years` | `Years` | — | 2008-2018 |
 | `is_ucla_campus_90095` | derived | 0/1 | flags ZIP 90095 (see caveat) |
@@ -54,10 +58,13 @@ saved to `data/processed/target_all_chs.csv` for sensitivity analysis.
 **The "three numbers" mystery (resolved).** A ZIP row copied from the app table
 showed three values (e.g. 91767 → 19.7, 86.8, 95.2). Confirmed from the raw
 layer: **19.7** is `excs_ER` (the rate); **86.8** is `lvl1_th` and **95.2** is
-`lvl4_th` — the choropleth **legend class-break thresholds**, which are constant
-across all ZIPs within a year range (2008–2018: 86.8 / 88.8 / 91.4 / 95.2). They
-are map legend breakpoints, **not** per-ZIP measurements and **not**
-CalEnviroScreen values.
+`lvl4_th` — that ZIP's own **CalHeatScore temperature thresholds** in °F for
+levels 1 and 4 (2008–2018, ZIP 91767: 86.8 / 88.8 / 91.4 / 95.2). They are
+ZIP-specific, not constant: there are 267 distinct level-4 thresholds across
+California ZIPs (69.7–107.6 °F), and ZIP 90001's are 81.4 / 83.6 / 86.6 / 91.5.
+They are **not** map legend breakpoints and **not** CalEnviroScreen values.
+*(Corrected 2026-11-08; an earlier version of this note described them as legend
+class breaks that were constant across ZIPs.)*
 
 **Unit / magnitude check (resolved).** Press coverage quotes excess rates of
 roughly 0.9–3.5 per 10,000 (e.g. West Adams ≈ 3.5). Those figures match a
@@ -236,4 +243,5 @@ available in `features_ces_geo.csv` as a cross-check but are not duplicated here
   Universal Studios pop ≈ 34; 91210 Glendale Galleria; 91522 Warner Bros.);
   90014 (Downtown LA), 91759 (Mt Baldy), and 93553 (Pearblossom) are small or
   rural. CES-derived features left blank for these ZIPs.
-- **ACS features:** all pending, blocked on the Census API key (section 4).
+- **ACS features:** retrieved (section 4). Suppressed ACS values remain blank; 18 of the
+  287 modelled LA ZIPs have at least one of the 13 model inputs missing.

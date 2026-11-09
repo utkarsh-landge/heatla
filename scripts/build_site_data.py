@@ -123,20 +123,26 @@ def main() -> None:
             extra += 1
 
     (SITE / "meta.json").write_text(json.dumps({
-        "title": "HEATLA — LA County extreme-heat excess ER risk",
+        "title": "HEATLA \u2014 LA County heat-related excess ER visits",
         "n_zips_mapped": len(keep),
         "n_zips_projected_2030": len(proj2030),
-        "target": "UCLA Heat Maps excess ER rate per 10,000, CalHeatScore-4, 2008-2018",
-        "data_years": {"target": "2008-2018", "CES": "4.0 (~2021)", "ACS": "2022 5-year",
+        "target": 'UCLA Heat Maps estimated excess ER visits per 10,000 residents, CalHeatScore level 4 layer, total over May-October 2008-2018',
+        "data_years": {"target": "2008-2018", "CES": "4.0 (data from 2013-2019, published 2021)",
+                       "ACS": "2022 5-year",
                        "cooling_centers": "LA County official, 2022",
                        "climate": "Cal-Adapt exheat_year_ens32avg (LOCA 32-model), 2026-2035 vs 2008-2018"},
-        "headline": "Fair out-of-region skill (CHS-4-only LA hold-out, Poisson): Spearman 0.674.",
+        "headline": "Out-of-region skill within heat level 4 (LA hold-out, Poisson): Spearman 0.674.",
         "caveats": [
+            "The target is UCLA's model-based estimate, not a direct count: observed heat-related ER visits minus the visits a Bayesian spatial model expects at typical temperatures.",
+            "The level-4 value is a total over May-October 2008-2018 and covers every heat day up to and including level 4, not only the most extreme days.",
             "ZIP-level only; no daily or individual records.",
             "Small sample (~287 ZIPs); mismatched data years across sources.",
-            "LA predictions are out-of-fold (leave-one-geographic-group-out).",
-            "Pooled all-CHS hold-out numbers are inflated by chs_level; the fair measure is CHS-4-only Poisson Spearman 0.674.",
-            "2030 outlook is a proportional heat-exposure scaling, not a refit epidemiological model.",
+            "Missing model inputs are filled with the training-fold median before fitting.",
+            "LA predictions are shown in two versions: out-of-fold (trained on other LA ZIPs) and holdout (trained on the rest of California).",
+            "Pooled all-CHS hold-out numbers mostly reflect the gap between heat levels; the within-level measure is CHS-4-only Poisson Spearman 0.674.",
+            "The ZIP-to-tract downscale is checked only by a pseudo-ZIP recovery test; there is no tract-level health data to validate against.",
+            "The 2030 layer is a proportional heat-exposure scaling scenario, not a model prediction and not part of model evaluation.",
+            "Cooling-center selection picks among the 153 existing centers and measures straight-line coverage of ZIP centroids, not actual access or health benefit.",
             "ZIP 90095 (UCLA) may have mis-attributed ER patients; flagged.",
             "Prototype study, not an operational tool.",
         ],
@@ -144,6 +150,11 @@ def main() -> None:
 
     print(f"site data written: {len(keep)} zip polygons, {len(clist)} centers, "
           f"{len(proj2030)} with 2030 projection, {extra} extra result files")
+
+    # The files above come from the original pipeline (pre -999 correction). Replace the
+    # model numbers and predictions with the corrected Part 1 and Part 2 results.
+    import build_site_results
+    build_site_results.main()
 
 
 if __name__ == "__main__":

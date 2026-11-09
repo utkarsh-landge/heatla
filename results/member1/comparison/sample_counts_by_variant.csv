@@ -1,0 +1,7 @@
+variant,evaluation,test_zips,test_rows,common_complete_zips,common_complete_rows
+ces40_original,la_holdout,287,1148,270,1080
+ces40_original,spatial_cv,1675,6700,1262,5048
+ces40_fixed,la_holdout,287,1148,270,1080
+ces40_fixed,spatial_cv,1675,6700,1262,5048
+ces30,la_holdout,287,1148,270,1080
+ces30,spatial_cv,1675,6700,1262,5048

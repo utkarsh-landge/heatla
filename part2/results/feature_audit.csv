@@ -1,0 +1,20 @@
+feature,in_model_A_base_at_level4,in_original_LA_model,in_new_augmented_model,source_for_new_experiment,reference_period_status,missing_in_new_experiment
+pm25,True,True,True,statewide model table,Original indicator period needs verification,11.0
+ozone,True,True,True,statewide model table,Original indicator period needs verification,11.0
+asthma_ed_per10k,True,True,True,statewide model table,Original indicator period needs verification,11.0
+cardiovascular_ed_per10k,True,True,True,statewide model table,Original indicator period needs verification,11.0
+poverty_pct,True,False,True,statewide model table,Original indicator period needs verification,13.0
+elderly65_pct,True,False,True,statewide model table,Original indicator period needs verification,11.0
+edu_lt_hs_pct,True,False,True,statewide model table,Original indicator period needs verification,13.0
+ling_isol_pct,True,False,True,statewide model table,Original indicator period needs verification,15.0
+unemployment_pct,True,False,True,statewide model table,Original indicator period needs verification,13.0
+housing_burden_pct,True,False,True,statewide model table,Original indicator period needs verification,14.0
+pop_density_per_sqmi,True,True,True,statewide model table,Original indicator period needs verification,0.0
+median_hh_income,False,True,False,not used,not used in new comparison,
+pct_poverty,False,True,False,not used,not used in new comparison,
+pct_age_65plus,False,True,False,not used,not used in new comparison,
+pct_renters,False,True,True,ACS 2018 feature table,ACS 2018 five-year release; geographic alignment requires review,12.0
+pct_no_vehicle,False,True,True,ACS 2018 feature table,ACS 2018 five-year release; geographic alignment requires review,12.0
+pct_uninsured,False,True,True,ACS 2018 feature table,ACS 2018 five-year release; geographic alignment requires review,9.0
+pct_construction,False,True,True,ACS 2018 feature table,ACS 2018 five-year release; geographic alignment requires review,9.0
+total_pop,False,True,False,not used,not used in new comparison,

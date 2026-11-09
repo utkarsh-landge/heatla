@@ -1,0 +1,97 @@
+{
+  "status": "historical_same_code_features_prepared_not_geographically_harmonized",
+  "n_zips": 287,
+  "n_base_features": 11,
+  "n_augmented_features": 15,
+  "n_folds": 5,
+  "labels_and_base_values_unchanged": true,
+  "acs_reference_period": "2014-2018",
+  "feature_summary": {
+    "pct_renters": {
+      "missing_2018": 12,
+      "missing_2022": 10,
+      "mean_2018": 51.45830315781222,
+      "mean_2022": 50.98881227436823,
+      "missing_zip_codes": [
+        "90071",
+        "90073",
+        "90095",
+        "90263",
+        "90506",
+        "90639",
+        "90747",
+        "90822",
+        "90840",
+        "91330",
+        "91371",
+        "91608"
+      ]
+    },
+    "pct_no_vehicle": {
+      "missing_2018": 12,
+      "missing_2022": 10,
+      "mean_2018": 9.085028943213915,
+      "mean_2022": 8.988895306859206,
+      "missing_zip_codes": [
+        "90071",
+        "90073",
+        "90095",
+        "90263",
+        "90506",
+        "90639",
+        "90747",
+        "90822",
+        "90840",
+        "91330",
+        "91371",
+        "91608"
+      ]
+    },
+    "pct_uninsured": {
+      "missing_2018": 9,
+      "missing_2022": 4,
+      "mean_2018": 9.415107913669065,
+      "mean_2022": 7.7802120141342765,
+      "missing_zip_codes": [
+        "90071",
+        "90095",
+        "90506",
+        "90639",
+        "90747",
+        "90822",
+        "90840",
+        "91371",
+        "91608"
+      ]
+    },
+    "pct_construction": {
+      "missing_2018": 9,
+      "missing_2022": 5,
+      "mean_2018": 5.385043673510571,
+      "mean_2022": 5.702099290780142,
+      "missing_zip_codes": [
+        "90071",
+        "90095",
+        "90506",
+        "90639",
+        "90747",
+        "90822",
+        "90840",
+        "91371",
+        "91608"
+      ]
+    }
+  },
+  "geography_review": {
+    "same_code_pairs": 285,
+    "mutual_land_overlap_at_least_95pct": 181,
+    "review_flags_not_row_exclusions": 106
+  },
+  "input_hashes": {
+    "la_base.csv": "0d5a783f51a34c762078688a8b22650992a70ffef9a0c9222dddb0c0cabd3bc0",
+    "la_augmented.csv": "522dc9838ae11739f3d67c51eb835790438aabfdec1b3438593bca76fc4c2b59",
+    "features_acs2018.csv": "6da7bd1fed4328b9db4b268c7807e8da94605e29e0068436c405b76dc3ef9557"
+  },
+  "missing_value_policy": "No 2022 fallback, no zero filling; future median imputation inside training folds only.",
+  "training_status": "No prediction models trained in this data replacement step."
+}

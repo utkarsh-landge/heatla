@@ -147,7 +147,7 @@
       "predict_mean": {
         "n": 1148,
         "r2": -0.06148241455403469,
-        "spearman": NaN,
+        "spearman": null,
         "top10_recall": 0.02608695652173913,
         "top20_recall": 0.13478260869565217
       },

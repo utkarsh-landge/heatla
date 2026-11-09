@@ -1,0 +1,23 @@
+version,source_field,tracts,tracts_sentinel_-999,tracts_blank,tracts_other_negative,tracts_missing_after_cleaning
+CES 4.0,PM2_5,8035,0,0,0,0
+CES 4.0,Ozone,8035,0,0,0,0
+CES 4.0,Asthma,8035,11,0,0,11
+CES 4.0,Cardiovas,8035,11,0,0,11
+CES 4.0,Poverty,8035,75,0,0,75
+CES 4.0,Elderly65,8035,24,0,0,24
+CES 4.0,Educatn,8035,103,0,0,103
+CES 4.0,Ling_Isol,8035,320,0,0,320
+CES 4.0,Unempl,8035,335,0,0,335
+CES 4.0,HousBurd,8035,145,0,0,145
+CES 4.0,CIscoreP,8035,103,0,0,103
+CES 3.0,PM2.5,8035,0,19,0,19
+CES 3.0,Ozone,8035,0,0,0,0
+CES 3.0,Asthma,8035,0,0,0,0
+CES 3.0,Cardiovascular Disease,8035,0,0,0,0
+CES 3.0,Poverty,8035,0,79,0,79
+CES 3.0,Elderly65_shp,8035,0,0,0,0
+CES 3.0,Education,8035,0,96,0,96
+CES 3.0,Linguistic Isolation,8035,0,242,0,242
+CES 3.0,Unemployment,8035,0,155,0,155
+CES 3.0,Housing Burden,8035,0,157,0,157
+CES 3.0,CES 3.0 Percentile,8035,0,106,0,106

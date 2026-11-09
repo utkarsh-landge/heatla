@@ -1,0 +1,15 @@
+check,value
+ZIPs in raw statewide table,1686
+ZIPs with at least one negative CES value in ORIGINAL table,424
+  of which Los Angeles County,84
+ZIPs with all 10 CES inputs present: original 4.0,1342
+ZIPs with all 10 CES inputs present: corrected 4.0,1283
+ZIPs with all 10 CES inputs present: 3.0,1296
+ZIPs with no CES input at all: corrected 4.0,344
+ZIPs with no CES input at all: 3.0,344
+ZIPs with some but not all CES inputs: corrected 4.0,59
+ZIPs with some but not all CES inputs: 3.0,46
+CES 3.0 tracts,8035
+CES 3.0 tracts with Elderly value joined from shapefile,8035
+Any negative value left in corrected 4.0 table,0
+Any negative value in 3.0 table,0

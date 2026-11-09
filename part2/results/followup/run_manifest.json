@@ -1,0 +1,32 @@
+{
+  "seed": 42,
+  "n_model_fits": 120,
+  "variants": {
+    "cumulative": {
+      "target": "cumulative",
+      "ed_inputs_dropped": []
+    },
+    "level4_only": {
+      "target": "level4_only",
+      "ed_inputs_dropped": []
+    },
+    "cumulative_no_ed": {
+      "target": "cumulative",
+      "ed_inputs_dropped": [
+        "asthma_ed_per10k",
+        "cardiovascular_ed_per10k"
+      ]
+    },
+    "level4_only_no_ed": {
+      "target": "level4_only",
+      "ed_inputs_dropped": [
+        "asthma_ed_per10k",
+        "cardiovascular_ed_per10k"
+      ]
+    }
+  },
+  "level4_only_source": "results/member1/inputs/model_table_ca_ces40_fixed_level_only.csv",
+  "folds": "part2/data/la_base.csv group column (unchanged)",
+  "cumulative_rerun_max_abs_spearman_diff_vs_main_run": 0.0011620532548707319,
+  "note": "Poisson reproduces the main run exactly; random forest and gradient boosting can differ slightly across operating systems."
+}

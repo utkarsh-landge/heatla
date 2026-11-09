@@ -1,0 +1,12 @@
+{
+  "n_all_zips": 287,
+  "n_matched_CES_zips": 273,
+  "n_missing_CES": 14,
+  "ces_spearman": 0.5662792030953138,
+  "ces_top10_recall": 0.14814814814814814,
+  "ces_top20_recall": 0.34545454545454546,
+  "tie_rule": "descending score, ascending ZIP; same rule for target and predictor",
+  "comparison_note": "Future model comparison must use these same matched ZIPs. No R2 for CES percentile.",
+  "input_checks": "287 ZIPs; 5 original folds; identical common fields; unchanged labels; no negative CES inputs",
+  "acs_status": "CES_corrected_ACS2018_same_code_join_approximate_geography"
+}

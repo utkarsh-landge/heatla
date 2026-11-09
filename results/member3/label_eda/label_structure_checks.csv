@@ -1,0 +1,8 @@
+check,value
+ZIPs analysed (same cleaning as the models),1675
+of which Los Angeles County,287
+ZIPs where the rate rises at every level (L1<=L2<=L3<=L4),1675
+ZIPs where the day count rises at every level,1675
+ZIPs whose level-4 day count equals all warm-season days (2024),1675
+Distinct level-4 temperature thresholds across ZIPs,267
+ZIPs with a negative level-only contribution at any level,0

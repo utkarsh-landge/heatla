@@ -1,0 +1,63 @@
+{
+  "status": "CES_corrected_ACS2018_same_code_join_approximate_geography",
+  "acs_vintage": "2018",
+  "acs_reference_period": "2014-2018",
+  "target": "excess_er_rate_per_10k",
+  "target_period": "2008-2018",
+  "heat_level": 4,
+  "base_features": [
+    "pm25",
+    "ozone",
+    "asthma_ed_per10k",
+    "cardiovascular_ed_per10k",
+    "poverty_pct",
+    "elderly65_pct",
+    "edu_lt_hs_pct",
+    "ling_isol_pct",
+    "unemployment_pct",
+    "housing_burden_pct",
+    "pop_density_per_sqmi"
+  ],
+  "extra_features": [
+    "pct_renters",
+    "pct_no_vehicle",
+    "pct_uninsured",
+    "pct_construction"
+  ],
+  "augmented_features": [
+    "pm25",
+    "ozone",
+    "asthma_ed_per10k",
+    "cardiovascular_ed_per10k",
+    "poverty_pct",
+    "elderly65_pct",
+    "edu_lt_hs_pct",
+    "ling_isol_pct",
+    "unemployment_pct",
+    "housing_burden_pct",
+    "pop_density_per_sqmi",
+    "pct_renters",
+    "pct_no_vehicle",
+    "pct_uninsured",
+    "pct_construction"
+  ],
+  "seed": 42,
+  "folds": "Reuse original predictions_oof.csv groups for both configurations",
+  "poisson_sample_weight": "population (metadata, not a prediction feature)",
+  "missing_value_policy": "Do not drop rows based on additional feature availability. Fit median imputation inside each training fold.",
+  "current_code_parameters": {
+    "poisson": {
+      "alpha": 1.0,
+      "max_iter": 5000
+    },
+    "random_forest": {
+      "n_estimators": 500,
+      "min_samples_leaf": 2,
+      "n_jobs": 1
+    },
+    "gradient_boosting": "Current repository defaults, random_state=42"
+  },
+  "population_and_median_income_predictors": "Excluded from both new configurations",
+  "historical_alignment": "2014-2018 values loaded by unchanged ZIP code; not full 2008-2018 representation. Official 2010/2020 relationship-file diagnostics are in results/acs2018_geography_audit.csv. Boundaries are not harmonized; retain this limitation.",
+  "target_interpretation": "Unchanged UCLA category-4 published label. Cumulative interpretation is unconfirmed; no L4-L3 substitution."
+}

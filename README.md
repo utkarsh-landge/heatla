@@ -1,5 +1,13 @@
 # HEATLA
 
+> **This README describes the original tract-level pipeline, which is now archived under `legacy/`.**
+> The commands, layout and outputs below (`make`, `tests/`, `dashboard/`, `reports/methods_and_results.md`,
+> `data/README.md`, `gee/`, `config.yaml`) exist only there. For the current project — ZIP-level prediction
+> of UCLA Heat Maps excess ER visits, the website in `site/`, and cooling-center siting — see `REPORT.md` and
+> `DATA_SOURCES.md`. The midterm write-up is `reports/MIDTERM_REPORT.md`. Part reports:
+> `reports/member1_statewide.md` (statewide model and LA hold-out), `part2/PART2_MODEL_COMPARISON_REPORT.md`
+> (LA base versus augmented inputs) and `reports/member3_labels_website_siting.md` (labels, website, siting).
+
 Heat vulnerability and cooling-centre siting for Los Angeles County.
 
 Two questions, answered at the level of the 2020 census tract (2,498 tracts,

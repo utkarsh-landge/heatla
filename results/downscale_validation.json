@@ -1,8 +1,19 @@
 {
   "n_zips": 287,
   "n_groups": 47,
-  "mae_model_split": 4.309,
+  "mae_model_split": 3.985,
   "mae_population_split": 5.181,
-  "improvement_vs_population": 0.1682,
-  "note": "lower MAE is better; model split beats population split iff mae_model < mae_pop"
+  "improvement_vs_population": 0.2307,
+  "spearman_model_split": 0.9753,
+  "spearman_population_split": 0.9599,
+  "note": "lower MAE is better; model split beats population split iff mae_model < mae_pop. Spearman is the rank correlation of recovered vs real ZIP excess-ER numbers.",
+  "tract_output": {
+    "tract_vintage": "2020 census tracts (CES 4.0 2010 tracts moved by land-area share)",
+    "n_tracts": 2493,
+    "n_tract_zip_pieces": 3737,
+    "n_tracts_split_across_zips": 988,
+    "n_zips_downscaled": 287,
+    "n_la_zips_in_table": 287,
+    "max_abs_zip_sum_error": 2.842170943040401e-14
+  }
 }

@@ -4,8 +4,11 @@ Every column in `data/processed/` is listed here with its real source, the exact
 layer/table, the year, the unit, the retrieval date, and any transformation.
 No value in `data/processed/` is invented, imputed, or interpolated. Where a real
 value could not be obtained it is left blank and reported (see "Known gaps").
+The models fill missing inputs with the training-fold median at fit time; the
+stored files keep them blank.
 
-Retrieval date for all entries below: **2026-10-28**.
+Retrieval dates are given per entry. Sections 1–4 were retrieved on **2026-10-28**;
+later sections state their own date.
 
 ---
 
@@ -29,6 +32,10 @@ definitions in `data/raw/ucla_excess_er_zip.meta.json`.
   CalHeatScore Category". Per the app text, CHS levels are temperature thresholds
   derived from historical heat–health relationships, categorized into four levels
   of risk (CHS 1 = mildest heat threshold … CHS 4 = most extreme heat).
+  **The values are cumulative across levels** (inferred from the data, see
+  `reports/member3_labels_website_siting.md` section 1): the level-k row covers
+  every warm-season day at or below level k, so the level-4 row is the total over
+  all heat levels and the level-k-only contribution is level k minus level k−1.
 - `NumRate` = `"Rate"` or `"Number"`.
 - `Years` = `"2008-2018"` (All Years) or `"2014-2018"` (Last Five Years).
 
@@ -37,16 +44,19 @@ CHS category **4** (most extreme heat), `Years = "2008-2018"`. This matches the
 project's goal ("extra ER visits during *extreme* heat") and the table previously
 copied from the app (e.g. ZIP 91767 rate = 19.7). The full CHS 1–4 cross is also
 saved to `data/processed/target_all_chs.csv` for sensitivity analysis.
+Because the values are cumulative, the level-4 row is a total over all heat levels,
+not over extreme-heat days only. The extreme-heat-only quantity is level 4 minus
+level 3; results for that target are in `results/member1/ces40_fixed_level_only/`.
 
 **Columns in `target.csv`:**
 
 | column | source field | unit | notes |
 |---|---|---|---|
 | `zip` | `zip` | — | LA County ZIP (289 rows) |
-| `excess_er_rate_per_10k` | `excs_ER` where `NumRate='Rate'` | excess ER visits per 10,000 persons | layer label: "Rate (per 10,000)" |
+| `excess_er_rate_per_10k` | `excs_ER` where `NumRate='Rate'` | excess ER visits per 10,000 persons, **total over May–October 2008–2018** | layer label: "Rate (per 10,000)". Not a daily or yearly rate: UCLA's yearly layer (`time_trend_zip`) sums to this value over the 11 years, to within rounding (checked in two ZIPs) |
 | `excess_er_number` | `excs_ER` where `NumRate='Number'` | excess ER visit count | — |
 | `population` | `popultn` | persons | layer-provided ZIP population |
-| `n_heat_days` | `n_ht_dy` | days | heat days at CHS-4 threshold over 2008–2018 (constant across ZIPs = 2024) |
+| `n_heat_days` | `n_ht_dy` | days | number of warm-season days at or below the row's CHS level. For CHS 4 it equals 2,024 in every ZIP, which is all warm-season days in 2008–2018 (184 days × 11 years); it is **not** a count of extreme-heat days |
 | `chs_category` | `categry` | — | 4 |
 | `years` | `Years` | — | 2008-2018 |
 | `is_ucla_campus_90095` | derived | 0/1 | flags ZIP 90095 (see caveat) |
@@ -54,10 +64,13 @@ saved to `data/processed/target_all_chs.csv` for sensitivity analysis.
 **The "three numbers" mystery (resolved).** A ZIP row copied from the app table
 showed three values (e.g. 91767 → 19.7, 86.8, 95.2). Confirmed from the raw
 layer: **19.7** is `excs_ER` (the rate); **86.8** is `lvl1_th` and **95.2** is
-`lvl4_th` — the choropleth **legend class-break thresholds**, which are constant
-across all ZIPs within a year range (2008–2018: 86.8 / 88.8 / 91.4 / 95.2). They
-are map legend breakpoints, **not** per-ZIP measurements and **not**
-CalEnviroScreen values.
+`lvl4_th` — that ZIP's own **CalHeatScore temperature thresholds** in °F for
+levels 1 and 4 (2008–2018, ZIP 91767: 86.8 / 88.8 / 91.4 / 95.2). They are
+ZIP-specific, not constant: there are 267 distinct level-4 thresholds across
+California ZIPs (69.7–107.6 °F), and ZIP 90001's are 81.4 / 83.6 / 86.6 / 91.5.
+They are **not** map legend breakpoints and **not** CalEnviroScreen values.
+*(Corrected 2026-11-08; an earlier version of this note described them as legend
+class breaks that were constant across ZIPs.)*
 
 **Unit / magnitude check (resolved).** Press coverage quotes excess rates of
 roughly 0.9–3.5 per 10,000 (e.g. West Adams ≈ 3.5). Those figures match a
@@ -85,7 +98,7 @@ outlier (`Z_ER_RN` max 77.4). Models will be run with and without it.
 **Source.** CalEnviroScreen 4.0 (OEHHA/CalEPA), accessed via the UCLA-hosted copy
 on the same ArcGIS org used for the target:
 `.../arcgis/rest/services/calenviroscreen_test3/FeatureServer/0`, filtered to
-`County = 'Los Angeles'`. CES 4.0 reflects data vintages centered ~2015–2019
+`County = 'Los Angeles'`. CES 4.0 inputs describe roughly 2013–2019
 (published 2021). Raw tract rows saved untouched to
 `data/raw/ces40_la_tracts.csv` (2,343 LA census tracts).
 
@@ -95,6 +108,13 @@ layer's `TotPop19` as the weight. Percentile columns (CES percentile) are also
 population-weighted; averaging percentiles is an approximation and is noted here
 as such.
 
+**Missing-value correction (−999).** CalEnviroScreen marks missing tract values
+as −999. These are set to missing, field by field, before the population-weighted
+aggregation, so a tract with no value for a field is left out of that field's mean.
+The original pull did not do this; the corrected tables are in `data/corrected/`
+(built by `scripts/build_corrected_ces_tables.py`). See `reports/member1_statewide.md`
+section 1 and `reports/ces_sentinel_fix.md`.
+
 | column | CES field | unit | notes |
 |---|---|---|---|
 | `pm25` | `PM2_5` | µg/m³ (annual mean PM2.5) | pop-weighted to ZIP |
@@ -103,8 +123,17 @@ as such.
 | `cardiovascular_ed_per10k` | `Cardiovas` | age-adjusted ED visits per 10,000 | pop-weighted to ZIP |
 | `poverty_pct_ces` | `Poverty` | % below 2× federal poverty level | pop-weighted to ZIP |
 | `elderly65_pct_ces` | `Elderly65` | % population age 65+ | pop-weighted to ZIP |
-| `ces4_percentile` | `CIscoreP` | CES 4.0 overall percentile (0–100) | pop-weighted; used as a **baseline index** in Step 4 |
+| `edu_lt_hs_pct` | `Educatn` | % of population over 25 without a high-school education | pop-weighted to ZIP |
+| `ling_isol_pct` | `Ling_Isol` | % of limited-English-speaking households | pop-weighted to ZIP |
+| `unemployment_pct` | `Unempl` | % of population over 16 unemployed and in the labour force | pop-weighted to ZIP |
+| `housing_burden_pct` | `HousBurd` | % of households that are low-income and pay more than 50% of income on housing | pop-weighted to ZIP |
+| `ces4_percentile` | `CIscoreP` | CES 4.0 overall percentile (0–100) | pop-weighted; used as a rank-only baseline index on matched ZIPs (REPORT §4a, §4c) |
 | `ces_pop19` | sum of `TotPop19` | persons | CES-covered population in the ZIP (reference) |
+
+The four rows above `ces4_percentile` (education, linguistic isolation,
+unemployment, housing burden) are used by the models through the statewide and
+LA tables; definitions follow `reports/member1_statewide.md` section 3. In those
+tables the poverty and age-65+ columns are named `poverty_pct` and `elderly65_pct`.
 
 ---
 
@@ -128,6 +157,12 @@ and reported (see "Known gaps"); they are not reassigned to a neighboring ZCTA.
 ---
 
 ## 4. Census ACS 2022 5-year (ZCTA) (`data/processed/features_acs.csv`)
+
+**Status.** This ACS 2022 pull was the original source. For the four features the
+reported models add (`pct_renters`, `pct_no_vehicle`, `pct_uninsured`,
+`pct_construction`) it is superseded: those now use ACS 2018 5-year estimates
+(2014–2018), fetched by `part2/fetch_acs2018.py` with the same formulas. See
+`part2/ACS_VARIABLE_AND_YEAR_AUDIT.md` and `part2/HISTORICAL_FEATURE_UPDATE.md`.
 
 **Source.** Census Data API, ACS 2022 5-year estimates, ZCTA geography. A free API
 key is required (<https://api.census.gov/data/key_signup.html>); it is read from
@@ -159,7 +194,7 @@ relative difference (ZIPs with pop > 500), confirming the ZIP↔ZCTA join is cor
 
 ---
 
-## 5a. California-wide training table (`data/processed/model_table_ca.csv`)
+## 5. California-wide training table (`data/processed/model_table_ca.csv`)
 
 For the honest LA-holdout test and the ZIP→tract downscale, the same target and
 CES feature pulls were extended from LA County to **all of California**, one row per
@@ -176,9 +211,23 @@ ACS key was required for the statewide table; it uses CES-sourced social columns
 Script: `scripts/fetch_statewide.py`. Every column traces to the sources already
 documented above — nothing new is invented.
 
+**Tract inputs for the ZIP→tract downscale** (`scripts/run_downscale.py`). The
+model is trained on the corrected version of this table
+(`data/corrected/model_table_ca_corrected.csv`). Tract-level files:
+
+| file | content | use |
+|---|---|---|
+| `data/raw/ces40_ca_tracts.csv` | CES 4.0 tract inputs and `TotPop19` (2010 tracts, no tract ID column) | tract inputs and population |
+| `data/raw/heatrisk/ces4_ca.csv` | OEHHA CES 4.0 full results with the 2010 tract ID | gives each row above its tract ID; rows are matched on population + PM2.5 + ozone, which is unique in both files (8,035 of 8,035 matched) |
+| `data/raw/heatrisk/xwalk_tract10_20_ca.csv` | Census 2020↔2010 tract relationship file (land area of each overlap) | moves population (by land-area share) and inputs (population-weighted) to 2020 tracts |
+| `data/raw/heatrisk/xwalk_zcta_tract_ca.csv` | Census 2020 ZCTA↔tract relationship file (land area of each overlap) | cuts each 2020 tract into ZIP pieces by land-area share |
+
+−999 is treated as missing at tract level. Land-area shares assume people are spread
+evenly over each tract's land.
+
 ---
 
-## 5b. Cal-Adapt projected extreme-heat days (`data/processed/heat_days_la.csv`, `heat_factor_2030.csv`)
+## 6. Cal-Adapt projected extreme-heat days (`data/processed/heat_days_la.csv`, `heat_factor_2030.csv`)
 
 **Source.** Cal-Adapt API (UC Berkeley Geospatial Innovation Facility),
 <https://api.cal-adapt.org>. Series `exheat_year_ens32avg_rcp45` and
@@ -197,7 +246,7 @@ Raw JSON responses saved untouched to `data/raw/caladapt_exheat/<scenario>/<zip>
 287 ZIPs retrieved; **2 skipped** (`91123`, `91522` — no centroid, section "Known
 gaps"); never filled in.
 
-**Derived `heat_factor` (`heat_factor_2030.csv`).**
+**Derived `heat_factor` (`heat_factor_2030.csv`; written by `scripts/run_projection_2030.py`, not committed).**
 `heat_factor(zip) = mean exheat days 2026–2035 ÷ mean exheat days 2008–2018`, using
 the **same** ens32avg series for numerator and denominator (no historical/projection
 splice; 2008–2018 matches the UCLA observation window). 2026–2035 is a 10-year window
@@ -213,14 +262,27 @@ fitted per-ZIP time series (no per-ZIP yearly ER series exists to fit). Script:
 
 ---
 
-## 5. Final modeling table (`data/processed/model_table.csv`)
+## 7. Modeling tables
 
-One row per target ZIP (289), joining the target (section 1) with CES/geography
-(sections 2–3) and ACS (section 4). 17 features total. **Complete-case rows (all
-features present): 269 of 289**; the 20 incomplete rows are the institutional /
+### Original LA table (`data/processed/model_table.csv`, legacy)
+
+This is the original LA table (ACS 2022), used by the original 13-input LA model.
+The reported models no longer use it. One row per target ZIP (289), joining the
+target (section 1) with CES/geography (sections 2–3) and ACS (section 4). 17
+features total. **Complete-case rows (all features present): 269 of 289**; the 20 incomplete rows are the institutional /
 tiny-population ZIPs listed under "Known gaps". For social/demographic variables the
 ACS versions are used; the CES `poverty_pct_ces` / `elderly65_pct_ces` columns remain
 available in `features_ces_geo.csv` as a cross-check but are not duplicated here.
+
+### Tables used by the reported models
+
+- `data/corrected/model_table_ca_corrected.csv`: statewide ZIP × heat level table
+  with the −999 correction. It is identical to
+  `results/member1/inputs/model_table_ca_ces40_fixed.csv`.
+- `part2/data/la_base.csv`: 287 LA ZIPs at level 4, 11 inputs (corrected
+  CalEnviroScreen fields plus population density).
+- `part2/data/la_augmented.csv`: the same 287 ZIPs, 15 inputs (the 11 above plus
+  the four ACS features, ACS 2014–2018).
 
 ---
 
@@ -236,4 +298,7 @@ available in `features_ces_geo.csv` as a cross-check but are not duplicated here
   Universal Studios pop ≈ 34; 91210 Glendale Galleria; 91522 Warner Bros.);
   90014 (Downtown LA), 91759 (Mt Baldy), and 93553 (Pearblossom) are small or
   rural. CES-derived features left blank for these ZIPs.
-- **ACS features:** all pending, blocked on the Census API key (section 4).
+- **ACS features:** retrieved (section 4). Suppressed ACS values remain blank.
+- **Missing model inputs:** 17 of the 287 modelled LA ZIPs have at least one of the
+  11 LA base inputs missing, and 21 have at least one of the 15 augmented inputs
+  missing. Statewide, 394 of 1,675 ZIPs have at least one input missing.

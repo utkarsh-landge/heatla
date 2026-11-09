@@ -1,0 +1,32 @@
+{
+  "demand_zips": 287,
+  "candidate_sites": 153,
+  "committed_n_zips": 287,
+  "committed_n_candidate_sites": 153,
+  "burden_weight": "max(0, Part 2 out-of-fold augmented Poisson rate) x UCLA population / 10,000",
+  "total_predicted_burden": 10842.9,
+  "total_observed_burden": 10545.3,
+  "zips_with_zero_weight": 0,
+  "miles_to_nearest_candidate_site": {
+    "median": 1.43,
+    "p90": 4.4,
+    "max": 17.53
+  },
+  "budgets_k": [
+    5,
+    10,
+    20,
+    40
+  ],
+  "radii_miles": [
+    1,
+    2,
+    3,
+    5
+  ],
+  "all_exact_coverages_reproduced": true,
+  "exact_at_least_greedy_everywhere": true,
+  "max_exact_minus_greedy_pp": 3.94,
+  "runs_with_identical_site_set": 16,
+  "runs": 16
+}

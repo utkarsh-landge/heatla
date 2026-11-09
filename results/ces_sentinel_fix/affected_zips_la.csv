@@ -1,0 +1,30 @@
+table,zip,county,in_model_table,features_changed,model_columns_changed,had_negative_value,became_missing,percentile_changed,tracts_in_zip,which_features
+la,90024,Los Angeles,1,2,1,1,0,1,12,poverty_pct_ces; ces4_percentile
+la,90027,Los Angeles,1,2,1,0,0,1,16,poverty_pct_ces; ces4_percentile
+la,90058,Los Angeles,1,1,1,0,0,1,3,ces4_percentile
+la,90242,Los Angeles,1,2,1,0,0,1,10,poverty_pct_ces; ces4_percentile
+la,90272,Los Angeles,1,1,1,0,0,1,7,ces4_percentile
+la,90503,Los Angeles,1,1,0,1,0,0,10,poverty_pct_ces
+la,90650,Los Angeles,1,1,1,0,0,1,21,ces4_percentile
+la,90670,Los Angeles,1,2,1,0,0,1,5,poverty_pct_ces; ces4_percentile
+la,90731,Los Angeles,1,2,1,0,0,1,16,poverty_pct_ces; ces4_percentile
+la,90744,Los Angeles,1,2,1,0,0,1,15,poverty_pct_ces; ces4_percentile
+la,90802,Los Angeles,1,2,1,0,0,1,10,poverty_pct_ces; ces4_percentile
+la,90813,Los Angeles,1,1,1,0,0,1,14,ces4_percentile
+la,90815,Los Angeles,1,2,1,0,0,1,11,poverty_pct_ces; ces4_percentile
+la,90840,Los Angeles,1,2,1,1,2,1,1,poverty_pct_ces; ces4_percentile
+la,91011,Los Angeles,1,2,1,0,0,1,6,poverty_pct_ces; ces4_percentile
+la,91042,Los Angeles,1,2,1,0,0,1,7,poverty_pct_ces; ces4_percentile
+la,91326,Los Angeles,1,1,0,1,0,0,8,poverty_pct_ces
+la,91330,Los Angeles,1,1,1,1,1,1,1,ces4_percentile
+la,91342,Los Angeles,1,2,1,0,0,1,22,poverty_pct_ces; ces4_percentile
+la,91367,Los Angeles,1,1,0,1,0,0,7,elderly65_pct_ces
+la,91384,Los Angeles,1,2,1,1,0,1,7,poverty_pct_ces; ces4_percentile
+la,91390,Los Angeles,1,2,1,0,0,1,9,poverty_pct_ces; ces4_percentile
+la,91406,Los Angeles,1,2,1,0,0,1,17,poverty_pct_ces; ces4_percentile
+la,91711,Los Angeles,1,2,1,1,0,1,8,poverty_pct_ces; ces4_percentile
+la,91768,Los Angeles,1,2,1,1,0,1,9,poverty_pct_ces; ces4_percentile
+la,93510,Los Angeles,1,2,1,1,0,1,3,poverty_pct_ces; ces4_percentile
+la,93536,Los Angeles,1,2,1,1,0,1,13,poverty_pct_ces; ces4_percentile
+la,93550,Los Angeles,1,1,1,0,0,1,17,ces4_percentile
+la,93563,Los Angeles,1,2,1,1,2,1,1,poverty_pct_ces; ces4_percentile

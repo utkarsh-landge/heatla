@@ -4,7 +4,7 @@
 
 > **Draft notes for the team. Delete this box before submitting.**
 >
-> - **Decisions assumed, not yet agreed:** the published level-4 label is the main target with level-4-only beside it; Part 2 augmented Poisson is the official LA model; siting is not rerun. The website now shows the corrected Part 1 and Part 2 results.
+> - **Decisions assumed, not yet agreed:** the published level-4 label is the main target with level-4-only beside it; Part 2 augmented Poisson is the official LA model, and siting now uses its out-of-fold predictions. The website now shows the corrected Part 1 and Part 2 results.
 > - **Part 2 follow-up runs (level-4-only target, no asthma/cardiovascular inputs) are done** (section 5.8, `part2/FOLLOWUP_EXPERIMENTS.md`); Char should review them.
 > - **Check against a course sample report:** nobody has confirmed the expected format or length.
 > - **Literature:** Riley, Derakhshan and Hess were checked in full and Scott from its abstract only. The other papers had only their bibliographic details checked, so read them before submitting. Every journal reference's authors, volume, pages and DOI were checked against Crossref.
@@ -24,7 +24,7 @@ This report addresses three questions:
 2. **Added community features.** Do additional community indicators improve prediction within LA? (Part 2)
 3. **Labels and siting.** What do the UCLA labels measure, and how can they be used to site cooling centers? (Part 3)
 
-The siting component is at the formulation stage. Its design will be discussed at office hours.
+The siting component has a working formulation and a first decision check (section 6). Its design will be discussed at office hours.
 
 ## 2. Related work
 
@@ -337,16 +337,18 @@ $$\max \sum_{z\in Z} w_z\,y_z$$
 
 $$\text{subject to}\quad y_z \le \sum_{s\in S} a_{zs}\,x_s \;\;\forall z\in Z, \qquad \sum_{s\in S} x_s \le k, \qquad x_s,\,y_z\in\{0,1\}.$$
 
-A ZIP counts once in the objective no matter how many selected centers reach it. An independent re-solve reproduced all 16 committed solutions, including the selected sites. The weights use earlier LA out-of-fold Poisson predictions and have not been rerun with the corrected inputs.
+A ZIP counts once in the objective no matter how many selected centers reach it. The predicted rate $\hat r_z$ is the Part 2 augmented Poisson out-of-fold prediction. Equity is reported by quartiles of median household income and of the corrected CalEnviroScreen percentile (273 ZIPs with a value). An independent re-solve reproduced all 16 solutions, including the selected sites.
 
 *Share of predicted burden covered by the exact solution.*
 
 | Radius (miles) | ZIPs reachable by any center | Ceiling | k = 5 | k = 10 | k = 20 | k = 40 |
 |---|---|---|---|---|---|---|
-| 1 | 99 of 287 | 42.9% | 6.6% | 11.7% | 20.5% | 32.3% |
-| 2 | 183 of 287 | 69.0% | 13.4% | 22.1% | 35.2% | 53.8% |
-| 3 | 235 of 287 | 84.1% | 26.2% | 40.2% | 60.4% | 80.5% |
-| 5 | 268 of 287 | 92.6% | 47.2% | 69.0% | 87.6% | 92.6% |
+| 1 | 99 of 287 | 43.3% | 6.9% | 12.2% | 20.9% | 32.9% |
+| 2 | 183 of 287 | 69.3% | 13.9% | 22.7% | 35.9% | 54.3% |
+| 3 | 235 of 287 | 84.3% | 26.8% | 40.7% | 60.7% | 80.8% |
+| 5 | 268 of 287 | 92.9% | 47.7% | 69.3% | 87.8% | 92.9% |
+
+**Do the predictions change the decision?** We scored every plan on the UCLA-label burden rather than on the predictions. Plans chosen with the predictions cover on average 0.25 percentage points less label burden than plans chosen with the label itself (at most 1.2 points), 0.8 points more than plans weighted by population only (at most 2.7), and 17.5 points more than random sets of centers. At 2 miles and 10 centers the shares are 22.0% (predictions), 22.0% (label), 20.8% (population) and 9.8% (random). The predictions therefore pick nearly the same centers as the labels, but most of the gain over random comes from population. In LA, where every ZIP has a label, the predictions add little to this decision.
 
 **Limitations.** The program chooses among existing centers and does not propose new sites. Coverage is all-or-nothing and straight-line from one point per ZIP, with no travel time, capacity or opening hours. Being within reach does not establish use or health benefit. The burden totals all heat levels over eleven seasons, while centers open on the hottest days.
 
@@ -365,7 +367,7 @@ A ZIP counts once in the objective no matter how many selected centers reach it.
 
 1. Discuss the siting design at office hours, including new candidate sites and equity constraints.
 2. Ask UCLA to confirm the cumulative reading of heat levels and whether the socioeconomic adjustment was used.
-3. Rerun siting with corrected predictions, and consider the level-4-only burden.
+3. Decide whether siting should use the level-4-only burden and whether to add new candidate sites such as libraries.
 4. Test whether the population year matters using ACS population from inside the label period.
 5. Explore UCLA's public yearly ZIP layer (2008–2018) for a check across time.
 

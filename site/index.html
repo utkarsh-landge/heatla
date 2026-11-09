@@ -333,7 +333,8 @@ footer .wrap{padding:28px 22px 46px;display:flex;justify-content:space-between;g
 <section id="siting">
   <div class="head reveal"><p class="eyebrow">07 — Cooling centers</p><h2>Where to open them.</h2>
     <p>Pick a budget and radius. Benefit = out-of-fold predicted excess ER visits within range of an open
-    center (from the earlier 13-input LA model on pre-correction inputs; not yet rerun). Exact solves an integer program; greedy adds the best next site.</p></div>
+    center. The weights are Part 2 out-of-fold Poisson predictions (augmented LA model). Exact solves an integer program; greedy adds the best next site.
+    Scored on the UCLA label, these plans cover on average 0.25 points less burden than plans chosen with the label itself, and 0.8 points more than plans weighted by population alone.</p></div>
   <div class="card reveal">
     <div class="slider-row">
       <div class="slider"><label>Budget <b id="kval">10</b> centers</label><input type="range" id="k" min="0" max="3" step="1" value="1"></div>

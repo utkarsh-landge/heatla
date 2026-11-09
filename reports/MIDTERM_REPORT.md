@@ -105,7 +105,7 @@ Rows with missing inputs are kept. Missing values are filled with the training-f
 
 **Data years.** The label covers 2008–2018, and the inputs do not match it exactly. CalEnviroScreen 4.0 inputs describe about 2013–2019, and the four added ACS features describe 2014–2018. We tested CalEnviroScreen 3.0 inputs, which describe 2009–2015, as a sensitivity check (section 5.7).
 
-**Population.** UCLA's population field represents the 2020 Census. Its California total is 39,535,231 against 39,538,212 in the Census Bureau's 2020 base, and its county totals fit 2020 better than any year from 2010 to 2023. Statewide, 2020 is about 3.4% above 2013 and 6.1% above 2010. It is used for density and as the Poisson weight, and it is the denominator of UCLA's rate. We kept it in all parts and document the mismatch as a limitation; its effect has not been tested.
+**Population.** UCLA's population field represents the 2020 Census. Its California total is 39,535,231 against 39,538,212 in the Census Bureau's 2020 base, and its county totals fit 2020 better than any year from 2010 to 2023. Statewide, 2020 is about 3.4% above 2013 and 6.1% above 2010. It is used for density and as the Poisson weight, and it is the denominator of UCLA's rate. We kept it in all parts and document the mismatch as a limitation. To check it, we reran Parts 1 and 2 with 2010 Census population (Census 2010 Gazetteer ZCTA file; 285 of the 287 LA ZIPs matched). Spearman changed by at most 0.022 and R² by about 0.01, except random forest's LA-holdout level-4 R² (−0.48 to −0.34, still well below zero). The conclusions did not change (`results/population_year_check.md`).
 
 ## 4. Experimental setups
 
@@ -354,7 +354,7 @@ A ZIP counts once in the objective no matter how many selected centers reach it.
 
 - **The labels are estimates** from UCLA's model, totalled over the period. Results describe agreement with those estimates, not observed extreme-day visits.
 - **The cumulative reading of heat levels is an inference**, and level-only results depend on it. UCLA's optional socioeconomic adjustment may or may not have been used.
-- **Input years differ from the label period** (section 3.4). The effect of using 2020 population has not been tested.
+- **Input years differ from the label period** (section 3.4). Using 2010 population instead changed Spearman by at most 0.022 and did not change the conclusions (`results/population_year_check.md`).
 - **Asthma and cardiovascular inputs share a data source with the label** (section 5.5).
 - **Missing inputs are imputed.** 337 of 1,675 ZIPs have no CalEnviroScreen data, typically because no tract lists them as its ZIP. A further 57 lack one or more inputs (394 in total; 17 of 287 in LA).
 - **Geography is approximate.** Each tract is assigned to one ZIP, ZIP and ZCTA are joined by code, and boundaries are not harmonized across data vintages.

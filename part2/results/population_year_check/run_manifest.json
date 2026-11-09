@@ -1,0 +1,26 @@
+{
+  "seed": 42,
+  "n_model_fits": 90,
+  "variants": {
+    "as_published": "UCLA 2020 population for density and Poisson weight",
+    "density2010": "density = POP10 / aland_sqmi; Poisson weight = UCLA 2020 population",
+    "both2010": "density = POP10 / aland_sqmi; Poisson weight = POP10"
+  },
+  "pop10_source": "Census 2010 Gazetteer ZCTA file (Gaz_zcta_national.txt)",
+  "land_area_source": "aland_sqmi in results/member1/inputs/model_table_ca_ces40_fixed.csv (2023 Gazetteer)",
+  "zips": 287,
+  "pop10_missing": [
+    "90639",
+    "90840"
+  ],
+  "pop10_zero": [
+    "90506",
+    "90747",
+    "91608"
+  ],
+  "missing_pop10_rule": "density missing (median-imputed in each training fold); UCLA weight kept",
+  "zero_pop10_rule": "density 0; UCLA weight kept",
+  "folds": "part2/data/la_base.csv group column (unchanged)",
+  "as_published_rerun_max_abs_spearman_diff_vs_main_run": 0.0011620532548707319,
+  "note": "Poisson reproduces the main run exactly; random forest and gradient boosting can differ slightly across operating systems."
+}

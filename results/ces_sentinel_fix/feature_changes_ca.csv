@@ -1,0 +1,832 @@
+table,zip,county,feature,in_model_table,original,corrected,difference,original_negative,status,tracts_in_zip,tracts_missing_this_field,tracts_used
+ca,92869,Orange,ling_isol_pct,1,-113.068,5.191,118.259,1,corrected,7,1,6
+ca,92651,Orange,ling_isol_pct,1,-401.6783,1.7825,403.4608,1,corrected,7,1,6
+ca,92660,Orange,unemployment_pct,1,-28.8135,4.3492,33.1627,1,corrected,8,1,7
+ca,92612,Orange,edu_lt_hs_pct,1,-136.3242,3.4382,139.7624,1,corrected,6,1,5
+ca,92708,Orange,unemployment_pct,1,-103.4983,3.9135,107.4118,1,corrected,12,1,11
+ca,92646,Orange,ling_isol_pct,1,-49.0741,2.5811,51.6552,1,corrected,14,1,13
+ca,92886,Orange,edu_lt_hs_pct,1,-53.0119,5.1597,58.1716,1,corrected,10,1,9
+ca,92833,Orange,unemployment_pct,1,-161.0981,6.7312,167.8293,1,corrected,11,2,9
+ca,92801,Orange,ling_isol_pct,1,-39.1192,15.2172,54.3364,1,corrected,10,1,9
+ca,92807,Orange,poverty_pct,1,9.9585,10.0672,0.1087,0,corrected,9,1,8
+ca,92807,Orange,edu_lt_hs_pct,1,6.3379,6.4462,0.1083,0,corrected,9,1,8
+ca,92807,Orange,ling_isol_pct,1,2.994,3.102,0.108,0,corrected,9,1,8
+ca,92807,Orange,unemployment_pct,1,4.6725,4.7807,0.1082,0,corrected,9,1,8
+ca,92807,Orange,housing_burden_pct,1,12.165,12.274,0.109,0,corrected,9,1,8
+ca,92807,Orange,ces4_percentile,1,24.2183,24.3286,0.1103,0,corrected,9,1,8
+ca,92841,Orange,ling_isol_pct,1,-42.064,21.3542,63.4182,1,corrected,8,1,7
+ca,92841,Orange,unemployment_pct,1,-106.9188,4.5027,111.4215,1,corrected,8,1,7
+ca,92867,Orange,unemployment_pct,1,-134.4398,4.3112,138.751,1,corrected,8,1,7
+ca,92618,Orange,housing_burden_pct,1,-55.1644,15.0018,70.1662,1,corrected,6,1,5
+ca,92637,Orange,unemployment_pct,1,-303.0982,3.2156,306.3138,1,corrected,5,2,3
+ca,92683,Orange,unemployment_pct,1,-102.2499,5.5505,107.8004,1,corrected,17,2,15
+ca,92887,Orange,ling_isol_pct,1,-189.0797,3.3666,192.4463,1,corrected,4,1,3
+ca,90621,Orange,unemployment_pct,1,-163.7149,6.1857,169.9006,1,corrected,4,1,3
+ca,92802,Orange,poverty_pct,1,45.4385,46.2792,0.8407,0,corrected,8,1,7
+ca,92802,Orange,edu_lt_hs_pct,1,31.3462,32.1755,0.8293,0,corrected,8,1,7
+ca,92802,Orange,ling_isol_pct,1,16.5024,17.3198,0.8174,0,corrected,8,1,7
+ca,92802,Orange,unemployment_pct,1,5.3247,6.1331,0.8084,0,corrected,8,1,7
+ca,92802,Orange,housing_burden_pct,1,26.1132,26.9384,0.8252,0,corrected,8,1,7
+ca,92802,Orange,ces4_percentile,1,72.576,73.4385,0.8625,0,corrected,8,1,7
+ca,92806,Orange,edu_lt_hs_pct,1,-8.4371,20.6876,29.1247,1,corrected,7,1,6
+ca,92806,Orange,ling_isol_pct,1,-331.5569,10.1085,341.6654,1,corrected,7,2,5
+ca,92691,Orange,unemployment_pct,1,-102.5723,3.518,106.0903,1,corrected,11,1,10
+ca,92692,Orange,ling_isol_pct,1,-129.5761,4.245,133.8211,1,corrected,10,1,9
+ca,92675,Orange,edu_lt_hs_pct,1,-6.4609,8.4584,14.9193,1,corrected,9,1,8
+ca,92672,Orange,edu_lt_hs_pct,1,-143.0109,6.3499,149.3608,1,corrected,8,1,7
+ca,95136,Santa Clara,unemployment_pct,1,-160.6084,3.2708,163.8792,1,corrected,8,1,7
+ca,94952,Sonoma,ling_isol_pct,1,-123.3052,2.4411,125.7463,1,corrected,9,1,8
+ca,95403,Sonoma,ling_isol_pct,1,-96.0282,6.8696,102.8978,1,corrected,9,1,8
+ca,95403,Sonoma,unemployment_pct,1,-98.5382,4.0735,102.6117,1,corrected,9,1,8
+ca,94928,Sonoma,ling_isol_pct,1,-146.3574,4.41,150.7674,1,corrected,7,1,6
+ca,95148,Santa Clara,unemployment_pct,1,-74.0099,6.1928,80.2027,1,corrected,10,1,9
+ca,95139,Santa Clara,unemployment_pct,1,-613.1918,3.2,616.3918,1,corrected,2,1,1
+ca,95448,Sonoma,unemployment_pct,1,-130.1617,3.6716,133.8333,1,corrected,5,1,4
+ca,95037,Santa Clara,unemployment_pct,1,-25.7877,3.8247,29.6124,1,corrected,11,1,10
+ca,95112,Santa Clara,ling_isol_pct,1,-61.7199,15.5121,77.232,1,corrected,10,1,9
+ca,95035,Santa Clara,ling_isol_pct,1,11.5043,14.9777,3.4734,0,corrected,15,1,14
+ca,95035,Santa Clara,unemployment_pct,1,0.153,3.5873,3.4343,0,corrected,15,1,14
+ca,95035,Santa Clara,housing_burden_pct,1,9.1947,12.6602,3.4655,0,corrected,15,1,14
+ca,95035,Santa Clara,ces4_percentile,1,31.8015,35.3447,3.5432,0,corrected,15,1,14
+ca,96058,Siskiyou,unemployment_pct,1,-379.0618,10.8,389.8618,1,corrected,2,1,1
+ca,96058,Siskiyou,housing_burden_pct,1,-380.2282,8.9,389.1282,1,corrected,2,1,1
+ca,00035,,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,96022,Shasta,unemployment_pct,1,-436.0562,8.4,444.4562,1,corrected,2,1,1
+ca,00057,,poverty_pct,1,-999.0,,,1,became missing,1,1,0
+ca,00057,,edu_lt_hs_pct,1,-999.0,,,1,became missing,1,1,0
+ca,00057,,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,00057,,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,00057,,housing_burden_pct,1,-999.0,,,1,became missing,1,1,0
+ca,00057,,ces4_percentile,1,-999.0,,,1,became missing,1,1,0
+ca,93117,Santa Barbara,edu_lt_hs_pct,1,-5.3175,9.4462,14.7637,1,corrected,12,2,10
+ca,93117,Santa Barbara,ling_isol_pct,1,-49.7173,7.4729,57.1902,1,corrected,12,2,10
+ca,93117,Santa Barbara,unemployment_pct,1,-5.4339,9.3281,14.762,1,corrected,12,2,10
+ca,93013,Santa Barbara,unemployment_pct,1,-338.3604,5.1575,343.5179,1,corrected,3,1,2
+ca,93436,Santa Barbara,ling_isol_pct,1,-42.9948,7.9659,50.9607,1,corrected,12,1,11
+ca,93436,Santa Barbara,unemployment_pct,1,-41.8356,9.187,51.0226,1,corrected,12,1,11
+ca,93436,Santa Barbara,housing_burden_pct,1,-34.5242,16.8881,51.4123,1,corrected,12,1,11
+ca,93436,Santa Barbara,ces4_percentile,1,-6.0843,46.844,52.9283,1,corrected,12,1,11
+ca,93110,Santa Barbara,ling_isol_pct,1,-300.8379,2.4152,303.2531,1,corrected,4,1,3
+ca,93108,Santa Barbara,unemployment_pct,1,-257.9857,6.1693,264.155,1,corrected,3,1,2
+ca,93101,Santa Barbara,unemployment_pct,1,-201.2832,4.2015,205.4847,1,corrected,8,1,7
+ca,93111,Santa Barbara,unemployment_pct,1,-260.2899,6.8692,267.1591,1,corrected,3,1,2
+ca,92227,Imperial,housing_burden_pct,1,-18.688,20.6856,39.3736,1,corrected,5,1,4
+ca,95012,Monterey,unemployment_pct,1,-92.6713,7.5702,100.2415,1,corrected,3,1,2
+ca,92233,Imperial,poverty_pct,1,-468.8712,65.0,533.8712,1,corrected,2,1,1
+ca,92233,Imperial,ling_isol_pct,1,-490.3952,21.8,512.1952,1,corrected,2,1,1
+ca,92233,Imperial,unemployment_pct,1,-491.0928,20.4,511.4928,1,corrected,2,1,1
+ca,92233,Imperial,housing_burden_pct,1,-492.5875,17.4,509.9875,1,corrected,2,1,1
+ca,92233,Imperial,ces4_percentile,1,-460.5534,81.6944,542.2478,1,corrected,2,1,1
+ca,92283,Imperial,unemployment_pct,1,-283.557,23.0,306.557,1,corrected,2,1,1
+ca,92283,Imperial,housing_burden_pct,1,-290.9074,12.5,303.4074,1,corrected,2,1,1
+ca,92274,Riverside,housing_burden_pct,1,-205.6422,22.3647,228.0069,1,corrected,4,1,3
+ca,92250,Imperial,unemployment_pct,1,-112.2244,21.2,133.4244,1,corrected,2,1,1
+ca,92250,Imperial,housing_burden_pct,1,-116.3967,16.4,132.7967,1,corrected,2,1,1
+ca,93901,Monterey,ling_isol_pct,1,-93.8366,11.5861,105.4227,1,corrected,7,1,6
+ca,93923,Monterey,ling_isol_pct,1,-89.4095,1.2484,90.6579,1,corrected,7,1,6
+ca,93923,Monterey,unemployment_pct,1,-279.4383,4.2404,283.6787,1,corrected,7,3,4
+ca,93955,Monterey,poverty_pct,1,-36.2378,36.5599,72.7977,1,corrected,7,1,6
+ca,93955,Monterey,edu_lt_hs_pct,1,-48.7474,23.1045,71.8519,1,corrected,7,1,6
+ca,93955,Monterey,ling_isol_pct,1,-152.0153,9.8845,161.8998,1,corrected,7,2,5
+ca,93955,Monterey,housing_burden_pct,1,-49.0191,22.8123,71.8314,1,corrected,7,1,6
+ca,93955,Monterey,ces4_percentile,1,-40.2775,32.2148,72.4923,1,corrected,7,1,6
+ca,93933,Monterey,ling_isol_pct,1,-194.2022,11.6918,205.894,1,corrected,4,1,3
+ca,93940,Monterey,ling_isol_pct,1,-79.6287,3.4356,83.0643,1,corrected,7,1,6
+ca,93960,Monterey,poverty_pct,1,-327.3646,39.7727,367.1373,1,corrected,3,1,2
+ca,93960,Monterey,ling_isol_pct,1,-342.5295,16.3182,358.8477,1,corrected,3,1,2
+ca,93960,Monterey,housing_burden_pct,1,-343.0729,15.4778,358.5507,1,corrected,3,1,2
+ca,93960,Monterey,ces4_percentile,1,-327.3038,39.8668,367.1706,1,corrected,3,1,2
+ca,93426,Monterey,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,95648,Placer,unemployment_pct,1,-194.2235,3.1753,197.3988,1,corrected,11,3,8
+ca,93944,Monterey,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,93944,Monterey,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,93944,Monterey,housing_burden_pct,1,-999.0,,,1,became missing,1,1,0
+ca,93944,Monterey,ces4_percentile,1,-999.0,,,1,became missing,1,1,0
+ca,95747,Placer,unemployment_pct,1,-18.4076,4.9237,23.3313,1,corrected,11,1,10
+ca,95076,Santa Cruz,ling_isol_pct,1,-100.3743,19.5482,119.9225,1,corrected,15,2,13
+ca,95076,Santa Cruz,housing_burden_pct,1,2.4185,19.4052,16.9867,0,corrected,15,1,14
+ca,95661,Placer,unemployment_pct,1,-226.5205,4.243,230.7635,1,corrected,8,2,6
+ca,96145,Placer,edu_lt_hs_pct,1,-247.3188,0.5661,247.8849,1,corrected,3,1,2
+ca,96145,Placer,ling_isol_pct,1,-999.0,,,1,became missing,3,3,0
+ca,96145,Placer,unemployment_pct,1,-999.0,,,1,became missing,3,3,0
+ca,96145,Placer,housing_burden_pct,1,-234.1588,18.0659,252.2247,1,corrected,3,1,2
+ca,96145,Placer,ces4_percentile,1,-245.7091,2.7066,248.4157,1,corrected,3,1,2
+ca,96142,El Dorado,edu_lt_hs_pct,1,-999.0,,,1,became missing,1,1,0
+ca,96142,El Dorado,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,96142,El Dorado,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,96142,El Dorado,housing_burden_pct,1,-999.0,,,1,became missing,1,1,0
+ca,96142,El Dorado,ces4_percentile,1,-999.0,,,1,became missing,1,1,0
+ca,95602,Placer,unemployment_pct,1,-250.2142,2.4343,252.6485,1,corrected,4,1,3
+ca,95223,Calaveras,ling_isol_pct,1,-404.3979,0.0,404.3979,1,corrected,3,2,1
+ca,95223,Calaveras,unemployment_pct,1,-90.2808,8.432,98.7128,1,corrected,3,1,2
+ca,95223,Calaveras,housing_burden_pct,1,-85.6039,13.6169,99.2208,1,corrected,3,1,2
+ca,95223,Calaveras,ces4_percentile,1,-88.7845,10.0908,98.8753,1,corrected,3,1,2
+ca,95252,Calaveras,unemployment_pct,1,-376.3579,4.8,381.1579,1,corrected,2,1,1
+ca,96161,Nevada,edu_lt_hs_pct,1,-134.1861,5.2522,139.4383,1,corrected,5,1,4
+ca,96161,Nevada,ling_isol_pct,1,-87.6333,1.1124,88.7457,1,corrected,5,1,4
+ca,96161,Nevada,unemployment_pct,1,-261.7483,1.6106,263.3589,1,corrected,5,2,3
+ca,96161,Nevada,housing_burden_pct,1,-116.4288,8.9045,125.3333,1,corrected,5,1,4
+ca,93514,Inyo,ling_isol_pct,1,-114.1723,0.7611,114.9334,1,corrected,5,1,4
+ca,93514,Inyo,unemployment_pct,1,-392.0417,4.0622,396.1039,1,corrected,5,2,3
+ca,93517,Mono,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,93546,Mono,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,96140,Placer,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,96143,Placer,unemployment_pct,1,-302.6245,1.4,304.0245,1,corrected,2,1,1
+ca,92625,Orange,edu_lt_hs_pct,1,-286.9354,0.9789,287.9143,1,corrected,3,1,2
+ca,92625,Orange,unemployment_pct,1,-279.9669,0.7801,280.747,1,corrected,3,1,2
+ca,92657,Orange,unemployment_pct,1,-472.5739,2.6,475.1739,1,corrected,2,1,1
+ca,92831,Orange,ling_isol_pct,1,-33.5525,6.2881,39.8406,1,corrected,10,1,9
+ca,92661,Orange,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92662,Orange,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,94305,Santa Clara,edu_lt_hs_pct,1,-156.36,2.0007,158.3607,1,corrected,3,1,2
+ca,94305,Santa Clara,ling_isol_pct,1,-152.8639,6.1538,159.0177,1,corrected,3,1,2
+ca,94305,Santa Clara,housing_burden_pct,1,-137.0897,24.8926,161.9823,1,corrected,3,1,2
+ca,94305,Santa Clara,ces4_percentile,1,-141.0078,20.2381,161.2459,1,corrected,3,1,2
+ca,94304,Santa Clara,ling_isol_pct,1,-242.9023,4.1,247.0023,1,corrected,2,1,1
+ca,94304,Santa Clara,housing_burden_pct,1,-235.7415,13.6,249.3415,1,corrected,2,1,1
+ca,92649,Orange,unemployment_pct,1,-67.0443,4.6708,71.7151,1,corrected,7,1,6
+ca,94035,Santa Clara,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,94035,Santa Clara,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,90740,Orange,ling_isol_pct,1,-23.4334,4.6232,28.0566,1,corrected,7,1,6
+ca,90740,Orange,unemployment_pct,1,-147.4363,3.8966,151.3329,1,corrected,7,1,6
+ca,90740,Orange,housing_burden_pct,1,-17.0742,11.1654,28.2396,1,corrected,7,1,6
+ca,95476,Sonoma,unemployment_pct,1,-120.1292,4.1631,124.2923,1,corrected,8,1,7
+ca,95421,Sonoma,unemployment_pct,1,-379.8568,5.5,385.3568,1,corrected,2,1,1
+ca,92626,Orange,unemployment_pct,1,-49.1257,3.8356,52.9613,1,corrected,11,1,10
+ca,92676,Orange,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92677,Orange,ling_isol_pct,1,-89.2449,3.4974,92.7423,1,corrected,14,1,13
+ca,92677,Orange,unemployment_pct,1,-62.6218,4.0427,66.6645,1,corrected,14,1,13
+ca,95624,Sacramento,ling_isol_pct,1,-52.9533,4.5407,57.494,1,corrected,12,2,10
+ca,95624,Sacramento,housing_burden_pct,1,0.2647,12.5017,12.237,0,corrected,12,1,11
+ca,95630,Sacramento,poverty_pct,1,-50.3999,12.4959,62.8958,1,corrected,16,1,15
+ca,95630,Sacramento,ling_isol_pct,1,-59.7471,2.5289,62.276,1,corrected,16,1,15
+ca,95630,Sacramento,unemployment_pct,1,-59.197,3.1155,62.3125,1,corrected,16,1,15
+ca,95630,Sacramento,housing_burden_pct,1,-53.0178,9.7044,62.7222,1,corrected,16,1,15
+ca,95630,Sacramento,ces4_percentile,1,-54.0298,8.6253,62.6551,1,corrected,16,1,15
+ca,95758,Sacramento,ling_isol_pct,1,-82.1175,7.7859,89.9034,1,corrected,11,1,10
+ca,95841,Sacramento,unemployment_pct,1,-315.1796,5.8186,320.9982,1,corrected,4,1,3
+ca,92084,San Diego,ling_isol_pct,1,-90.8905,5.1561,96.0466,1,corrected,9,1,8
+ca,95632,Sacramento,unemployment_pct,1,-62.444,6.5316,68.9756,1,corrected,6,1,5
+ca,95621,Sacramento,unemployment_pct,1,-140.0821,5.2733,145.3554,1,corrected,9,1,8
+ca,95843,Sacramento,ling_isol_pct,1,-135.2131,6.9857,142.1988,1,corrected,8,1,7
+ca,95825,Sacramento,unemployment_pct,1,-75.0736,11.7633,86.8369,1,corrected,7,1,6
+ca,95831,Sacramento,unemployment_pct,1,-73.5953,4.6837,78.279,1,corrected,10,1,9
+ca,95833,Sacramento,ling_isol_pct,1,-95.7779,3.9581,99.736,1,corrected,9,1,8
+ca,95815,Sacramento,ling_isol_pct,1,-122.9125,10.6479,133.5604,1,corrected,7,1,6
+ca,95482,Mendocino,unemployment_pct,1,-206.1281,10.3282,216.4563,1,corrected,5,1,4
+ca,95838,Sacramento,unemployment_pct,1,-135.4091,7.0787,142.4878,1,corrected,5,1,4
+ca,91978,San Diego,ling_isol_pct,1,-417.6439,2.6,420.2439,1,corrected,2,1,1
+ca,91978,San Diego,unemployment_pct,1,-411.027,14.0,425.027,1,corrected,2,1,1
+ca,95437,Mendocino,ling_isol_pct,1,-335.3228,7.6424,342.9652,1,corrected,3,1,2
+ca,95437,Mendocino,unemployment_pct,1,-266.2969,6.4065,272.7034,1,corrected,3,1,2
+ca,95814,Sacramento,unemployment_pct,1,-242.7815,4.7302,247.5117,1,corrected,6,2,4
+ca,95822,Sacramento,ling_isol_pct,1,-46.8144,11.7956,58.61,1,corrected,9,1,8
+ca,95822,Sacramento,unemployment_pct,1,-55.1737,9.2758,64.4495,1,corrected,9,1,8
+ca,95817,Sacramento,unemployment_pct,1,-302.3139,8.1817,310.4956,1,corrected,4,1,3
+ca,95818,Sacramento,unemployment_pct,1,-296.5902,5.1276,301.7178,1,corrected,8,2,6
+ca,95693,Sacramento,ling_isol_pct,1,-248.5019,4.9,253.4019,1,corrected,2,1,1
+ca,95836,Sacramento,edu_lt_hs_pct,1,-999.0,,,1,became missing,1,1,0
+ca,95836,Sacramento,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,95836,Sacramento,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,95836,Sacramento,housing_burden_pct,1,-999.0,,,1,became missing,1,1,0
+ca,95836,Sacramento,ces4_percentile,1,-999.0,,,1,became missing,1,1,0
+ca,93610,Madera,unemployment_pct,1,-385.8372,7.7391,393.5763,1,corrected,3,1,2
+ca,93646,Fresno,unemployment_pct,1,-314.116,23.2,337.316,1,corrected,2,1,1
+ca,93277,Tulare,ling_isol_pct,1,-209.3576,4.2968,213.6544,1,corrected,10,2,8
+ca,93291,Tulare,ling_isol_pct,1,-35.3637,12.1258,47.4895,1,corrected,7,1,6
+ca,93291,Tulare,unemployment_pct,1,-15.0946,6.0065,21.1011,1,corrected,7,1,6
+ca,95901,Yuba,ling_isol_pct,1,-124.8365,2.2702,127.1067,1,corrected,8,2,6
+ca,95961,Yuba,ling_isol_pct,1,-135.1829,7.8571,143.04,1,corrected,4,1,3
+ca,93257,Tulare,ling_isol_pct,1,11.8515,19.7548,7.9033,0,corrected,13,1,12
+ca,93257,Tulare,unemployment_pct,1,6.0945,13.9527,7.8582,0,corrected,13,1,12
+ca,93257,Tulare,housing_burden_pct,1,13.9136,21.833,7.9194,0,corrected,13,1,12
+ca,93257,Tulare,ces4_percentile,1,73.7117,82.0986,8.3869,0,corrected,13,1,12
+ca,92115,San Diego,edu_lt_hs_pct,1,-35.5013,15.1453,50.6466,1,corrected,12,1,11
+ca,92115,San Diego,ling_isol_pct,1,-104.5783,8.8845,113.4628,1,corrected,12,2,10
+ca,92105,San Diego,unemployment_pct,1,-49.9891,8.8225,58.8116,1,corrected,14,1,13
+ca,92082,San Diego,unemployment_pct,1,-307.4498,4.1344,311.5842,1,corrected,3,1,2
+ca,91913,San Diego,unemployment_pct,1,-146.3111,6.1938,152.5049,1,corrected,4,1,3
+ca,92102,San Diego,unemployment_pct,1,-49.6407,5.1123,54.753,1,corrected,11,1,10
+ca,91977,San Diego,ling_isol_pct,1,-163.4462,4.8968,168.343,1,corrected,12,2,10
+ca,92106,San Diego,poverty_pct,1,-4.3325,18.8936,23.2261,1,corrected,7,1,6
+ca,92106,San Diego,edu_lt_hs_pct,1,-193.9399,4.6082,198.5481,1,corrected,7,2,5
+ca,92106,San Diego,ling_isol_pct,1,-20.2063,2.6492,22.8555,1,corrected,7,1,6
+ca,92106,San Diego,unemployment_pct,1,-18.065,4.8405,22.9055,1,corrected,7,1,6
+ca,92106,San Diego,housing_burden_pct,1,-6.7873,16.3815,23.1688,1,corrected,7,1,6
+ca,92106,San Diego,ces4_percentile,1,0.9448,24.2942,23.3494,0,corrected,7,1,6
+ca,92101,San Diego,poverty_pct,1,24.9493,25.636,0.6867,0,corrected,8,1,7
+ca,92101,San Diego,edu_lt_hs_pct,1,5.4949,6.1685,0.6736,0,corrected,8,1,7
+ca,92101,San Diego,ling_isol_pct,1,4.1775,4.8503,0.6728,0,corrected,8,1,7
+ca,92101,San Diego,unemployment_pct,1,4.4434,5.1164,0.673,0,corrected,8,1,7
+ca,92101,San Diego,housing_burden_pct,1,17.519,18.2007,0.6817,0,corrected,8,1,7
+ca,92101,San Diego,ces4_percentile,1,59.353,60.0627,0.7097,0,corrected,8,1,7
+ca,92056,San Diego,ling_isol_pct,1,-54.479,3.6787,58.1577,1,corrected,12,1,11
+ca,92056,San Diego,unemployment_pct,1,-62.0857,5.2966,67.3823,1,corrected,12,1,11
+ca,92135,San Diego,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92135,San Diego,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92135,San Diego,housing_burden_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92135,San Diego,ces4_percentile,1,-999.0,,,1,became missing,1,1,0
+ca,92117,San Diego,ling_isol_pct,1,-128.9236,4.0472,132.9708,1,corrected,9,1,8
+ca,92109,San Diego,unemployment_pct,1,-64.146,3.027,67.173,1,corrected,12,1,11
+ca,92119,San Diego,ling_isol_pct,1,-231.6814,2.399,234.0804,1,corrected,4,1,3
+ca,91932,San Diego,ling_isol_pct,1,-49.6697,7.324,56.9937,1,corrected,6,1,5
+ca,92139,San Diego,housing_burden_pct,1,-118.3614,19.4018,137.7632,1,corrected,7,1,6
+ca,92075,San Diego,edu_lt_hs_pct,1,-490.0968,2.3423,492.4391,1,corrected,3,1,2
+ca,92134,San Diego,poverty_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92134,San Diego,edu_lt_hs_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92134,San Diego,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92134,San Diego,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92134,San Diego,housing_burden_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92134,San Diego,ces4_percentile,1,-999.0,,,1,became missing,1,1,0
+ca,92021,San Diego,unemployment_pct,1,-117.1448,7.7016,124.8464,1,corrected,10,1,9
+ca,92114,San Diego,ling_isol_pct,1,-57.9914,8.4985,66.4899,1,corrected,14,1,13
+ca,91902,San Diego,ling_isol_pct,1,-404.8596,4.4707,409.3303,1,corrected,5,2,3
+ca,95981,Yuba,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,95981,Yuba,housing_burden_pct,1,-999.0,,,1,became missing,1,1,0
+ca,95002,Santa Clara,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,96103,Plumas,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92145,San Diego,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92058,San Diego,unemployment_pct,1,-301.5297,6.7664,308.2961,1,corrected,4,1,3
+ca,92037,San Diego,unemployment_pct,1,-69.5065,4.5624,74.0689,1,corrected,13,1,12
+ca,92122,San Diego,unemployment_pct,1,-91.9237,4.4889,96.4126,1,corrected,8,1,7
+ca,92081,San Diego,ling_isol_pct,1,-266.9648,1.9613,268.9261,1,corrected,5,1,4
+ca,95046,Santa Clara,unemployment_pct,1,-477.7848,2.5,480.2848,1,corrected,2,1,1
+ca,93263,Kern,ling_isol_pct,1,-61.2374,23.6208,84.8582,1,corrected,5,1,4
+ca,93263,Kern,housing_burden_pct,1,-67.2271,17.089,84.3161,1,corrected,5,1,4
+ca,93308,Kern,ling_isol_pct,1,-71.9353,1.7847,73.72,1,corrected,10,1,9
+ca,93560,Kern,unemployment_pct,1,-212.1437,10.74,222.8837,1,corrected,4,1,3
+ca,93524,Kern,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,93561,Kern,poverty_pct,1,-122.8821,30.5211,153.4032,1,corrected,5,1,4
+ca,93561,Kern,ling_isol_pct,1,-146.9723,2.2128,149.1851,1,corrected,5,1,4
+ca,93561,Kern,unemployment_pct,1,-143.4844,6.3115,149.7959,1,corrected,5,1,4
+ca,93561,Kern,housing_burden_pct,1,-138.7958,11.821,150.6168,1,corrected,5,1,4
+ca,93561,Kern,ces4_percentile,1,-112.3855,42.8556,155.2411,1,corrected,5,1,4
+ca,93215,Kern,poverty_pct,1,-84.1377,59.8827,144.0204,1,corrected,7,2,5
+ca,93215,Kern,ling_isol_pct,1,-109.8329,30.1425,139.9754,1,corrected,7,2,5
+ca,93215,Kern,unemployment_pct,1,-128.3895,8.6646,137.0541,1,corrected,7,2,5
+ca,93215,Kern,housing_burden_pct,1,-119.0148,19.5152,138.53,1,corrected,7,2,5
+ca,93215,Kern,ces4_percentile,1,-66.5903,80.1925,146.7828,1,corrected,7,2,5
+ca,92140,San Diego,poverty_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92140,San Diego,edu_lt_hs_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92140,San Diego,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92140,San Diego,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92140,San Diego,housing_burden_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92140,San Diego,ces4_percentile,1,-999.0,,,1,became missing,1,1,0
+ca,93280,Kern,poverty_pct,1,-155.0869,61.3101,216.397,1,corrected,4,1,3
+ca,93280,Kern,ling_isol_pct,1,-181.2877,28.3908,209.6785,1,corrected,4,1,3
+ca,93280,Kern,unemployment_pct,1,-195.7303,10.2449,205.9752,1,corrected,4,1,3
+ca,93280,Kern,housing_burden_pct,1,-192.8561,13.8561,206.7122,1,corrected,4,1,3
+ca,93280,Kern,ces4_percentile,1,-133.3832,88.5791,221.9623,1,corrected,4,1,3
+ca,93285,Kern,ling_isol_pct,1,-566.4234,4.0,570.4234,1,corrected,2,1,1
+ca,93285,Kern,unemployment_pct,1,-422.4914,14.7,437.1914,1,corrected,2,1,1
+ca,92004,San Diego,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92004,San Diego,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,93268,Kern,ling_isol_pct,1,-470.6384,18.5503,489.1887,1,corrected,3,1,2
+ca,95691,Yolo,unemployment_pct,1,-111.2605,7.1048,118.3653,1,corrected,7,1,6
+ca,95618,Yolo,edu_lt_hs_pct,1,-295.0476,3.0336,298.0812,1,corrected,4,1,3
+ca,93622,Fresno,housing_burden_pct,1,-75.0594,14.2719,89.3313,1,corrected,3,1,2
+ca,93637,Madera,unemployment_pct,1,-196.9897,6.8528,203.8425,1,corrected,5,1,4
+ca,92136,San Diego,poverty_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92136,San Diego,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92136,San Diego,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92136,San Diego,housing_burden_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92136,San Diego,ces4_percentile,1,-999.0,,,1,became missing,1,1,0
+ca,93722,Fresno,ling_isol_pct,1,-51.4794,7.3613,58.8407,1,corrected,13,1,12
+ca,93706,Fresno,unemployment_pct,1,-97.082,13.0256,110.1076,1,corrected,11,1,10
+ca,94930,Marin,ling_isol_pct,1,-536.3785,1.693,538.0715,1,corrected,3,1,2
+ca,94930,Marin,housing_burden_pct,1,-108.1752,21.9476,130.1228,1,corrected,3,1,2
+ca,94901,Marin,unemployment_pct,1,-193.2814,3.1211,196.4025,1,corrected,8,1,7
+ca,93710,Fresno,edu_lt_hs_pct,1,-47.8582,11.2234,59.0816,1,corrected,10,1,9
+ca,93710,Fresno,ling_isol_pct,1,-84.3008,5.7597,90.0605,1,corrected,10,1,9
+ca,95943,Glenn,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,96130,Lassen,ling_isol_pct,1,-361.2372,0.2552,361.4924,1,corrected,4,2,2
+ca,96056,Shasta,unemployment_pct,1,-387.3885,2.7,390.0885,1,corrected,2,1,1
+ca,96117,Lassen,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,96117,Lassen,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,96117,Lassen,housing_burden_pct,1,-999.0,,,1,became missing,1,1,0
+ca,96117,Lassen,ces4_percentile,1,-999.0,,,1,became missing,1,1,0
+ca,96132,Lassen,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,95548,Del Norte,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,95203,San Joaquin,ling_isol_pct,1,-156.6219,10.5097,167.1316,1,corrected,4,1,3
+ca,93442,San Luis Obispo,ling_isol_pct,1,-140.8005,1.2314,142.0319,1,corrected,3,1,2
+ca,93442,San Luis Obispo,unemployment_pct,1,-135.1995,7.7594,142.9589,1,corrected,3,1,2
+ca,93401,San Luis Obispo,ling_isol_pct,1,-67.4746,2.836,70.3106,1,corrected,8,1,7
+ca,93401,San Luis Obispo,housing_burden_pct,1,-51.002,20.5519,71.5539,1,corrected,8,1,7
+ca,93405,San Luis Obispo,poverty_pct,1,-27.32,59.6923,87.0123,1,corrected,6,1,5
+ca,93405,San Luis Obispo,edu_lt_hs_pct,1,-284.6333,8.4754,293.1087,1,corrected,6,1,5
+ca,93405,San Luis Obispo,ling_isol_pct,1,-80.2524,2.0199,82.2723,1,corrected,6,1,5
+ca,93405,San Luis Obispo,unemployment_pct,1,-75.4861,7.213,82.6991,1,corrected,6,1,5
+ca,93405,San Luis Obispo,housing_burden_pct,1,-41.6849,44.0411,85.726,1,corrected,6,1,5
+ca,93405,San Luis Obispo,ces4_percentile,1,-57.1106,27.234,84.3446,1,corrected,6,1,5
+ca,93422,San Luis Obispo,edu_lt_hs_pct,1,-3.6733,5.6055,9.2788,1,corrected,5,1,4
+ca,93422,San Luis Obispo,ling_isol_pct,1,-7.7004,1.5408,9.2412,1,corrected,5,1,4
+ca,93422,San Luis Obispo,unemployment_pct,1,-6.118,3.1379,9.2559,1,corrected,5,1,4
+ca,93422,San Luis Obispo,housing_burden_pct,1,2.7064,12.0446,9.3382,0,corrected,5,1,4
+ca,93422,San Luis Obispo,ces4_percentile,1,3.5196,12.8654,9.3458,0,corrected,5,1,4
+ca,94015,San Mateo,unemployment_pct,1,-55.6764,5.5634,61.2398,1,corrected,11,1,10
+ca,94019,San Mateo,unemployment_pct,1,-547.7621,3.0,550.7621,1,corrected,2,1,1
+ca,94402,San Mateo,ling_isol_pct,1,-123.0581,5.5304,128.5885,1,corrected,8,1,7
+ca,93433,San Luis Obispo,ling_isol_pct,1,-430.6734,0.0,430.6734,1,corrected,2,1,1
+ca,94401,San Mateo,unemployment_pct,1,-157.6863,4.5666,162.2529,1,corrected,6,1,5
+ca,94558,Napa,ling_isol_pct,1,-37.2263,5.8747,43.101,1,corrected,23,3,20
+ca,94558,Napa,unemployment_pct,1,-53.2914,4.1121,57.4035,1,corrected,23,3,20
+ca,94558,Napa,housing_burden_pct,1,-4.3271,13.9753,18.3024,1,corrected,23,2,21
+ca,94558,Napa,ces4_percentile,1,17.9575,36.6699,18.7124,0,corrected,23,2,21
+ca,94066,San Mateo,edu_lt_hs_pct,1,-44.1765,11.7289,55.9054,1,corrected,9,1,8
+ca,94066,San Mateo,ling_isol_pct,1,-69.9938,7.69,77.6838,1,corrected,9,1,8
+ca,94066,San Mateo,unemployment_pct,1,-51.8709,3.584,55.4549,1,corrected,9,1,8
+ca,94515,Napa,unemployment_pct,1,-999.0,,,1,became missing,2,2,0
+ca,93428,San Luis Obispo,unemployment_pct,1,-322.3,6.1637,328.4637,1,corrected,3,1,2
+ca,95336,San Joaquin,ling_isol_pct,1,-130.361,5.7558,136.1168,1,corrected,10,1,9
+ca,95206,San Joaquin,unemployment_pct,1,-16.1848,10.5966,26.7814,1,corrected,12,1,11
+ca,95206,San Joaquin,housing_burden_pct,1,-2.3667,24.7913,27.158,1,corrected,12,1,11
+ca,95337,San Joaquin,ling_isol_pct,1,-96.4051,3.692,100.0971,1,corrected,5,1,4
+ca,95242,San Joaquin,ling_isol_pct,1,-263.4257,3.2725,266.6982,1,corrected,7,2,5
+ca,95366,San Joaquin,ling_isol_pct,1,-329.7242,2.5035,332.2277,1,corrected,3,1,2
+ca,95215,San Joaquin,ling_isol_pct,1,-147.2965,21.5008,168.7973,1,corrected,5,1,4
+ca,95215,San Joaquin,unemployment_pct,1,-164.0361,10.4682,174.5043,1,corrected,5,1,4
+ca,95358,Stanislaus,ling_isol_pct,1,-80.3693,14.4799,94.8492,1,corrected,8,1,7
+ca,95358,Stanislaus,unemployment_pct,1,-81.8109,12.8895,94.7004,1,corrected,8,1,7
+ca,95357,Stanislaus,unemployment_pct,1,-207.9252,5.2594,213.1846,1,corrected,5,1,4
+ca,95355,Stanislaus,unemployment_pct,1,-43.4765,8.0586,51.5351,1,corrected,8,1,7
+ca,95350,Stanislaus,unemployment_pct,1,-55.9905,8.4264,64.4169,1,corrected,10,1,9
+ca,92392,San Bernardino,ling_isol_pct,1,-535.078,5.4136,540.4916,1,corrected,6,2,4
+ca,92371,San Bernardino,ling_isol_pct,1,-371.2812,2.636,373.9172,1,corrected,3,1,2
+ca,92394,San Bernardino,poverty_pct,1,-44.1662,48.8486,93.0148,1,corrected,4,1,3
+ca,92394,San Bernardino,ling_isol_pct,1,-81.94,7.3951,89.3351,1,corrected,4,1,3
+ca,92394,San Bernardino,unemployment_pct,1,-74.6848,15.357,90.0418,1,corrected,4,1,3
+ca,92394,San Bernardino,housing_burden_pct,1,-69.7318,20.7926,90.5244,1,corrected,4,1,3
+ca,92394,San Bernardino,ces4_percentile,1,-26.4339,68.3083,94.7422,1,corrected,4,1,3
+ca,92399,San Bernardino,ling_isol_pct,1,-115.0278,2.1368,117.1646,1,corrected,8,1,7
+ca,92314,San Bernardino,ling_isol_pct,1,-276.742,2.1303,278.8723,1,corrected,6,3,3
+ca,92314,San Bernardino,unemployment_pct,1,-96.047,5.6551,101.7021,1,corrected,6,1,5
+ca,92315,San Bernardino,unemployment_pct,1,-668.0177,2.2,670.2177,1,corrected,3,2,1
+ca,92324,San Bernardino,ling_isol_pct,1,-152.683,11.1636,163.8466,1,corrected,12,2,10
+ca,92401,San Bernardino,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92352,San Bernardino,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92316,San Bernardino,ling_isol_pct,1,-99.8872,15.6594,115.5466,1,corrected,7,1,6
+ca,92316,San Bernardino,unemployment_pct,1,-106.7466,7.9185,114.6651,1,corrected,7,1,6
+ca,96007,Shasta,ling_isol_pct,1,-109.2327,1.7838,111.0165,1,corrected,6,1,5
+ca,96007,Shasta,unemployment_pct,1,-106.5597,4.7903,111.35,1,corrected,6,1,5
+ca,96001,Shasta,ling_isol_pct,1,-97.5417,0.8672,98.4089,1,corrected,10,2,8
+ca,91730,San Bernardino,ling_isol_pct,1,-68.3406,6.9154,75.256,1,corrected,12,1,11
+ca,91762,San Bernardino,ling_isol_pct,1,-92.1634,9.1534,101.3168,1,corrected,10,1,9
+ca,91786,San Bernardino,unemployment_pct,1,-72.8978,5.6373,78.5351,1,corrected,11,1,10
+ca,92346,San Bernardino,ling_isol_pct,1,-104.1903,4.204,108.3943,1,corrected,8,1,7
+ca,92346,San Bernardino,unemployment_pct,1,-231.4968,6.7655,238.2623,1,corrected,8,2,6
+ca,92346,San Bernardino,housing_burden_pct,1,-95.1211,14.3718,109.4929,1,corrected,8,1,7
+ca,92346,San Bernardino,ces4_percentile,1,-59.6547,54.1345,113.7892,1,corrected,8,1,7
+ca,92277,San Bernardino,ling_isol_pct,1,-93.2611,2.9048,96.1659,1,corrected,5,1,4
+ca,92277,San Bernardino,unemployment_pct,1,-265.9917,11.3121,277.3038,1,corrected,5,1,4
+ca,92277,San Bernardino,housing_burden_pct,1,-80.2887,17.2546,97.5433,1,corrected,5,1,4
+ca,95326,Stanislaus,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,96051,Shasta,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92307,San Bernardino,ling_isol_pct,1,-149.3668,2.3858,151.7526,1,corrected,7,1,6
+ca,92311,San Bernardino,ling_isol_pct,1,-28.8971,4.2319,33.129,1,corrected,6,1,5
+ca,92308,San Bernardino,unemployment_pct,1,-141.8867,11.9284,153.8151,1,corrected,6,1,5
+ca,91763,San Bernardino,ling_isol_pct,1,-85.7086,16.4386,102.1472,1,corrected,8,1,7
+ca,96016,Shasta,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,93657,Fresno,unemployment_pct,1,-44.2607,5.6278,49.8885,1,corrected,8,1,7
+ca,93619,Fresno,unemployment_pct,1,-97.144,3.4823,100.6263,1,corrected,11,1,10
+ca,93619,Fresno,housing_burden_pct,1,-12.8295,7.3264,20.1559,1,corrected,11,1,10
+ca,94903,Marin,unemployment_pct,1,-219.1182,5.4642,224.5824,1,corrected,5,1,4
+ca,93705,Fresno,ling_isol_pct,1,-291.4675,5.8217,297.2892,1,corrected,7,2,5
+ca,93704,Fresno,ling_isol_pct,1,-151.2839,3.1873,154.4712,1,corrected,8,1,7
+ca,94960,Marin,edu_lt_hs_pct,1,-130.2881,3.2791,133.5672,1,corrected,4,1,3
+ca,92404,San Bernardino,ling_isol_pct,1,-64.8817,5.6222,70.5039,1,corrected,11,1,10
+ca,94964,Marin,poverty_pct,1,-999.0,,,1,became missing,1,1,0
+ca,94964,Marin,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,94964,Marin,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,94964,Marin,housing_burden_pct,1,-999.0,,,1,became missing,1,1,0
+ca,94964,Marin,ces4_percentile,1,-999.0,,,1,became missing,1,1,0
+ca,94956,Marin,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,93728,Fresno,ling_isol_pct,1,-306.4741,12.5199,318.994,1,corrected,4,1,3
+ca,95338,Mariposa,unemployment_pct,1,-248.8516,9.0059,257.8575,1,corrected,3,1,2
+ca,93210,Fresno,poverty_pct,1,-144.8788,42.1832,187.062,1,corrected,4,1,3
+ca,93210,Fresno,ling_isol_pct,1,-173.4868,7.3097,180.7965,1,corrected,4,1,3
+ca,93210,Fresno,unemployment_pct,1,-173.004,7.8982,180.9022,1,corrected,4,1,3
+ca,93210,Fresno,housing_burden_pct,1,-167.8436,14.1888,182.0324,1,corrected,4,1,3
+ca,93210,Fresno,ces4_percentile,1,-116.8169,76.3909,193.2078,1,corrected,4,1,3
+ca,93720,Fresno,unemployment_pct,1,-158.0251,5.3615,163.3866,1,corrected,6,1,5
+ca,93654,Fresno,ling_isol_pct,1,-41.1973,17.2111,58.4084,1,corrected,7,1,6
+ca,92860,Riverside,unemployment_pct,1,-138.8162,3.1084,141.9246,1,corrected,8,1,7
+ca,92860,Riverside,housing_burden_pct,1,-108.3271,10.9579,119.285,1,corrected,8,1,7
+ca,92260,Riverside,unemployment_pct,1,-116.0293,6.5792,122.6085,1,corrected,12,2,10
+ca,94553,Contra Costa,ling_isol_pct,1,-14.7601,3.281,18.0411,1,corrected,13,1,12
+ca,92507,Riverside,unemployment_pct,1,-13.9645,9.3473,23.3118,1,corrected,12,2,10
+ca,92507,Riverside,housing_burden_pct,1,-0.7109,22.9145,23.6254,1,corrected,12,2,10
+ca,92506,Riverside,unemployment_pct,1,-113.3623,5.3039,118.6662,1,corrected,10,1,9
+ca,92882,Riverside,ling_isol_pct,1,-22.5476,5.8695,28.4171,1,corrected,15,1,14
+ca,95991,Sutter,unemployment_pct,1,-85.5941,9.7749,95.369,1,corrected,9,1,8
+ca,92509,Riverside,ling_isol_pct,1,-61.6092,9.3344,70.9436,1,corrected,15,1,14
+ca,92234,Riverside,unemployment_pct,1,-139.0542,6.7149,145.7691,1,corrected,13,3,10
+ca,92211,Riverside,unemployment_pct,1,-137.7723,3.4555,141.2278,1,corrected,5,1,4
+ca,92262,Riverside,ling_isol_pct,1,-71.8292,6.483,78.3122,1,corrected,9,1,8
+ca,92276,Riverside,unemployment_pct,1,-192.0671,6.7,198.7671,1,corrected,2,1,1
+ca,92240,Riverside,unemployment_pct,1,-128.4596,9.3772,137.8368,1,corrected,8,1,7
+ca,92561,Riverside,edu_lt_hs_pct,1,-251.4426,14.4,265.8426,1,corrected,2,1,1
+ca,92561,Riverside,ling_isol_pct,1,-736.2791,2.5,738.7791,1,corrected,2,1,1
+ca,92561,Riverside,unemployment_pct,1,-255.3523,9.1,264.4523,1,corrected,2,1,1
+ca,92320,Riverside,ling_isol_pct,1,-43.1276,1.7228,44.8504,1,corrected,4,1,3
+ca,92320,Riverside,unemployment_pct,1,-40.3095,4.673,44.9825,1,corrected,4,1,3
+ca,92223,Riverside,ling_isol_pct,1,-114.5181,3.3676,117.8857,1,corrected,9,1,8
+ca,92220,Riverside,ling_isol_pct,1,-268.8504,9.2191,278.0695,1,corrected,7,2,5
+ca,92595,Riverside,ling_isol_pct,1,-215.7805,3.7717,219.5522,1,corrected,7,2,5
+ca,92544,Riverside,ling_isol_pct,1,-80.7536,3.2876,84.0412,1,corrected,11,1,10
+ca,92553,Riverside,ling_isol_pct,1,-16.6819,10.8975,27.5794,1,corrected,16,1,15
+ca,92264,Riverside,edu_lt_hs_pct,1,-99.0833,8.1503,107.2336,1,corrected,8,1,7
+ca,92239,Riverside,poverty_pct,1,-763.6363,45.6386,809.2749,1,corrected,3,1,2
+ca,92239,Riverside,edu_lt_hs_pct,1,13.6463,35.7701,22.1238,0,corrected,3,1,2
+ca,92239,Riverside,ling_isol_pct,1,-794.3399,4.6,798.9399,1,corrected,3,2,1
+ca,92239,Riverside,unemployment_pct,1,-999.0,,,1,became missing,3,3,0
+ca,92239,Riverside,housing_burden_pct,1,-793.1367,10.5,803.6367,1,corrected,3,2,1
+ca,92239,Riverside,ces4_percentile,1,-783.6085,57.2239,840.8324,1,corrected,3,2,1
+ca,92587,Riverside,unemployment_pct,1,-166.831,5.1548,171.9858,1,corrected,4,1,3
+ca,92586,Riverside,unemployment_pct,1,-224.3534,8.2431,232.5965,1,corrected,5,1,4
+ca,91752,Riverside,unemployment_pct,1,-89.5785,6.5067,96.0852,1,corrected,7,1,6
+ca,91752,Riverside,housing_burden_pct,1,-59.9373,18.3511,78.2884,1,corrected,7,1,6
+ca,92567,Riverside,ling_isol_pct,1,-291.6542,5.5702,297.2244,1,corrected,3,1,2
+ca,92567,Riverside,unemployment_pct,1,-348.4057,7.9682,356.3739,1,corrected,3,1,2
+ca,92241,Riverside,unemployment_pct,1,-179.3961,5.9249,185.321,1,corrected,3,1,2
+ca,92225,Riverside,ling_isol_pct,1,-99.3313,14.409,113.7403,1,corrected,6,1,5
+ca,00039,,edu_lt_hs_pct,1,-999.0,,,1,became missing,1,1,0
+ca,00039,,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,96041,Trinity,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,94513,Contra Costa,ling_isol_pct,1,-120.3383,2.3549,122.6932,1,corrected,10,1,9
+ca,94509,Contra Costa,ling_isol_pct,1,-110.4401,7.877,118.3171,1,corrected,12,1,11
+ca,94509,Contra Costa,unemployment_pct,1,-49.0177,11.2585,60.2762,1,corrected,12,1,11
+ca,94505,Contra Costa,ling_isol_pct,1,-155.7609,0.2601,156.021,1,corrected,3,1,2
+ca,94505,Contra Costa,unemployment_pct,1,-151.7235,5.0447,156.7682,1,corrected,3,1,2
+ca,94595,Contra Costa,unemployment_pct,1,-394.1145,4.0439,398.1584,1,corrected,5,3,2
+ca,94803,Contra Costa,ling_isol_pct,1,-190.6086,5.231,195.8396,1,corrected,4,1,3
+ca,94707,Alameda,ling_isol_pct,1,-137.5675,1.2061,138.7736,1,corrected,4,1,3
+ca,94583,Contra Costa,edu_lt_hs_pct,1,-155.5281,4.3024,159.8305,1,corrected,7,1,6
+ca,94544,Alameda,ling_isol_pct,1,-39.4326,12.755,52.1876,1,corrected,16,1,15
+ca,92373,San Bernardino,unemployment_pct,1,-91.6134,5.6838,97.2972,1,corrected,6,1,5
+ca,94549,Contra Costa,unemployment_pct,1,-210.267,4.04,214.307,1,corrected,5,1,4
+ca,92372,San Bernardino,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,92344,San Bernardino,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,93060,Ventura,ling_isol_pct,1,-66.1933,11.716,77.9093,1,corrected,7,1,6
+ca,93065,Ventura,housing_burden_pct,1,-9.8511,14.3215,24.1726,1,corrected,15,1,14
+ca,93003,Ventura,ling_isol_pct,1,-25.2693,2.5075,27.7768,1,corrected,10,1,9
+ca,93001,Ventura,edu_lt_hs_pct,1,-5.7019,12.889,18.5909,1,corrected,11,1,10
+ca,93001,Ventura,ling_isol_pct,1,-164.6909,4.1703,168.8612,1,corrected,11,2,9
+ca,93001,Ventura,unemployment_pct,1,-13.7802,4.6595,18.4397,1,corrected,11,1,10
+ca,93001,Ventura,ces4_percentile,1,27.2766,46.4847,19.2081,0,corrected,11,1,10
+ca,93004,Ventura,unemployment_pct,1,-104.5546,3.9829,108.5375,1,corrected,4,1,3
+ca,91362,Ventura,unemployment_pct,1,-15.5613,4.7691,20.3304,1,corrected,8,1,7
+ca,91362,Ventura,housing_burden_pct,1,-6.2669,14.2556,20.5225,1,corrected,8,1,7
+ca,92549,Riverside,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,91360,Ventura,edu_lt_hs_pct,1,-71.3852,8.7156,80.1008,1,corrected,10,1,9
+ca,91360,Ventura,ling_isol_pct,1,-82.1747,3.9105,86.0852,1,corrected,10,1,9
+ca,93012,Ventura,ling_isol_pct,1,-92.1204,1.1941,93.3145,1,corrected,6,1,5
+ca,92210,Riverside,unemployment_pct,1,-612.3577,7.7,620.0577,1,corrected,2,1,1
+ca,93021,Ventura,housing_burden_pct,1,-38.7929,10.28,49.0729,1,corrected,8,1,7
+ca,93030,Ventura,unemployment_pct,1,-59.9201,6.4975,66.4176,1,corrected,9,1,8
+ca,93036,Ventura,edu_lt_hs_pct,1,8.9592,25.8118,16.8526,0,corrected,8,1,7
+ca,93036,Ventura,ling_isol_pct,1,-122.075,13.8634,135.9384,1,corrected,8,1,7
+ca,93036,Ventura,unemployment_pct,1,-9.8652,6.6727,16.5379,1,corrected,8,1,7
+ca,93036,Ventura,housing_burden_pct,1,3.098,19.8526,16.7546,0,corrected,8,1,7
+ca,93036,Ventura,ces4_percentile,1,38.1459,55.4865,17.3406,0,corrected,8,1,7
+ca,00061,,poverty_pct,1,-999.0,,,1,became missing,1,1,0
+ca,00061,,edu_lt_hs_pct,1,-999.0,,,1,became missing,1,1,0
+ca,00061,,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,00061,,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,00061,,housing_burden_pct,1,-999.0,,,1,became missing,1,1,0
+ca,00061,,ces4_percentile,1,-999.0,,,1,became missing,1,1,0
+ca,91301,Los Angeles,ling_isol_pct,1,-140.4685,3.1047,143.5732,1,corrected,8,1,7
+ca,91301,Los Angeles,unemployment_pct,1,-17.5229,4.2335,21.7564,1,corrected,8,1,7
+ca,91301,Los Angeles,housing_burden_pct,1,-6.242,15.7644,22.0064,1,corrected,8,1,7
+ca,93243,Kern,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,93043,Ventura,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,96150,El Dorado,edu_lt_hs_pct,1,-119.2645,11.3644,130.6289,1,corrected,10,2,8
+ca,96150,El Dorado,unemployment_pct,1,-93.642,6.7496,100.3916,1,corrected,10,1,9
+ca,96150,El Dorado,housing_burden_pct,1,-11.8633,18.1123,29.9756,1,corrected,10,1,9
+ca,95720,El Dorado,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,95720,El Dorado,housing_burden_pct,1,-999.0,,,1,became missing,1,1,0
+ca,95327,Tuolumne,poverty_pct,1,-161.4463,35.4636,196.9099,1,corrected,3,1,2
+ca,95327,Tuolumne,ling_isol_pct,1,-189.9454,0.2643,190.2097,1,corrected,3,1,2
+ca,95327,Tuolumne,unemployment_pct,1,-182.9932,8.851,191.8442,1,corrected,3,1,2
+ca,95327,Tuolumne,housing_burden_pct,1,-180.0593,12.4747,192.534,1,corrected,3,1,2
+ca,95327,Tuolumne,ces4_percentile,1,-148.2471,51.766,200.0131,1,corrected,3,1,2
+ca,95370,Tuolumne,ling_isol_pct,1,-175.81,1.5287,177.3387,1,corrected,4,1,3
+ca,95451,Lake,unemployment_pct,1,-297.673,4.7,302.373,1,corrected,2,1,1
+ca,95453,Lake,unemployment_pct,1,-999.0,,,1,became missing,3,3,0
+ca,95928,Butte,ling_isol_pct,1,-125.8983,1.5288,127.4271,1,corrected,7,1,6
+ca,95965,Butte,unemployment_pct,1,-115.4356,10.9643,126.3999,1,corrected,7,1,6
+ca,95966,Butte,ling_isol_pct,1,-92.1645,2.1101,94.2746,1,corrected,7,1,6
+ca,95969,Butte,ling_isol_pct,1,-173.5546,0.4395,173.9941,1,corrected,5,1,4
+ca,95969,Butte,unemployment_pct,1,-119.568,8.1787,127.7467,1,corrected,5,1,4
+ca,96101,Modoc,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,96104,Modoc,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,96104,Modoc,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,95942,Butte,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,95503,Humboldt,ling_isol_pct,1,-60.2794,2.6372,62.9166,1,corrected,6,1,5
+ca,94578,Alameda,unemployment_pct,1,-82.4149,6.8028,89.2177,1,corrected,9,1,8
+ca,94546,Alameda,unemployment_pct,1,-46.964,3.9366,50.9006,1,corrected,10,1,9
+ca,94601,Alameda,ling_isol_pct,1,-98.0753,21.53,119.6053,1,corrected,11,1,10
+ca,94601,Alameda,unemployment_pct,1,-73.6386,8.2107,81.8493,1,corrected,11,1,10
+ca,94705,Alameda,ling_isol_pct,1,-139.284,1.4446,140.7286,1,corrected,4,1,3
+ca,90710,Los Angeles,edu_lt_hs_pct,1,-83.3999,22.368,105.7679,1,corrected,8,1,7
+ca,94610,Alameda,edu_lt_hs_pct,1,-188.884,5.8551,194.7391,1,corrected,9,2,7
+ca,94607,Alameda,poverty_pct,1,39.2415,43.7367,4.4952,0,corrected,14,2,12
+ca,94607,Alameda,edu_lt_hs_pct,1,-5.9899,17.2179,23.2078,1,corrected,14,2,12
+ca,94607,Alameda,ling_isol_pct,1,13.9424,18.3281,4.3857,0,corrected,14,2,12
+ca,94607,Alameda,unemployment_pct,1,-146.129,8.1263,154.2553,1,corrected,14,3,11
+ca,94607,Alameda,housing_burden_pct,1,-1.7757,23.8801,25.6558,1,corrected,14,3,11
+ca,94607,Alameda,ces4_percentile,1,78.082,82.7454,4.6634,0,corrected,14,2,12
+ca,94608,Alameda,edu_lt_hs_pct,1,-129.7159,8.9672,138.6831,1,corrected,10,1,9
+ca,94603,Alameda,ling_isol_pct,1,-205.9084,13.8263,219.7347,1,corrected,7,2,5
+ca,94501,Alameda,ling_isol_pct,1,-39.3082,5.9962,45.3044,1,corrected,14,1,13
+ca,94551,Alameda,unemployment_pct,1,-183.2208,3.3395,186.5603,1,corrected,7,1,6
+ca,94605,Alameda,unemployment_pct,1,-62.9611,7.2418,70.2029,1,corrected,10,1,9
+ca,94704,Alameda,unemployment_pct,1,-97.1019,8.6091,105.711,1,corrected,5,1,4
+ca,94720,Alameda,edu_lt_hs_pct,1,-999.0,,,1,became missing,1,1,0
+ca,94720,Alameda,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,94720,Alameda,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,94720,Alameda,housing_burden_pct,1,-999.0,,,1,became missing,1,1,0
+ca,94720,Alameda,ces4_percentile,1,-999.0,,,1,became missing,1,1,0
+ca,94102,San Francisco,edu_lt_hs_pct,1,-82.2713,15.33,97.6013,1,corrected,11,1,10
+ca,94108,San Francisco,unemployment_pct,1,-115.4821,4.7564,120.2385,1,corrected,6,1,5
+ca,94124,San Francisco,edu_lt_hs_pct,1,17.1379,24.9698,7.8319,0,corrected,10,1,9
+ca,94124,San Francisco,ling_isol_pct,1,-13.0219,15.9116,28.9335,1,corrected,10,2,8
+ca,94124,San Francisco,unemployment_pct,1,-21.4299,7.2568,28.6867,1,corrected,10,2,8
+ca,94124,San Francisco,housing_burden_pct,1,15.1005,22.9167,7.8162,0,corrected,10,1,9
+ca,94124,San Francisco,ces4_percentile,1,75.7309,84.0144,8.2835,0,corrected,10,1,9
+ca,94134,San Francisco,unemployment_pct,1,-4.9854,6.0148,11.0002,1,corrected,12,1,11
+ca,94134,San Francisco,housing_burden_pct,1,5.4867,16.6029,11.1162,0,corrected,12,1,11
+ca,94121,San Francisco,poverty_pct,1,10.9569,18.855,7.8981,0,corrected,10,1,9
+ca,94121,San Francisco,edu_lt_hs_pct,1,1.735,9.5609,7.8259,0,corrected,10,1,9
+ca,94121,San Francisco,ling_isol_pct,1,5.9806,13.8397,7.8591,0,corrected,10,1,9
+ca,94121,San Francisco,unemployment_pct,1,-4.0829,3.6975,7.7804,1,corrected,10,1,9
+ca,94121,San Francisco,housing_burden_pct,1,9.5275,17.4143,7.8868,0,corrected,10,1,9
+ca,94121,San Francisco,ces4_percentile,1,23.9606,31.9603,7.9997,0,corrected,10,1,9
+ca,90650,Los Angeles,ling_isol_pct,1,-6.4379,12.5007,18.9386,1,corrected,21,1,20
+ca,90650,Los Angeles,unemployment_pct,1,-13.013,5.8,18.813,1,corrected,21,1,20
+ca,90650,Los Angeles,housing_burden_pct,1,-0.9657,18.0773,19.043,1,corrected,21,1,20
+ca,90650,Los Angeles,ces4_percentile,1,60.2857,80.4973,20.2116,0,corrected,21,1,20
+ca,90221,Los Angeles,ling_isol_pct,1,-56.8866,12.128,69.0146,1,corrected,11,1,10
+ca,95521,Humboldt,ling_isol_pct,1,-88.2208,3.0023,91.2231,1,corrected,3,1,2
+ca,90027,Los Angeles,poverty_pct,1,32.6411,32.753,0.1119,0,corrected,16,1,15
+ca,90027,Los Angeles,edu_lt_hs_pct,1,10.1938,10.3033,0.1095,0,corrected,16,1,15
+ca,90027,Los Angeles,ling_isol_pct,1,17.772,17.8823,0.1103,0,corrected,16,1,15
+ca,90027,Los Angeles,unemployment_pct,1,5.7846,5.8937,0.1091,0,corrected,16,1,15
+ca,90027,Los Angeles,housing_burden_pct,1,23.3535,23.4645,0.111,0,corrected,16,1,15
+ca,90027,Los Angeles,ces4_percentile,1,67.8058,67.9216,0.1158,0,corrected,16,1,15
+ca,95341,Merced,unemployment_pct,1,-114.0705,12.1144,126.1849,1,corrected,9,1,8
+ca,91406,Los Angeles,poverty_pct,1,40.163,41.3188,1.1558,0,corrected,17,1,16
+ca,91406,Los Angeles,edu_lt_hs_pct,1,19.2106,24.0745,4.8639,0,corrected,17,2,15
+ca,91406,Los Angeles,ling_isol_pct,1,-36.5568,20.4014,56.9582,1,corrected,17,2,15
+ca,91406,Los Angeles,unemployment_pct,1,1.4206,6.1995,4.7789,0,corrected,17,2,15
+ca,91406,Los Angeles,housing_burden_pct,1,22.3126,27.1914,4.8788,0,corrected,17,2,15
+ca,91406,Los Angeles,ces4_percentile,1,83.4575,88.6283,5.1708,0,corrected,17,2,15
+ca,95340,Merced,ling_isol_pct,1,-69.1132,9.8525,78.9657,1,corrected,8,1,7
+ca,90012,Los Angeles,unemployment_pct,1,4.0791,6.7886,2.7095,0,corrected,10,1,9
+ca,90012,Los Angeles,housing_burden_pct,1,-278.9685,25.7474,304.7159,1,corrected,10,2,8
+ca,90046,Los Angeles,unemployment_pct,1,-44.2152,6.6721,50.8873,1,corrected,13,1,12
+ca,95060,Santa Cruz,unemployment_pct,1,-125.0249,6.3877,131.4126,1,corrected,9,1,8
+ca,90806,Los Angeles,housing_burden_pct,1,-2.23,23.9395,26.1695,1,corrected,10,1,9
+ca,94122,San Francisco,poverty_pct,1,14.8679,15.8394,0.9715,0,corrected,13,1,12
+ca,94122,San Francisco,edu_lt_hs_pct,1,8.5375,9.503,0.9655,0,corrected,13,1,12
+ca,94122,San Francisco,ling_isol_pct,1,9.529,10.4955,0.9665,0,corrected,13,1,12
+ca,94122,San Francisco,unemployment_pct,1,2.1142,3.0735,0.9593,0,corrected,13,1,12
+ca,94122,San Francisco,housing_burden_pct,1,13.3818,14.352,0.9702,0,corrected,13,1,12
+ca,94122,San Francisco,ces4_percentile,1,14.2233,15.1942,0.9709,0,corrected,13,1,12
+ca,90026,Los Angeles,ling_isol_pct,1,-8.7949,16.924,25.7189,1,corrected,21,1,20
+ca,90026,Los Angeles,unemployment_pct,1,-18.8883,6.5684,25.4567,1,corrected,21,1,20
+ca,90810,Los Angeles,housing_burden_pct,1,-6.0658,20.9308,26.9966,1,corrected,10,1,9
+ca,94132,San Francisco,ling_isol_pct,1,-40.9309,14.7733,55.7042,1,corrected,7,1,6
+ca,94132,San Francisco,unemployment_pct,1,-46.3528,9.0361,55.3889,1,corrected,7,1,6
+ca,91367,Los Angeles,elderly65_pct,1,-157.8942,16.9881,174.8823,1,corrected,7,1,6
+ca,91367,Los Angeles,edu_lt_hs_pct,1,-87.6134,6.4525,94.0659,1,corrected,7,1,6
+ca,91367,Los Angeles,unemployment_pct,1,-200.6069,5.0285,205.6354,1,corrected,7,1,6
+ca,91303,Los Angeles,unemployment_pct,1,-79.028,6.2175,85.2455,1,corrected,8,1,7
+ca,90016,Los Angeles,unemployment_pct,1,-72.4315,4.8424,77.2739,1,corrected,12,1,11
+ca,90660,Los Angeles,unemployment_pct,1,-64.942,5.0225,69.9645,1,corrected,13,1,12
+ca,93544,Los Angeles,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,90064,Los Angeles,ling_isol_pct,1,-105.8242,4.2741,110.0983,1,corrected,7,1,6
+ca,91390,Los Angeles,poverty_pct,1,5.9942,12.0859,6.0917,0,corrected,9,1,8
+ca,91390,Los Angeles,ling_isol_pct,1,-42.9001,2.0907,44.9908,1,corrected,9,2,7
+ca,91390,Los Angeles,unemployment_pct,1,-244.1662,3.7919,247.9581,1,corrected,9,3,6
+ca,91390,Los Angeles,housing_burden_pct,1,-48.4875,10.5328,59.0203,1,corrected,9,3,6
+ca,91390,Los Angeles,ces4_percentile,1,3.4831,9.5596,6.0765,0,corrected,9,1,8
+ca,93550,Los Angeles,ling_isol_pct,1,5.0589,10.1824,5.1235,0,corrected,17,2,15
+ca,93550,Los Angeles,unemployment_pct,1,-59.5042,9.6179,69.1221,1,corrected,17,3,14
+ca,93550,Los Angeles,housing_burden_pct,1,21.0873,26.2926,5.2053,0,corrected,17,2,15
+ca,93550,Los Angeles,ces4_percentile,1,56.7257,62.1128,5.3871,0,corrected,17,2,15
+ca,93552,Los Angeles,ling_isol_pct,1,-44.6307,13.1266,57.7573,1,corrected,7,1,6
+ca,90019,Los Angeles,ling_isol_pct,1,-79.5135,18.0632,97.5767,1,corrected,16,1,15
+ca,94116,San Francisco,unemployment_pct,1,-97.2354,4.4865,101.7219,1,corrected,7,1,6
+ca,90007,Los Angeles,edu_lt_hs_pct,1,-50.6684,33.7785,84.4469,1,corrected,14,1,13
+ca,90007,Los Angeles,ling_isol_pct,1,-58.6631,25.0719,83.735,1,corrected,14,1,13
+ca,90007,Los Angeles,unemployment_pct,1,-56.7566,13.9208,70.6774,1,corrected,14,1,13
+ca,91342,Los Angeles,poverty_pct,1,33.2072,33.5997,0.3925,0,corrected,22,1,21
+ca,91342,Los Angeles,edu_lt_hs_pct,1,29.4126,29.8037,0.3911,0,corrected,22,1,21
+ca,91342,Los Angeles,ling_isol_pct,1,-34.4458,11.2293,45.6751,1,corrected,22,3,19
+ca,91342,Los Angeles,unemployment_pct,1,-2.1234,3.5818,5.7052,1,corrected,22,2,20
+ca,91342,Los Angeles,housing_burden_pct,1,16.3748,22.1858,5.811,0,corrected,22,2,20
+ca,91342,Los Angeles,ces4_percentile,1,60.8061,66.8714,6.0653,0,corrected,22,2,20
+ca,90731,Los Angeles,poverty_pct,1,18.1659,38.7258,20.5599,0,corrected,16,1,15
+ca,90731,Los Angeles,ling_isol_pct,1,-20.1523,11.2948,31.4471,1,corrected,16,2,14
+ca,90731,Los Angeles,unemployment_pct,1,-24.0877,7.233,31.3207,1,corrected,16,2,14
+ca,90731,Los Angeles,housing_burden_pct,1,-7.1582,24.7064,31.8646,1,corrected,16,2,14
+ca,90731,Los Angeles,ces4_percentile,1,51.6264,72.8626,21.2362,0,corrected,16,1,15
+ca,91331,Los Angeles,unemployment_pct,1,-14.7517,5.759,20.5107,1,corrected,24,1,23
+ca,93536,Los Angeles,poverty_pct,1,-46.0618,25.8223,71.8841,1,corrected,13,1,12
+ca,93536,Los Angeles,ling_isol_pct,1,-67.0658,3.2339,70.2997,1,corrected,13,1,12
+ca,93536,Los Angeles,unemployment_pct,1,-65.191,5.2501,70.4411,1,corrected,13,1,12
+ca,93536,Los Angeles,housing_burden_pct,1,-56.865,14.2042,71.0692,1,corrected,13,1,12
+ca,93536,Los Angeles,ces4_percentile,1,-36.7742,35.8106,72.5848,1,corrected,13,1,12
+ca,91733,Los Angeles,unemployment_pct,1,-129.9142,6.1198,136.034,1,corrected,10,1,9
+ca,93535,Los Angeles,ling_isol_pct,1,-8.8113,6.2148,15.0261,1,corrected,17,2,15
+ca,93535,Los Angeles,unemployment_pct,1,-49.1604,7.3615,56.5219,1,corrected,17,3,14
+ca,93535,Los Angeles,housing_burden_pct,1,3.1124,18.3193,15.2069,0,corrected,17,2,15
+ca,95064,Santa Cruz,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,90670,Los Angeles,poverty_pct,1,30.1133,30.5591,0.4458,0,corrected,5,1,4
+ca,90670,Los Angeles,edu_lt_hs_pct,1,19.6061,20.0473,0.4412,0,corrected,5,1,4
+ca,90670,Los Angeles,ling_isol_pct,1,8.6225,9.0589,0.4364,0,corrected,5,1,4
+ca,90670,Los Angeles,unemployment_pct,1,3.3116,3.7458,0.4342,0,corrected,5,1,4
+ca,90670,Los Angeles,housing_burden_pct,1,20.0282,20.4697,0.4415,0,corrected,5,1,4
+ca,90670,Los Angeles,ces4_percentile,1,84.6216,85.091,0.4694,0,corrected,5,1,4
+ca,91011,Los Angeles,poverty_pct,1,4.5643,8.9851,4.4208,0,corrected,6,1,5
+ca,91011,Los Angeles,edu_lt_hs_pct,1,-1.764,2.6289,4.3929,1,corrected,6,1,5
+ca,91011,Los Angeles,ling_isol_pct,1,-0.8723,3.5246,4.3969,1,corrected,6,1,5
+ca,91011,Los Angeles,unemployment_pct,1,-1.2597,3.1354,4.3951,1,corrected,6,1,5
+ca,91011,Los Angeles,housing_burden_pct,1,6.5652,10.9947,4.4295,0,corrected,6,1,5
+ca,91011,Los Angeles,ces4_percentile,1,5.3748,9.7991,4.4243,0,corrected,6,1,5
+ca,91770,Los Angeles,unemployment_pct,1,-68.7055,4.819,73.5245,1,corrected,14,1,13
+ca,95006,Santa Cruz,unemployment_pct,1,-457.1798,4.0,461.1798,1,corrected,2,1,1
+ca,94131,San Francisco,unemployment_pct,1,-128.0425,3.4869,131.5294,1,corrected,7,1,6
+ca,93534,Los Angeles,ling_isol_pct,1,-125.0819,5.1251,130.207,1,corrected,8,1,7
+ca,91304,Los Angeles,ling_isol_pct,1,-24.9592,13.987,38.9462,1,corrected,12,1,11
+ca,91722,Los Angeles,ling_isol_pct,1,-126.2949,8.0008,134.2957,1,corrected,8,1,7
+ca,90813,Los Angeles,edu_lt_hs_pct,1,40.8591,42.562,1.7029,0,corrected,14,1,13
+ca,90813,Los Angeles,ling_isol_pct,1,18.0692,19.7348,1.6656,0,corrected,14,1,13
+ca,90813,Los Angeles,unemployment_pct,1,7.3292,8.9772,1.648,0,corrected,14,1,13
+ca,90813,Los Angeles,housing_burden_pct,1,28.6212,30.3041,1.6829,0,corrected,14,1,13
+ca,90813,Los Angeles,ces4_percentile,1,86.4207,88.1982,1.7775,0,corrected,14,1,13
+ca,90802,Los Angeles,poverty_pct,1,39.1122,39.5265,0.4143,0,corrected,10,1,9
+ca,90802,Los Angeles,edu_lt_hs_pct,1,12.7922,13.196,0.4038,0,corrected,10,1,9
+ca,90802,Los Angeles,ling_isol_pct,1,5.0467,5.4475,0.4008,0,corrected,10,1,9
+ca,90802,Los Angeles,unemployment_pct,1,5.678,6.079,0.401,0,corrected,10,1,9
+ca,90802,Los Angeles,housing_burden_pct,1,22.7425,23.1503,0.4078,0,corrected,10,1,9
+ca,90802,Los Angeles,ces4_percentile,1,71.025,71.4521,0.4271,0,corrected,10,1,9
+ca,91792,Los Angeles,unemployment_pct,1,-70.1374,7.2304,77.3678,1,corrected,9,1,8
+ca,91773,Los Angeles,ling_isol_pct,1,-148.4517,4.4562,152.9079,1,corrected,7,1,6
+ca,95065,Santa Cruz,unemployment_pct,1,-169.058,2.3314,171.3894,1,corrected,3,1,2
+ca,90503,Los Angeles,poverty_pct,1,-50.5689,17.3691,67.938,1,corrected,10,1,9
+ca,90503,Los Angeles,unemployment_pct,1,-100.4246,3.75,104.1746,1,corrected,10,1,9
+ca,90277,Los Angeles,edu_lt_hs_pct,1,-112.0062,2.6899,114.6961,1,corrected,7,1,6
+ca,91748,Los Angeles,housing_burden_pct,1,-17.3381,21.1136,38.4517,1,corrected,11,1,10
+ca,90254,Los Angeles,ling_isol_pct,1,-252.442,1.8918,254.3338,1,corrected,5,2,3
+ca,90045,Los Angeles,ling_isol_pct,1,-19.9545,2.7861,22.7406,1,corrected,11,2,9
+ca,90044,Los Angeles,ling_isol_pct,1,-34.0727,13.9579,48.0306,1,corrected,26,1,25
+ca,90044,Los Angeles,unemployment_pct,1,-69.7804,7.1338,76.9142,1,corrected,26,2,24
+ca,91724,Los Angeles,ling_isol_pct,1,-101.02,6.5466,107.5666,1,corrected,7,1,6
+ca,91750,Los Angeles,ling_isol_pct,1,-160.9265,4.3254,165.2519,1,corrected,7,1,6
+ca,90025,Los Angeles,edu_lt_hs_pct,1,-58.1405,6.9712,65.1117,1,corrected,10,1,9
+ca,90065,Los Angeles,unemployment_pct,1,-63.5612,7.2633,70.8245,1,corrected,14,1,13
+ca,91326,Los Angeles,poverty_pct,1,-43.7684,10.3313,54.0997,1,corrected,8,1,7
+ca,91326,Los Angeles,ling_isol_pct,1,-43.2577,10.871,54.1287,1,corrected,8,1,7
+ca,90024,Los Angeles,poverty_pct,1,-190.3347,40.0338,230.3685,1,corrected,12,1,11
+ca,90024,Los Angeles,edu_lt_hs_pct,1,-314.8393,2.9346,317.7739,1,corrected,12,2,10
+ca,90024,Los Angeles,ling_isol_pct,1,-263.6196,7.314,270.9336,1,corrected,12,2,10
+ca,90024,Los Angeles,unemployment_pct,1,-47.0451,9.8003,56.8454,1,corrected,12,1,11
+ca,90024,Los Angeles,housing_burden_pct,1,-194.9469,34.1077,229.0546,1,corrected,12,1,11
+ca,90024,Los Angeles,ces4_percentile,1,-193.4903,35.9793,229.4696,1,corrected,12,1,11
+ca,90058,Los Angeles,edu_lt_hs_pct,1,51.6533,57.3696,5.7163,0,corrected,3,1,2
+ca,90058,Los Angeles,ling_isol_pct,1,11.969,17.4694,5.5004,0,corrected,3,1,2
+ca,90058,Los Angeles,unemployment_pct,1,5.2583,10.7221,5.4638,0,corrected,3,1,2
+ca,90058,Los Angeles,housing_burden_pct,1,28.7908,34.3827,5.5919,0,corrected,3,1,2
+ca,90058,Los Angeles,ces4_percentile,1,92.4125,98.3505,5.938,0,corrected,3,1,2
+ca,90067,Los Angeles,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,91768,Los Angeles,poverty_pct,1,-7.8148,46.123,53.9378,1,corrected,9,1,8
+ca,91768,Los Angeles,edu_lt_hs_pct,1,-20.7445,32.4896,53.2341,1,corrected,9,1,8
+ca,91768,Los Angeles,ling_isol_pct,1,-50.0951,13.3467,63.4418,1,corrected,9,2,7
+ca,91768,Los Angeles,unemployment_pct,1,-2.0669,9.0815,11.1484,1,corrected,9,1,8
+ca,91768,Los Angeles,housing_burden_pct,1,-43.2451,20.6547,63.8998,1,corrected,9,2,7
+ca,91768,Los Angeles,ces4_percentile,1,19.6481,87.7528,68.1047,0,corrected,9,2,7
+ca,91006,Los Angeles,unemployment_pct,1,-198.2493,3.8133,202.0626,1,corrected,7,1,6
+ca,90250,Los Angeles,unemployment_pct,1,-60.5067,5.5964,66.1031,1,corrected,20,1,19
+ca,94110,San Francisco,unemployment_pct,1,-79.9066,3.2281,83.1347,1,corrected,16,1,15
+ca,91791,Los Angeles,ling_isol_pct,1,-62.1626,10.8391,73.0017,1,corrected,7,1,6
+ca,91791,Los Angeles,housing_burden_pct,1,-55.655,17.8538,73.5088,1,corrected,7,1,6
+ca,90230,Los Angeles,ling_isol_pct,1,-43.6053,6.4766,50.0819,1,corrected,6,1,5
+ca,90047,Los Angeles,ling_isol_pct,1,-71.4015,4.3579,75.7594,1,corrected,9,1,8
+ca,91340,Los Angeles,unemployment_pct,1,-96.2717,4.6685,100.9402,1,corrected,7,1,6
+ca,91505,Los Angeles,ling_isol_pct,1,-55.7191,4.7313,60.4504,1,corrected,9,2,7
+ca,93563,Los Angeles,poverty_pct,1,-999.0,,,1,became missing,1,1,0
+ca,93563,Los Angeles,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,93563,Los Angeles,housing_burden_pct,1,-999.0,,,1,became missing,1,1,0
+ca,93563,Los Angeles,ces4_percentile,1,-999.0,,,1,became missing,1,1,0
+ca,94535,Solano,ling_isol_pct,1,-235.9669,1.5,237.4669,1,corrected,3,2,1
+ca,94535,Solano,unemployment_pct,1,-999.0,,,1,became missing,3,3,0
+ca,95687,Solano,poverty_pct,1,-81.6074,19.0946,100.702,1,corrected,13,1,12
+ca,95687,Solano,ling_isol_pct,1,-96.4027,2.6753,99.078,1,corrected,13,1,12
+ca,95687,Solano,unemployment_pct,1,-185.9239,3.9337,189.8576,1,corrected,13,2,11
+ca,95687,Solano,housing_burden_pct,1,-87.9514,12.0542,100.0056,1,corrected,13,1,12
+ca,95687,Solano,ces4_percentile,1,-75.2039,26.2011,101.405,1,corrected,13,1,12
+ca,94533,Solano,ling_isol_pct,1,-49.3083,5.7739,55.0822,1,corrected,16,1,15
+ca,94533,Solano,unemployment_pct,1,-110.8275,7.4588,118.2863,1,corrected,16,2,14
+ca,90015,Los Angeles,unemployment_pct,1,-122.6422,6.374,129.0162,1,corrected,6,1,5
+ca,91384,Los Angeles,poverty_pct,1,-162.3946,16.1496,178.5442,1,corrected,7,1,6
+ca,91384,Los Angeles,ling_isol_pct,1,-173.1846,3.0568,176.2414,1,corrected,7,1,6
+ca,91384,Los Angeles,unemployment_pct,1,-170.9107,5.8161,176.7268,1,corrected,7,1,6
+ca,91384,Los Angeles,housing_burden_pct,1,-166.3189,11.3878,177.7067,1,corrected,7,1,6
+ca,91384,Los Angeles,ces4_percentile,1,-151.493,29.3778,180.8708,1,corrected,7,1,6
+ca,95374,Merced,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,91711,Los Angeles,poverty_pct,1,-86.5067,18.5413,105.048,1,corrected,8,1,7
+ca,91711,Los Angeles,ling_isol_pct,1,-99.6539,3.8806,103.5345,1,corrected,8,1,7
+ca,91711,Los Angeles,housing_burden_pct,1,-89.3037,15.4224,104.7261,1,corrected,8,1,7
+ca,91711,Los Angeles,ces4_percentile,1,-61.3641,46.5784,107.9425,1,corrected,8,1,7
+ca,94591,Solano,ling_isol_pct,1,-108.716,5.4206,114.1366,1,corrected,13,2,11
+ca,93551,Los Angeles,ling_isol_pct,1,-133.1055,4.7165,137.822,1,corrected,11,2,9
+ca,94589,Solano,ling_isol_pct,1,-133.8473,8.7121,142.5594,1,corrected,7,1,6
+ca,94589,Solano,unemployment_pct,1,-161.689,12.4998,174.1888,1,corrected,7,1,6
+ca,93212,Kings,poverty_pct,1,-348.1157,63.2399,411.3556,1,corrected,5,1,4
+ca,93212,Kings,ling_isol_pct,1,-368.513,29.9516,398.4646,1,corrected,5,1,4
+ca,93212,Kings,unemployment_pct,1,-380.1578,10.9474,391.1052,1,corrected,5,1,4
+ca,93212,Kings,housing_burden_pct,1,-375.4692,18.5991,394.0683,1,corrected,5,1,4
+ca,93212,Kings,ces4_percentile,1,-340.6454,75.4314,416.0768,1,corrected,5,1,4
+ca,91042,Los Angeles,poverty_pct,1,32.6595,33.729,1.0695,0,corrected,7,1,6
+ca,91042,Los Angeles,edu_lt_hs_pct,1,12.2085,13.2568,1.0483,0,corrected,7,1,6
+ca,91042,Los Angeles,ling_isol_pct,1,13.3713,14.4209,1.0496,0,corrected,7,1,6
+ca,91042,Los Angeles,unemployment_pct,1,5.2527,6.2938,1.0411,0,corrected,7,1,6
+ca,91042,Los Angeles,housing_burden_pct,1,24.8094,25.8708,1.0614,0,corrected,7,1,6
+ca,91042,Los Angeles,ces4_percentile,1,44.5278,45.6097,1.0819,0,corrected,7,1,6
+ca,93245,Kings,ling_isol_pct,1,-57.151,3.94,61.091,1,corrected,6,1,5
+ca,94590,Solano,ling_isol_pct,1,-131.8922,7.0018,138.894,1,corrected,10,1,9
+ca,93204,Kings,poverty_pct,1,-176.4853,67.6,244.0853,1,corrected,2,1,1
+ca,93204,Kings,ling_isol_pct,1,-205.2494,30.3,235.5494,1,corrected,2,1,1
+ca,93204,Kings,unemployment_pct,1,-219.0531,12.4,231.4531,1,corrected,2,1,1
+ca,93204,Kings,housing_burden_pct,1,-211.9584,21.6,233.5584,1,corrected,2,1,1
+ca,93204,Kings,ces4_percentile,1,-168.9509,77.3701,246.321,1,corrected,2,1,1
+ca,91330,Los Angeles,edu_lt_hs_pct,1,-999.0,,,1,became missing,1,1,0
+ca,91330,Los Angeles,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,91330,Los Angeles,housing_burden_pct,1,-999.0,,,1,became missing,1,1,0
+ca,91330,Los Angeles,ces4_percentile,1,-999.0,,,1,became missing,1,1,0
+ca,91755,Los Angeles,unemployment_pct,1,-207.9376,5.0119,212.9495,1,corrected,6,1,5
+ca,91504,Los Angeles,ling_isol_pct,1,-142.6638,6.415,149.0788,1,corrected,5,1,4
+ca,91501,Los Angeles,ling_isol_pct,1,-333.0851,13.7609,346.846,1,corrected,3,1,2
+ca,90604,Los Angeles,unemployment_pct,1,-105.9424,4.3789,110.3213,1,corrected,9,1,8
+ca,90232,Los Angeles,edu_lt_hs_pct,1,-206.1276,6.4783,212.6059,1,corrected,4,1,3
+ca,90274,Los Angeles,unemployment_pct,1,-72.7154,3.4075,76.1229,1,corrected,7,1,6
+ca,94571,Solano,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,90049,Los Angeles,edu_lt_hs_pct,1,-150.7526,2.4956,153.2482,1,corrected,12,1,11
+ca,90049,Los Angeles,ling_isol_pct,1,-69.7768,1.8314,71.6082,1,corrected,12,2,10
+ca,90049,Los Angeles,housing_burden_pct,1,-15.839,14.9284,30.7674,1,corrected,12,1,11
+ca,95514,Humboldt,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,90242,Los Angeles,poverty_pct,1,28.6023,29.2798,0.6775,0,corrected,10,1,9
+ca,90242,Los Angeles,edu_lt_hs_pct,1,20.9133,21.5857,0.6724,0,corrected,10,1,9
+ca,90242,Los Angeles,ling_isol_pct,1,9.0149,9.6794,0.6645,0,corrected,10,1,9
+ca,90242,Los Angeles,unemployment_pct,1,4.4771,5.1387,0.6616,0,corrected,10,1,9
+ca,90242,Los Angeles,housing_burden_pct,1,19.7875,20.4592,0.6717,0,corrected,10,1,9
+ca,90242,Los Angeles,ces4_percentile,1,73.1103,73.8172,0.7069,0,corrected,10,1,9
+ca,95542,Humboldt,unemployment_pct,1,-999.0,,,1,became missing,1,1,0
+ca,90241,Los Angeles,ling_isol_pct,1,-20.8473,9.6392,30.4865,1,corrected,8,1,7
+ca,90272,Los Angeles,edu_lt_hs_pct,1,-4.4123,1.4524,5.8647,1,corrected,7,1,6
+ca,90272,Los Angeles,ling_isol_pct,1,-5.2329,0.6271,5.86,1,corrected,7,1,6
+ca,90272,Los Angeles,unemployment_pct,1,-2.198,3.6798,5.8778,1,corrected,7,1,6
+ca,90272,Los Angeles,housing_burden_pct,1,4.5904,10.5083,5.9179,0,corrected,7,1,6
+ca,90272,Los Angeles,ces4_percentile,1,1.4126,7.3117,5.8991,0,corrected,7,1,6
+ca,90732,Los Angeles,ling_isol_pct,1,-79.1669,4.134,83.3009,1,corrected,7,1,6
+ca,90744,Los Angeles,poverty_pct,1,50.7705,50.9417,0.1712,0,corrected,15,1,14
+ca,90744,Los Angeles,edu_lt_hs_pct,1,44.5418,44.7119,0.1701,0,corrected,15,1,14
+ca,90744,Los Angeles,ling_isol_pct,1,18.8807,19.0467,0.166,0,corrected,15,1,14
+ca,90744,Los Angeles,unemployment_pct,1,5.9633,6.1272,0.1639,0,corrected,15,1,14
+ca,90744,Los Angeles,housing_burden_pct,1,23.7627,23.9295,0.1668,0,corrected,15,1,14
+ca,90744,Los Angeles,ces4_percentile,1,89.2141,89.3915,0.1774,0,corrected,15,1,14
+ca,91403,Los Angeles,unemployment_pct,1,-277.4602,7.1112,284.5714,1,corrected,5,1,4
+ca,90305,Los Angeles,ling_isol_pct,1,-283.4111,0.844,284.2551,1,corrected,5,1,4
+ca,90305,Los Angeles,unemployment_pct,1,-206.8798,5.2231,212.1029,1,corrected,5,1,4
+ca,90303,Los Angeles,ling_isol_pct,1,-78.0694,12.9258,90.9952,1,corrected,7,1,6
+ca,90040,Los Angeles,unemployment_pct,1,-461.2395,8.0,469.2395,1,corrected,2,1,1
+ca,90292,Los Angeles,unemployment_pct,1,-198.8818,2.7838,201.6656,1,corrected,4,1,3
+ca,90291,Los Angeles,edu_lt_hs_pct,1,-103.0058,5.7258,108.7316,1,corrected,9,1,8
+ca,91207,Los Angeles,unemployment_pct,1,-428.8705,6.3,435.1705,1,corrected,2,1,1
+ca,93532,Los Angeles,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,90815,Los Angeles,poverty_pct,1,15.1552,18.4697,3.3145,0,corrected,11,1,10
+ca,90815,Los Angeles,edu_lt_hs_pct,1,-70.2284,5.9283,76.1567,1,corrected,11,2,9
+ca,90815,Los Angeles,ling_isol_pct,1,-1.2544,2.0065,3.2609,1,corrected,11,1,10
+ca,90815,Los Angeles,unemployment_pct,1,-30.6973,4.2966,34.9939,1,corrected,11,2,9
+ca,90815,Los Angeles,housing_burden_pct,1,10.0942,13.3922,3.298,0,corrected,11,1,10
+ca,90815,Los Angeles,ces4_percentile,1,30.3832,33.7475,3.3643,0,corrected,11,1,10
+ca,90704,,edu_lt_hs_pct,1,-103.6828,13.7,117.3828,1,corrected,2,1,1
+ca,90704,,ling_isol_pct,1,-109.8714,6.7,116.5714,1,corrected,2,1,1
+ca,90704,,unemployment_pct,1,-115.7948,0.0,115.7948,1,corrected,2,1,1
+ca,90704,,housing_burden_pct,1,-94.8419,23.7,118.5419,1,corrected,2,1,1
+ca,90704,,ces4_percentile,1,-87.5847,31.9087,119.4934,1,corrected,2,1,1
+ca,91351,Los Angeles,ling_isol_pct,1,-71.0961,4.1689,75.265,1,corrected,8,1,7
+ca,91351,Los Angeles,housing_burden_pct,1,-0.3819,17.0508,17.4327,1,corrected,8,1,7
+ca,91387,Los Angeles,ling_isol_pct,1,-38.4508,5.6738,44.1246,1,corrected,9,1,8
+ca,93510,Los Angeles,poverty_pct,1,-0.9514,22.2923,23.2437,1,corrected,3,1,2
+ca,93510,Los Angeles,edu_lt_hs_pct,1,-15.5757,7.3274,22.9031,1,corrected,3,1,2
+ca,93510,Los Angeles,ling_isol_pct,1,-20.3712,2.4202,22.7914,1,corrected,3,1,2
+ca,93510,Los Angeles,unemployment_pct,1,-17.709,5.1444,22.8534,1,corrected,3,1,2
+ca,93510,Los Angeles,housing_burden_pct,1,-8.9011,14.1575,23.0586,1,corrected,3,1,2
+ca,93510,Los Angeles,ces4_percentile,1,-3.0398,20.1552,23.195,1,corrected,3,1,2
+ca,90840,Los Angeles,poverty_pct,1,-999.0,,,1,became missing,1,1,0
+ca,90840,Los Angeles,edu_lt_hs_pct,1,-999.0,,,1,became missing,1,1,0
+ca,90840,Los Angeles,ling_isol_pct,1,-999.0,,,1,became missing,1,1,0
+ca,90840,Los Angeles,housing_burden_pct,1,-999.0,,,1,became missing,1,1,0
+ca,90840,Los Angeles,ces4_percentile,1,-999.0,,,1,became missing,1,1,0

@@ -211,6 +211,20 @@ ACS key was required for the statewide table; it uses CES-sourced social columns
 Script: `scripts/fetch_statewide.py`. Every column traces to the sources already
 documented above — nothing new is invented.
 
+**Tract inputs for the ZIP→tract downscale** (`scripts/run_downscale.py`). The
+model is trained on the corrected version of this table
+(`data/corrected/model_table_ca_corrected.csv`). Tract-level files:
+
+| file | content | use |
+|---|---|---|
+| `data/raw/ces40_ca_tracts.csv` | CES 4.0 tract inputs and `TotPop19` (2010 tracts, no tract ID column) | tract inputs and population |
+| `data/raw/heatrisk/ces4_ca.csv` | OEHHA CES 4.0 full results with the 2010 tract ID | gives each row above its tract ID; rows are matched on population + PM2.5 + ozone, which is unique in both files (8,035 of 8,035 matched) |
+| `data/raw/heatrisk/xwalk_tract10_20_ca.csv` | Census 2020↔2010 tract relationship file (land area of each overlap) | moves population (by land-area share) and inputs (population-weighted) to 2020 tracts |
+| `data/raw/heatrisk/xwalk_zcta_tract_ca.csv` | Census 2020 ZCTA↔tract relationship file (land area of each overlap) | cuts each 2020 tract into ZIP pieces by land-area share |
+
+−999 is treated as missing at tract level. Land-area shares assume people are spread
+evenly over each tract's land.
+
 ---
 
 ## 6. Cal-Adapt projected extreme-heat days (`data/processed/heat_days_la.csv`, `heat_factor_2030.csv`)

@@ -109,16 +109,20 @@ Bit-exact results require `n_jobs=1` and single-thread BLAS (`OMP_NUM_THREADS=OP
 
 ## 5. ZIP → tract downscale
 
-Each ZIP's excess-ER count is split across its census tracts in proportion to (model-predicted rate × tract population), then rescaled so the tract sum equals the ZIP's UCLA value. There is no tract-level health data, so the tract estimates cannot be validated directly. The splitting rule is checked one level up with a pseudo-ZIP recovery test: the 287 LA ZIPs are merged into 47 spatial groups, each group's known total is split back to its member ZIPs by the same rule, and the result is compared with the real ZIP values (ZIP-level MAE, in excess visits):
+Each ZIP's excess-ER count is split across its census tracts in proportion to (model-predicted rate × tract population), then rescaled so the tract sum equals the ZIP's UCLA value. The weights come from a Poisson model trained on the corrected statewide table (`data/corrected/model_table_ca_corrected.csv`, −999 treated as missing) with Los Angeles County left out, so the LA weights come from a model that never saw LA. At tract level −999 is also treated as missing; 82 tracts have at least one input missing, and the model fills it with the training median as it does for ZIPs.
 
-| Split method | MAE |
-|---|---|
-| Model-weighted | **4.309** |
-| Population-only | 5.181 |
+**Tracts.** The output uses real 2020 census tracts (11-digit GEOID). CalEnviroScreen 4.0 is published on 2010 tracts, so each CES tract's population (`TotPop19`) is moved to 2020 tracts by land-area share using the Census 2010→2020 tract relationship file, and each 2020 tract takes the population-weighted mean of its 2010 pieces' inputs. Tracts are then matched to ZIPs with the Census 2020 ZCTA–tract relationship file. A tract that crosses a ZIP boundary is cut into pieces by land area, and each piece belongs to one ZIP. Both steps assume people are spread evenly over the land in a tract. We chose 2020 tracts over the 2010 CES tracts because 2020 tracts match current maps and Census data, and because the relationship file lets one tract contribute to several ZIPs instead of being assigned to a single ZIP. The ZIP's population density is still used for every tract in it, since the model was trained on ZIP density.
 
-On this test the model-weighted split has 16.8% lower error than a population-only split. This supports the weighting rule; it does not measure the accuracy of the tract estimates. Tract identifiers in the output are sequence numbers within each ZIP (`90001-1`, `90001-2`, …), not census tract IDs. Output: `results/tract_risk_la.csv`.
+The result covers all 287 LA ZIPs: 3,737 tract–ZIP pieces from 2,493 tracts (2,482 in LA County, 11 in neighboring counties that LA ZIPs reach into); 988 tracts are split across two or more ZIPs. The pieces of every ZIP add back to its UCLA value (largest difference 3 × 10⁻¹⁴). Outputs: `results/tract_risk_la.csv` (one row per tract–ZIP piece) and `results/tract_risk_la_by_tract.csv` (pieces summed to one row per tract, for mapping).
 
-The downscale weights come from the original statewide Poisson model on uncorrected CalEnviroScreen inputs (commit `0980d9a`). They have not been rerun with the corrected inputs.
+There is no tract-level health data, so the tract estimates cannot be validated directly. The splitting rule is checked one level up with a pseudo-ZIP recovery test: the 287 LA ZIPs are merged into 47 spatial groups, each group's known total is split back to its member ZIPs by the same rule, and the result is compared with the real ZIP values (ZIP-level MAE in excess visits, and Spearman rank correlation):
+
+| Split method | MAE | Spearman |
+|---|---|---|
+| Model-weighted | **3.985** | **0.975** |
+| Population-only | 5.181 | 0.960 |
+
+On this test the model-weighted split has 23.1% lower error than a population-only split. This supports the weighting rule; it does not measure the accuracy of the tract estimates. The earlier run on uncorrected inputs gave 4.309 for the model-weighted split; the population-only split does not use model inputs and is unchanged.
 
 ## 6. 2030 scaling scenario (Cal-Adapt)
 
@@ -152,7 +156,7 @@ Highest-projected ZIP in both scenarios is **91767** (Pomona area): 19.7 → 28.
 - The asthma and cardiovascular inputs (`asthma_ed_per10k`, `cardiovascular_ed_per10k`) come from the same state ER records as the label and are partly ER-utilization proxies; see the caveat in §4c.
 - 2030 scenario is a proportional scaling, not a refit model, and is not a model evaluation result.
 - The target is UCLA's model-based estimate, totalled over 2008–2018 and cumulative across heat levels; it is not a direct count of ER visits on extreme-heat days.
-- The ZIP → tract downscale has no tract-level ground truth and is checked only by a pseudo-ZIP recovery test.
+- The ZIP → tract downscale has no tract-level ground truth and is checked only by a pseudo-ZIP recovery test. Moving CES values to 2020 tracts and to ZIPs assumes people are spread evenly over each tract's land.
 
 ## 9. Reproduce
 
@@ -191,7 +195,7 @@ fetch_statewide.py           # all-CA ZIP x 4 CHS levels + CES
 fetch_climate_caladapt.py    # Cal-Adapt exheat days per ZIP centroid
 run_models.py                # LA-only OOF models (original 13-input model)
 run_models_ca.py             # statewide spatial CV + LA hold-out (original inputs)
-run_downscale.py             # ZIP -> tract
+run_downscale.py             # ZIP -> 2020 census tract (corrected inputs)
 run_projection_2030.py       # 2030 scaling scenario
 run_siting.py                # cooling-center ILP (CBC)
 build_site_data.py           # site/data/*.json for the website (needs network for ZIP polygons)

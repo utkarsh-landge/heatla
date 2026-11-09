@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "configuration_feature_counts": {
+    "base": 11,
+    "original_la": 13,
+    "augmented": 15
+  },
+  "documented_distinct_fields": 19,
+  "base_matches_Model_A_without_constant_heat_level": true,
+  "new_common_values_identical": true,
+  "unknowns_preserved": [
+    "CES Elderly65 reference year",
+    "UCLA population reference year"
+  ],
+  "data_sha256": {
+    "data\\la_base.csv": "0d5a783f51a34c762078688a8b22650992a70ffef9a0c9222dddb0c0cabd3bc0",
+    "data\\la_augmented.csv": "522dc9838ae11739f3d67c51eb835790438aabfdec1b3438593bca76fc4c2b59"
+  }
+}

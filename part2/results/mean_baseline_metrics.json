@@ -1,0 +1,15 @@
+{
+  "corrected_training_fold_mean": {
+    "n": 287,
+    "r2": -0.11110022891308047,
+    "rmse": 3.2587938867899604,
+    "mae": 2.6435212957317367
+  },
+  "original_full_sample_mean_for_audit_only": {
+    "n": 287,
+    "r2": 0.0,
+    "rmse": 3.0915784716499415,
+    "mae": 2.4951328776602852
+  },
+  "note": "The original full-sample mean uses test labels. Only the corrected result is an OOF baseline. Ranking metrics are omitted for this constant-within-fold reference."
+}

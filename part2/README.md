@@ -22,6 +22,18 @@ python -m venv part2/.venv
 ./part2/.venv/Scripts/python.exe part2/write_comparison_report.py
 ```
 
+On macOS or Linux:
+
+```bash
+python -m venv part2/.venv
+part2/.venv/bin/python -m pip install -r part2/requirements-models.txt
+part2/.venv/bin/python part2/validate_comparison_results.py
+part2/.venv/bin/python part2/make_comparison_figures.py
+part2/.venv/bin/python part2/write_comparison_report.py
+```
+
+The reported run was on Windows. Random forest and gradient boosting results differ by up to about 0.002 in pooled metrics between Windows and macOS; Poisson reproduces to 1e-11.
+
 To refit all 30 fold models, run `part2/run_feature_comparison.py` with the same Python environment before the validation/plot/report commands. No Census key or sibling data directory is needed for these commands. Model settings and prepared-input hashes are unchanged from the completed run.
 
 ## Preparation versus reproduction
@@ -30,6 +42,6 @@ This delivery reproduces the model comparison from the included prepared inputs.
 
 ## Remaining team checks
 
-Confirm the population reference year and category-4 target interpretation. CES inputs have mixed periods; ACS additions cover 2014–2018, while the UCLA target covers 2008–2018. Source boundaries are not harmonized. Scott et al. claims are limited to the verified abstract. Website exports are handoff files, not a live website update. Merge and synchronize with Parts 1 and 3 after review.
+Confirm the population reference year and category-4 target interpretation. CES inputs have mixed periods; ACS additions cover 2014–2018, while the UCLA target covers 2008–2018. Source boundaries are not harmonized. Scott et al. claims are limited to the verified abstract. The website now loads these predictions through `scripts/build_site_results.py` (integration branch). Merge and synchronize with Parts 1 and 3 after review.
 
 The upload package excludes local environments, caches, private review notes and team branch copies. Personal absolute paths in provenance metadata have been replaced with source filenames; numerical source hashes are preserved. Only the plotting geometry path was changed in the core reproduction scripts.

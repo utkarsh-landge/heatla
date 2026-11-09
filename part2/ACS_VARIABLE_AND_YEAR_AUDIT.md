@@ -2,6 +2,8 @@
 
 The four added variables use the intended Census fields, and their current processed values agree with a recalculation from the received raw ACS responses. Their definitions can be documented now. Temporal alignment remains unresolved because the current inputs cover 2018–2022 and the health labels cover 2008–2018. Historical inputs have not yet been downloaded or substituted.
 
+> **Superseded.** The paragraph above describes the state before the historical update. The models now use ACS 2014–2018 inputs for the four added variables; see [HISTORICAL_FEATURE_UPDATE.md](HISTORICAL_FEATURE_UPDATE.md).
+
 ## Verified variable definitions
 
 | Feature | Recommended report label | Universe and formula | Interpretation limit |
@@ -66,7 +68,7 @@ The initial sample-access attempt failed before a valid key was available. On 20
 - The four selected empirical references and feature rationales are now in SUPPORTING_LITERATURE.md and FEATURE_SELECTION_RATIONALE.md. Scott et al. full-text verification remains pending.
 - The CES -999 aggregation issue remains separate from these ACS formula checks.
 
-To reproduce the local checks with the saved metadata, run the following from the workspace root.
+The audit script below (`part2/audit_acs_variables.py`) is not included in the repository. With that script, the local checks were run from the workspace root as follows.
 
 ```powershell
 python ./part2/audit_acs_variables.py --data-package ../heatla_data_0980d9a

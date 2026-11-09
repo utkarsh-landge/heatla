@@ -9,26 +9,26 @@
     "oof": {
       "name": "LA out-of-fold",
       "long_name": "LA out-of-fold predictions",
-      "description": "Each ZIP is predicted by a model trained on the other four spatial folds of LA County (heat level 4 only).",
+      "description": "Each ZIP is predicted by a model trained on the other four spatial folds of LA County (heat level 4 only). 15 inputs: 10 corrected CalEnviroScreen inputs and population density, plus 4 ACS 2014-2018 features (Part 2).",
       "properties": {
         "poisson": "pred_poisson",
         "random_forest": "pred_rf",
         "gradient_boosting": "pred_gbm"
       },
-      "file": "results/predictions_oof.csv",
-      "sha256_16": "53d5558fb47c5cc6"
+      "file": "part2/results/feature_comparison/predictions_oof.csv",
+      "sha256_16": "cc067292a3ebdeeb"
     },
     "holdout": {
       "name": "LA holdout",
       "long_name": "LA holdout predictions",
-      "description": "Every LA ZIP is predicted by one model trained on all California ZIPs outside LA County (heat levels 1-4); level-4 predictions shown.",
+      "description": "Every LA ZIP is predicted by one model trained on all California ZIPs outside LA County (heat levels 1-4, 12 inputs, corrected CalEnviroScreen); level-4 predictions shown (Part 1).",
       "properties": {
         "poisson": "hold_poisson",
         "random_forest": "hold_rf",
         "gradient_boosting": "hold_gbm"
       },
-      "file": "results/predictions_la_holdout.csv",
-      "sha256_16": "3fb3e54277e065f8"
+      "file": "results/member1/ces40_fixed/predictions_la_holdout.csv",
+      "sha256_16": "1f67cdd3353a6ef3"
     }
   },
   "models": {
@@ -37,7 +37,7 @@
     "gradient_boosting": "Gradient boosting"
   },
   "error_definition": "error = prediction - UCLA label; positive = overprediction, negative = underprediction; same unit as the label",
-  "status": "Development versions from the existing results at commit 0980d9a. Replace with the final selected versions at integration.",
+  "status": "Final versions at integration: corrected CalEnviroScreen inputs (-999 treated as missing).",
   "n_zips": 287,
   "heat_level": 4
 }

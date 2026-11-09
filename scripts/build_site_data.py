@@ -151,6 +151,11 @@ def main() -> None:
     print(f"site data written: {len(keep)} zip polygons, {len(clist)} centers, "
           f"{len(proj2030)} with 2030 projection, {extra} extra result files")
 
+    # The files above come from the original pipeline (pre -999 correction). Replace the
+    # model numbers and predictions with the corrected Part 1 and Part 2 results.
+    import build_site_results
+    build_site_results.main()
+
 
 if __name__ == "__main__":
     main()

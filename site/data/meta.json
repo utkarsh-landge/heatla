@@ -6,11 +6,12 @@
   "data_years": {
     "target": "2008-2018",
     "CES": "4.0 (data from 2013-2019, published 2021)",
-    "ACS": "2022 5-year",
+    "ACS": "2014-2018 5-year (four added LA features)",
     "cooling_centers": "LA County official, 2022",
-    "climate": "Cal-Adapt exheat_year_ens32avg (LOCA 32-model), 2026-2035 vs 2008-2018"
+    "climate": "Cal-Adapt exheat_year_ens32avg (LOCA 32-model), 2026-2035 vs 2008-2018",
+    "population": "UCLA layer, 2020 Census"
   },
-  "headline": "Out-of-region skill within heat level 4 (LA hold-out, Poisson): Spearman 0.674.",
+  "headline": "Out-of-region skill within heat level 4 (LA hold-out, Poisson): Spearman 0.73 for UCLA's level-4 label, 0.68 for level-4 days alone.",
   "caveats": [
     "The target is UCLA's model-based estimate, not a direct count: observed heat-related ER visits minus the visits a Bayesian spatial model expects at typical temperatures.",
     "The level-4 value is a total over May-October 2008-2018 and covers every heat day up to and including level 4, not only the most extreme days.",
@@ -18,11 +19,13 @@
     "Small sample (~287 ZIPs); mismatched data years across sources.",
     "Missing model inputs are filled with the training-fold median before fitting.",
     "LA predictions are shown in two versions: out-of-fold (trained on other LA ZIPs) and holdout (trained on the rest of California).",
-    "Pooled all-CHS hold-out numbers mostly reflect the gap between heat levels; the within-level measure is CHS-4-only Poisson Spearman 0.674.",
+    "Pooled all-CHS hold-out numbers mostly reflect the gap between heat levels; the within-level measures are the level-4 rows above.",
+    "Two inputs, the asthma and heart-attack ER-visit rates, come from the same state ER records as the label. Without them, level-4 skill drops and, for level-4 days alone, is about level with the CalEnviroScreen index.",
     "The ZIP-to-tract downscale is checked only by a pseudo-ZIP recovery test; there is no tract-level health data to validate against.",
     "The 2030 layer is a proportional heat-exposure scaling scenario, not a model prediction and not part of model evaluation.",
     "Cooling-center selection picks among the 153 existing centers and measures straight-line coverage of ZIP centroids, not actual access or health benefit.",
     "ZIP 90095 (UCLA) may have mis-attributed ER patients; flagged.",
-    "Prototype study, not an operational tool."
+    "Prototype study, not an operational tool.",
+    "Cooling-center weights use the earlier LA out-of-fold predictions (13-input model, pre-correction inputs) and have not been rerun."
   ]
 }

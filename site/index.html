@@ -204,9 +204,9 @@ footer .wrap{padding:28px 22px 46px;display:flex;justify-content:space-between;g
   </div>
   <div class="stats">
     <div class="stat reveal"><div class="n" data-count="287">0</div><div class="l">LA County ZIPs modeled</div></div>
-    <div class="stat reveal"><div class="n" data-count="17">0</div><div class="l">real features per ZIP</div></div>
+    <div class="stat reveal"><div class="n" data-count="15">0</div><div class="l">model inputs per LA ZIP</div></div>
     <div class="stat reveal"><div class="n" data-count="153">0</div><div class="l">real cooling centers</div></div>
-    <div class="stat reveal"><div class="n" data-count="0.79" data-dec="2">0</div><div class="l">best Spearman ρ</div></div>
+    <div class="stat reveal"><div class="n" data-count="0.78" data-dec="2">0</div><div class="l">best Spearman ρ (LA, level 4)</div></div>
   </div>
 </header>
 
@@ -222,7 +222,7 @@ footer .wrap{padding:28px 22px 46px;display:flex;justify-content:space-between;g
     Nothing on this page is synthetic.</p>
     <div class="pills">
       <span class="pill">UCLA Heat Maps</span><span class="pill">CalEnviroScreen 4.0</span>
-      <span class="pill">Census ACS 2022</span><span class="pill">Census Gazetteer</span><span class="pill">LA County cooling centers</span>
+      <span class="pill">Census ACS 2014–2018</span><span class="pill">Census Gazetteer</span><span class="pill">LA County cooling centers</span>
     </div>
   </div>
 </section>
@@ -289,8 +289,9 @@ footer .wrap{padding:28px 22px 46px;display:flex;justify-content:space-between;g
 
 <section id="models">
   <div class="head reveal"><p class="eyebrow">04 — Models</p><h2>How well can we predict it?</h2>
-    <p>Leave-one-geographic-group-out cross-validation over 5 spatial groups. Top-10% = share of the truly
-    highest-risk 10% of ZIPs a model also ranks in its top 10%.</p></div>
+    <p>LA County only, heat level 4. Leave-one-geographic-group-out cross-validation over 5 spatial groups
+    inside LA; 15 inputs (corrected CalEnviroScreen, density and four ACS 2014–2018 features). Top-10% = share
+    of the truly highest-burden 10% of ZIPs a model also ranks in its top 10%.</p></div>
   <div class="card reveal" style="overflow-x:auto">
     <table id="modelTable"><thead><tr><th>Model</th><th>R²</th><th>R² 95% CI</th><th>Spearman ρ</th><th>Top-10%</th><th>Top-20%</th></tr></thead><tbody></tbody></table>
     <p class="src" id="baseline-line" style="margin-top:14px"></p>
@@ -332,7 +333,7 @@ footer .wrap{padding:28px 22px 46px;display:flex;justify-content:space-between;g
 <section id="siting">
   <div class="head reveal"><p class="eyebrow">07 — Cooling centers</p><h2>Where to open them.</h2>
     <p>Pick a budget and radius. Benefit = out-of-fold predicted excess ER visits within range of an open
-    center. Exact solves an integer program; greedy adds the best next site.</p></div>
+    center (from the earlier 13-input LA model on pre-correction inputs; not yet rerun). Exact solves an integer program; greedy adds the best next site.</p></div>
   <div class="card reveal">
     <div class="slider-row">
       <div class="slider"><label>Budget <b id="kval">10</b> centers</label><input type="range" id="k" min="0" max="3" step="1" value="1"></div>
@@ -366,7 +367,7 @@ footer .wrap{padding:28px 22px 46px;display:flex;justify-content:space-between;g
 
 </main>
 <footer><div class="wrap">
-  <span><strong>HEATLA</strong> · USC — target 2008–2018 · CES 4.0 · ACS 2022 · cooling centers 2022.</span>
+  <span><strong>HEATLA</strong> · USC — target 2008–2018 · CES 4.0 (−999 corrected) · ACS 2014–2018 · cooling centers 2022.</span>
   <span>Built from real pipeline outputs. No synthetic data.</span>
 </div></footer>
 
@@ -582,7 +583,8 @@ const name2={poisson:"Poisson · ridge, pop-weighted",random_forest:"Random Fore
 function fillModels(){const tb=$("#modelTable tbody"),m=METRICS.models,rows=Object.entries(m).map(([k,r])=>({k,...r.overall})),best=Math.max(...rows.map(r=>r.r2));
   tb.innerHTML=rows.map(r=>`<tr class="${r.r2===best?'best':''}"><td>${name2[r.k]||r.k}</td><td>${r.r2.toFixed(3)}</td><td class="mono">[${r.r2_ci[0].toFixed(2)}, ${r.r2_ci[1].toFixed(2)}]</td><td>${r.spearman.toFixed(3)}</td><td>${Math.round(r.top10_recall*100)}%</td><td>${Math.round(r.top20_recall*100)}%</td></tr>`).join("");
   const b=METRICS.baselines.ces4_percentile;
-  $("#baseline-line").innerHTML=`<b>Baselines.</b> Predict-the-mean ≈ R² 0. CalEnviroScreen 4.0 percentile vs observed: ρ ${b.spearman.toFixed(2)}, top-10% ${Math.round(b.top10_recall*100)}%. The models beat the existing index on ranking — Poisson recovers the most of the true top 10%.`;}
+  const mb=METRICS.baselines.predict_mean;
+  $("#baseline-line").innerHTML=`<b>Baselines.</b> Predicting the training-fold mean gives R² ${mb.r2.toFixed(2)}. On the same ${b.n} ZIPs that have a CalEnviroScreen 4.0 percentile, the percentile ranks ZIPs with ρ ${b.spearman.toFixed(2)} (top-10% ${Math.round(b.top10_recall*100)}%) against ρ ${b.poisson_spearman_same_zips.toFixed(2)} (top-10% ${Math.round(b.poisson_top10_same_zips*100)}%) for Poisson. Adding the four ACS features raises R² and ρ for all three models but does not improve the top-10%.`;}
 
 const KS=[5,10,20,40],RS=[1,2,3,5];
 const run=()=>SOL.runs.find(x=>x.k===KS[+$("#k").value]&&x.radius_mi===RS[+$("#r").value]);
@@ -600,11 +602,13 @@ function fillCA(){if(!CA)return;const A=CA.test_a_spatial_cv.models,B=CA.test_b_
   const rows=[
     {l:"Statewide spatial CV",n:"Gradient Boosting",m:A.gradient_boosting},
     {l:"LA hold-out · all CHS",n:"Poisson",m:B.poisson.all_chs},
-    {l:"LA hold-out · CHS-4 only",n:"Poisson",m:B.poisson.chs4,star:true},
-    {l:"LA hold-out · CHS-4 only",n:"Random Forest",m:B.random_forest.chs4},
+    {l:"LA hold-out · level-4 label",n:"Poisson",m:B.poisson.chs4,star:true},
+    {l:"LA hold-out · level-4 label",n:"Random Forest",m:B.random_forest.chs4},
+    {l:"LA hold-out · level-4 days only",n:"Poisson",m:B.poisson.chs4_days_only},
   ];
   $("#caTable tbody").innerHTML=rows.map(r=>`<tr class="${r.star?'best':''}"><td>${r.l}</td><td>${r.n}</td><td>${r.m.r2.toFixed(3)}</td><td>${r.m.spearman.toFixed(3)}</td><td>${Math.round(r.m.top10_recall*100)}%</td></tr>`).join("");
-  $("#ca-note").innerHTML=`<b>How to read this.</b> The all-CHS numbers (ρ ≈ 0.89) mostly reflect the gap between heat levels — the CHS level itself carries most of the signal. The measure of out-of-region skill within one level is the <b>CHS-4-only LA hold-out: Poisson ρ ${B.poisson.chs4.spearman.toFixed(3)}</b> (★). Tree models give negative R² on that slice. A comparison with the CalEnviroScreen index needs the same ZIPs and the same heat level; the figure previously shown here mixed all four levels and has been removed pending the matched comparison.`;}
+  const C4=CA.test_b_la_holdout.baselines.ces4_percentile_chs4,CD=CA.test_b_la_holdout.baselines.ces4_percentile_chs4_days_only;
+  $("#ca-note").innerHTML=`<b>How to read this.</b> Models are trained on California outside LA and tested on LA, with corrected CalEnviroScreen inputs. The all-CHS numbers mostly reflect the gap between heat levels. Within level 4, Poisson ranks LA ZIPs with <b>ρ ${B.poisson.chs4.spearman.toFixed(2)}</b> (★) on UCLA's level-4 label, which totals all heat levels, and ρ ${B.poisson.chs4_days_only.spearman.toFixed(2)} on level-4 days alone, where the amount does not transfer (R² ${B.poisson.chs4_days_only.r2.toFixed(2)}). On the same ${C4.n} ZIPs the CalEnviroScreen percentile has ρ ${C4.spearman.toFixed(2)} and ${CD.spearman.toFixed(2)}, against ${C4.poisson_spearman_same_zips.toFixed(2)} and ${CD.poisson_spearman_same_zips.toFixed(2)} for Poisson. Two inputs (asthma and heart-attack ER rates) share the label's ER records; without them the level-4-days ρ falls to about the index's level.`;}
 
 function fillOutlook(){if(!PROJ)return;const s=PROJ.scenarios[SCEN];
   $("#outlookStats").innerHTML=`

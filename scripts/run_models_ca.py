@@ -133,7 +133,15 @@ def main() -> None:
         "test_a_spatial_cv": test_a_spatial(df),
         "test_b_la_holdout": test_b_la_holdout(df),
     }
-    (RES / "metrics_ca.json").write_text(json.dumps(results, indent=2))
+    def clean(o):  # NaN (e.g. Spearman of a constant baseline) is not valid JSON
+        if isinstance(o, float):
+            return o if np.isfinite(o) else None
+        if isinstance(o, dict):
+            return {k: clean(v) for k, v in o.items()}
+        if isinstance(o, list):
+            return [clean(v) for v in o]
+        return o
+    (RES / "metrics_ca.json").write_text(json.dumps(clean(results), indent=2))
 
     b = results["test_b_la_holdout"]
     print("\n===== TEST B: train on CA minus LA, predict LA =====")

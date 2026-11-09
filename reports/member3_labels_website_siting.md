@@ -303,7 +303,7 @@ Claims within Member 3's scope were corrected in this branch. Others are recorde
 
 | # | Claim | Where | Finding | Action |
 |---|---|---|---|---|
-| 1 | "No value is imputed, interpolated, or fabricated" | `REPORT.md` intro | Data files leave gaps blank, but every model fills missing inputs with the training-fold median: 18 of 287 modelled LA ZIPs, 337 of 1,675 statewide | Corrected |
+| 1 | "No value is imputed, interpolated, or fabricated" | `REPORT.md` intro | Data files leave gaps blank, but every model fills missing inputs with the training-fold median: 394 of 1,675 statewide ZIPs (337 with no CalEnviroScreen data at all) and 17 of 287 modelled LA ZIPs (21 with the four ACS features). An earlier version of this row gave 18 and 337 | Corrected |
 | 2 | Target is the "excess ER-visit rate … (CHS-4, extreme heat)" | `REPORT.md` §2, website section 01 | It is an eleven-season total, cumulative across heat levels, and model-based | Corrected in both |
 | 3 | Downscale "validated … comparing tract-level MAE" | `REPORT.md` §5, website | The test merges ZIPs into 47 groups and recovers ZIP values; the error is ZIP-level. No tract-level health data exist | Corrected in both |
 | 4 | Tract output implies census tracts | `results/tract_risk_la.csv` | Tract identifiers are sequence numbers within a ZIP (`90001-1`), not census tract IDs | Stated in `REPORT.md` |
@@ -311,7 +311,7 @@ Claims within Member 3's scope were corrected in this branch. Others are recorde
 | 6 | Model score "still beats the existing CalEnviroScreen index (ρ 0.24)" | Website out-of-region note | Compares a level-4 score with a baseline computed over all four levels | Removed from the website. `REPORT.md` §4c is Member 1's; their corrected comparison is in pull request 2 |
 | 7 | `n_heat_days` is "heat days at CHS-4 threshold … constant across ZIPs = 2024" | `DATA_SOURCES.md` | 2,024 is every warm-season day in 2008–2018 (184 × 11) | Corrected |
 | 8 | `lvl1_th`, `lvl4_th` are "legend class-break thresholds … constant across all ZIPs" | `DATA_SOURCES.md` | They are ZIP-specific temperature thresholds; 267 distinct level-4 values | Corrected, with a dated note |
-| 9 | "ACS features: all pending, blocked on the Census API key" | `DATA_SOURCES.md` known gaps | Stale; the ACS features are in the model table | Corrected |
+| 9 | "ACS features: all pending, blocked on the Census API key" | `DATA_SOURCES.md` known gaps | Stale; the ACS features are in the model table | Corrected. The known-gaps entry now gives the current missing-input counts: 17 of 287 LA ZIPs (11 inputs), 21 (15 inputs), 394 of 1,675 statewide |
 | 10 | README quick start, layout and outputs | `README.md` | Describes the archived pipeline; `make`, `tests/` and `dashboard/` exist only under `legacy/` | Banner added at the top; full rewrite left for integration |
 | 11 | "Observed" used for UCLA values | Website | They are estimates | Renamed "UCLA label" |
 | 12 | "Exact ILP ≥ greedy … (gap ≤ 3.9 percentage points)" | `REPORT.md` §7 | Verified: true in all 16 runs, largest gap 3.89 | No change needed |
@@ -386,4 +386,4 @@ The label checks in section 1.2 used live queries to UCLA's public layers on 202
 3. UCLA Heat Maps. About page, `uclaheatmaps.org/about`, and map application (ArcGIS item `4c158842b5c94857a06c3a85c7aa02de`). Retrieved 2026-11-08.
 4. UCLA Heat Maps. Feature layers `zip_ER`, `time_trend_zip`, `time_trend_county`, `zip_time_trend_graph`, `services7.arcgis.com/2hYXmwteFLemN5bW`. Queried 2026-11-08.
 5. Riley K, Wilhalme H, Delp L, Eisenman DP (2018). Mortality and morbidity during extreme heat events and prevalence of outdoor work: an analysis of community-level data from Los Angeles County, California. *International Journal of Environmental Research and Public Health* 15(4):580. Cited on UCLA's About page.
-6. Church R, ReVelle C (1974). The maximal covering location problem. *Papers of the Regional Science Association* 32:101–118. *(Standard reference for the model in section 4; citation from memory — confirm.)*
+6. Church R, ReVelle C (1974). The maximal covering location problem. *Papers of the Regional Science Association* 32(1):101–118. doi:10.1007/BF01942293

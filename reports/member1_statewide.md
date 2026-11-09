@@ -117,7 +117,7 @@ The "original" column shows fewer missing values only because −999 was being c
 
 **Exclusion rule.** Rows are dropped only if the label, the ZCTA centroid or the population is missing. This removes 11 ZIPs (44 rows): 91123, 91522, 92152, 92318, 93435, 94035, 95141, 95192, 95724, 95836, 96162. The rule and the resulting 1,675 ZIPs are the same in all three variants.
 
-**Missing inputs are imputed, not dropped.** 337 ZIPs (20%) have no CalEnviroScreen values because no CalEnviroScreen tract lists them as its ZIP. With the correction, a further 57 ZIPs lack one or more inputs. All of these rows stay in training and testing, and missing inputs are filled with the training-fold median. The statement "no value is imputed" in `REPORT.md` is true of the data files but not of the models.
+**Missing inputs are imputed, not dropped.** 337 ZIPs (20%) have no CalEnviroScreen values because no CalEnviroScreen tract lists them as its ZIP. With the correction, a further 57 ZIPs lack one or more inputs. All of these rows stay in training and testing, and missing inputs are filled with the training-fold median. The statement "no value is imputed" in `REPORT.md` is true of the data files but not of the models (resolved at integration: `REPORT.md` now says how missing inputs are filled).
 
 LA ZIPs with incomplete inputs in the corrected 4.0 table (17): 90014, 90067, 90073, 90089, 90095, 90263, 90639, 90822, 90840, 91210, 91330, 91608, 91759, 93532, 93544, 93553, 93563. Most are institutional or very small.
 
@@ -144,7 +144,7 @@ The statewide model uses 12 inputs: heat level, population density and ten CalEn
 | `pop_density_per_sqmi` | UCLA population ÷ Gazetteer 2023 ZCTA land area | Population 2020 Census (note C); land area 2023 | same | Not a CES field |
 | *(baseline)* percentile | Overall CalEnviroScreen percentile, 0–100 | Mixed, 2013–2019 | Mixed, 2009–2015 | Yes (`CES 3.0 Percentile`) |
 
-**Assessment of 4.0.** Every 4.0 input describes roughly 2013–2019: the last third of the 2008–2018 label window and slightly beyond. This is closer than the "~2021" stated in `REPORT.md` (2021 is the publication year), but none of it describes 2008–2012.
+**Assessment of 4.0.** Every 4.0 input describes roughly 2013–2019: the last third of the 2008–2018 label window and slightly beyond. This is closer than the "~2021" stated in `REPORT.md` (2021 is the publication year; resolved at integration), but none of it describes 2008–2012.
 
 **Assessment of 3.0.** Every 3.0 input describes 2009–2015, inside the label window. Both versions use the same 8,035 census tracts on 2010 boundaries and assign the same 1,355 ZIPs, so the tract-to-ZIP step is identical.
 
@@ -184,8 +184,8 @@ Bibliographic details were checked online; the team should read each paper befor
 
 | Input group | Why it is plausible | Supporting work |
 |---|---|---|
-| Age 65+, poverty, education | Standard components of heat-vulnerability indices; older adults had the largest ED and hospitalisation increases in the 2006 California heat wave | Reid et al. 2009; Knowlton et al. 2009; Gronlund 2014 |
-| Cardiovascular ED rate | Heat is associated with more ER visits for ischaemic heart disease, stroke and other cardiovascular causes in California | Basu et al. 2012; Knowlton et al. 2009 |
+| Age 65+, poverty, education | Standard components of heat-vulnerability indices; young children and older adults were at greatest risk of ED visits and hospitalisation in the 2006 California heat wave | Reid et al. 2009; Knowlton et al. 2009; Gronlund 2014 |
+| Cardiovascular ED rate | Heat is associated with more ER visits for ischaemic heart disease, ischaemic stroke and other cardiovascular causes in California | Basu et al. 2012; Knowlton et al. 2009 |
 | Asthma ED rate | Heat is associated with respiratory emergency hospitalisations and with asthma ED visits | Anderson et al. 2013; Xu et al. 2013 |
 | PM2.5, ozone | Air pollution modifies and confounds heat effects; heat-wave mortality effects are larger on high-ozone and high-particulate days | Analitis et al. 2014; Basu et al. 2012 (tested pollutant confounding) |
 | Linguistic isolation, unemployment, housing burden | Socioeconomic position and social/linguistic isolation are associated with heat distress calls and heat-health disparities | Uejio et al. 2011; Gronlund 2014 |
@@ -601,9 +601,9 @@ Bootstrap 95% intervals for the LA holdout Poisson ρ without the two inputs: 0.
 
 - `scripts/fetch_statewide.py` and `scripts/fetch_features_ces_geo.py`: treat −999 as missing before aggregating. This changes `model_table_ca.csv`, `results/metrics_ca.json`, the downscale and anything else built on them. Not changed here, so that the original results stay available for comparison.
 - `REPORT.md` sections 4b and 4c: **done in this branch.** They now carry the corrected statewide numbers, the matched CalEnviroScreen comparison, the level-4-only result and the ablation.
-- `REPORT.md` section 4a (LA-only models) is Member 2's and still shows numbers from before the −999 correction; its CES baseline changes with the corrected percentile.
-- `REPORT.md` opening paragraph: "No value is imputed" is not true of the models.
-- `REPORT.md` section 8 and `site/data/meta.json`: "CES ~2021" should give the data years (2013–2019), not the publication year.
+- `REPORT.md` section 4a (LA-only models) is Member 2's and still shows numbers from before the −999 correction; its CES baseline changes with the corrected percentile. (Resolved at integration.)
+- `REPORT.md` opening paragraph: "No value is imputed" is not true of the models. (Resolved at integration.)
+- `REPORT.md` section 8 and `site/data/meta.json`: "CES ~2021" should give the data years (2013–2019), not the publication year. (Resolved at integration in `REPORT.md`.)
 - `site/data/meta.json` headline ("Spearman 0.674") is the uncorrected value; the corrected value is 0.730 for the cumulative label and 0.681 for level-4 only. That file is also edited by pull request 4, so it is left for the integration step to avoid a conflict.
 - `site/data/metrics_ca.json` and `results/metrics_ca.json` come from the original pipeline and still hold uncorrected numbers. They change only when the shared fetch scripts adopt the fix and the pipeline is rerun.
 
@@ -632,14 +632,14 @@ Bootstrap 95% intervals for the LA holdout Poisson ρ without the two inputs: 0.
 1. Analitis A, et al. (2014). Effects of heat waves on mortality: effect modification and confounding by air pollutants. *Epidemiology* 25(1):15–22. doi:10.1097/EDE.0b013e31828ac01b
 2. Anderson GB, et al. (2013). Heat-related emergency hospitalizations for respiratory diseases in the Medicare population. *American Journal of Respiratory and Critical Care Medicine* 187(10):1098–1103. doi:10.1164/rccm.201211-1969OC
 3. Basu R, Pearson D, Malig B, Broadwin R, Green R (2012). The effect of high ambient temperature on emergency room visits. *Epidemiology* 23(6):813–820. doi:10.1097/EDE.0b013e31826b7f97
-4. Gronlund CJ (2014). Racial and socioeconomic disparities in heat-related health effects and their mechanisms: a review. *Current Epidemiology Reports* 1(3):165–173.
-5. Knowlton K, et al. (2009). The 2006 California heat wave: impacts on hospitalizations and emergency department visits. *Environmental Health Perspectives* 117(1):61–67. *(page range from memory — confirm)*
+4. Gronlund CJ (2014). Racial and socioeconomic disparities in heat-related health effects and their mechanisms: a review. *Current Epidemiology Reports* 1(3):165–173. doi:10.1007/s40471-014-0014-4
+5. Knowlton K, et al. (2009). The 2006 California heat wave: impacts on hospitalizations and emergency department visits. *Environmental Health Perspectives* 117(1):61–67. doi:10.1289/ehp.11594
 6. OEHHA (2021). *Summary of Changes in CalEnviroScreen Version 4.0.* California Office of Environmental Health Hazard Assessment, October 2021.
 7. OEHHA (2017). *CalEnviroScreen 3.0: Update to the California Communities Environmental Health Screening Tool.* January 2017. Retrieved from the California Open Data Portal, dataset "CalEnviroScreen 3.0 Results", 2026-11-08.
 8. OEHHA (2018). *CalEnviroScreen 3.0 Results (June 2018 Update)* [CSV] and *CalEnviroScreen 3.0 Shapefile*. California Open Data Portal, https://data.ca.gov/dataset/calenviroscreen-3-0-results. Retrieved 2026-11-08.
 9. Reid CE, et al. (2009). Mapping community determinants of heat vulnerability. *Environmental Health Perspectives* 117(11):1730–1736. doi:10.1289/ehp.0900683
 10. Riley K, Wilhalme H, Delp L, Eisenman DP (2018). Mortality and morbidity during extreme heat events and prevalence of outdoor work: an analysis of community-level data from Los Angeles County, California. *International Journal of Environmental Research and Public Health* 15(4):580. doi:10.3390/ijerph15040580
-11. Uejio CK, et al. (2011). Intra-urban societal vulnerability to extreme heat: the role of heat exposure and the built environment, socioeconomics, and neighborhood stability. *Health & Place* 17(2):498–507.
+11. Uejio CK, et al. (2011). Intra-urban societal vulnerability to extreme heat: the role of heat exposure and the built environment, socioeconomics, and neighborhood stability. *Health & Place* 17(2):498–507. doi:10.1016/j.healthplace.2010.12.005
 12. Xu Z, Huang C, Hu W, Turner LR, Su H, Tong S (2013). Extreme temperatures and emergency department admissions for childhood asthma in Brisbane, Australia. *Occupational and Environmental Medicine* 70(10):730–735. doi:10.1136/oemed-2013-101538
 
 ## 15. Reproduce

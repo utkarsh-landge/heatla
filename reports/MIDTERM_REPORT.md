@@ -1,13 +1,13 @@
 # HEATLA: Predicting Heat-Related Excess Emergency Visits by ZIP Code in California and Los Angeles County
 
-**CSCI 461 midterm report** · [team member names]
+**CSCI 461 midterm report** · Rohit Shetty, Utkarsh Landge, Neel Kothari, Haochen (Char) Song
 
 > **Draft notes for the team. Delete this box before submitting.**
 >
-> - **Decisions assumed, not yet agreed:** the published level-4 label is the main target with level-4-only beside it; Part 2 augmented Poisson is the official LA model; siting is not rerun; the website is not updated.
+> - **Decisions assumed, not yet agreed:** the published level-4 label is the main target with level-4-only beside it; Part 2 augmented Poisson is the official LA model; siting is not rerun. The website now shows the corrected Part 1 and Part 2 results.
 > - **Pending from Part 2:** the level-4-only and no-asthma/cardiovascular runs (section 5.8). Results here are not invented; the section says they are pending.
 > - **Check against a course sample report:** nobody has confirmed the expected format or length.
-> - **Literature:** Riley, Derakhshan and Hess were checked in full and Scott from its abstract only. The other papers had only their bibliographic details checked, so read them before submitting. The Knowlton page range and the Church and ReVelle citation are from memory.
+> - **Literature:** Riley, Derakhshan and Hess were checked in full and Scott from its abstract only. The other papers had only their bibliographic details checked, so read them before submitting. Every journal reference's authors, volume, pages and DOI were checked against Crossref.
 > - **Unconfirmed:** that UCLA's level values are cumulative, whether UCLA's published layer used its optional socioeconomic adjustment, and the reference year of the CalEnviroScreen age-65+ field.
 
 ## Abstract
@@ -296,7 +296,7 @@ Replacing inputs from about 2013–2019 with inputs from 2009–2015 changes R²
 
 Adding the four features improves R² and rank correlation for all three models, most clearly for Poisson (R² +0.080, Spearman +0.061), whose MAE and R² improve in all five folds. Random forest and gradient boosting improve in pooled fit, but their exploratory resampling intervals include zero. Top-10% recall does not improve consistently: unchanged for Poisson, one ZIP higher for random forest and one ZIP lower for gradient boosting. This measures the four features as a group, not each one alone. On the 273 ZIPs with a CalEnviroScreen percentile, the index has ρ = 0.566 and augmented Poisson 0.811.
 
-**Local training versus transfer.** On nearly the same features, LA-only Poisson has R² 0.403 and ρ 0.718, and the LA holdout Poisson (also using heat level, trained on other counties and all levels) has R² 0.349 and ρ 0.730. So local training gives no gain in ranking and a modest gain in R², although the two designs also differ in training rows and heat levels. The earlier, higher LA-only figures reflected a different feature set as well as local training.
+**Local training versus transfer.** LA-only Poisson has R² 0.403 and ρ 0.718, and the LA holdout Poisson has R² 0.349 and ρ 0.730 on the level-4 label. These come from different designs, so they are not directly comparable. Part 1 trains outside LA on all four heat levels with 12 inputs. Part 2 trains on the other LA folds at level 4 only with 11 inputs. The higher LA-only figures in earlier drafts (R² 0.445, ρ 0.785, `results/metrics.json`) came from the original 13-input model on inputs before the −999 correction.
 
 *Pending: level-4-only and no-asthma/cardiovascular runs for this experiment.*
 
@@ -347,7 +347,7 @@ A ZIP counts once in the objective no matter how many selected centers reach it.
 - **The cumulative reading of heat levels is an inference**, and level-only results depend on it. UCLA's optional socioeconomic adjustment may or may not have been used.
 - **Input years differ from the label period** (section 3.4). The effect of using 2020 population has not been tested.
 - **Asthma and cardiovascular inputs share a data source with the label** (section 5.5).
-- **Missing inputs are imputed.** 337 of 1,675 ZIPs have no CalEnviroScreen data, typically because no tract lists them as its ZIP.
+- **Missing inputs are imputed.** 337 of 1,675 ZIPs have no CalEnviroScreen data, typically because no tract lists them as its ZIP. A further 57 lack one or more inputs (394 in total; 17 of 287 in LA).
 - **Geography is approximate.** Each tract is assigned to one ZIP, ZIP and ZCTA are joined by code, and boundaries are not harmonized across data vintages.
 - **LA is effectively one test.** LA holdout and statewide cross-validation are nearly the same split for LA, and LA differs strongly from the rest of the state at level 4, so transfer results may not generalize to other counties.
 - **Small top-k sets.** Top-10% recall in LA rests on 29 ZIPs.
@@ -362,36 +362,36 @@ A ZIP counts once in the objective no matter how many selected centers reach it.
 
 ## References
 
-Analitis, A., et al. (2014). Effects of heat waves on mortality: effect modification and confounding by air pollutants. *Epidemiology, 25*(1), 15–22.
+Analitis, A., et al. (2014). Effects of heat waves on mortality: effect modification and confounding by air pollutants. *Epidemiology, 25*(1), 15–22. https://doi.org/10.1097/EDE.0b013e31828ac01b
 
-Anderson, G. B., et al. (2013). Heat-related emergency hospitalizations for respiratory diseases in the Medicare population. *American Journal of Respiratory and Critical Care Medicine, 187*(10), 1098–1103.
+Anderson, G. B., et al. (2013). Heat-related emergency hospitalizations for respiratory diseases in the Medicare population. *American Journal of Respiratory and Critical Care Medicine, 187*(10), 1098–1103. https://doi.org/10.1164/rccm.201211-1969OC
 
-Basu, R., Pearson, D., Malig, B., Broadwin, R., & Green, R. (2012). The effect of high ambient temperature on emergency room visits. *Epidemiology, 23*(6), 813–820.
+Basu, R., Pearson, D., Malig, B., Broadwin, R., & Green, R. (2012). The effect of high ambient temperature on emergency room visits. *Epidemiology, 23*(6), 813–820. https://doi.org/10.1097/EDE.0b013e31826b7f97
 
-Church, R., & ReVelle, C. (1974). The maximal covering location problem. *Papers of the Regional Science Association, 32*, 101–118.
+Church, R., & ReVelle, C. (1974). The maximal covering location problem. *Papers of the Regional Science Association, 32*(1), 101–118. https://doi.org/10.1007/BF01942293
 
-Derakhshan, S., Eisenman, D. P., Basu, R., & Longcore, T. (2024). Do social vulnerability indices correlate with extreme heat health outcomes? *The Journal of Climate Change and Health, 18*, 100276.
+Derakhshan, S., Eisenman, D. P., Basu, R., & Longcore, T. (2024). Do social vulnerability indices correlate with extreme heat health outcomes? *The Journal of Climate Change and Health, 18*, 100276. https://doi.org/10.1016/j.joclim.2023.100276
 
-Gronlund, C. J. (2014). Racial and socioeconomic disparities in heat-related health effects and their mechanisms: a review. *Current Epidemiology Reports, 1*(3), 165–173.
+Gronlund, C. J. (2014). Racial and socioeconomic disparities in heat-related health effects and their mechanisms: a review. *Current Epidemiology Reports, 1*(3), 165–173. https://doi.org/10.1007/s40471-014-0014-4
 
-Hess, J. J., Saha, S., & Luber, G. (2014). Summertime acute heat illness in U.S. emergency departments from 2006 through 2010. *Environmental Health Perspectives, 122*(11), 1209–1215.
+Hess, J. J., Saha, S., & Luber, G. (2014). Summertime acute heat illness in U.S. emergency departments from 2006 through 2010: analysis of a nationally representative sample. *Environmental Health Perspectives, 122*(11), 1209–1215. https://doi.org/10.1289/ehp.1306796
 
-Knowlton, K., et al. (2009). The 2006 California heat wave: impacts on hospitalizations and emergency department visits. *Environmental Health Perspectives, 117*(1), 61–67.
+Knowlton, K., et al. (2009). The 2006 California heat wave: impacts on hospitalizations and emergency department visits. *Environmental Health Perspectives, 117*(1), 61–67. https://doi.org/10.1289/ehp.11594
 
 OEHHA (2021). *Summary of Changes in CalEnviroScreen Version 4.0.* California Office of Environmental Health Hazard Assessment.
 
 OEHHA (2017). *CalEnviroScreen 3.0: Update to the California Communities Environmental Health Screening Tool.*
 
-Reid, C. E., et al. (2009). Mapping community determinants of heat vulnerability. *Environmental Health Perspectives, 117*(11), 1730–1736.
+Reid, C. E., et al. (2009). Mapping community determinants of heat vulnerability. *Environmental Health Perspectives, 117*(11), 1730–1736. https://doi.org/10.1289/ehp.0900683
 
-Riley, K., Wilhalme, H., Delp, L., & Eisenman, D. P. (2018). Mortality and morbidity during extreme heat events and prevalence of outdoor work. *International Journal of Environmental Research and Public Health, 15*(4), 580.
+Riley, K., Wilhalme, H., Delp, L., & Eisenman, D. P. (2018). Mortality and morbidity during extreme heat events and prevalence of outdoor work: an analysis of community-level data from Los Angeles County, California. *International Journal of Environmental Research and Public Health, 15*(4), 580. https://doi.org/10.3390/ijerph15040580
 
-Scott, M., Grineski, S. E., Collins, T. W., & Adkins, D. E. (2025). Climate Gaps: Disparities in residential air conditioning access across ten US metropolitan areas. *Applied Geography, 176*, 103537.
+Scott, M., Grineski, S. E., Collins, T. W., & Adkins, D. E. (2025). Climate Gaps: Disparities in residential air conditioning access across ten US metropolitan areas. *Applied Geography, 176*, 103537. https://doi.org/10.1016/j.apgeog.2025.103537
 
 UCLA CalHeatScore modeling group (2025). *Heat Analysis Algorithm: Unified Technical Reference.* github.com/CalHeatScore-UCLA-modeling/Methods.
 
 UCLA CalHeatScore modeling group (2025b). *Empirical Model Methods.* Earlier methods document, same repository history.
 
-Uejio, C. K., et al. (2011). Intra-urban societal vulnerability to extreme heat. *Health & Place, 17*(2), 498–507.
+Uejio, C. K., et al. (2011). Intra-urban societal vulnerability to extreme heat: the role of heat exposure and the built environment, socioeconomics, and neighborhood stability. *Health & Place, 17*(2), 498–507. https://doi.org/10.1016/j.healthplace.2010.12.005
 
-Xu, Z., Huang, C., Hu, W., Turner, L. R., Su, H., & Tong, S. (2013). Extreme temperatures and emergency department admissions for childhood asthma in Brisbane, Australia. *Occupational and Environmental Medicine, 70*(10), 730–735.
+Xu, Z., Huang, C., Hu, W., Turner, L. R., Su, H., & Tong, S. (2013). Extreme temperatures and emergency department admissions for childhood asthma in Brisbane, Australia. *Occupational and Environmental Medicine, 70*(10), 730–735. https://doi.org/10.1136/oemed-2013-101538

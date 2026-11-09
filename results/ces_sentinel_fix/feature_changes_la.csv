@@ -1,0 +1,50 @@
+table,zip,county,feature,in_model_table,original,corrected,difference,original_negative,status,tracts_in_zip,tracts_missing_this_field,tracts_used
+la,90024,Los Angeles,poverty_pct_ces,0,-190.3347,40.0338,230.3685,1,corrected,12,1,11
+la,90024,Los Angeles,ces4_percentile,1,-193.4903,35.9793,229.4696,1,corrected,12,1,11
+la,90027,Los Angeles,poverty_pct_ces,0,32.6411,32.753,0.1119,0,corrected,16,1,15
+la,90027,Los Angeles,ces4_percentile,1,67.8058,67.9216,0.1158,0,corrected,16,1,15
+la,90058,Los Angeles,ces4_percentile,1,92.4125,98.3505,5.938,0,corrected,3,1,2
+la,90242,Los Angeles,poverty_pct_ces,0,28.6023,29.2798,0.6775,0,corrected,10,1,9
+la,90242,Los Angeles,ces4_percentile,1,73.1103,73.8172,0.7069,0,corrected,10,1,9
+la,90272,Los Angeles,ces4_percentile,1,1.4126,7.3117,5.8991,0,corrected,7,1,6
+la,90503,Los Angeles,poverty_pct_ces,0,-50.5689,17.3691,67.938,1,corrected,10,1,9
+la,90650,Los Angeles,ces4_percentile,1,60.2857,80.4973,20.2116,0,corrected,21,1,20
+la,90670,Los Angeles,poverty_pct_ces,0,30.1133,30.5591,0.4458,0,corrected,5,1,4
+la,90670,Los Angeles,ces4_percentile,1,84.6216,85.091,0.4694,0,corrected,5,1,4
+la,90731,Los Angeles,poverty_pct_ces,0,18.1659,38.7258,20.5599,0,corrected,16,1,15
+la,90731,Los Angeles,ces4_percentile,1,51.6264,72.8626,21.2362,0,corrected,16,1,15
+la,90744,Los Angeles,poverty_pct_ces,0,50.7705,50.9417,0.1712,0,corrected,15,1,14
+la,90744,Los Angeles,ces4_percentile,1,89.2141,89.3915,0.1774,0,corrected,15,1,14
+la,90802,Los Angeles,poverty_pct_ces,0,39.1122,39.5265,0.4143,0,corrected,10,1,9
+la,90802,Los Angeles,ces4_percentile,1,71.025,71.4521,0.4271,0,corrected,10,1,9
+la,90813,Los Angeles,ces4_percentile,1,86.4207,88.1982,1.7775,0,corrected,14,1,13
+la,90815,Los Angeles,poverty_pct_ces,0,15.1552,18.4697,3.3145,0,corrected,11,1,10
+la,90815,Los Angeles,ces4_percentile,1,30.3832,33.7475,3.3643,0,corrected,11,1,10
+la,90840,Los Angeles,poverty_pct_ces,0,-999.0,,,1,became missing,1,1,0
+la,90840,Los Angeles,ces4_percentile,1,-999.0,,,1,became missing,1,1,0
+la,91011,Los Angeles,poverty_pct_ces,0,4.5643,8.9851,4.4208,0,corrected,6,1,5
+la,91011,Los Angeles,ces4_percentile,1,5.3748,9.7991,4.4243,0,corrected,6,1,5
+la,91042,Los Angeles,poverty_pct_ces,0,32.6595,33.729,1.0695,0,corrected,7,1,6
+la,91042,Los Angeles,ces4_percentile,1,44.5278,45.6097,1.0819,0,corrected,7,1,6
+la,91326,Los Angeles,poverty_pct_ces,0,-43.7684,10.3313,54.0997,1,corrected,8,1,7
+la,91330,Los Angeles,ces4_percentile,1,-999.0,,,1,became missing,1,1,0
+la,91342,Los Angeles,poverty_pct_ces,0,33.2072,33.5997,0.3925,0,corrected,22,1,21
+la,91342,Los Angeles,ces4_percentile,1,60.8061,66.8714,6.0653,0,corrected,22,2,20
+la,91367,Los Angeles,elderly65_pct_ces,0,-157.8942,16.9881,174.8823,1,corrected,7,1,6
+la,91384,Los Angeles,poverty_pct_ces,0,-162.3946,16.1496,178.5442,1,corrected,7,1,6
+la,91384,Los Angeles,ces4_percentile,1,-151.493,29.3778,180.8708,1,corrected,7,1,6
+la,91390,Los Angeles,poverty_pct_ces,0,5.9942,12.0859,6.0917,0,corrected,9,1,8
+la,91390,Los Angeles,ces4_percentile,1,3.4831,9.5596,6.0765,0,corrected,9,1,8
+la,91406,Los Angeles,poverty_pct_ces,0,40.163,41.3188,1.1558,0,corrected,17,1,16
+la,91406,Los Angeles,ces4_percentile,1,83.4575,88.6283,5.1708,0,corrected,17,2,15
+la,91711,Los Angeles,poverty_pct_ces,0,-86.5067,18.5413,105.048,1,corrected,8,1,7
+la,91711,Los Angeles,ces4_percentile,1,-61.3641,46.5784,107.9425,1,corrected,8,1,7
+la,91768,Los Angeles,poverty_pct_ces,0,-7.8148,46.123,53.9378,1,corrected,9,1,8
+la,91768,Los Angeles,ces4_percentile,1,19.6481,87.7528,68.1047,0,corrected,9,2,7
+la,93510,Los Angeles,poverty_pct_ces,0,-0.9514,22.2923,23.2437,1,corrected,3,1,2
+la,93510,Los Angeles,ces4_percentile,1,-3.0398,20.1552,23.195,1,corrected,3,1,2
+la,93536,Los Angeles,poverty_pct_ces,0,-46.0618,25.8223,71.8841,1,corrected,13,1,12
+la,93536,Los Angeles,ces4_percentile,1,-36.7742,35.8106,72.5848,1,corrected,13,1,12
+la,93550,Los Angeles,ces4_percentile,1,56.7257,62.1128,5.3871,0,corrected,17,2,15
+la,93563,Los Angeles,poverty_pct_ces,0,-999.0,,,1,became missing,1,1,0
+la,93563,Los Angeles,ces4_percentile,1,-999.0,,,1,became missing,1,1,0

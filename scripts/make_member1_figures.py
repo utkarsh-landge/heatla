@@ -9,9 +9,12 @@ Conventions used in every figure:
   error       = prediction - label; red = overprediction, blue = underprediction
 
 Run:  .venv/bin/python scripts/make_member1_figures.py
+      .venv/bin/python scripts/make_member1_figures.py --dir results/member1/ces30 \
+          --inputs "CalEnviroScreen 3.0 inputs"
 """
 from __future__ import annotations
 
+import argparse
 import json
 import pathlib
 
@@ -26,8 +29,9 @@ from matplotlib.patches import Polygon  # noqa: E402
 from scipy.stats import spearmanr  # noqa: E402
 from sklearn.metrics import r2_score  # noqa: E402
 
-OUT = pathlib.Path("results/member1")
+OUT = pathlib.Path("results/member1")   # overridden by --dir
 FIG = OUT / "figures"
+INPUTS = ""                             # overridden by --inputs; shown under each title
 LEVELS = (1, 2, 3, 4)
 UNIT = "excess ER visits per 10,000"
 MODEL_NAME = {"poisson": "Poisson", "random_forest": "Random forest",
@@ -60,6 +64,9 @@ plt.rcParams.update({
 
 def save(fig, name: str) -> None:
     FIG.mkdir(parents=True, exist_ok=True)
+    if INPUTS:
+        fig.text(0.995, 0.005, f"Inputs: {INPUTS}", ha="right", va="bottom", fontsize=8,
+                 color=INK2)
     fig.savefig(FIG / name, dpi=160, bbox_inches="tight")
     plt.close(fig)
     print("  wrote", FIG / name)
@@ -263,6 +270,13 @@ def metric_comparison(kind: str, model: str) -> None:
 
 
 def main() -> None:
+    global OUT, FIG, INPUTS
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--dir", default="results/member1", help="folder with the run's CSV outputs")
+    ap.add_argument("--inputs", default="", help="input-variant label printed on each figure")
+    a = ap.parse_args()
+    OUT, INPUTS = pathlib.Path(a.dir), a.inputs
+    FIG = OUT / "figures"
     fold_map()
     for kind in ("la_holdout", "spatial_cv"):
         for model in MODEL_NAME:

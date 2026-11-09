@@ -1,0 +1,29 @@
+stage,unique_zips,rows
+Raw statewide table (ZIP x heat level),1686,6744
+"After cleaning: label, centroid and population present",1675,6700
+  of which CalEnviroScreen inputs present,1281,5124
+  of which CalEnviroScreen inputs missing (median-imputed in training fold),394,1576
+Los Angeles County (LA holdout test set),287,1148
+  of which CalEnviroScreen inputs present,270,1080
+  of which CalEnviroScreen inputs missing,17,68
+Rest of California (LA holdout training set),1388,5552
+  of which CalEnviroScreen inputs present,1011,4044
+  of which CalEnviroScreen inputs missing,377,1508
+"Detail: some but not all CalEnviroScreen inputs missing, statewide",57,228
+"Detail: some but not all CalEnviroScreen inputs missing, Los Angeles",6,24
+"Detail: all CalEnviroScreen inputs missing, statewide",337,1348
+"Detail: all CalEnviroScreen inputs missing, Los Angeles",11,44
+"Detail: CalEnviroScreen percentile present (baseline sample), statewide",1326,5304
+"Detail: CalEnviroScreen percentile present (baseline sample), Los Angeles",273,1092
+Heat level 1: statewide,1675,1675
+Heat level 1: Los Angeles,287,287
+Heat level 1: rest of California,1388,1388
+Heat level 2: statewide,1675,1675
+Heat level 2: Los Angeles,287,287
+Heat level 2: rest of California,1388,1388
+Heat level 3: statewide,1675,1675
+Heat level 3: Los Angeles,287,287
+Heat level 3: rest of California,1388,1388
+Heat level 4: statewide,1675,1675
+Heat level 4: Los Angeles,287,287
+Heat level 4: rest of California,1388,1388

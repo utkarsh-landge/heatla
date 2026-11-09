@@ -20,10 +20,18 @@ What is reported:
     (rank metrics only: CES is an index, not a rate, so R2 is not defined for it)
   - row-level labels, predictions and errors (error = prediction - UCLA label)
 
-Run:  .venv/bin/python scripts/run_member1_statewide.py
+Run (original CES 4.0 inputs, as committed in results/member1/):
+  .venv/bin/python scripts/run_member1_statewide.py
+
+Run on another input table (same columns; see scripts/build_member1_ces_tables.py):
+  .venv/bin/python scripts/run_member1_statewide.py --tag ces40_fixed \
+      --table data/processed/model_table_ca_ces40_fixed.csv --out results/member1/ces40_fixed
+  .venv/bin/python scripts/run_member1_statewide.py --tag ces30 --baseline ces3_percentile \
+      --table data/processed/model_table_ca_ces30.csv --out results/member1/ces30
 """
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import os
@@ -49,10 +57,13 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 from heatla import model as M  # noqa: E402
-from run_models_ca import BASELINE, FEATURES, N_GROUPS, SEED, TARGET, fit_predict, load  # noqa: E402
+from run_models_ca import FEATURES, N_GROUPS, SEED, TARGET, fit_predict  # noqa: E402
 
-OUT = pathlib.Path("results/member1")
-TABLE = pathlib.Path("data/processed/model_table_ca.csv")
+DEFAULT_TABLE = pathlib.Path("data/processed/model_table_ca.csv")
+OUT = pathlib.Path("results/member1")   # overridden by --out
+TABLE = DEFAULT_TABLE                   # overridden by --table
+BASELINE = "ces4_percentile"            # overridden by --baseline
+TAG = "ces40_original"                  # overridden by --tag
 MODELS = ("poisson", "random_forest", "gradient_boosting")
 LEVELS = (1, 2, 3, 4)
 LEVEL_FEATURES = [f for f in FEATURES if f != "chs_level"]
@@ -61,6 +72,21 @@ LA = "Los Angeles"
 
 
 # ---------------------------------------------------------------- helpers
+def load() -> pd.DataFrame:
+    """Same cleaning as run_models_ca.load(), for whichever table is selected."""
+    df = pd.read_csv(TABLE)
+    for c in FEATURES + [TARGET, "lat", "lon", "population", BASELINE]:
+        df[c] = pd.to_numeric(df[c], errors="coerce")
+    df = df.dropna(subset=[TARGET, "lat", "lon", "population"]).reset_index(drop=True)
+    df["zip"] = df["zip"].astype(str).str.replace(r"\.0$", "", regex=True).str.zfill(5)
+    return df
+
+
+def baseline_label() -> str:
+    return {"ces4_percentile": "CES 4.0 percentile",
+            "ces3_percentile": "CES 3.0 percentile"}.get(BASELINE, BASELINE)
+
+
 def metrics(y, p, ci: bool = True) -> dict:
     """R2, Spearman, top-10% / top-20% recall, with bootstrap CIs for R2 and Spearman."""
     o = M.metric_block(y, p)
@@ -98,10 +124,10 @@ def sample_counts(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
     raw = pd.read_csv(TABLE)
     raw["zip"] = raw["zip"].astype(str).str.replace(r"\.0$", "", regex=True).str.zfill(5)
     dropped = sorted(set(raw["zip"]) - set(df["zip"]))
-    has_ces = df[CES_INPUTS].notna().all(axis=1)
+    has_ces = df[CES_INPUTS].notna().all(axis=1)      # all ten CES inputs present
     any_ces = df[CES_INPUTS].notna().any(axis=1)
-    assert (has_ces == any_ces).all(), "CES inputs are missing all-or-nothing per row"
-    assert (has_ces == df[BASELINE].notna()).all(), "CES percentile missing with CES inputs"
+    partial = any_ces & ~has_ces                      # some, not all, present
+    has_pct = df[BASELINE].notna()
     is_la = df["county"] == LA
 
     def row(stage, sub):
@@ -118,6 +144,19 @@ def sample_counts(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
             row("Rest of California (LA holdout training set)", df[~is_la]),
             row("  of which CalEnviroScreen inputs present", df[~is_la & has_ces]),
             row("  of which CalEnviroScreen inputs missing", df[~is_la & ~has_ces])]
+    if partial.any() or (has_pct != has_ces).any():
+        # only arises once -999 sentinels are treated as missing per feature
+        rows += [row("Detail: some but not all CalEnviroScreen inputs missing, statewide",
+                     df[partial]),
+                 row("Detail: some but not all CalEnviroScreen inputs missing, Los Angeles",
+                     df[is_la & partial]),
+                 row("Detail: all CalEnviroScreen inputs missing, statewide", df[~any_ces]),
+                 row("Detail: all CalEnviroScreen inputs missing, Los Angeles",
+                     df[is_la & ~any_ces]),
+                 row("Detail: CalEnviroScreen percentile present (baseline sample), statewide",
+                     df[has_pct]),
+                 row("Detail: CalEnviroScreen percentile present (baseline sample), Los Angeles",
+                     df[is_la & has_pct])]
     for lv in LEVELS:
         m = df["chs_level"] == lv
         rows.append(row(f"Heat level {lv}: statewide", df[m]))
@@ -134,6 +173,10 @@ def sample_counts(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
         "every_zip_has_all_4_levels": bool((per_zip == 4).all()),
         "n_counties": int(df["county"].nunique()),
         "la_zips_missing_ces": sorted(df.loc[is_la & ~has_ces, "zip"].unique().tolist()),
+        "la_zips_missing_ces_percentile": sorted(
+            df.loc[is_la & ~has_pct, "zip"].unique().tolist()),
+        "missing_rows_per_input": {c: int(df[c].isna().sum()) for c in CES_INPUTS + [BASELINE]},
+        "negative_rows_per_input": {c: int((df[c] < 0).sum()) for c in CES_INPUTS + [BASELINE]},
     }
     return pd.DataFrame(rows), info
 
@@ -263,7 +306,7 @@ def ces_matched(pred: pd.DataFrame, kind: str) -> list[dict]:
         mm = m & ok
         base = {"evaluation": kind, "scope": scope, "n_all": int(m.sum()),
                 "n_matched": int(mm.sum()), "n_dropped_no_ces": int((m & ~ok).sum())}
-        recs.append({**base, "predictor": "CES 4.0 percentile", "config": "index",
+        recs.append({**base, "predictor": baseline_label(), "config": "index",
                      **{k: v for k, v in rank_metrics(y[mm], ces[mm]).items() if k != "n"}})
         for config in ("all_level", "level_specific"):
             for name in MODELS:
@@ -275,6 +318,16 @@ def ces_matched(pred: pd.DataFrame, kind: str) -> list[dict]:
 
 # ---------------------------------------------------------------- main
 def main() -> None:
+    global OUT, TABLE, BASELINE, TAG
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--table", default=str(DEFAULT_TABLE), help="model table CSV")
+    ap.add_argument("--out", default="results/member1", help="output directory")
+    ap.add_argument("--baseline", default="ces4_percentile",
+                    help="column holding the CalEnviroScreen percentile used as baseline")
+    ap.add_argument("--tag", default="ces40_original", help="name of this input variant")
+    a = ap.parse_args()
+    OUT, TABLE, BASELINE, TAG = pathlib.Path(a.out), pathlib.Path(a.table), a.baseline, a.tag
+
     OUT.mkdir(parents=True, exist_ok=True)
     df = load()
     df["fold"] = assign_folds(df)
@@ -307,17 +360,19 @@ def main() -> None:
     # regression check: the all-level pooled numbers must equal the committed results
     old = json.loads(pathlib.Path("results/metrics_ca.json").read_text())
     checks = {}
-    for name in MODELS:
+    for name in MODELS if TABLE == DEFAULT_TABLE else ():
         for kind, ref in (("spatial_cv", old["test_a_spatial_cv"]["models"][name]),
                           ("la_holdout", old["test_b_la_holdout"]["models"][name]["all_chs"])):
             new = mdf[(mdf.evaluation == kind) & (mdf.config == "all_level")
                       & (mdf.model == name) & (mdf.scope == "pooled (levels 1-4)")].iloc[0]
             checks[f"{kind}/{name}"] = bool(abs(new["r2"] - ref["r2"]) < 1e-9
                                             and abs(new["spearman"] - ref["spearman"]) < 1e-9)
-    print("matches committed results/metrics_ca.json:", all(checks.values()))
+    if checks:
+        print("matches committed results/metrics_ca.json:", all(checks.values()))
 
     config = {
         "module": "Member 1 - statewide models and geographic transfer",
+        "input_variant": TAG,
         "starting_commit": "0980d9a", "code_commit_at_run": git_commit(),
         "data_version": {"file": str(TABLE),
                          "sha256": hashlib.sha256(TABLE.read_bytes()).hexdigest(),
@@ -343,7 +398,9 @@ def main() -> None:
         "samples": info,
         "matches_committed_metrics_ca": checks,
         "outputs": sorted(p.name for p in OUT.glob("*.csv")),
-        "command": ".venv/bin/python scripts/run_member1_statewide.py",
+        "command": ".venv/bin/python scripts/run_member1_statewide.py"
+                   + ("" if TABLE == DEFAULT_TABLE else
+                      f" --tag {TAG} --table {TABLE} --out {OUT} --baseline {BASELINE}"),
     }
     (OUT / "config.json").write_text(json.dumps(config, indent=2))
     (OUT / "metrics_member1.json").write_text(json.dumps(

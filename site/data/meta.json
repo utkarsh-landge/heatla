@@ -25,7 +25,6 @@
     "The 2030 layer is a proportional heat-exposure scaling scenario, not a model prediction and not part of model evaluation.",
     "Cooling-center selection picks among the 153 existing centers and measures straight-line coverage of ZIP centroids, not actual access or health benefit.",
     "ZIP 90095 (UCLA) may have mis-attributed ER patients; flagged.",
-    "Prototype study, not an operational tool.",
-    "Cooling-center weights use the earlier LA out-of-fold predictions (13-input model, pre-correction inputs) and have not been rerun."
+    "Prototype study, not an operational tool."
   ]
 }

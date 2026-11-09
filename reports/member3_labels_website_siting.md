@@ -20,7 +20,7 @@
 | 5. Siting formulation | Done and verified against the code's output |
 | 6. Annual ER data | Done — bounded search, findings recorded |
 | Final model versions on the website | **Not done** — development versions from commit `0980d9a` are loaded; swap at integration |
-| CalEnviroScreen −999 correction on the website and in siting | **Not done here** — depends on the shared fix (pull request 1) |
+| CalEnviroScreen −999 correction on the website and in siting | Website: shared fix (pull request 1). Siting: rerun with corrected inputs (section 4) |
 
 ---
 
@@ -222,6 +222,8 @@ To view: `python3 -m http.server 8765 --directory site`, then open `http://local
 
 This documents what `src/heatla/siting.py` does. It was checked by re-solving the program independently (`scripts/member3_check_siting.py`).
 
+**Update (rerun).** The siting has been rerun with the final LA model: the weights are now the Part 2 augmented Poisson out-of-fold predictions (`part2/results/feature_comparison/predictions_oof.csv`), and the CalEnviroScreen equity quartiles use the corrected percentile from `part2/data/la_base.csv`. The code now reads only inputs in the repository (`site/data/centers.json`, `part2/data/la_base.csv`, `site/data/zips.geojson`). The numbers below are from the rerun. A decision check that scores every plan on the UCLA-label burden is in `results/siting_decision_check.csv` and `REPORT.md` section 7.
+
 ### 4.1 Inputs
 
 | Symbol | Meaning | Value in the code |
@@ -229,14 +231,14 @@ This documents what `src/heatla/siting.py` does. It was checked by re-solving th
 | $Z$ | Demand points | The 287 LA ZIPs with a label and a centroid |
 | $S$ | Candidate sites | The 153 existing LA County regional cooling centers (2022 layer) |
 | $w_z$ | Burden weight of ZIP $z$ | $\max(0,\hat r_z)\cdot p_z/10{,}000$ |
-| $\hat r_z$ | Predicted rate | LA out-of-fold Poisson prediction, excess ER visits per 10,000 |
+| $\hat r_z$ | Predicted rate | Part 2 augmented Poisson out-of-fold prediction, excess ER visits per 10,000 |
 | $p_z$ | Population | The population in UCLA's layer |
 | $d_{zs}$ | Distance | Great-circle (haversine) distance in miles between the ZIP's centroid and the site |
 | $R$ | Coverage radius | 1, 2, 3 or 5 miles |
 | $a_{zs}$ | Coverage indicator | 1 if $d_{zs}\le R$, else 0 |
 | $k$ | Budget | 5, 10, 20 or 40 centers; every center costs the same |
 
-**Converting rates to counts.** The model predicts a rate. Multiplying by population and dividing by 10,000 gives a predicted number of excess ER visits in the ZIP, so that a large ZIP counts for more than a small one with the same rate. Because of what the label is (section 1), this is a number of visits over eleven warm seasons. Totals over LA: 10,774 predicted and 10,545 from the UCLA label.
+**Converting rates to counts.** The model predicts a rate. Multiplying by population and dividing by 10,000 gives a predicted number of excess ER visits in the ZIP, so that a large ZIP counts for more than a small one with the same rate. Because of what the label is (section 1), this is a number of visits over eleven warm seasons. Totals over LA: 10,843 predicted and 10,545 from the UCLA label.
 
 **ZIP representative point.** Each ZIP is represented by one point, its Census ZCTA centroid (2023 Gazetteer internal point). The whole ZIP is covered or not covered according to that one point.
 
@@ -273,16 +275,16 @@ A ZIP with no site within $R$ has $y_z=0$.
 | Selected site sets | Identical in all 16 |
 | ZIPs covered and UCLA-label coverage | Identical in all 16 |
 | "Exact is at least as good as greedy" | True in all 16 |
-| "Gap is at most 3.9 percentage points" | True: largest gap 3.89 points, at 5 miles and 20 centers |
+| "Gap is at most 3.9 percentage points" | True: largest gap 3.94 points, at 5 miles and 20 centers |
 
 **Table 3. Exact solutions (share of predicted burden covered) and the ceiling set by where existing centers are.**
 
 | Radius | ZIPs any center can reach | Ceiling | k = 5 | k = 10 | k = 20 | k = 40 |
 |---|---|---|---|---|---|---|
-| 1 mile | 99 of 287 | 42.9% | 6.6% | 11.7% | 20.5% | 32.3% |
-| 2 miles | 183 of 287 | 69.0% | 13.4% | 22.1% | 35.2% | 53.8% |
-| 3 miles | 235 of 287 | 84.1% | 26.2% | 40.2% | 60.4% | 80.5% |
-| 5 miles | 268 of 287 | 92.6% | 47.2% | 69.0% | 87.6% | 92.6% |
+| 1 mile | 99 of 287 | 43.3% | 6.9% | 12.2% | 20.9% | 32.9% |
+| 2 miles | 183 of 287 | 69.3% | 13.9% | 22.7% | 35.9% | 54.3% |
+| 3 miles | 235 of 287 | 84.3% | 26.8% | 40.7% | 60.7% | 80.8% |
+| 5 miles | 268 of 287 | 92.9% | 47.7% | 69.3% | 87.8% | 92.9% |
 
 At 5 miles and a budget of 40, only 36 centers are selected: the ceiling is reached and the remaining budget has nothing to add.
 
@@ -294,8 +296,8 @@ At 5 miles and a budget of 40, only 36 centers are selected: the ceiling is reac
 - **No capacity, hours or cost differences.** Every center counts the same and can serve any number of people.
 - **Coverage is not benefit.** Being within range of a center does not mean residents use it or that ER visits fall. The objective is exposure to a facility, not a health outcome.
 - **The burden is not specific to extreme heat.** It is the all-levels, eleven-season total (section 1), while cooling centers open on the hottest days.
-- **Weights are predictions although labels exist for every LA ZIP.** The predicted and UCLA-label coverage of the chosen sites are almost the same (for example 22.1% and 22.0% at 2 miles and 10 centers), so in LA the predictions add little to the siting decision over using the labels directly.
-- **Equity is reported, not enforced,** and the CalEnviroScreen quartiles use the uncorrected percentile, which is wrong for 26 LA ZIPs. Site selection itself does not use it.
+- **Weights are predictions although labels exist for every LA ZIP.** The predicted and UCLA-label coverage of the chosen sites are almost the same (for example 22.7% and 22.0% at 2 miles and 10 centers). Scored on the label, the prediction plans are on average 0.25 points below plans chosen with the label itself and 0.8 points above population-only plans, so in LA the predictions add little to the siting decision over using the labels directly.
+- **Equity is reported, not enforced.** The CalEnviroScreen quartiles now use the corrected percentile and cover the 273 ZIPs that have one. Site selection itself does not use it.
 
 ## 5. Audit of report and website claims
 

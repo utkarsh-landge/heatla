@@ -204,9 +204,7 @@ def meta(ca: dict) -> None:
         caveats.insert(7, "Two inputs, the asthma and heart-attack ER-visit rates, come from the same "
                           "state ER records as the label. Without them, level-4 skill drops and, for "
                           "level-4 days alone, is about level with the CalEnviroScreen index.")
-    if not any("Cooling-center weights" in c for c in caveats):
-        caveats.append("Cooling-center weights use the earlier LA out-of-fold predictions (13-input "
-                       "model, pre-correction inputs) and have not been rerun.")
+    caveats = [c for c in caveats if not c.startswith("Cooling-center weights use the earlier")]
     m["caveats"] = caveats
     path.write_text(json.dumps(m, indent=2))
 

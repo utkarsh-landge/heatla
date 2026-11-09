@@ -5,8 +5,9 @@ from the committed inputs, without calling src/heatla/siting.py, and compares th
 with results/coolingcenter_solutions.json. Nothing in results/ is rewritten.
 
 Inputs (read-only)
-  data/processed/model_table.csv   ZIP centroids, UCLA population, observed excess number
-  results/predictions_oof.csv      out-of-fold Poisson predictions (the burden weights)
+  part2/data/la_base.csv           ZIP centroids, UCLA population, observed excess number
+  part2/results/feature_comparison/predictions_oof.csv
+                                   out-of-fold augmented Poisson predictions (the burden weights)
   site/data/centers.json           the 153 candidate sites (existing cooling centres)
   results/coolingcenter_solutions.json  the committed solutions being checked
 Outputs
@@ -54,14 +55,15 @@ def solve(cover: np.ndarray, w: np.ndarray, k: int) -> tuple[float, list[int]]:
 
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
-    zips = pd.read_csv("data/processed/model_table.csv").dropna(
+    zips = pd.read_csv("part2/data/la_base.csv", dtype={"zip": str}).dropna(
         subset=["excess_er_rate_per_10k", "lat", "lon"]).reset_index(drop=True)
-    oof = pd.read_csv("results/predictions_oof.csv")
-    df = zips.merge(oof[["zip", "pred_poisson"]], on="zip")
+    oof = pd.read_csv("part2/results/feature_comparison/predictions_oof.csv", dtype={"zip": str})
+    df = zips.merge(oof[["zip", "pred_poisson_augmented"]], on="zip")
     sites = pd.DataFrame(json.loads(pathlib.Path("site/data/centers.json").read_text()))
     sol = json.loads(pathlib.Path("results/coolingcenter_solutions.json").read_text())
 
-    w = np.clip(df["pred_poisson"].to_numpy(float), 0, None) * df["ucla_population"].to_numpy(float) / 1e4
+    w = (np.clip(df["pred_poisson_augmented"].to_numpy(float), 0, None)
+         * df["population"].to_numpy(float) / 1e4)
     obs = df["excess_er_number"].to_numpy(float)
     dist = haversine(df["lat"].to_numpy()[:, None], df["lon"].to_numpy()[:, None],
                      sites["lat"].to_numpy()[None, :], sites["lon"].to_numpy()[None, :])
@@ -98,7 +100,7 @@ def main() -> None:
     inst = {
         "demand_zips": int(len(df)), "candidate_sites": int(len(sites)),
         "committed_n_zips": sol["n_zips"], "committed_n_candidate_sites": sol["n_candidate_sites"],
-        "burden_weight": "max(0, out-of-fold Poisson predicted rate) x UCLA population / 10,000",
+        "burden_weight": "max(0, Part 2 out-of-fold augmented Poisson rate) x UCLA population / 10,000",
         "total_predicted_burden": round(float(w.sum()), 1),
         "total_observed_burden": round(float(obs.sum()), 1),
         "zips_with_zero_weight": int((w <= 0).sum()),

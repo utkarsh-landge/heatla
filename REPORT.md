@@ -139,9 +139,36 @@ Highest-projected ZIP in both scenarios is **91767** (Pomona area): 19.7 → 28.
 ## 7. Cooling centers
 
 - **Source:** LA County Regional Cooling Centers (ArcGIS, July 2022), 153 sites.
-- **Siting:** exact integer linear program (PuLP/CBC) to maximize risk-weighted coverage. Exact ILP ≥ greedy on every budget tested (gap ≤ 3.9 percentage points).
+- **Siting:** exact integer linear program (PuLP/CBC) to maximize risk-weighted coverage. Exact ILP ≥ greedy on every budget tested (gap ≤ 3.9 percentage points, at 5 miles and 20 centers).
 - **What is chosen:** the candidate sites are the 153 existing centers, so the program selects which existing centers to prioritize; it does not propose new locations. A ZIP counts as covered when its centroid is within the chosen straight-line radius of a selected center. The full formulation is in `reports/member3_labels_website_siting.md`, section 4.
-- **Weights:** the risk weights are the earlier LA out-of-fold Poisson predictions (`results/predictions_oof.csv`, the 13-input model on inputs before the −999 correction). Siting has not been rerun with the models in section 4.
+- **Weights:** max(0, predicted rate) × UCLA population ÷ 10,000, where the rate is the Part 2 augmented Poisson out-of-fold prediction (`part2/results/feature_comparison/predictions_oof.csv`, `pred_poisson_augmented`). Centroids, population, the UCLA label and the corrected CalEnviroScreen percentile come from `part2/data/la_base.csv`. CES equity quartiles use the 273 ZIPs with a CES value. Results: `results/coolingcenter_solutions.json` (same file as `site/data/solutions.json`). An independent re-solve (`scripts/member3_check_siting.py`) reproduces all 16 exact solutions and site sets.
+
+*Exact solution, share of predicted burden covered. Ceiling = share reachable if all 153 centers were chosen.*
+
+| Radius (miles) | ZIPs reachable | Ceiling | k = 5 | k = 10 | k = 20 | k = 40 |
+|---|---|---|---|---|---|---|
+| 1 | 99 of 287 | 43.3% | 6.9% | 12.2% | 20.9% | 32.9% |
+| 2 | 183 of 287 | 69.3% | 13.9% | 22.7% | 35.9% | 54.3% |
+| 3 | 235 of 287 | 84.3% | 26.8% | 40.7% | 60.7% | 80.8% |
+| 5 | 268 of 287 | 92.9% | 47.7% | 69.3% | 87.8% | 92.9% |
+
+At 5 miles and k = 40 only 36 centers are needed to reach the ceiling.
+
+- **Decision check** (`results/siting_decision_check.csv`). Every plan is scored on the UCLA-label burden, not on the predictions. Plans are chosen with (a) the predictions, (b) the UCLA label itself (perfect information), (c) population only, (d) random site sets (mean of 100, seed 42). Across the 16 radius × budget cases, the prediction plan is on average 0.25 points below perfect information (at most 1.2), 0.8 points above population only (at most 2.7; population only is 0.3 points ahead at 3 miles and 10 centers, and tied at 5 miles and 40), and 17.5 points above random (4.8 to 28.0).
+
+*Share of UCLA-label burden covered, 2-mile radius, existing centers.*
+
+| Plan | k = 5 | k = 10 | k = 20 | k = 40 |
+|---|---|---|---|---|
+| Predictions | 13.0% | 22.0% | 35.2% | 53.4% |
+| UCLA label (perfect information) | 13.2% | 22.0% | 35.7% | 54.2% |
+| Population only | 12.3% | 20.8% | 33.9% | 52.8% |
+| Level-4-only label | 13.0% | 21.6% | 34.2% | 53.0% |
+| Random (mean of 100) | 5.3% | 9.8% | 17.9% | 31.8% |
+
+So the predictions pick nearly the same sites the labels would. Most of the gain over random comes from where people live; risk weighting adds 0.8 points on average over population only. In LA, labels exist for every ZIP, so the predictions matter mainly where no label exists.
+
+- **Adding libraries** (scenario). Adding 149 LA County libraries from the 211 layer (not already within 0.1 mile of a center) raises the 2-mile ceiling from 69.3% to 88.2% of label burden. With 40 sites at 2 miles, the prediction plan then covers 61.3% instead of 53.4%. The same rows with `candidates = centers_plus_libraries` are in the decision-check file.
 
 ## 8. Limitations
 

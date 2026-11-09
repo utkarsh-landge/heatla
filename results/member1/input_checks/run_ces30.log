@@ -1,0 +1,18 @@
+cleaned table: 6700 rows, 1675 ZIPs; all levels of a ZIP in one fold: True
+running la_holdout ...
+running spatial_cv ...
+
+LA holdout, Poisson:
+        config               scope    n     r2  spearman  top10_recall  top20_recall
+     all_level pooled (levels 1-4) 1148  0.783     0.907         0.722         0.778
+     all_level             level 1  287 -0.137     0.313         0.241         0.298
+     all_level             level 2  287  0.021     0.488         0.172         0.404
+     all_level             level 3  287  0.245     0.643         0.103         0.439
+     all_level             level 4  287  0.369     0.744         0.207         0.509
+level_specific pooled (levels 1-4) 1148  0.769     0.908         0.739         0.774
+level_specific             level 1  287 -0.205     0.137         0.241         0.228
+level_specific             level 2  287  0.036     0.463         0.172         0.386
+level_specific             level 3  287  0.283     0.647         0.241         0.439
+level_specific             level 4  287  0.289     0.695         0.276         0.404
+
+wrote results/member1/ces30/

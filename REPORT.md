@@ -44,30 +44,52 @@ Three model families throughout: Poisson GLM, random forest, gradient boosting. 
 
 The models beat the existing CES index on rank correlation but explain under half the variance. Small sample and mismatched data years limit this.
 
-### 4b. Statewide spatial CV (6,700 rows, 10 groups, all CHS levels)
+### 4b. Statewide spatial CV (1,675 ZIPs × 4 heat levels = 6,700 rows, 10 geographic folds)
 
-| Model | R² | Spearman ρ | Top-10 recall | Top-20 recall |
-|---|---|---|---|---|
-| Poisson | 0.517 | 0.866 | 0.53 | 0.81 |
-| Random forest | 0.630 | 0.900 | 0.61 | 0.82 |
-| Gradient boosting | 0.669 | 0.887 | 0.64 | 0.82 |
+Corrected CalEnviroScreen inputs (the −999 missing-value marker is treated as missing; see `reports/member1_statewide.md`, section 1). Every ZIP is predicted by a model that did not see its fold.
+
+| Model | Scope | R² | Spearman ρ | Top-10 recall | Top-20 recall |
+|---|---|---|---|---|---|
+| Poisson | all CHS levels pooled | 0.525 | 0.871 | 0.56 | 0.81 |
+| Random forest | all CHS levels pooled | 0.629 | 0.900 | 0.61 | 0.81 |
+| Gradient boosting | all CHS levels pooled | 0.665 | 0.888 | 0.64 | 0.81 |
+| Poisson | CHS-4 label only (n=1,675) | −0.015 | 0.512 | 0.16 | 0.35 |
+| Random forest | CHS-4 label only | 0.199 | 0.567 | 0.32 | 0.43 |
+| Gradient boosting | CHS-4 label only | 0.284 | 0.585 | 0.33 | 0.41 |
+
+The pooled scores mostly measure the gap between heat levels. Within one level, no model reaches ρ = 0.6.
 
 ### 4c. LA hold-out (train on non-LA California, test on LA)
 
-Train n = 5,552, test n = 1,148.
+Train: 1,388 ZIPs, 5,552 rows. Test: 287 LA ZIPs, 1,148 rows. Corrected CalEnviroScreen inputs.
 
-| Model | Scope | R² | Spearman ρ |
-|---|---|---|---|
-| Poisson | all CHS levels | 0.753 | 0.891 |
-| Poisson | **CHS-4 only (n=287)** | **0.266** | **0.674** |
-| Random forest | all CHS | 0.604 | 0.909 |
-| Random forest | CHS-4 only | −0.550 | 0.680 |
-| Gradient boosting | all CHS | 0.646 | 0.902 |
-| Gradient boosting | CHS-4 only | −0.280 | 0.674 |
-| Baseline: predict mean | all CHS | −0.061 | — |
-| Baseline: CES 4.0 percentile | LA | — | 0.237 |
+| Model | Scope | R² | Spearman ρ | Top-10 recall |
+|---|---|---|---|---|
+| Poisson | all CHS levels pooled | 0.781 | 0.905 | 0.75 |
+| Poisson | **CHS-4 label (n=287)** | **0.349** | **0.730** | **0.34** |
+| Poisson | **CHS-4 days only (n=287)** | **0.089** | **0.681** | **0.34** |
+| Random forest | all CHS levels pooled | 0.619 | 0.911 | 0.66 |
+| Random forest | CHS-4 label | −0.483 | 0.688 | 0.14 |
+| Random forest | CHS-4 days only | −2.748 | 0.650 | 0.28 |
+| Gradient boosting | all CHS levels pooled | 0.642 | 0.898 | 0.70 |
+| Gradient boosting | CHS-4 label | −0.291 | 0.683 | 0.24 |
+| Gradient boosting | CHS-4 days only | −2.143 | 0.646 | 0.38 |
+| Baseline: predict the training mean | all CHS levels pooled | −0.061 | — | — |
 
-> **Honest headline.** The pooled all-CHS numbers (ρ ≈ 0.89) are **inflated** because `chs_level` carries most of the signal — predicting that CHS-4 ZIPs have higher rates than CHS-1 ZIPs is easy. The fair measure of out-of-region skill on the quantity we care about is the **CHS-4-only LA hold-out: Poisson ρ = 0.674**. Tree models give negative R² on this slice (they overfit the non-LA distribution), so Poisson is the model to report. Even so, 0.674 rank correlation still clearly beats the CES baseline (0.237).
+"CHS-4 label" is UCLA's published level-4 value, which totals every heat level. "CHS-4 days only" is the excess on level-4 days alone (level 4 minus level 3), from a model trained on that target; it is the quantity that corresponds to extreme heat.
+
+CalEnviroScreen 4.0 percentile as a baseline, on the same LA ZIPs and the same heat level (273 ZIPs with a percentile; rank metrics only, since the percentile is an index and not a rate):
+
+| Target | CES percentile ρ | Poisson ρ | CES top-10 | Poisson top-10 |
+|---|---|---|---|---|
+| CHS-4 label | 0.566 | 0.757 | 0.15 | 0.30 |
+| CHS-4 days only | 0.498 | 0.707 | 0.15 | 0.37 |
+
+> **Headline.** The pooled all-CHS numbers (ρ ≈ 0.9) mostly reflect the gap between heat levels: `chs_level` carries most of the signal. Within level 4, a model trained on the rest of California ranks LA ZIPs with **ρ = 0.73 for the published level-4 label and ρ = 0.68 for extreme-heat days alone**. The amount of excess transfers poorly for extreme-heat days (Poisson R² = 0.09; tree models are strongly negative), because extreme-day excess averages 7.75 per 10,000 in the rest of California against 3.11 in LA. On matched ZIPs the Poisson model beats the CalEnviroScreen percentile on both targets.
+>
+> **Caveat on the inputs.** Two inputs, the asthma and cardiovascular ER-visit rates, come from the same state ER records as the label. Without them, LA level-4 rank correlation falls from 0.73 to 0.63 for the published label and from 0.68 to 0.50 for extreme-heat days, where the model is then about level with the CalEnviroScreen percentile (0.535 against 0.498).
+>
+> An earlier version of this section reported ρ = 0.674 against a CalEnviroScreen baseline of 0.237. Both were computed on inputs affected by the −999 error, and the baseline was computed across all four heat levels, so the two were not comparable. Details, per-level results, the level-specific comparison and a CalEnviroScreen 3.0 sensitivity check are in `reports/member1_statewide.md`.
 
 ### Reproducibility
 
